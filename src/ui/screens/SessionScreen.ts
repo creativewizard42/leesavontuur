@@ -1,13 +1,17 @@
 /**
  * Sessiescherm: rendert de vaste sessie-loop (GD §3.1) met vaste hoeken
  * (huis linksboven, oor rechtsboven, verder rechtsonder) en pauze (UX §3.10).
+ *
+ * F3: gebruikt de adaptieve, hervatbare `SessionQueue` (QA-007/QA-008/QA-010),
+ * blokkeert dubbel afronden (QA-005), zet focus na schermwissel (QA-011),
+ * vangt focus in de pauzedialoog (QA-014) en ruimt expliciet op (QA-017).
  */
 import type { ActivityItem, AnswerEvent } from '../../types';
 import type { AudioService } from '../../audio/AudioService';
 import type { GameState } from '../../core/GameState';
-import { createSessionQueue, type SessionPlan } from '../../core/SessionPlanner';
+import type { SessionQueue } from '../../core/SessionPlanner';
 import { fbText, getGrapheme, ui } from '../../content';
-import { el, clear } from '../dom';
+import { el, clear, focusFirstInteractive } from '../dom';
 import { iconEar, iconHome, iconNext, iconPloef, iconSpark } from '../icons';
 import { createActivityView, type ActivityViewHandle } from '../components/ActivityView';
 import { createLetterIntro } from '../components/LetterIntro';
@@ -15,21 +19,32 @@ import { instructionClip } from '../../learning/util';
 
 export interface SessionScreenDeps {
   state: GameState;
-  plan: SessionPlan;
+  queue: SessionQueue;
   audio: AudioService;
   now: () => number;
   free?: boolean;
+  /** Prompt automatisch herhalen bij lage mastery (GD §7, QA-018). */
+  autoRepeat?: boolean;
   onEvent: (event: AnswerEvent, item: ActivityItem) => void;
   onIntroduce: (graphemeId: string) => void;
+  /** Aangeroepen ná `queue.next()` zodat de sessiepositie bewaard kan worden. */
+  onAdvance?: () => void;
   onExit: () => void;
   onFinished: () => void;
 }
 
-export function createSessionScreen(deps: SessionScreenDeps): HTMLElement {
-  const queue = createSessionQueue(deps.plan);
+export interface SessionScreenHandle {
+  element: HTMLElement;
+  destroy(): void;
+}
+
+export function createSessionScreen(deps: SessionScreenDeps): SessionScreenHandle {
+  const queue = deps.queue;
   let activity: ActivityViewHandle | null = null;
   let activityDone = false;
   let introShown = false;
+  let finished = false;
+  let autoRepeatTimer: ReturnType<typeof setTimeout> | null = null;
 
   const screen = el('div', { class: 'la-screen', 'data-screen': 'session' });
 
@@ -71,21 +86,42 @@ export function createSessionScreen(deps: SessionScreenDeps): HTMLElement {
 
   screen.append(topbar, stage, progress, footer);
 
+  const totalItems = queue.toJSON(deps.now()).sections.reduce((n, section) => n + section.items.length, 0);
+
   function updateProgress(): void {
-    const current = deps.plan.sections.flatMap((s) => s.items).length - queue.remaining() + 1;
-    const total = deps.plan.sections.flatMap((s) => s.items).length;
-    progress.textContent = ui('ui.nav.progress').replace('{index}', String(current)).replace('{total}', String(total));
+    const current = Math.min(totalItems, totalItems - queue.remaining() + 1);
+    progress.textContent = ui('ui.nav.progress').replace('{index}', String(current)).replace('{total}', String(totalItems));
   }
 
   function playPrompt(item: ActivityItem): void {
     if (item.prompt.audio) void deps.audio.playClip(item.prompt.audio);
   }
 
+  function finish(): void {
+    if (finished) return;
+    finished = true;
+    nextBtn.disabled = true;
+    deps.onFinished();
+  }
+
+  function scheduleAutoRepeat(item: ActivityItem): void {
+    if (autoRepeatTimer !== null) clearTimeout(autoRepeatTimer);
+    if (!deps.autoRepeat || !item.prompt.audio) return;
+    autoRepeatTimer = setTimeout(() => {
+      autoRepeatTimer = null;
+      if (!finished && activity && !activity.isDone()) activity.repeat();
+    }, 5000);
+  }
+
   function mountActivity(): void {
     const item = queue.current();
     if (!item) {
-      deps.onFinished();
+      finish();
       return;
+    }
+    if (autoRepeatTimer !== null) {
+      clearTimeout(autoRepeatTimer);
+      autoRepeatTimer = null;
     }
     activity?.destroy();
     activity = null;
@@ -101,7 +137,7 @@ export function createSessionScreen(deps: SessionScreenDeps): HTMLElement {
       reward.append(sparks);
       reward.append(el('p', { class: 'la-reward__count', text: fbText('fb.reward.1') }));
       stage.append(reward);
-      if (item.prompt.audio) void deps.audio.playClip(item.prompt.audio);
+      playPrompt(item);
       activityDone = true;
       nextBtn.disabled = false;
       nextBtn.focus();
@@ -121,7 +157,8 @@ export function createSessionScreen(deps: SessionScreenDeps): HTMLElement {
       },
     });
     stage.append(activity.element);
-    playPrompt(item);
+    focusFirstInteractive(stage);
+    scheduleAutoRepeat(item);
   }
 
   function maybeIntro(): boolean {
@@ -135,13 +172,21 @@ export function createSessionScreen(deps: SessionScreenDeps): HTMLElement {
     introShown = true;
     deps.onIntroduce(graphemeId);
     clear(stage);
-    stage.append(
-      createLetterIntro({
-        grapheme,
-        audio: deps.audio,
-        onContinue: () => renderCurrent(),
-      }),
-    );
+    const intro = createLetterIntro({
+      grapheme,
+      audio: deps.audio,
+      onContinue: () => {
+        // De introductie-item is ongescoord (metadata.introduction): sla het
+        // over zodat het niet nog eens als activiteit verschijnt.
+        if (queue.current()?.metadata?.['introduction'] === true) {
+          queue.next();
+          deps.onAdvance?.();
+        }
+        renderCurrent();
+      },
+    });
+    stage.append(intro);
+    focusFirstInteractive(intro);
     progress.textContent = '';
     return true;
   }
@@ -153,19 +198,36 @@ export function createSessionScreen(deps: SessionScreenDeps): HTMLElement {
   }
 
   function advance(): void {
-    if (!activityDone) return;
+    if (!activityDone || finished) return;
+    activityDone = false;
+    nextBtn.disabled = true;
     queue.next();
+    deps.onAdvance?.();
     renderCurrent();
   }
 
-  // ---- pauze-overlay ----
+  // ---- pauze-overlay (QA-014) ----
   let overlay: HTMLElement | null = null;
+  let trapCleanup: (() => void) | null = null;
+
+  function closePause(returnFocus = true): void {
+    if (!overlay) return;
+    overlay.remove();
+    overlay = null;
+    topbar.removeAttribute('inert');
+    stage.removeAttribute('inert');
+    footer.removeAttribute('inert');
+    trapCleanup?.();
+    trapCleanup = null;
+    if (returnFocus) home.focus();
+  }
+
   function openPause(): void {
-    if (overlay) return;
+    if (overlay || finished) return;
     overlay = el('div', { class: 'la-overlay', role: 'dialog', 'aria-modal': 'true', 'data-overlay': 'pause' });
     const card = el('div', { class: 'la-overlay__card' });
     card.append(iconPloef('la-ploef--small'));
-    card.append(el('p', { class: 'la-title', style: 'font-size:24px', text: ui('ui.pause.title') }));
+    card.append(el('p', { class: 'la-title la-title--sm', text: ui('ui.pause.title') }));
     card.append(el('p', { class: 'la-hint-text', text: fbText('fb.nav.stop.1') }));
     const resume = el('button', {
       type: 'button',
@@ -173,11 +235,7 @@ export function createSessionScreen(deps: SessionScreenDeps): HTMLElement {
       'aria-label': ui('ui.pause.continue'),
       text: ui('ui.pause.continue'),
     });
-    resume.addEventListener('click', () => {
-      overlay?.remove();
-      overlay = null;
-      repeat.focus();
-    });
+    resume.addEventListener('click', () => closePause());
     const toMap = el('button', {
       type: 'button',
       class: 'la-btn la-btn--wide',
@@ -191,6 +249,36 @@ export function createSessionScreen(deps: SessionScreenDeps): HTMLElement {
     card.append(resume, toMap);
     overlay.append(card);
     screen.append(overlay);
+
+    // Focus-trap + Escape.
+    topbar.setAttribute('inert', '');
+    stage.setAttribute('inert', '');
+    footer.setAttribute('inert', '');
+    const onTrap = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        event.stopPropagation();
+        closePause();
+        return;
+      }
+      if (event.key !== 'Tab' || !overlay) return;
+      const focusables = Array.from(
+        overlay.querySelectorAll<HTMLElement>('button, [href], input, [tabindex]:not([tabindex="-1"])'),
+      ).filter((el) => !el.hasAttribute('disabled'));
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (!first || !last) return;
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onTrap, true);
+    trapCleanup = () => document.removeEventListener('keydown', onTrap, true);
     resume.focus();
   }
 
@@ -204,6 +292,7 @@ export function createSessionScreen(deps: SessionScreenDeps): HTMLElement {
 
   const onKeyDown = (event: KeyboardEvent): void => {
     if (event.key === 'Escape') {
+      if (overlay) return;
       event.preventDefault();
       openPause();
     } else if (event.key === 'Home') {
@@ -214,16 +303,16 @@ export function createSessionScreen(deps: SessionScreenDeps): HTMLElement {
   };
   document.addEventListener('keydown', onKeyDown);
 
-  // Opruimen wanneer het scherm uit de DOM verdwijnt.
-  const observer = new MutationObserver(() => {
-    if (!screen.isConnected) {
-      document.removeEventListener('keydown', onKeyDown);
-      activity?.destroy();
-      observer.disconnect();
-    }
-  });
-  observer.observe(document.body, { childList: true, subtree: true });
-
   renderCurrent();
-  return screen;
+
+  return {
+    element: screen,
+    destroy(): void {
+      document.removeEventListener('keydown', onKeyDown);
+      trapCleanup?.();
+      if (autoRepeatTimer !== null) clearTimeout(autoRepeatTimer);
+      activity?.destroy();
+      activity = null;
+    },
+  };
 }

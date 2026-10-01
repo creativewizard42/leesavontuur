@@ -1,15 +1,17 @@
 /**
  * App-controller: laadt het profiel, kiest het scherm en verbindt de
  * sessie-loop met SaveSystem + AudioService (ARCHITECTURE §2/§7).
+ *
+ * F3: sluit aan op de nieuwe engine-API (`recordItemAnswer`, `completeSession`,
+ * `SessionQueue.reportOutcome`, resume-opslag, `saveProfile → {ok}`).
  */
-import type { AnswerEvent, Profile, Rng } from '../types';
+import type { ActivityItem, AnswerEvent, Profile, ProfileSettings, Rng } from '../types';
 import type { AudioService } from '../audio/AudioService';
 import {
-  addSparks,
+  completeSession,
   createInitialState,
   introduceGrapheme,
-  recordAnswer,
-  startNewSession,
+  recordItemAnswer,
   type GameState,
 } from '../core/GameState';
 import {
@@ -18,19 +20,27 @@ import {
   resetProfile,
   saveProfile,
   SAVE_KEY,
+  type SaveResult,
   type SaveStorage,
 } from '../core/SaveSystem';
-import { planSession, type SessionPlan } from '../core/SessionPlanner';
+import {
+  clearSessionState,
+  createSessionQueue,
+  loadSessionState,
+  planSession,
+  saveSessionState,
+  type SessionQueue,
+} from '../core/SessionPlanner';
 import { graphemes } from '../content';
 import { createAppAudio } from './audioClips';
-import { clear } from './dom';
+import { clear, focusFirstInteractive } from './dom';
 import { createStartScreen } from './screens/StartScreen';
 import { createMapScreen } from './screens/MapScreen';
 import { createSessionScreen } from './screens/SessionScreen';
 import { createRewardScreen } from './screens/RewardScreen';
 import { createParentGate } from '../parent/ParentGate';
 import { createParentDashboard } from '../parent/ParentDashboard';
-import { recordConfusion } from '../parent/confusions';
+import { clearConfusions, recordConfusion } from '../parent/confusions';
 
 export interface AppDeps {
   root: HTMLElement;
@@ -56,13 +66,24 @@ export function createApp(deps: AppDeps): App {
   const storage = deps.storage ?? defaultStorage();
   const rng = deps.rng ?? Math.random;
   const now = deps.now ?? (() => Date.now());
-  const baseAudio = deps.audio ?? createAppAudio();
+  let audioFallbackSeen = false;
+  const baseAudio =
+    deps.audio ??
+    createAppAudio({
+      onFallback: () => {
+        audioFallbackSeen = true;
+      },
+    });
 
   let state: GameState = createInitialState(deps.profile ?? loadProfile(storage));
   let disposed = false;
+  let currentDestroy: (() => void) | null = null;
+  let saveFailed = false;
 
-  function save(): void {
-    saveProfile(state.profile, storage);
+  function save(): SaveResult {
+    const result = saveProfile(state.profile, storage);
+    if (!result.ok) saveFailed = true;
+    return result;
   }
 
   function applySettings(): void {
@@ -71,15 +92,32 @@ export function createApp(deps: AppDeps): App {
     document.body.classList.toggle('la-reduced-motion', state.profile.settings.reducedMotion);
   }
 
-  function mount(screen: HTMLElement): void {
+  function updateSettings(patch: Partial<ProfileSettings>): void {
+    state = {
+      ...state,
+      profile: { ...state.profile, settings: { ...state.profile.settings, ...patch } },
+    };
+    applySettings();
+    save();
+  }
+
+  function mount(screen: HTMLElement, destroy?: () => void): void {
     if (disposed) return;
+    currentDestroy?.();
+    currentDestroy = destroy ?? null;
     clear(root);
     root.append(screen);
+    focusFirstInteractive(screen);
   }
 
   function effectiveAudio(): AudioService {
     if (state.profile.settings.audioEnabled !== false) return baseAudio;
     return mutedAudio(baseAudio);
+  }
+
+  function audioUnavailable(): boolean {
+    if (state.profile.settings.audioEnabled === false) return false;
+    return audioFallbackSeen || !baseAudio.isAvailable();
   }
 
   const app: App = {
@@ -88,6 +126,8 @@ export function createApp(deps: AppDeps): App {
     },
     destroy() {
       disposed = true;
+      currentDestroy?.();
+      currentDestroy = null;
       clear(root);
     },
     showStart() {
@@ -102,13 +142,7 @@ export function createApp(deps: AppDeps): App {
             save();
           },
           onParent: () => app.showParentGate(),
-          onToggleAudio: (enabled) => {
-            state = {
-              ...state,
-              profile: { ...state.profile, settings: { ...state.profile.settings, audioEnabled: enabled } },
-            };
-            save();
-          },
+          onToggleAudio: (enabled) => updateSettings({ audioEnabled: enabled }),
         }),
       );
     },
@@ -127,37 +161,56 @@ export function createApp(deps: AppDeps): App {
     startSession(free = false) {
       applySettings();
       const planProfile = free ? freeProfile(state.profile) : state.profile;
-      const plan: SessionPlan = planSession(planProfile, rng);
-      mount(
-        createSessionScreen({
-          state,
-          plan,
-          audio: effectiveAudio(),
-          now,
-          free,
-          onEvent: (event: AnswerEvent, item) => {
-            if (!event.correct && !event.isGuess) {
-              recordConfusion(item.targetId, event.selectedOptionId, item.kind, storage);
-            }
-            state = recordAnswer(state, event);
-            save();
-          },
-          onIntroduce: (graphemeId) => {
-            state = introduceGrapheme(state, graphemeId);
-            save();
-          },
-          onExit: () => {
-            save();
-            app.showMap();
-          },
-          onFinished: () => {
-            state = { ...state, profile: addSparks(state.profile, 1) };
-            state = startNewSession(state);
-            save();
-            showReward();
-          },
-        }),
-      );
+      const resumed = free ? undefined : loadSessionState(storage, now());
+      let queue: SessionQueue;
+      if (resumed) {
+        queue = resumed;
+      } else {
+        const plan = planSession(planProfile, rng);
+        queue = createSessionQueue(plan, {
+          sessionNumber: state.sessionNumber,
+          profile: planProfile,
+          learned: new Set(planProfile.unlockedGraphemes),
+          rng,
+        });
+      }
+      const sessionId = queue.toJSON(now()).sessionNumber;
+      const handle = createSessionScreen({
+        state,
+        queue,
+        audio: effectiveAudio(),
+        now,
+        free,
+        autoRepeat: state.profile.settings.autoRepeatPrompt,
+        onEvent: (event: AnswerEvent, item: ActivityItem) => {
+          if (!event.correct && !event.isGuess) {
+            recordConfusion(item.targetId, event.selectedOptionId, item.kind, storage);
+          }
+          state = recordItemAnswer(state, event, item);
+          queue.reportOutcome(event, item);
+          save();
+          saveSessionState(queue, storage, now());
+        },
+        onIntroduce: (graphemeId) => {
+          state = introduceGrapheme(state, graphemeId);
+          save();
+        },
+        onAdvance: () => {
+          saveSessionState(queue, storage, now());
+        },
+        onExit: () => {
+          saveSessionState(queue, storage, now());
+          save();
+          app.showMap();
+        },
+        onFinished: () => {
+          state = completeSession(state, sessionId);
+          clearSessionState(storage);
+          save();
+          showReward();
+        },
+      });
+      mount(handle.element, handle.destroy);
     },
     showParentGate() {
       applySettings();
@@ -174,9 +227,15 @@ export function createApp(deps: AppDeps): App {
         createParentDashboard({
           profile: state.profile,
           storage,
+          saveFailed,
+          audioUnavailable: audioUnavailable(),
+          onSettingsChange: (patch) => updateSettings(patch),
           onBack: () => app.showMap(),
           onReset: () => {
             state = createInitialState(resetProfile(storage));
+            clearConfusions(storage);
+            clearSessionState(storage);
+            saveFailed = false;
             save();
             app.showStart();
           },
@@ -191,6 +250,7 @@ export function createApp(deps: AppDeps): App {
       createRewardScreen({
         sparks: state.profile.rewards.klankvonkjes,
         leaves: state.profile.rewards.leaves.length,
+        audio: effectiveAudio(),
         onContinue: () => app.showMap(),
       }),
     );

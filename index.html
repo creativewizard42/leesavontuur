@@ -3,10 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
-    />
+    <!--
+      De CSP wordt uitsluitend in de productiebuild geïnjecteerd (zie
+      vite.config.ts, SEC-003) zodat Vite dev-HMR (ws://) niet geblokkeerd wordt.
+      `frame-ancestors` werkt NIET via een meta-tag (SEC-002) en moet als
+      HTTP-header op de hostingserver worden gezet; zie docs/SECURITY_HEADERS.md.
+    -->
     <meta name="referrer" content="no-referrer" />
     <title>LEESAVONTUUR</title>
   </head>
