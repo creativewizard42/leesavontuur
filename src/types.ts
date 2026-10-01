@@ -25,6 +25,7 @@ export type AudioKind =
   | 'sightword'
   | 'feedback'
   | 'instruction'
+  | 'sentence'
   | 'blend';
 
 /** Verwijzing naar één audiofragment (opname) met TTS/tekst als fallback. */
@@ -69,6 +70,13 @@ export interface Grapheme {
   name: string;
   /** Uitspraak-hint voor opname/TTS zonder sjwa: "mmm", "sss", "rrr". */
   soundHint: string;
+  /**
+   * Extra, eenduidige TTS-benaderingstekst voor kale letters (EDU-017):
+   * bv. "k-" i.p.v. "k" zodat een synthetische stem niet de letternaam
+   * ("kaa") zegt. Alleen gebruikt voor de tijdelijke TTS-fallback; `soundHint`
+   * blijft de canonieke klank voor gerekte/gehakte reeksen.
+   */
+  ttsHint?: string;
   type: GraphemeType;
   /** Fase waarin dit grafeem geïntroduceerd wordt (ED §3). */
   introducedInPhase: number;
@@ -81,6 +89,8 @@ export interface Grapheme {
 
 /** Woordpatroon volgens ED §6.1/§2.5. V = klinkerfoneem (tweeteken = 1 V). */
 export type WordPattern =
+  | 'V'
+  | 'CV'
   | 'VC'
   | 'VCC'
   | 'VVC'

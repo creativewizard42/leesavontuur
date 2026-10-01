@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   CURRENT_CONTENT,
+  assertItemsAllowed,
   isWordAllowed,
   segmentWord,
   validateContent,
@@ -9,6 +10,7 @@ import type { ValidationIssue, WordPattern } from '../types';
 import type { ContentBundleExt } from '../types';
 import { isBlockedWord } from '../blocklist';
 import { GRAPHEMES } from '../graphemes';
+import { RHYME_GROUPS } from '../phonology';
 
 const MVP = new Set(['m', 'a', 's', 't', 'k', 'r']);
 
@@ -215,5 +217,121 @@ describe('validator – detecteert opzettelijk kapotte fixtures', () => {
 
   it('de echte content is foutloos terwijl elke fixture precies één regel breekt', () => {
     expect(errors(clone())).toHaveLength(0);
+  });
+});
+
+describe('validator – phonologie-bank (EDU-002/EDU-013/EDU-020)', () => {
+  function withRhymeGroup(index: number, group: readonly string[], fn: () => void): void {
+    const groups = RHYME_GROUPS as unknown as (readonly string[])[];
+    const original = groups[index];
+    try {
+      groups[index] = group;
+      fn();
+    } finally {
+      groups[index] = original as readonly string[];
+    }
+  }
+
+  it('meldt een blokkeerwoord in de rijm-/lettergreepbank', () => {
+    withRhymeGroup(0, ['kat', 'poep'], () => {
+      expect(rules(clone())).toContain('PHONOLOGY_BLOCKED');
+    });
+  });
+
+  it('meldt een niet-rijmende groep', () => {
+    withRhymeGroup(0, ['kat', 'vis'], () => {
+      expect(rules(clone())).toContain('PHONOLOGY_RHYME_MISMATCH');
+    });
+  });
+
+  it('meldt een niet-bestaand woord', () => {
+    withRhymeGroup(0, ['kat', 'zzz'], () => {
+      expect(rules(clone())).toContain('PHONOLOGY_WORD_UNKNOWN');
+    });
+  });
+});
+
+describe('validator – instructie-keys (EDU-009)', () => {
+  it('meldt een ontbrekende vereiste instructie-key', () => {
+    const bundle = clone();
+    delete bundle.instructions['instr.start'];
+    expect(rules(bundle)).toContain('MISSING_INSTRUCTION');
+  });
+
+  it('meldt ontbrekende audio voor een vereiste instructie-key', () => {
+    const bundle = clone();
+    bundle.audioManifest = bundle.audioManifest.filter((c) => c.key !== 'instr.repeat');
+    expect(rules(bundle)).toContain('MISSING_INSTRUCTION_AUDIO');
+  });
+
+  it('meldt ontbrekende audio voor een dynamische klim-key', () => {
+    const bundle = clone();
+    bundle.audioManifest = bundle.audioManifest.filter((c) => c.key !== 'instr.klim.kam');
+    expect(rules(bundle)).toContain('MISSING_INSTRUCTION_AUDIO');
+  });
+
+  it('de echte content heeft alle vereiste instructie-clips', () => {
+    expect(errors(clone())).toHaveLength(0);
+  });
+});
+
+describe('assertItemsAllowed (EDU-020)', () => {
+  const baseItem = {
+    id: 'test.1',
+    skillId: 'SY.CVC',
+    kind: 'plakken',
+    prompt: { showText: false },
+    targetId: 'kam',
+    difficulty: 'A' as const,
+    isRetry: false,
+  };
+
+  it('keurt gegenereerde woorditems met toegestane woorden goed', () => {
+    const item = {
+      ...baseItem,
+      options: [
+        { id: 'kam', correct: true },
+        { id: 'mat', correct: false },
+      ],
+    };
+    expect(assertItemsAllowed([item], MVP).ok).toBe(true);
+  });
+
+  it('vangt een geblokkeerd afleiderwoord', () => {
+    const item = {
+      ...baseItem,
+      options: [
+        { id: 'kam', correct: true },
+        { id: 'poep', correct: false },
+      ],
+    };
+    const result = assertItemsAllowed([item], MVP);
+    expect(result.ok).toBe(false);
+    expect(result.issues.map((i) => i.rule)).toContain('ITEM_WORD_BLOCKED');
+  });
+
+  it('vangt een afleider met niet-geleerde grafemen', () => {
+    const item = {
+      ...baseItem,
+      options: [
+        { id: 'kam', correct: true },
+        { id: 'vis', correct: false },
+      ],
+    };
+    const result = assertItemsAllowed([item], MVP);
+    expect(result.ok).toBe(false);
+    expect(result.issues.map((i) => i.rule)).toContain('ITEM_WORD_NOT_ALLOWED');
+  });
+
+  it('negeert grafeem-, getal- en reeksopties', () => {
+    const item = {
+      ...baseItem,
+      options: [
+        { id: 'g:m', correct: true },
+        { id: 'ans:3', correct: false },
+        { id: 'ans:k-a-m', correct: false },
+      ],
+    };
+    expect(assertItemsAllowed([item], MVP).ok).toBe(true);
   });
 });

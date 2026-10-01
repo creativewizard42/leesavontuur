@@ -3,9 +3,11 @@
  * Puur auditief (ED §4.1): geen geschreven woord in beeld. Omdat het om
  * grote eenheden gaat (rijm/lettergrepen) is dit bewust auditief materiaal
  * en niet gebonden aan de vrijgegeven grafemen (ED §6.2 regel 8).
- * DOM-vrij.
+ * De rijm-/lettergreepbank staat in `content/phonology.ts` zodat de validator
+ * haar controleert (EDU-002/EDU-013/EDU-020). DOM-vrij.
  */
 import type { ActivityItem, Difficulty, Rng } from '../types';
+import { RHYME_GROUPS, SYLLABLE_WORDS } from '../content/phonology';
 import { feedbackMeta, instructionClip, itemId, placeOptions, wordClip, type OptionSpec } from './util';
 
 export interface PhonologyOptions {
@@ -15,35 +17,6 @@ export interface PhonologyOptions {
   rng: Rng;
   avoidCorrectIndices?: readonly number[];
 }
-
-interface SyllableWord {
-  word: string;
-  syllables: number;
-}
-
-const SYLLABLE_WORDS: readonly SyllableWord[] = [
-  { word: 'maan', syllables: 1 },
-  { word: 'raam', syllables: 1 },
-  { word: 'kat', syllables: 1 },
-  { word: 'vis', syllables: 1 },
-  { word: 'soep', syllables: 1 },
-  { word: 'konijn', syllables: 2 },
-  { word: 'tafel', syllables: 2 },
-  { word: 'muren', syllables: 2 },
-  { word: 'banaan', syllables: 3 },
-  { word: 'olifant', syllables: 3 },
-  { word: 'appelap', syllables: 3 },
-];
-
-/** Rijmgroepen (eindklank gelijk); auditief materiaal. */
-const RHYME_GROUPS: readonly (readonly string[])[] = [
-  ['kat', 'mat', 'rat'],
-  ['vis', 'mis', 'lis'],
-  ['tas', 'kas', 'bas'],
-  ['maan', 'kan', 'pan'],
-  ['raam', 'kaam', 'aam'],
-  ['soep', 'poep', 'groep'],
-];
 
 export function generate(options: PhonologyOptions): ActivityItem[] {
   return options.skillId === 'PH.SYLLABLE'
