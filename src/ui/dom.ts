@@ -67,3 +67,27 @@ export function clear(node: HTMLElement): void {
 export function setText(node: HTMLElement, text: string): void {
   node.textContent = text;
 }
+
+/**
+ * Zet de focus op het eerste zinvolle interactieve element (QA-011). Volgorde:
+ * expliciete `data-autofocus`, dan een optie, dan een gebied, dan de eerste knop.
+ * Lukt niets, focus dan het scherm zelf (met tabindex -1).
+ */
+export function focusFirstInteractive(root: HTMLElement): void {
+  const selectors = [
+    '[data-autofocus]',
+    '.la-option:not(:disabled)',
+    '.la-area:not(:disabled)',
+    '.la-avatar:not(:disabled)',
+    'button:not(:disabled)',
+  ];
+  for (const selector of selectors) {
+    const target = root.querySelector<HTMLElement>(selector);
+    if (target) {
+      target.focus();
+      return;
+    }
+  }
+  if (!root.hasAttribute('tabindex')) root.setAttribute('tabindex', '-1');
+  root.focus();
+}

@@ -2,22 +2,29 @@
  * UX-flow tests voor de activiteitweergave (ARCHITECTURE §9.3):
  * plaatje pas na correct, feedback via aria-live zonder "fout"/rood, retry,
  * en antwoorden met klik én toetsenbord.
+ *
+ * F3-aanvullingen: hakken toont geen gesegmenteerd antwoord, klankjager speelt
+ * eerst alle kandidaten (luister-dan-kies), en ontbrekend geluid geeft een
+ * rustige visuele fallback zonder crash.
  */
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ActivityItem } from '../../types';
-import { createMockAudioService } from '../../audio/AudioService';
+import { createMockAudioService, type MockAudioService } from '../../audio/AudioService';
 import * as WordReading from '../../learning/WordReading';
+import * as Segmenting from '../../learning/Segmenting';
+import * as FirstSound from '../../learning/FirstSound';
 import { wordsForBlock } from '../../content';
 import { createSeededRng } from '../../core/rng';
 import { createActivityView, type ActivityViewHandle } from '../components/ActivityView';
 
 const MVP = new Set(['m', 'a', 's', 't', 'k', 'r']);
+const WORD_NAMES = wordsForBlock(1).map((w) => w.word);
 
 function wordItem(): ActivityItem {
   return WordReading.generate({
     skillId: 'DE.CVC',
     targetWord: 'kat',
-    availableWords: wordsForBlock(1).map((w) => w.word),
+    availableWords: WORD_NAMES,
     difficulty: 'B',
     rng: createSeededRng(42),
     learned: MVP,
@@ -48,16 +55,18 @@ describe('ActivityView – Woord lezen', () => {
   function mount(
     item: ActivityItem,
     handlers: { onEvent?: (event: import('../../types').AnswerEvent) => void; onDone?: (o: 'correct' | 'modeled') => void } = {},
-  ): void {
+    audio: MockAudioService = createMockAudioService(),
+  ): MockAudioService {
     view = createActivityView({
       item,
-      audio: createMockAudioService(),
+      audio,
       sessionNumber: 1,
       now: () => 1000,
       onEvent: handlers.onEvent ?? vi.fn(),
       onDone: handlers.onDone ?? vi.fn(),
     });
     container.append(view.element);
+    return audio;
   }
 
   it('toont het plaatje pas NA een correct antwoord', () => {
@@ -118,5 +127,158 @@ describe('ActivityView – Woord lezen', () => {
     expect(onEvent).toHaveBeenCalledTimes(1);
     const first = onEvent.mock.calls[0]?.[0];
     expect(first.selectedOptionId).toBe(item.options[0]?.id);
+  });
+
+  it('gebruikt radiogroep-semantiek (aria-checked), niet aria-pressed', () => {
+    const item = wordItem();
+    mount(item);
+    const group = container.querySelector('.la-options');
+    expect(group?.getAttribute('role')).toBe('radiogroup');
+    const option = container.querySelector('.la-option');
+    expect(option?.getAttribute('role')).toBe('radio');
+    expect(option?.hasAttribute('aria-checked')).toBe(true);
+    expect(option?.hasAttribute('aria-pressed')).toBe(false);
+  });
+});
+
+describe('ActivityView – Hakken (EDU-003)', () => {
+  let container: HTMLElement;
+  let view: ActivityViewHandle | null = null;
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.append(container);
+  });
+  afterEach(() => {
+    view?.destroy();
+    view = null;
+    container.remove();
+  });
+
+  function segItem(): ActivityItem {
+    return Segmenting.generate({
+      skillId: 'AN.CVC',
+      word: 'kam',
+      difficulty: 'A',
+      rng: createSeededRng(4),
+      learned: MVP,
+      availableWords: WORD_NAMES,
+    });
+  }
+
+  function mount(item: ActivityItem): void {
+    view = createActivityView({
+      item,
+      audio: createMockAudioService(),
+      sessionNumber: 1,
+      now: () => 1000,
+      onEvent: vi.fn(),
+      onDone: vi.fn(),
+    });
+    container.append(view.element);
+  }
+
+  it('toont het gesegmenteerde antwoord nooit (geen letterblokken of k-a-m)', () => {
+    const item = segItem();
+    expect(item.prompt.showText).toBe(false);
+    mount(item);
+    expect(container.querySelector('.la-word-row')).toBeNull();
+    expect(container.querySelector('.la-letterblock')).toBeNull();
+    expect(container.textContent ?? '').not.toContain('k-a-m');
+  });
+
+  it('biedt in tap-modus een tik-oppervlak zonder letters', () => {
+    const item: ActivityItem = { ...segItem(), metadata: { ...(segItem().metadata ?? {}), responseMode: 'tap' } };
+    mount(item);
+    const tap = container.querySelector('[data-response-mode="tap"]');
+    expect(tap).not.toBeNull();
+    expect(container.querySelector('.la-letterblock')).toBeNull();
+    const tapBtn = container.querySelector<HTMLButtonElement>('[data-action="tap"]');
+    tapBtn?.click();
+    tapBtn?.click();
+    expect(tap?.getAttribute('data-taps')).toBe('2');
+  });
+});
+
+describe('ActivityView – Klankjager luister-dan-kies (EDU-005)', () => {
+  let container: HTMLElement;
+  let view: ActivityViewHandle | null = null;
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.append(container);
+  });
+  afterEach(() => {
+    view?.destroy();
+    view = null;
+    container.remove();
+  });
+
+  it('speelt eerst alle kandidaten af en heeft een aparte luisterknop per tegel', async () => {
+    const item = FirstSound.generate({
+      skillId: 'FN.FIRST_SOUND',
+      difficulty: 'A',
+      count: 1,
+      availableWords: WORD_NAMES,
+      rng: createSeededRng(11),
+      learned: MVP,
+    })[0];
+    expect(item).toBeDefined();
+    const audio = createMockAudioService();
+    view = createActivityView({
+      item: item as ActivityItem,
+      audio,
+      sessionNumber: 1,
+      now: () => 1000,
+      onEvent: vi.fn(),
+      onDone: vi.fn(),
+    });
+    container.append(view.element);
+
+    // Aparte luisterknoppen (oor) op de tegels.
+    expect(container.querySelectorAll('.la-option__listen').length).toBeGreaterThanOrEqual(1);
+
+    // Alle kandidaten zijn automatisch afgespeeld.
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    for (const option of (item as ActivityItem).options) {
+      if (option.audio) expect(audio.played).toContain(option.audio.key);
+    }
+  });
+});
+
+describe('ActivityView – ontbrekend geluid (QA-002)', () => {
+  let container: HTMLElement;
+  let view: ActivityViewHandle | null = null;
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.append(container);
+  });
+  afterEach(() => {
+    view?.destroy();
+    view = null;
+    container.remove();
+  });
+
+  it('toont een rustige visuele fallback zonder crash', async () => {
+    const audio = createMockAudioService({
+      result: { result: 'unavailable', approximate: false, reason: 'clip-missing' },
+    });
+    view = createActivityView({
+      item: wordItem(),
+      audio,
+      sessionNumber: 1,
+      now: () => 1000,
+      onEvent: vi.fn(),
+      onDone: vi.fn(),
+    });
+    container.append(view.element);
+
+    await Promise.resolve();
+    await Promise.resolve();
+    const fallback = container.querySelector('[data-audio-fallback="true"]');
+    expect(fallback).not.toBeNull();
+    expect(container.textContent ?? '').toContain('Geluid niet beschikbaar');
   });
 });

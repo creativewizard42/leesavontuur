@@ -44,7 +44,7 @@ export function createParentGate(options: ParentGateOptions): HTMLElement {
 
   const sumSection = el('div', { 'data-section': 'sum', hidden: true });
   sumSection.append(el('p', { class: 'la-hint-text', text: ui('ui.parent.gate.sum') }));
-  const sumLine = el('p', { class: 'la-title', style: 'font-size:28px', 'data-sum': `${a}+${b}`, text: `${a} + ${b} =` });
+  const sumLine = el('p', { class: 'la-title la-sum', text: `${a} + ${b} =` });
   const input = el('input', {
     type: 'text',
     inputmode: 'numeric',
@@ -82,6 +82,11 @@ export function createParentGate(options: ParentGateOptions): HTMLElement {
 
   function tick(): void {
     if (startTime === null) return;
+    // QA-024: ruim het interval op zodra het scherm is verwijderd.
+    if (!root.isConnected) {
+      stopHold();
+      return;
+    }
     const elapsed = now() - startTime;
     const pct = Math.min(100, (elapsed / holdMs) * 100);
     fill.style.height = `${pct}%`;

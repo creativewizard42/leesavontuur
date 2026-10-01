@@ -73,6 +73,7 @@ export function createStartScreen(options: StartScreenOptions): HTMLElement {
     },
   });
   playButton.dataset['action'] = 'start';
+  playButton.setAttribute('data-autofocus', '');
   stage.append(playButton);
 
   const audioToggle = el('label', { class: 'la-hint-text' });

@@ -63,6 +63,44 @@ export function iconSpeaker(): SVGElement {
   );
 }
 
+/** Letters/letterkaart (kind-knop zonder leesbare instructie, QA-012). */
+export function iconLetter(): SVGElement {
+  return wrap(
+    '<rect x="8" y="10" width="48" height="44" rx="8" fill="#fffdf5" stroke="#14342a" stroke-width="5"/>' +
+      '<path d="M20 44 L28 22 L36 44 M23 37 H33" fill="none" stroke="#1f6b45" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>',
+  );
+}
+
+/** Voorbeeldwoord/plaatje (QA-012). */
+export function iconPicture(): SVGElement {
+  return wrap(
+    '<rect x="8" y="10" width="48" height="44" rx="8" fill="#eaf7ef" stroke="#14342a" stroke-width="5"/>' +
+      '<circle cx="22" cy="24" r="5" fill="#f2b705" stroke="#14342a" stroke-width="3"/>' +
+      '<path d="M12 48 L26 32 L36 42 L44 34 L52 44" fill="none" stroke="#1f6b45" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>',
+  );
+}
+
+/** Luisteren/klank (oor-icoon op een tegel). */
+export function iconListen(): SVGElement {
+  return iconEar();
+}
+
+/** "Geluid niet beschikbaar" (QA-002): speaker met streep. */
+export function iconNoSound(): SVGElement {
+  return wrap(
+    '<path d="M8 24 H20 L34 10 V54 L20 40 H8 Z" fill="#d7e3d9" stroke="#14342a" stroke-width="4" stroke-linejoin="round"/>' +
+      '<path d="M40 20 L56 44 M56 20 L40 44" fill="none" stroke="#14342a" stroke-width="5" stroke-linecap="round"/>',
+  );
+}
+
+/** Tikken op de klanken (hakken tap-modus). */
+export function iconTap(): SVGElement {
+  return wrap(
+    '<circle cx="32" cy="34" r="6" fill="#f2b705" stroke="#14342a" stroke-width="4"/>' +
+      '<path d="M18 34 a14 14 0 0 1 28 0 M10 34 a22 22 0 0 1 44 0" fill="none" stroke="#1f6b45" stroke-width="5" stroke-linecap="round"/>',
+  );
+}
+
 /** Ploef, het donzige boswezentje met grote flaporen (UX §7). */
 export function iconPloef(extraClass = ''): SVGElement {
   const el = svgFromString(

@@ -436,7 +436,7 @@ body.la-reduced-motion {
   color: var(--la-water-diep);
 }
 
-.la-option[aria-pressed="true"] {
+.la-option[aria-checked="true"] {
   box-shadow: var(--la-schaduw-op);
 }
 
@@ -546,7 +546,115 @@ body.la-reduced-motion {
 }
 
 .la-feedback.is-hidden {
-  visibility: hidden;
+  /* QA-013: blijf in de accessibility-tree (geen visibility:hidden), zodat
+     screenreaders de live-regio aankondigen. */
+  opacity: 0;
+}
+
+/* ---------- Geluid ontbreekt (QA-002) ---------- */
+
+.la-audio-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--la-s2);
+  color: var(--la-tekst-zacht);
+}
+
+.la-audio-fallback__icon {
+  width: 48px;
+  height: 48px;
+}
+
+.la-audio-fallback__text {
+  font-size: var(--la-text-m);
+  font-weight: 700;
+}
+
+.la-audio-fallback__hint {
+  font-size: var(--la-text-s);
+}
+
+/* ---------- Hakken: tik de klanken (tap-modus) ---------- */
+
+.la-tap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--la-s3);
+}
+
+.la-tap__pops {
+  display: flex;
+  gap: var(--la-s2);
+  min-height: 40px;
+  align-items: center;
+}
+
+.la-tap__pop {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--la-radius-rond);
+  background: var(--la-honing);
+  border: 2px solid var(--la-bos);
+}
+
+.la-tap__btn {
+  min-width: var(--la-tik-super);
+  min-height: var(--la-tik-super);
+  border-radius: var(--la-radius-rond);
+  border: var(--la-rand);
+  background: var(--la-room);
+  color: var(--la-water-diep);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--la-schaduw-2);
+}
+
+.la-tap__btn svg {
+  width: 56px;
+  height: 56px;
+}
+
+/* ---------- Luisterknop per optie (klankjager) ---------- */
+
+.la-option-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--la-s2);
+}
+
+.la-option__listen {
+  min-width: var(--la-tik);
+  min-height: var(--la-tik);
+  border-radius: var(--la-radius-rond);
+  border: var(--la-rand);
+  background: var(--la-room);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.la-option__listen svg {
+  width: 40px;
+  height: 40px;
+}
+
+.la-option-item.is-listening .la-option {
+  box-shadow: var(--la-schaduw-op);
+  background: var(--la-mos);
+}
+
+.la-title--sm {
+  font-size: var(--la-text-l);
+}
+
+.la-sum {
+  font-size: 28px;
 }
 
 @keyframes la-ploef-flap {
@@ -734,7 +842,14 @@ body.la-reduced-motion {
   border-radius: var(--la-radius-s);
   border: var(--la-rand);
   width: 140px;
+  min-height: var(--la-tik);
   font-family: inherit;
+}
+
+.la-hint-text input[type="checkbox"] {
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
 }
 
 .la-gate-hold {

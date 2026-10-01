@@ -5,6 +5,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createParentGate } from '../ParentGate';
 import { createParentDashboard } from '../ParentDashboard';
+import { clearConfusions, loadConfusions, recordConfusion } from '../confusions';
 import { createSkillState } from '../../core/Mastery';
 import { createFreshProfile, createMemoryStorage } from '../../core/SaveSystem';
 
@@ -21,6 +22,8 @@ describe('ParentGate', () => {
     const onFail = vi.fn();
     const gate = createParentGate({ onPass, onFail, sum: { a: 7, b: 6 } });
     host.append(gate);
+    // SEC-012: het som-antwoord staat niet in de DOM.
+    expect(gate.querySelector('[data-sum]')).toBeNull();
     gate.querySelector<HTMLButtonElement>('[data-action="verify"]')?.click();
     expect(onPass).not.toHaveBeenCalled();
   });
@@ -64,7 +67,14 @@ describe('ParentDashboard', () => {
 
   it('toont neutrale statuslabels en geen diagnose-woorden', () => {
     const profile = createFreshProfile(0, () => 0.5);
-    profile.skills['LK.m.SOUND'] = { ...createSkillState(), mastery: 0.9, attempts: 14 };
+    // "Beheerst" volgt de volledige beheersingsdefinitie (EDU-029/isMastered).
+    profile.skills['LK.m.SOUND'] = {
+      ...createSkillState(),
+      mastery: 0.92,
+      attempts: 14,
+      consecutiveCorrect: 5,
+      sessionsSeen: 2,
+    };
     profile.skills['LK.a.SOUND'] = { ...createSkillState(), mastery: 0.4, attempts: 14 };
     profile.skills['AN.CVC'] = { ...createSkillState(), mastery: 0.55, attempts: 12 };
 
@@ -84,5 +94,15 @@ describe('ParentDashboard', () => {
     for (const forbidden of ['dyslexie', 'leesstoornis', 'stoornis', 'achterstand', 'risicokind', 'percentiel', 'avi', 'dmt']) {
       expect(text).not.toContain(forbidden);
     }
+  });
+});
+
+describe('Confusions-log', () => {
+  it('blijft begrensd en wist correct (SEC-005)', () => {
+    const storage = createMemoryStorage();
+    for (let i = 0; i < 60; i++) recordConfusion(`t${i}`, `c${i}`, 'letterklank', storage);
+    expect(loadConfusions(storage).length).toBeLessThanOrEqual(50);
+    clearConfusions(storage);
+    expect(loadConfusions(storage)).toEqual([]);
   });
 });

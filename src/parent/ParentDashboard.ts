@@ -1,10 +1,14 @@
 /**
  * Ouderdashboard (ED §12 / GD §9.2). Geen diagnose, geen percentielen,
  * geen vergelijking, geen rood label (ED §12.3). Alles lokaal.
+ *
+ * F3: status "Beheerst" uitsluitend via `skillStatus` (EDU-029), reactietijd in
+ * seconden (EDU-023), instellingen (rustige modus/contrast/auto-repeat, QA-018),
+ * en rustige meldingen bij ontbrekend geluid (QA-002) of mislukte opslag (QA-004).
  */
-import type { Profile, SkillState } from '../types';
+import type { Profile, ProfileSettings } from '../types';
 import { graphemes, ui } from '../content';
-import { soundSkillFor } from '../core/Progression';
+import { skillStatus, soundSkillFor, type SkillStatus } from '../core/Progression';
 import { median } from '../core/Mastery';
 import { exportProfile, defaultStorage, type SaveStorage } from '../core/SaveSystem';
 import { loadConfusions, type ConfusionEntry } from './confusions';
@@ -15,6 +19,12 @@ export interface ParentDashboardOptions {
   storage?: SaveStorage;
   onBack: () => void;
   onReset: () => void;
+  /** Wijzig een instelling direct (QA-018). */
+  onSettingsChange?: (patch: Partial<ProfileSettings>) => void;
+  /** Toon een rustige melding als opslaan niet lukte (QA-004). */
+  saveFailed?: boolean;
+  /** Toon een rustige melding als er geen geluid/stem is (QA-002). */
+  audioUnavailable?: boolean;
 }
 
 type Status = 'zeker' | 'oefent' | 'nog';
@@ -25,10 +35,14 @@ const STATUS_UI: Record<Status, string> = {
   nog: 'ui.parent.status.nog',
 };
 
-function statusFor(state: SkillState | undefined): Status {
-  if (!state || state.attempts === 0) return 'nog';
-  if (state.mastery >= 0.8) return 'zeker';
-  return 'oefent';
+const STATUS_MAP: Record<SkillStatus, Status> = {
+  mastered: 'zeker',
+  developing: 'oefent',
+  not_started: 'nog',
+};
+
+function statusFor(profile: Profile, skillId: string): Status {
+  return STATUS_MAP[skillStatus(profile, skillId)];
 }
 
 function statusBadge(status: Status): HTMLElement {
@@ -70,9 +84,21 @@ export function createParentDashboard(options: ParentDashboardOptions): HTMLElem
   header.append(back);
   container.append(header);
 
+  // Rustige meldingen (geen crash, QA-002/QA-004).
+  if (options.saveFailed === true) {
+    const warn = el('div', { class: 'la-card', 'data-notice': 'save-failed' });
+    warn.append(el('p', { class: 'la-hint-text', text: ui('ui.parent.save.failed') }));
+    container.append(warn);
+  }
+  if (options.audioUnavailable === true) {
+    const warn = el('div', { class: 'la-card', 'data-notice': 'audio-unavailable' });
+    warn.append(el('p', { class: 'la-hint-text', text: ui('ui.parent.audio.missing') }));
+    container.append(warn);
+  }
+
   // Geleerde klanken (MVP-grafemen, blok 1).
   const mvp = graphemes.filter((g) => g.introducedInPhase <= 1);
-  const learned = mvp.filter((g) => statusFor(profile.skills[soundSkillFor(g.id)]) === 'zeker');
+  const learned = mvp.filter((g) => statusFor(profile, soundSkillFor(g.id)) === 'zeker');
   const card = el('div', { class: 'la-card' });
   card.append(el('h3', { text: ui('ui.parent.learned.title') }));
   card.append(
@@ -82,7 +108,7 @@ export function createParentDashboard(options: ParentDashboardOptions): HTMLElem
   );
   const chips = el('div', { class: 'la-chips' });
   for (const g of mvp) {
-    const status = statusFor(profile.skills[soundSkillFor(g.id)]);
+    const status = statusFor(profile, soundSkillFor(g.id));
     const chip = el('span', { class: 'la-chip', 'data-grapheme': g.id, 'data-status': status });
     chip.append(el('span', { class: `la-dot la-dot--${status}` }));
     chip.append(document.createTextNode(` ${g.letters} · `));
@@ -105,7 +131,7 @@ export function createParentDashboard(options: ParentDashboardOptions): HTMLElem
   const blendCard = el('div', { class: 'la-card' });
   blendCard.append(el('h3', { text: ui('ui.parent.blend.title') }));
   for (const skillId of ['AN.CVC', 'SY.CVC'] as const) {
-    const status = statusFor(profile.skills[skillId]);
+    const status = statusFor(profile, skillId);
     const row = el('div', { class: 'la-blend-row', 'data-skill': skillId });
     row.append(el('span', { text: skillId }));
     row.append(meter(status));
@@ -119,7 +145,7 @@ export function createParentDashboard(options: ParentDashboardOptions): HTMLElem
   wordsCard.append(el('h3', { text: ui('ui.parent.words.title') }));
   const wordsRead = Object.values(profile.items).filter((item) => item.skillId.startsWith('DE.')).length;
   wordsCard.append(el('p', { text: ui('ui.parent.wordsRead').replace('{n}', String(wordsRead)) }));
-  const deStatus = statusFor(profile.skills['DE.CVC']);
+  const deStatus = statusFor(profile, 'DE.CVC');
   const deRow = el('div', { class: 'la-blend-row', 'data-skill': 'DE.CVC' });
   deRow.append(el('span', { text: 'DE.CVC' }));
   deRow.append(meter(deStatus));
@@ -134,7 +160,7 @@ export function createParentDashboard(options: ParentDashboardOptions): HTMLElem
   }
   container.append(wordsCard);
 
-  // Reactietijd (indicatie)
+  // Reactietijd (indicatie) – EDU-023: seconden met de juiste eenheid.
   const skillStates = Object.values(profile.skills).filter((s) => s.attempts > 0 && s.avgResponseMs > 0);
   const avg = median(skillStates.map((s) => s.avgResponseMs));
   const timeCard = el('div', { class: 'la-card' });
@@ -142,7 +168,7 @@ export function createParentDashboard(options: ParentDashboardOptions): HTMLElem
   timeCard.append(el('p', { text: `${profile.sessionCount} sessies` }));
   if (avg > 0) {
     const seconds = (avg / 1000).toFixed(1).replace('.', ',');
-    timeCard.append(el('p', { text: ui('ui.parent.response').replace('{ms}', seconds) }));
+    timeCard.append(el('p', { text: ui('ui.parent.response').replace('{s}', seconds) }));
   }
   container.append(timeCard);
 
@@ -187,6 +213,30 @@ export function createParentDashboard(options: ParentDashboardOptions): HTMLElem
   }
   extraCard.append(confusionWrap);
   container.append(extraCard);
+
+  // Instellingen (QA-018)
+  if (options.onSettingsChange) {
+    const settingsCard = el('div', { class: 'la-card', 'data-section': 'settings' });
+    settingsCard.append(el('h3', { text: ui('ui.parent.settings.title') }));
+    settingsCard.append(el('p', { class: 'la-hint-text', text: ui('ui.parent.settings.hint') }));
+    const settings = profile.settings;
+    const rows: { key: keyof ProfileSettings; label: string; checked: boolean }[] = [
+      { key: 'audioEnabled', label: ui('ui.settings.audio'), checked: settings.audioEnabled },
+      { key: 'reducedMotion', label: ui('ui.settings.motion'), checked: settings.reducedMotion },
+      { key: 'highContrast', label: ui('ui.settings.contrast'), checked: settings.highContrast },
+      { key: 'autoRepeatPrompt', label: ui('ui.settings.autoRepeat'), checked: settings.autoRepeatPrompt },
+    ];
+    for (const row of rows) {
+      const label = el('label', { class: 'la-hint-text la-setting-row' });
+      const input = el('input', { type: 'checkbox', 'data-setting': row.key });
+      input.checked = row.checked;
+      input.addEventListener('change', () => options.onSettingsChange?.({ [row.key]: input.checked }));
+      label.append(input);
+      label.append(document.createTextNode(` ${row.label}`));
+      settingsCard.append(label);
+    }
+    container.append(settingsCard);
+  }
 
   // Privacy + beheer
   const manage = el('div', { class: 'la-card' });

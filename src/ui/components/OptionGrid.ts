@@ -1,10 +1,16 @@
 /**
  * Optiegrid voor antwoorden (2 -> 3 -> 4 opties). Identieke knoppen (GD §4),
  * tikdoelen >= 64 px, toetsenbord/cijfer 1-4 (GD §8.4 / UX §6.1).
+ *
+ * Semantiek (QA-015): een `radiogroup` met `role="radio"` + `aria-checked`
+ * (geen misleidende `aria-pressed` op antwoordknoppen).
+ *
+ * Klankjager (EDU-005 / QA-002): met `onListen` krijgt elke optie een aparte
+ * luisterknop (oor) die de klank afspeelt zónder te kiezen.
  */
 import type { ActivityOption } from '../../types';
 import { el } from '../dom';
-import { iconSpeaker } from '../icons';
+import { iconSpeaker, iconEar } from '../icons';
 import { ui } from '../../content';
 
 export interface OptionGridOptions {
@@ -12,6 +18,8 @@ export interface OptionGridOptions {
   onSelect: (optionId: string) => void;
   /** Speel de audio van deze optie (hover/focus). */
   onPreview?: (option: ActivityOption) => void;
+  /** Aparte luisterknop per optie (speelt audio, kiest niet). */
+  onListen?: (option: ActivityOption) => void;
   /** Hoe de optie getoond wordt. */
   mode?: 'auto' | 'word' | 'audio' | 'letters';
   disabled?: boolean;
@@ -43,12 +51,15 @@ function optionAriaLabel(option: ActivityOption, index: number, resolved: 'word'
 }
 
 export function createOptionGrid(options: OptionGridOptions): OptionGridHandle {
+  const withListen = typeof options.onListen === 'function';
   const container = el('div', {
     class: `la-options${options.options.length > 3 ? ' la-options--grid' : ''}`,
-    role: 'group',
+    role: 'radiogroup',
   });
 
   const buttons: HTMLButtonElement[] = [];
+  const listenButtons: HTMLButtonElement[] = [];
+
   options.options.forEach((option, index) => {
     const resolved = optionMode(options.mode, option);
     const button = el('button', {
@@ -56,9 +67,10 @@ export function createOptionGrid(options: OptionGridOptions): OptionGridHandle {
       class: `la-option la-option--${resolved}`,
       'data-option-id': option.id,
       'data-option-index': index,
+      role: 'radio',
+      'aria-checked': 'false',
       'aria-posinset': index + 1,
       'aria-setsize': options.options.length,
-      'aria-pressed': 'false',
       'aria-label': optionAriaLabel(option, index, resolved),
     });
     if (resolved === 'audio') {
@@ -78,8 +90,28 @@ export function createOptionGrid(options: OptionGridOptions): OptionGridHandle {
       button.addEventListener('pointerenter', preview);
       button.addEventListener('focus', preview);
     }
+
+    if (withListen) {
+      const item = el('div', { class: 'la-option-item', role: 'presentation' });
+      const listen = el('button', {
+        type: 'button',
+        class: 'la-option__listen',
+        'data-listen-id': option.id,
+        'aria-label': ui('ui.listen'),
+      });
+      listen.append(iconEar());
+      listen.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (listen.disabled) return;
+        options.onListen?.(option);
+      });
+      item.append(button, listen);
+      listenButtons.push(listen);
+      container.append(item);
+    } else {
+      container.append(button);
+    }
     buttons.push(button);
-    container.append(button);
   });
 
   // Pijltjesnavigatie binnen de groep.
@@ -105,12 +137,13 @@ export function createOptionGrid(options: OptionGridOptions): OptionGridHandle {
     buttons,
     setDisabled(disabled: boolean) {
       for (const button of buttons) button.disabled = disabled;
+      for (const button of listenButtons) button.disabled = disabled;
     },
     mark(optionId: string, state) {
       for (const button of buttons) {
         button.classList.remove('is-correct', 'is-retry', 'is-hint', 'is-lit');
         const selected = button.dataset['optionId'] === optionId;
-        button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        button.setAttribute('aria-checked', selected ? 'true' : 'false');
         if (selected && state === 'correct') button.classList.add('is-correct');
         if (selected && state === 'retry') button.classList.add('is-retry');
         if (selected && state === 'hint') button.classList.add('is-hint');
