@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="een kas (broeikas)">
+  <path d="M52 74 l48 -32 48 32 z" fill="#4CAF6D" stroke="#14342A" stroke-width="5" stroke-linejoin="round"/>
+  <rect x="52" y="74" width="96" height="92" fill="#EAF7EF" stroke="#14342A" stroke-width="5"/>
+  <line x1="100" y1="74" x2="100" y2="166" stroke="#14342A" stroke-width="4"/>
+  <line x1="52" y1="120" x2="148" y2="120" stroke="#14342A" stroke-width="4"/>
+  <path d="M70 150 q4 -22 22 -30 M132 148 q0 -24 -18 -30" fill="none" stroke="#4CAF6D" stroke-width="5" stroke-linecap="round"/>
+</svg>
