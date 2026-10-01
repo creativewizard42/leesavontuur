@@ -20,6 +20,8 @@ interface RawGrapheme {
   letters: string;
   name: string;
   soundHint: string;
+  /** TTS-benaderingstekst voor kale letters (EDU-017); standaard = soundHint. */
+  ttsHint?: string;
   type: GraphemeType;
   block: number;
   exampleWord?: string;
@@ -29,32 +31,32 @@ const RAW: readonly RawGrapheme[] = [
   // Blok 1 – MVP (ED §5.2)
   // m: voorbeeld "maan" gebruikt aa (nog niet geleerd) -> alleen auditief (ED §5.3).
   { id: 'm', letters: 'm', name: 'em', soundHint: 'mmm', type: 'continuant', block: 1, exampleWord: 'maan' },
-  { id: 'a', letters: 'a', name: 'aa', soundHint: 'a', type: 'vowel-short', block: 1, exampleWord: 'mam' },
+  { id: 'a', letters: 'a', name: 'aa', soundHint: 'a', ttsHint: 'a-', type: 'vowel-short', block: 1, exampleWord: 'mam' },
   { id: 's', letters: 's', name: 'es', soundHint: 'sss', type: 'continuant', block: 1, exampleWord: 'as' },
-  { id: 't', letters: 't', name: 'tee', soundHint: 't', type: 'plosive', block: 1, exampleWord: 'mat' },
-  { id: 'k', letters: 'k', name: 'kaa', soundHint: 'k', type: 'plosive', block: 1, exampleWord: 'kam' },
+  { id: 't', letters: 't', name: 'tee', soundHint: 't', ttsHint: 't-', type: 'plosive', block: 1, exampleWord: 'mat' },
+  { id: 'k', letters: 'k', name: 'kaa', soundHint: 'k', ttsHint: 'k-', type: 'plosive', block: 1, exampleWord: 'kam' },
   { id: 'r', letters: 'r', name: 'er', soundHint: 'rrr', type: 'continuant', block: 1, exampleWord: 'ram' },
   // Blok 2
-  { id: 'i', letters: 'i', name: 'ie', soundHint: 'i', type: 'vowel-short', block: 2, exampleWord: 'mis' },
+  { id: 'i', letters: 'i', name: 'ie', soundHint: 'i', ttsHint: 'i-', type: 'vowel-short', block: 2, exampleWord: 'mis' },
   { id: 'v', letters: 'v', name: 'vee', soundHint: 'vvv', type: 'continuant', block: 2, exampleWord: 'vat' },
   { id: 'aa', letters: 'aa', name: 'lange aa', soundHint: 'aaa', type: 'vowel-long', block: 2, exampleWord: 'kaas' },
   { id: 'l', letters: 'l', name: 'el', soundHint: 'lll', type: 'continuant', block: 2, exampleWord: 'lam' },
   { id: 'n', letters: 'n', name: 'en', soundHint: 'nnn', type: 'continuant', block: 2, exampleWord: 'kan' },
   // Blok 3
   { id: 'oo', letters: 'oo', name: 'lange oo', soundHint: 'ooo', type: 'vowel-long', block: 3, exampleWord: 'kool' },
-  { id: 'e', letters: 'e', name: 'ee', soundHint: 'e', type: 'vowel-short', block: 3, exampleWord: 'nek' },
-  { id: 'd', letters: 'd', name: 'dee', soundHint: 'd', type: 'plosive', block: 3, exampleWord: 'dak' },
+  { id: 'e', letters: 'e', name: 'ee', soundHint: 'e', ttsHint: 'e-', type: 'vowel-short', block: 3, exampleWord: 'nek' },
+  { id: 'd', letters: 'd', name: 'dee', soundHint: 'd', ttsHint: 'd-', type: 'plosive', block: 3, exampleWord: 'dak' },
   { id: 'ee', letters: 'ee', name: 'lange ee', soundHint: 'eee', type: 'vowel-long', block: 3, exampleWord: 'teen' },
   // Blok 4
-  { id: 'p', letters: 'p', name: 'pee', soundHint: 'p', type: 'plosive', block: 4, exampleWord: 'kip' },
-  { id: 'o', letters: 'o', name: 'oo', soundHint: 'o', type: 'vowel-short', block: 4, exampleWord: 'pop' },
+  { id: 'p', letters: 'p', name: 'pee', soundHint: 'p', ttsHint: 'p-', type: 'plosive', block: 4, exampleWord: 'kip' },
+  { id: 'o', letters: 'o', name: 'oo', soundHint: 'o', ttsHint: 'o-', type: 'vowel-short', block: 4, exampleWord: 'pop' },
   { id: 'z', letters: 'z', name: 'zet', soundHint: 'zzz', type: 'continuant', block: 4, exampleWord: 'zon' },
   { id: 'ie', letters: 'ie', name: 'ie', soundHint: 'ie', type: 'vowel-long', block: 4, exampleWord: 'riem' },
   { id: 'h', letters: 'h', name: 'haa', soundHint: 'hhh', type: 'continuant', block: 4, exampleWord: 'hek' },
   // Blok 5
   { id: 'oe', letters: 'oe', name: 'oe', soundHint: 'oe', type: 'vowel-long', block: 5, exampleWord: 'voet' },
-  { id: 'u', letters: 'u', name: 'uu', soundHint: 'u', type: 'vowel-short', block: 5, exampleWord: 'hut' },
-  { id: 'b', letters: 'b', name: 'bee', soundHint: 'b', type: 'plosive', block: 5, exampleWord: 'bal' },
+  { id: 'u', letters: 'u', name: 'uu', soundHint: 'u', ttsHint: 'u-', type: 'vowel-short', block: 5, exampleWord: 'hut' },
+  { id: 'b', letters: 'b', name: 'bee', soundHint: 'b', ttsHint: 'b-', type: 'plosive', block: 5, exampleWord: 'bal' },
   { id: 'uu', letters: 'uu', name: 'lange uu', soundHint: 'uuu', type: 'vowel-long', block: 5, exampleWord: 'muur' },
   { id: 'j', letters: 'j', name: 'jee', soundHint: 'jjj', type: 'continuant', block: 5, exampleWord: 'jas' },
   // Blok 6
@@ -73,10 +75,10 @@ const RAW: readonly RawGrapheme[] = [
   { id: 'ng', letters: 'ng', name: 'en-gee', soundHint: 'ng', type: 'continuant', block: 8, exampleWord: 'ring' },
   { id: 'nk', letters: 'nk', name: 'en-kaa', soundHint: 'ngk', type: 'continuant', block: 8, exampleWord: 'bank' },
   // Later: alleen herkennen, niet in decodeeroefeningen (ED §5.3, §2.3).
-  { id: 'c', letters: 'c', name: 'see', soundHint: 'k', type: 'plosive', block: 9 },
-  { id: 'x', letters: 'x', name: 'iks', soundHint: 'ks', type: 'plosive', block: 9 },
-  { id: 'y', letters: 'y', name: 'i-grec', soundHint: 'j', type: 'continuant', block: 9 },
-  { id: 'q', letters: 'q', name: 'kuu', soundHint: 'k', type: 'plosive', block: 9 },
+  { id: 'c', letters: 'c', name: 'see', soundHint: 'k', ttsHint: 'k-', type: 'plosive', block: 9 },
+  { id: 'x', letters: 'x', name: 'iks', soundHint: 'ks', ttsHint: 'ks', type: 'plosive', block: 9 },
+  { id: 'y', letters: 'y', name: 'i-grec', soundHint: 'j', ttsHint: 'jjj', type: 'continuant', block: 9 },
+  { id: 'q', letters: 'q', name: 'kuu', soundHint: 'k', ttsHint: 'k-', type: 'plosive', block: 9 },
 ];
 
 /**
@@ -147,7 +149,7 @@ function audioFor(g: RawGrapheme): GraphemeAudio {
   const sound: AudioClip = {
     key: `lk.${g.id}.sound`,
     src: `audio/graphemes/${g.id}_sound.mp3`,
-    text: g.soundHint,
+    text: g.ttsHint ?? g.soundHint,
     kind: 'grapheme-sound',
   };
   const name: AudioClip = {
@@ -174,6 +176,7 @@ export const GRAPHEMES: readonly Grapheme[] = RAW.map((g, index) => {
     letters: g.letters,
     name: g.name,
     soundHint: g.soundHint,
+    ...(g.ttsHint === undefined ? {} : { ttsHint: g.ttsHint }),
     type: g.type,
     introducedInPhase: g.block,
     order: index + 1,

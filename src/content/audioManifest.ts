@@ -8,20 +8,21 @@ import { FEEDBACK } from './feedback';
 import { INSTRUCTIONS } from './instructions';
 
 /**
- * Volledige opnamelijst voor audio (ARCHITECTURE §6.2, GD §11.2).
+ * Volledige opnamelijst voor audio (ARCHITECTURE §6.2, GD §11.2, EDU-009/EDU-022).
  *
  * Er zijn nog **geen** opnames; elke clip heeft daarom een `text` (TTS/aria
  * fallback). Losse klanken en gerekte reeksen blijven in dit spel altijd echte
  * opnames (ED §13 regel 1): de `text` hier is enkel de ontwikkel-/noodfallback.
  *
- * Blends ("gerekt/gehakt") worden gegenereerd uit de `soundHint` per grafeem,
- * bv. *kam* → "k-a-mmm".
+ * Gerekte reeksen gebruiken één canonieke key-conventie (`blend.<woord>`) en
+ * expliciete pauzes tussen de klank-hints ("k … a … mmm"), zodat de TTS-fallback
+ * en de opnamelijst dezelfde tekst delen.
  */
 function blendText(graphemes: readonly string[]): string {
   const byId = new Map(GRAPHEMES.map((g) => [g.id, g]));
   return graphemes
     .map((id) => byId.get(id)?.soundHint ?? id)
-    .join('-');
+    .join(' … ');
 }
 
 export function buildAudioManifest(): AudioClip[] {
@@ -39,10 +40,17 @@ export function buildAudioManifest(): AudioClip[] {
   for (const w of WORDS) {
     if (w.audio) put(w.audio);
     put({
-      key: `bl.${w.word}`,
+      key: `blend.${w.word}`,
       src: `audio/blends/${w.word}.mp3`,
       text: blendText(w.graphemes),
       kind: 'blend',
+    });
+    // Klimopdracht per doelwoord (dynamische instructie-key, EDU-009).
+    put({
+      key: `instr.klim.${w.word}`,
+      src: `audio/feedback/instr.klim.${w.word}.mp3`,
+      text: `Klim naar ${w.word}.`,
+      kind: 'instruction',
     });
   }
 

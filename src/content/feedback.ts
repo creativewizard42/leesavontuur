@@ -39,7 +39,27 @@ export const FEEDBACK: Readonly<Record<string, string>> = {
   'fb.reward.1': 'Een klankvonkje voor jou!',
   'fb.letterarrive.1': 'Ooo, luister! Er is een nieuwe klank.',
   'fb.help.parent.1': 'Vraag maar aan een grote mens.',
+  // 5.6 Foutspecifieke feedback (ED §9.3, EDU-006). Variabelen via {sound}/{letter}/{word}/{sounds}.
+  'fb.specific.first_sound': 'Bijna! Luister naar het begin: {sound}…',
+  'fb.specific.last_sound': 'Bijna! Luister naar het laatste stukje: {sound}…',
+  'fb.specific.middle_sound': 'Luister naar het midden: {sound}… Welke klinker hoor je?',
+  'fb.specific.order': 'We lezen van links naar rechts: {word}. Probeer het nog eens.',
+  'fb.specific.letter_confusion': 'Dat is de letter {letter}. Luister naar de klank: {sound}.',
+  'fb.specific.blend_retry': 'Luister nog eens: {sounds}. Kun jij ze samenplakken?',
 };
+
+/**
+ * Foutspecifieke feedback-IDs (ED §9.3, EDU-006) die de generatoren per
+ * gekozen afleider zetten (`try1ByOption`). F2 gebruikt exact deze namen.
+ */
+export const SPECIFIC_FEEDBACK_KEYS: readonly string[] = [
+  'fb.specific.first_sound',
+  'fb.specific.last_sound',
+  'fb.specific.middle_sound',
+  'fb.specific.order',
+  'fb.specific.letter_confusion',
+  'fb.specific.blend_retry',
+];
 
 /**
  * Alle feedback-IDs die in GAME_DESIGN §5.1–§5.5 genoemd worden. De validator
@@ -82,4 +102,7 @@ export const REQUIRED_FEEDBACK_KEYS: readonly string[] = [
   'fb.reward.1',
   'fb.letterarrive.1',
   'fb.help.parent.1',
+  // 5.6 Foutspecifieke feedback (EDU-006)
+  ...SPECIFIC_FEEDBACK_KEYS,
 ];
+

@@ -220,10 +220,10 @@ function freeProfile(profile: Profile): Profile {
 function mutedAudio(audio: AudioService): AudioService {
   return {
     preload: async () => {},
-    play: async () => 'silent',
-    playClip: async () => 'silent',
-    playSequence: async () => 'silent',
-    playStretched: async () => 'silent',
+    play: async () => ({ result: 'unavailable', approximate: false }),
+    playClip: async () => ({ result: 'unavailable', approximate: false }),
+    playSequence: async () => ({ result: 'unavailable', approximate: false }),
+    playStretched: async () => ({ result: 'unavailable', approximate: false }),
     stop: () => audio.stop(),
     isAvailable: () => false,
     get mode(): 'silent' {

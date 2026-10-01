@@ -1,4 +1,5 @@
 import type {
+  ActivityItem,
   AudioClip,
   ContentBundle,
   Grapheme,
@@ -16,10 +17,16 @@ import { SIGHT_WORDS } from './sightWords';
 import { SENTENCES } from './sentences';
 import { FEEDBACK, REQUIRED_FEEDBACK_KEYS } from './feedback';
 import { UI_TEXTS } from './uiTexts';
-import { INSTRUCTIONS } from './instructions';
+import { INSTRUCTIONS, INSTRUCTION_KEY_PATTERNS, REQUIRED_INSTRUCTION_KEYS } from './instructions';
 import { PROPER_NAMES } from './properNames';
 import { AUDIO_MANIFEST } from './audioManifest';
 import { isBlockedWord } from './blocklist';
+import {
+  PHONOLOGY_KNOWN_WORDS,
+  RHYME_GROUPS,
+  SYLLABLE_WORDS,
+  rhymeTail,
+} from './phonology';
 import type { ContentBundleExt, ProperName, ValidateOptions } from './types';
 
 export const CONTENT_SCHEMA_VERSION = 1;
@@ -96,6 +103,60 @@ export function isWordAllowed(
     if (!learnedGraphemes.has(id)) return false;
   }
   return true;
+}
+
+// ---------------------------------------------------------------------------
+// assertItemsAllowed (runtime-check voor generatoruitvoer, EDU-020)
+// ---------------------------------------------------------------------------
+
+const OPTION_PREFIX = /^(?:g|ans|n|sw|pn|de|blend|bl):/;
+
+function alphabeticCandidate(value: string | undefined): string | undefined {
+  if (value === undefined) return undefined;
+  const stripped = value.replace(OPTION_PREFIX, '').toLowerCase();
+  return /^[a-z]+$/.test(stripped) ? stripped : undefined;
+}
+
+/**
+ * Controleert de woorden in gegenereerde items (zowel het juiste antwoord als
+ * de afleiders) tegen de blokkeerlijst en `isWordAllowed`. Herbruikbaar in
+ * content-tests over veel seeds (EDU-020). Alleen alfabetische optie-ids/labels
+ * van lengte ≥ 2 worden als woord beschouwd; grafeem-/getal-/reeks-opties
+ * (`g:m`, `ans:3`, `ans:k-a-m`) worden overgeslagen.
+ */
+export function assertItemsAllowed(
+  items: readonly ActivityItem[],
+  learned: ReadonlySet<string>,
+): ValidationResult {
+  const issues: ValidationIssue[] = [];
+  const add = (rule: string, message: string, location: string): void => {
+    issues.push({ rule, severity: 'error', message, location });
+  };
+
+  for (const item of items) {
+    const candidates = new Set<string>();
+    for (const option of item.options) {
+      const fromId = alphabeticCandidate(option.id);
+      if (fromId !== undefined) candidates.add(fromId);
+      const fromLabel = alphabeticCandidate(option.label);
+      if (fromLabel !== undefined) candidates.add(fromLabel);
+    }
+    for (const word of candidates) {
+      const location = `items:${item.id}:${word}`;
+      if (isBlockedWord(word)) {
+        add('ITEM_WORD_BLOCKED', `Geblokkeerd woord "${word}" in gegenereerd item`, location);
+      } else if (!isWordAllowed(word, learned)) {
+        add(
+          'ITEM_WORD_NOT_ALLOWED',
+          `Woord "${word}" gebruikt niet-geleerde grafemen of bestaat niet`,
+          location,
+        );
+      }
+    }
+  }
+
+  const errors = issues.filter((i) => i.severity === 'error');
+  return { ok: errors.length === 0, issues };
 }
 
 // ---------------------------------------------------------------------------
@@ -269,6 +330,45 @@ export function validateContent(
       `MVP heeft ${mvpCount} woorden; minimaal ${MIN_MVP_WORDS} vereist (ED §5.2)`,
       'words',
     );
+  }
+
+  // --- phonologie-bank (EDU-002/EDU-013/EDU-020) ---------------------------
+  const checkPhonologyWord = (word: string, location: string): void => {
+    if (!/^[a-z]+$/.test(word)) {
+      add('PHONOLOGY_WORD_FORM', `Phonologiewoord "${word}" is geen klein alfabetisch woord`, location);
+      return;
+    }
+    if (isBlockedWord(word)) {
+      add('PHONOLOGY_BLOCKED', `Blokkeerwoord "${word}" in de phonologie-bank`, location);
+      return;
+    }
+    if (!PHONOLOGY_KNOWN_WORDS.has(word) && !wordByWord.has(word)) {
+      add('PHONOLOGY_WORD_UNKNOWN', `"${word}" is geen gecureerd/bestaand woord`, location);
+    }
+  };
+
+  for (const group of RHYME_GROUPS) {
+    const location = `phonology:rhyme:${group.join('/')}`;
+    if (group.length < 2) {
+      add('PHONOLOGY_RHYME_SIZE', 'Rijmgroep heeft minder dan 2 woorden', location);
+    }
+    const tails = new Set(group.map((w) => rhymeTail(w)));
+    if (tails.size > 1) {
+      add(
+        'PHONOLOGY_RHYME_MISMATCH',
+        `Rijmgroep deelt niet hetzelfde rijmdeel (${[...tails].join(', ')})`,
+        location,
+      );
+    }
+    for (const word of group) checkPhonologyWord(word, location);
+  }
+
+  for (const entry of SYLLABLE_WORDS) {
+    const location = `phonology:syllable:${entry.word}`;
+    if (!Number.isInteger(entry.syllables) || entry.syllables < 1 || entry.syllables > 4) {
+      add('PHONOLOGY_SYLLABLE_RANGE', `Ongeldig lettergreepaantal ${entry.syllables}`, location);
+    }
+    checkPhonologyWord(entry.word, location);
   }
 
   // --- sight words ----------------------------------------------------------
@@ -457,6 +557,31 @@ export function validateContent(
     }
     if (!clip.text || clip.text.trim() === '') {
       add('AUDIO_TEXT', `AudioClip "${clip.key}" mist fallback-tekst`, location, 'warning');
+    }
+  }
+
+  // --- instructie-keys (EDU-009) -------------------------------------------
+  for (const key of REQUIRED_INSTRUCTION_KEYS) {
+    if (!(key in instructions)) {
+      add('MISSING_INSTRUCTION', `Vereiste instructie-key "${key}" ontbreekt in INSTRUCTIONS`, 'instructions');
+    }
+    if (!clipByKey.has(key)) {
+      add('MISSING_INSTRUCTION_AUDIO', `Geen audio-clip voor instructie-key "${key}"`, 'audioManifest');
+    }
+  }
+  for (const pattern of INSTRUCTION_KEY_PATTERNS) {
+    if (!(pattern.template in instructions)) {
+      add(
+        'MISSING_INSTRUCTION',
+        `Template "${pattern.template}" voor dynamische key "${pattern.prefix}*" ontbreekt`,
+        'instructions',
+      );
+    }
+    for (const w of bundle.words) {
+      const key = `${pattern.prefix}${w.word}`;
+      if (!clipByKey.has(key)) {
+        add('MISSING_INSTRUCTION_AUDIO', `Geen audio-clip voor dynamische key "${key}"`, 'audioManifest');
+      }
     }
   }
 

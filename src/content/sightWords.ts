@@ -26,9 +26,11 @@ interface RawSightWord {
 }
 
 const RAW: readonly RawSightWord[] = [
-  { id: 'SW.de', word: 'de', requiresBlock: 1 },
-  { id: 'SW.een', word: 'een', requiresBlock: 1, introducedAfter: 'SW.de' },
-  { id: 'SW.het', word: 'het', requiresBlock: 1, introducedAfter: 'SW.een' },
+  // ED §7.1: SW.de pas bij begin fase 7 (DE.CVC ≥ 0.7). De skill-drempel kan
+  // dit model niet uitdrukken; `requiresBlock` staat op het echte blok (7).
+  { id: 'SW.de', word: 'de', requiresBlock: 7 },
+  { id: 'SW.een', word: 'een', requiresBlock: 7, introducedAfter: 'SW.de' },
+  { id: 'SW.het', word: 'het', requiresBlock: 7, introducedAfter: 'SW.een' },
   { id: 'SW.ze', word: 'ze', requiresBlock: 4 },
   { id: 'SW.we', word: 'we', requiresBlock: 6 },
   { id: 'SW.je', word: 'je', requiresBlock: 5 },

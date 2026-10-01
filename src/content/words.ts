@@ -26,6 +26,8 @@ type RawWord = readonly [
     mvp?: boolean;
     /** Alleen zinvol i.c.m. mvp: er bestaat een SVG in public/assets. */
     image?: boolean;
+    /** Kindvriendelijk/betekenisvol doelwoord (EDU-016); default true. */
+    kidFriendly?: boolean;
   },
 ];
 
@@ -39,7 +41,7 @@ const RAW: readonly RawWord[] = [
   ['kat', ['k', 'a', 't'], { mvp: true, image: true }],
   ['tak', ['t', 'a', 'k'], { mvp: true, image: true }],
   ['kas', ['k', 'a', 's'], { mvp: true, image: true }],
-  ['mak', ['m', 'a', 'k'], { mvp: true }],
+  ['mak', ['m', 'a', 'k'], { mvp: true, kidFriendly: false }],
   ['ram', ['r', 'a', 'm'], { mvp: true, image: true }],
   ['rat', ['r', 'a', 't'], { mvp: true, image: true }],
   ['kar', ['k', 'a', 'r'], { mvp: true, image: true }],
@@ -49,8 +51,8 @@ const RAW: readonly RawWord[] = [
   ['mast', ['m', 'a', 's', 't'], { mvp: true, image: true }],
   ['stam', ['s', 't', 'a', 'm'], { mvp: true, image: true }],
   ['kras', ['k', 'r', 'a', 's'], { mvp: true, image: true }],
-  ['smak', ['s', 'm', 'a', 'k'], { mvp: true }],
-  ['mars', ['m', 'a', 'r', 's'], { mvp: true }],
+  ['smak', ['s', 'm', 'a', 'k'], { mvp: true, kidFriendly: false }],
+  ['mars', ['m', 'a', 'r', 's'], { mvp: true, kidFriendly: false }],
   ['start', ['s', 't', 'a', 'r', 't'], { mvp: true }],
 
   // --- Fase 5, blok 2 (ED §6.5 #22–48) ---
@@ -241,7 +243,7 @@ export const WORDS: readonly Word[] = RAW.map(([word, graphemes, opts]) => {
     pattern,
     phase: phaseForPattern(pattern),
     block: blockForGraphemes(graphemes),
-    kidFriendly: true,
+    kidFriendly: opts.kidFriendly !== false,
     audio: wordAudio(word),
   };
   const withMvp: Word = opts.mvp === true ? { ...base, isMvp: true } : base;

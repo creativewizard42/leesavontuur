@@ -1,36 +1,100 @@
 /**
- * Instructie- en audio-promptteksten per activiteit (GD §4, §11.2).
+ * Instructie- en audio-promptteksten per activiteit (GD §4, §11.2, EDU-009).
  *
  * Alle Nederlandse teksten die het spel uitspreekt staan hier centraal, zodat
  * er geen losse teksten in de UI-/game-code hoeven te staan. `{...}` zijn
- * placeholders die de Builder invult (bv. `{doelwoord}`, `{klank}`).
+ * placeholders die de Builder invult (bv. `{woord}`, `{sound}`).
+ *
+ * `REQUIRED_INSTRUCTION_KEYS` is de set sleutels die de code gebruikt; de
+ * validator eist dat elk daarvan in deze map **en** in de audiolijst staat.
+ * Dynamische sleutels (per doelwoord) worden via `INSTRUCTION_KEY_PATTERNS`
+ * afgeleid van een generieke template.
  */
 export const INSTRUCTIONS: Readonly<Record<string, string>> = {
-  // Klankjager (4a)
+  // Fonemisch bewustzijn / Klankjager (GD §4a)
+  'instr.fn.first_sound': 'Welk woord begint met {sound}?',
+  'instr.fn.last_sound': 'Welk woord eindigt op {sound}?',
   'instr.klankjager.first': 'Welk woord begint met {klank}?',
   'instr.klankjager.last': 'Welk woord eindigt op {klank}?',
   'instr.klankjager.candidates': '{woorden}',
-  // Letter-klank (4b)
+  // Letter-klank (GD §4b)
+  'instr.lk.grapheme_to_sound': 'Welke klank zegt deze letter?',
+  'instr.lk.sound_to_grapheme': 'Welke letter hoort bij {sound}?',
   'instr.letterklank.r1': 'Welke klank zegt deze letter?',
   'instr.letterklank.r2': 'Welke letter hoort bij {klank}?',
-  // Hakken (4c)
+  // Hakken (GD §4c)
   'instr.hakken.start': 'Tik de letters één voor één. Hoor je de klanken?',
   'instr.hakken.count': 'Hoeveel klanken hoor je?',
-  // Plakken (4d)
+  // Plakken (GD §4d)
   'instr.plakken.r1': 'Plak de klanken aan elkaar. Welk woord hoor je?',
   'instr.plakken.r2': 'Sleep de klanken in de goede volgorde.',
-  // Woord lezen (4e)
+  // Woord lezen (GD §4e)
+  'instr.de.read': 'Lees dit woord. Tik eerst de letters, plak ze daarna aan elkaar.',
   'instr.woordlezen.start': 'Lees dit woord. Tik eerst de letters, plak ze daarna aan elkaar.',
   'instr.woordlezen.reveal': '{woord}. Dit is {beeld}.',
   'instr.woordlezen.comprehension': 'Wat hoort bij dit woord?',
-  // De Klimboom (4f)
+  // De Klimboom (GD §4f) – generieke template voor `instr.klim.<woord>`.
+  'instr.klim': 'Klim naar {word}.',
   'instr.klimboom': 'Klim naar {woord}.',
+  // Fonologisch bewustzijn: rijmen en klappen (GD §4a)
+  'instr.ph.syllable': 'Hoeveel klappen hoor je in {word}?',
+  'instr.ph.rhyme': 'Wat rijmt op {word}?',
   // Algemeen (GD §4, §11.2)
   'instr.repeat': 'Ik zeg het nog een keer.',
   'instr.guess': 'Rustig maar. Eerst goed kijken.',
   'instr.audio.options': 'Luister maar.',
-  // Aanvulling door de UI-builder (start/map/introductie).
+  // Aanvullingen door de UI-builder (start/map/introductie).
   'instr.start': 'We gaan lezen! Tik op de groene knop.',
   'instr.map': 'Kies een plek in het Klankwoud.',
   'instr.new_letter': 'Ooo, luister! Er is een nieuwe klank.',
 };
+
+/**
+ * Sleutels die de code daadwerkelijk gebruikt of vereist (EDU-009). De
+ * validator eist dat elk van deze bestaat in `INSTRUCTIONS` én in de
+ * audiomanifest.
+ */
+export const REQUIRED_INSTRUCTION_KEYS: readonly string[] = [
+  'instr.start',
+  'instr.map',
+  'instr.repeat',
+  'instr.fn.first_sound',
+  'instr.fn.last_sound',
+  'instr.lk.grapheme_to_sound',
+  'instr.lk.sound_to_grapheme',
+  'instr.ph.syllable',
+  'instr.ph.rhyme',
+  'instr.de.read',
+  'instr.klim',
+  'instr.hakken.start',
+  'instr.plakken.r1',
+];
+
+/**
+ * Dynamische instructiesleutels: een prefix die op een concrete sleutel wordt
+ * toegepast met een generieke template (bv. `instr.klim.kam` → `instr.klim`).
+ */
+export interface InstructionKeyPattern {
+  prefix: string;
+  template: string;
+}
+
+export const INSTRUCTION_KEY_PATTERNS: readonly InstructionKeyPattern[] = [
+  { prefix: 'instr.klim.', template: 'instr.klim' },
+];
+
+/**
+ * Lost een (mogelijk dynamische) instructiesleutel op naar zijn template-sleutel
+ * en variabelen. Bv. `instr.klim.kam` → template `instr.klim`, vars `{word:'kam'}`.
+ */
+export function resolveInstructionKey(
+  key: string,
+): { template: string; vars: Record<string, string> } | undefined {
+  for (const pattern of INSTRUCTION_KEY_PATTERNS) {
+    if (key.startsWith(pattern.prefix) && key.length > pattern.prefix.length) {
+      const value = key.slice(pattern.prefix.length);
+      return { template: pattern.template, vars: { word: value, woord: value } };
+    }
+  }
+  return undefined;
+}
