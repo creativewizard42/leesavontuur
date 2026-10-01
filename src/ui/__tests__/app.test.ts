@@ -42,12 +42,7 @@ describe('App – kindflow', () => {
     root.querySelector<HTMLButtonElement>('[data-action="start"]')?.click();
     expect(root.querySelector('[data-screen="session"]')).not.toBeNull();
 
-    // Nieuwe klank: introductie met letternaam/klank/voorbeeldwoord.
-    const introNext = root.querySelector<HTMLButtonElement>('[data-action="intro-next"]');
-    expect(introNext).not.toBeNull();
-    expect(root.querySelector('[data-letter-action="sound"]')).not.toBeNull();
-
-    introNext?.click();
+    // Fase 1: de sessie start met een auditieve klankwarming-up met keuzes.
     const option = root.querySelector<HTMLButtonElement>('.la-option');
     expect(option).not.toBeNull();
     option?.click();
@@ -59,7 +54,6 @@ describe('App – kindflow', () => {
       unlockedGraphemes?: string[];
       skills?: Record<string, { attempts: number }>;
     };
-    expect(parsed.unlockedGraphemes).toContain('m');
     expect(Object.keys(parsed.skills ?? {}).length).toBeGreaterThan(0);
   });
 

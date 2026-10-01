@@ -9,10 +9,17 @@ function richProfile(): Profile {
   const profile = createFreshProfile(1000, () => 0.5);
   profile.unlockedGraphemes = ['m', 'a', 's', 't', 'k', 'r'];
   profile.skills['PH.RHYME'] = createSkillState({ mastery: 0.9 });
+  profile.skills['FN.FIRST_SOUND'] = createSkillState({ mastery: 0.9 });
   profile.skills['SY.CVC'] = createSkillState({ mastery: 0.8 });
   profile.skills['AN.CVC'] = createSkillState({ mastery: 0.8 });
   for (const g of profile.unlockedGraphemes) {
-    profile.skills[`LK.${g}.SOUND`] = createSkillState({ mastery: 0.9 });
+    // Beheerst volgens isMastered (EDU-025), zodat de poort opengaat.
+    profile.skills[`LK.${g}.SOUND`] = createSkillState({
+      mastery: 0.9,
+      attempts: 12,
+      consecutiveCorrect: 4,
+      sessionsSeen: 2,
+    });
   }
   profile.skills['DE.CVC'] = createSkillState({ mastery: 0.8 });
   profile.items['kam'] = {
@@ -45,14 +52,20 @@ describe('SessionPlanner – volgorde en lengte', () => {
     expect(total).toBeLessThanOrEqual(80);
   });
 
-  it('geeft een vers profiel een sessie met nieuwe letter (m) en beloning', () => {
+  it('geeft een vers profiel een fase-1-sessie zonder gescoorde 1-optie-items (EDU-004/EDU-010)', () => {
     const plan = planSession(createFreshProfile(0, () => 0.5), createSeededRng(1));
     const steps = plan.sections.map((s) => s.step);
-    expect(steps).toContain(3);
+    // Fase 1 is bereikbaar: klankwarming-up + auditieve klankoefening.
+    expect(steps).toContain(1);
+    expect(steps).toContain(2);
+    // Nog geen letters: introductie pas als FN op orde is (ED §3).
+    expect(steps).not.toContain(3);
     expect(steps).toContain(8);
-    expect(steps).not.toContain(1);
-    const newLetter = plan.sections.find((s) => s.step === 3);
-    expect(newLetter?.items.every((i) => i.skillId.includes('.m.'))).toBe(true);
+    for (const item of flattenPlan(plan)) {
+      if (item.metadata?.['scored'] === false) continue;
+      if (item.kind === 'beloning') continue;
+      expect(item.options.length).toBeGreaterThanOrEqual(2);
+    }
   });
 
   it('laat stap 3 weg als de poort dicht is', () => {

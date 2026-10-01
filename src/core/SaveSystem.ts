@@ -23,6 +23,21 @@ import { graphemes } from '../content';
 
 export const SAVE_KEY = 'leesavontuur.save.v1';
 
+/** Resultaat van een schrijfpoging; gooit nooit (QA-004 / SEC-006). */
+export interface SaveResult {
+  ok: boolean;
+  reason?: 'quota' | 'unavailable' | 'serialize' | 'unknown';
+}
+
+/** Sleutels die nooit als record-key mogen worden overgenomen (SEC-007). */
+const DANGEROUS_KEYS: ReadonlySet<string> = new Set(['__proto__', 'constructor', 'prototype']);
+
+/** Bovengrens voor opgeslagen lijsten (SEC-007 / SEC-015). */
+const MAX_UNLOCKED = 64;
+const MAX_REWARD_ITEMS = 64;
+const MAX_SKILLS = 512;
+const MAX_ITEMS = 2048;
+
 export interface SaveStorage {
   read(key: string): string | null;
   write(key: string, value: string): void;
@@ -86,9 +101,9 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
-function asStringArray(value: unknown): string[] {
+function asStringArray(value: unknown, cap: number = MAX_REWARD_ITEMS): string[] {
   if (!Array.isArray(value)) return [];
-  return value.filter((v): v is string => typeof v === 'string');
+  return value.filter((v): v is string => typeof v === 'string').slice(0, cap);
 }
 
 function coerceBoolean(value: unknown, fallback: boolean): boolean {
@@ -120,21 +135,27 @@ function normalizeRewards(raw: unknown): Rewards {
 }
 
 function normalizeSkills(raw: unknown): Record<SkillId, SkillState> {
-  const out: Record<SkillId, SkillState> = {};
+  const out: Record<SkillId, SkillState> = Object.create(null) as Record<SkillId, SkillState>;
   if (!isRecord(raw)) return out;
+  let count = 0;
   for (const [skillId, value] of Object.entries(raw)) {
-    if (!skillId) continue;
+    if (!skillId || DANGEROUS_KEYS.has(skillId)) continue;
+    if (count >= MAX_SKILLS) break;
+    count += 1;
     out[skillId] = ensureSkillDetail(isRecord(value) ? (value as Partial<SkillStateDetail>) : undefined);
   }
   return out;
 }
 
 function normalizeItems(raw: unknown): Record<ItemKey, ItemState> {
-  const out: Record<ItemKey, ItemState> = {};
+  const out: Record<ItemKey, ItemState> = Object.create(null) as Record<ItemKey, ItemState>;
   if (!isRecord(raw)) return out;
+  let count = 0;
   for (const [itemKey, value] of Object.entries(raw)) {
-    if (!itemKey) continue;
+    if (!itemKey || DANGEROUS_KEYS.has(itemKey)) continue;
     if (!isRecord(value)) continue;
+    if (count >= MAX_ITEMS) break;
+    count += 1;
     const skillId = typeof value.skillId === 'string' ? value.skillId : itemKey;
     const base = createItemState(itemKey, skillId);
     out[itemKey] = {
@@ -151,7 +172,7 @@ function normalizeItems(raw: unknown): Record<ItemKey, ItemState> {
 export function normalizeProfile(raw: unknown, now: number = Date.now()): Profile {
   const source = isRecord(raw) ? raw : {};
   const fresh = createFreshProfile(now);
-  const unlocked = asStringArray(source.unlockedGraphemes);
+  const unlocked = asStringArray(source.unlockedGraphemes, MAX_UNLOCKED);
   const validIds = new Set(graphemes.map((g) => g.id));
   const filteredUnlocked = unlocked.filter((id) => validIds.has(id));
   const createdAt = typeof source.createdAt === 'string' ? source.createdAt : fresh.createdAt;
@@ -228,9 +249,30 @@ export function loadProfile(storage: SaveStorage = defaultStorage()): Profile {
   return migrate(raw);
 }
 
-export function saveProfile(profile: Profile, storage: SaveStorage = defaultStorage()): void {
-  const safe = normalizeProfile(profile);
-  storage.write(SAVE_KEY, JSON.stringify(safe));
+function classifyWriteError(error: unknown): SaveResult['reason'] {
+  const name = typeof error === 'object' && error !== null && 'name' in error ? String((error as { name?: unknown }).name) : '';
+  if (name === 'QuotaExceededError' || name === 'NS_ERROR_DOM_QUOTA_REACHED') return 'quota';
+  if (name === 'SecurityError' || name === 'InvalidStateError') return 'unavailable';
+  return 'unknown';
+}
+
+/**
+ * Schrijft het genormaliseerde profiel. Gooit nooit: bij quota/privémodus of
+ * een serializeerfout volgt `{ ok: false, reason }` (QA-004 / SEC-006).
+ */
+export function saveProfile(profile: Profile, storage: SaveStorage = defaultStorage()): SaveResult {
+  let json: string;
+  try {
+    json = JSON.stringify(normalizeProfile(profile));
+  } catch {
+    return { ok: false, reason: 'serialize' };
+  }
+  try {
+    storage.write(SAVE_KEY, json);
+    return { ok: true };
+  } catch (error) {
+    return { ok: false, reason: classifyWriteError(error) };
+  }
 }
 
 /** JSON-export (ouderzone). Nooit PII: alleen het lokale profiel. */
@@ -240,7 +282,11 @@ export function exportProfile(profile: Profile): string {
 
 /** Wist de save en geeft een vers profiel terug (dubbele bevestiging in UI). */
 export function resetProfile(storage: SaveStorage = defaultStorage()): Profile {
-  storage.remove(SAVE_KEY);
+  try {
+    storage.remove(SAVE_KEY);
+  } catch {
+    // Privémodus/quota: ga door met een vers profiel in het geheugen.
+  }
   const fresh = createFreshProfile();
   saveProfile(fresh, storage);
   return fresh;

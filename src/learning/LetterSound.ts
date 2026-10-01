@@ -74,7 +74,8 @@ export function generate(options: LetterSoundOptions): ActivityItem {
           showText: true,
         }
       : {
-          audio: graphemeSoundClip(targetGrapheme),
+          // EDU-005 (review): spreek de opdracht uit, niet alleen de losse klank.
+          audio: instructionClip('instr.lk.sound_to_grapheme', promptText),
           text: promptText,
           showText: false,
         };
@@ -98,6 +99,8 @@ export function generate(options: LetterSoundOptions): ActivityItem {
       }),
       targetGrapheme,
       direction,
+      // Ongescoord wanneer er geen echte keuze mogelijk is (EDU-004).
+      scored: placed.length >= 2,
     },
   };
 }

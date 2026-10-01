@@ -70,6 +70,7 @@ export function generate(options: WordReadingOptions): ActivityItem {
       }),
       // revealImage wordt door de UI pas ná correct getoond (ED §11.1).
       ...wordMetadata(targetWord, { task: 'read' }),
+      scored: placed.length >= 2,
     },
   };
 }

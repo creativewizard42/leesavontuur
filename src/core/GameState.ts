@@ -4,7 +4,7 @@
  * Verwerkt antwoorden via Mastery + SpacedRepetition en houdt de
  * sessie-overgangen bij. Alle functies zijn puur: ze muteren `state` niet.
  */
-import type { AnswerEvent, Profile, Rewards, SkillId, SkillState } from '../types';
+import type { ActivityItem, AnswerEvent, Profile, Rewards, SkillId, SkillState } from '../types';
 import {
   createSkillState,
   ensureSkillDetail,
@@ -13,6 +13,7 @@ import {
 } from './Mastery';
 import { createItemState, updateItemState } from './SpacedRepetition';
 import { recognizeSkillFor, soundSkillFor } from './Progression';
+import { isScoredActivityItem } from '../learning/util';
 
 export interface GameState {
   profile: Profile;
@@ -24,6 +25,8 @@ export interface GameState {
   introducedGraphemeThisSession: boolean;
   /** Aantal items op rij gemodelleerd (frustratiestop, ED §10.3). */
   consecutiveModeled: number;
+  /** Sessie-id dat al is afgerond; voorkomt dubbele beloning (QA-005). */
+  lastCompletedSessionId: number;
 }
 
 export function createInitialState(profile: Profile): GameState {
@@ -33,6 +36,7 @@ export function createInitialState(profile: Profile): GameState {
     sessionStep: 1,
     introducedGraphemeThisSession: false,
     consecutiveModeled: 0,
+    lastCompletedSessionId: 0,
   };
 }
 
@@ -125,7 +129,39 @@ export function startNewSession(state: GameState): GameState {
     sessionStep: 1,
     introducedGraphemeThisSession: false,
     consecutiveModeled: 0,
+    lastCompletedSessionId: state.lastCompletedSessionId,
   };
+}
+
+/**
+ * Rondt een sessie idempotent af op sessie-id (QA-005): een dubbele aanroep
+ * met hetzelfde `sessionId` kent nooit twee keer een vonkje of sessie toe.
+ * Geef het sessie-id mee dat bij de start van de sessie is vastgelegd.
+ */
+export function completeSession(state: GameState, sessionId: number = state.sessionNumber): GameState {
+  if (state.lastCompletedSessionId === sessionId) return state;
+  const sessionCount = Math.max(state.profile.sessionCount, sessionId);
+  let profile: Profile = { ...state.profile, sessionCount };
+  profile = addSparks(profile, 1);
+  return {
+    ...state,
+    profile,
+    sessionNumber: sessionCount + 1,
+    sessionStep: 1,
+    introducedGraphemeThisSession: false,
+    consecutiveModeled: 0,
+    lastCompletedSessionId: sessionId,
+  };
+}
+
+/**
+ * Verwerkt een antwoord alléén als het item gescoord mag worden. Items met
+ * minder dan twee opties (kennismaking/modeling) of expliciet ongescoorde items
+ * veranderen de mastery/Leitner niet (QA-006 / EDU-004).
+ */
+export function recordItemAnswer(state: GameState, event: AnswerEvent, item: ActivityItem): GameState {
+  if (!isScoredActivityItem(item)) return state;
+  return recordAnswer(state, event);
 }
 
 export function advanceStep(state: GameState, step: number): GameState {

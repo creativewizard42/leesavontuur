@@ -34,7 +34,9 @@ describe('LetterSound', () => {
     expect(wrong).toBeDefined();
     const attempt1 = checkAnswer(item, { optionId: wrong!.id, attempt: 1 });
     expect(attempt1.correct).toBe(false);
-    expect(attempt1.feedbackKey).toBe('fb.try1.2');
+    // EDU-006: foutspecifieke feedback i.p.v. één generieke tekst.
+    expect(attempt1.feedbackKey.startsWith('fb.specific.')).toBe(true);
+    expect(attempt1.feedbackVars).toBeDefined();
     expect(checkAnswer(item, { optionId: wrong!.id, attempt: 2 }).feedbackKey).toBe('fb.hint.2');
     const attempt3 = checkAnswer(item, { optionId: wrong!.id, attempt: 3 });
     expect(attempt3.modeled).toBe(true);
@@ -72,7 +74,7 @@ describe('LetterSound', () => {
 });
 
 describe('Segmenting', () => {
-  it('hakt kam in k-a-m en telt 3 klanken', () => {
+  it('verraadt het antwoord niet: het kind kiest het aantal klanken (EDU-003)', () => {
     expect(Segmenting.segment('kam')).toEqual(['k', 'a', 'm']);
     const item = Segmenting.generate({
       skillId: 'AN.CVC',
@@ -83,14 +85,20 @@ describe('Segmenting', () => {
       availableWords: WORDS,
     });
     expect(item.metadata?.['phonemeCount']).toBe(3);
-    expect(item.metadata?.['graphemes']).toEqual(['k', 'a', 'm']);
-    expect(item.options.find((o) => o.id === item.targetId)?.label).toBe('k-a-m');
+    expect(item.metadata?.['tapUnits']).toEqual(['k', 'a', 'm']);
+    expect(item.metadata?.['responseMode']).toBe('count');
+    // Geen enkele optie toont de gesegmenteerde vorm.
+    expect(item.options.every((o) => !(o.label ?? '').includes('-'))).toBe(true);
+    expect(item.options.find((o) => o.id === item.targetId)?.label).toBe('3');
     expect(checkAnswer(item, { optionId: item.targetId }).correct).toBe(true);
+    // FN.COUNT en AN.CVC versterken elkaar (EDU-021).
+    expect(item.secondarySkillId).toBe('FN.COUNT');
   });
 
-  it('maakt een FN.COUNT-variant met het aantal klanken', () => {
+  it('maakt een FN.COUNT-variant met het aantal klanken en secundair AN.CVC', () => {
     const item = Segmenting.generate({ skillId: 'FN.COUNT', word: 'tas', rng: seed(5) });
     expect(item.options.find((o) => o.id === item.targetId)?.label).toBe('3');
+    expect(item.secondarySkillId).toBe('AN.CVC');
   });
 });
 

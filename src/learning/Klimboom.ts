@@ -6,6 +6,7 @@
 import type { ActivityItem, Difficulty, Rng, SkillId, Word } from '../types';
 import { getWord, isWordAllowed } from '../content';
 import { optionCountFor } from '../core/Adaptive';
+import { skillsForWord } from './skills';
 import {
   feedbackMeta,
   instructionClip,
@@ -28,7 +29,6 @@ export interface KlimboomOptions {
 
 export function generate(options: KlimboomOptions): ActivityItem[] {
   const { count, difficulty, rng } = options;
-  const skillId: SkillId = options.skillId ?? 'DE.CVC';
   const learned = options.learned ?? new Set(options.availableWords.flatMap((w) => getWord(w)?.graphemes ?? []));
   const pool: Word[] = options.availableWords
     .filter((w) => isWordAllowed(w, learned))
@@ -56,9 +56,12 @@ export function generate(options: KlimboomOptions): ActivityItem[] {
     const correctIndex = placed.findIndex((o) => o.id === targetId);
     if (correctIndex >= 0) avoid.push(correctIndex);
 
+    // EDU-011: doel per patroon (DE.CVVC/CCVC/CVCC/CCVCC), niet alles op CVC.
+    const itemSkill: SkillId = skillsForWord(target).decode;
+
     items.push({
       id: itemId('klimboom', target.word, rng),
-      skillId,
+      skillId: itemSkill,
       kind: 'klimboom',
       prompt: {
         audio: instructionClip(`instr.klim.${target.word}`, `Klim naar ${target.word}.`),
@@ -78,6 +81,7 @@ export function generate(options: KlimboomOptions): ActivityItem[] {
           model: 'fb.model.2',
         }),
         ...wordMetadata(target.word, { task: 'klimboom' }),
+        scored: placed.length >= 2,
       },
     });
   }
