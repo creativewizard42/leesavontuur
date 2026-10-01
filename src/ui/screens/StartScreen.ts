@@ -76,7 +76,7 @@ export function createStartScreen(options: StartScreenOptions): HTMLElement {
   playButton.setAttribute('data-autofocus', '');
   stage.append(playButton);
 
-  const audioToggle = el('label', { class: 'la-hint-text' });
+  const audioToggle = el('label', { class: 'la-hint-text la-setting-row' });
   const checkbox = el('input', { type: 'checkbox', 'data-setting': 'audio' });
   checkbox.checked = options.profile.settings.audioEnabled;
   checkbox.addEventListener('change', () => options.onToggleAudio(checkbox.checked));

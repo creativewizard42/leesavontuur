@@ -7,11 +7,16 @@
  *
  * Klankjager (EDU-005 / QA-002): met `onListen` krijgt elke optie een aparte
  * luisterknop (oor) die de klank afspeelt zónder te kiezen.
+ *
+ * Audio-only / vorm (QA-R2-005, ronde 2): een optie zonder leesbaar label krijgt
+ * een **oor-/speakericoon + zichtbaar nummer** en een aria-label via
+ * `ui.option.sound`. Ontbrekende ui-keys tonen we nooit als key (fallback naar
+ * nummer/icoon). Vorm-afleiders (`metadata.kind === 'shape'`) renderen als vorm.
  */
 import type { ActivityOption } from '../../types';
 import { el } from '../dom';
-import { iconSpeaker, iconEar } from '../icons';
-import { ui } from '../../content';
+import { iconSpeaker, iconEar, iconShape } from '../icons';
+import { uiText } from '../text';
 
 export interface OptionGridOptions {
   options: readonly ActivityOption[];
@@ -34,20 +39,51 @@ export interface OptionGridHandle {
   focusIndex(index: number): void;
 }
 
-function optionMode(mode: OptionGridOptions['mode'], option: ActivityOption): 'word' | 'audio' | 'letters' {
+type ResolvedMode = 'word' | 'audio' | 'letters' | 'shape';
+
+/** Optie-metadata is additief (parallelle builders); defensief lezen. */
+function optionMetadata(option: ActivityOption): Record<string, unknown> {
+  const meta = (option as { metadata?: unknown }).metadata;
+  return typeof meta === 'object' && meta !== null ? (meta as Record<string, unknown>) : {};
+}
+
+function optionKind(option: ActivityOption): 'sound' | 'shape' | undefined {
+  const kind = optionMetadata(option)['kind'];
+  return kind === 'sound' || kind === 'shape' ? kind : undefined;
+}
+
+function resolveMode(mode: OptionGridOptions['mode'], option: ActivityOption): ResolvedMode {
+  const kind = optionKind(option);
+  if (kind === 'shape') return 'shape';
+  if (kind === 'sound') return 'audio';
   if (mode === 'word' || mode === 'audio' || mode === 'letters') return mode;
   if (option.label && option.label.length > 3) return 'word';
   if (option.label) return 'letters';
   return 'audio';
 }
 
-function optionAriaLabel(option: ActivityOption, index: number, resolved: 'word' | 'audio' | 'letters'): string {
+function optionAriaLabel(option: ActivityOption, index: number, resolved: ResolvedMode): string {
+  const n = index + 1;
+  if (resolved === 'shape') {
+    const base = uiText('ui.option.shape', { n }) || 'vorm';
+    return `${base} ${n}`;
+  }
+  if (resolved === 'audio') {
+    return uiText('ui.option.sound', { n }) || uiText('ui.option.audio.n', { n }) || `klankknop ${n}`;
+  }
   if (option.label) {
     return resolved === 'word'
-      ? ui('ui.option.word.n').replace('{woord}', option.label)
-      : ui('ui.option.letter.n').replace('{letter}', option.label);
+      ? uiText('ui.option.word.n', { woord: option.label }) || option.label
+      : uiText('ui.option.letter.n', { letter: option.label }) || option.label;
   }
-  return ui('ui.option.audio.n').replace('{n}', String(index + 1));
+  return uiText('ui.option.audio.n', { n }) || `klankknop ${n}`;
+}
+
+function shapeName(option: ActivityOption): string | undefined {
+  const shape = optionMetadata(option)['shape'];
+  if (typeof shape === 'string') return shape;
+  const parts = option.id.split(/[.:_-]/);
+  return parts[parts.length - 1];
 }
 
 export function createOptionGrid(options: OptionGridOptions): OptionGridHandle {
@@ -61,7 +97,7 @@ export function createOptionGrid(options: OptionGridOptions): OptionGridHandle {
   const listenButtons: HTMLButtonElement[] = [];
 
   options.options.forEach((option, index) => {
-    const resolved = optionMode(options.mode, option);
+    const resolved = resolveMode(options.mode, option);
     const button = el('button', {
       type: 'button',
       class: `la-option la-option--${resolved}`,
@@ -74,7 +110,16 @@ export function createOptionGrid(options: OptionGridOptions): OptionGridHandle {
       'aria-label': optionAriaLabel(option, index, resolved),
     });
     if (resolved === 'audio') {
-      button.append(iconSpeaker());
+      button.append(iconKind(kindIsSound(option) ? 'ear' : 'speaker'));
+      button.append(el('span', { class: 'la-option__number', 'aria-hidden': 'true', text: String(index + 1) }));
+    } else if (resolved === 'shape') {
+      const image = option.image;
+      if (typeof image === 'string' && image.length > 0) {
+        button.append(el('img', { class: 'la-option__shape-img', src: image, alt: '', 'aria-hidden': 'true' }));
+      } else {
+        button.append(iconShape(shapeName(option)));
+      }
+      button.append(el('span', { class: 'la-option__number', 'aria-hidden': 'true', text: String(index + 1) }));
     } else if (option.label) {
       button.append(document.createTextNode(option.label));
     }
@@ -97,7 +142,7 @@ export function createOptionGrid(options: OptionGridOptions): OptionGridHandle {
         type: 'button',
         class: 'la-option__listen',
         'data-listen-id': option.id,
-        'aria-label': ui('ui.listen'),
+        'aria-label': uiText('ui.listen') || 'Luister',
       });
       listen.append(iconEar());
       listen.addEventListener('click', (event) => {
@@ -137,7 +182,7 @@ export function createOptionGrid(options: OptionGridOptions): OptionGridHandle {
     buttons,
     setDisabled(disabled: boolean) {
       for (const button of buttons) button.disabled = disabled;
-      for (const button of listenButtons) button.disabled = disabled;
+      for (const listenButton of listenButtons) listenButton.disabled = disabled;
     },
     mark(optionId: string, state) {
       for (const button of buttons) {
@@ -155,4 +200,12 @@ export function createOptionGrid(options: OptionGridOptions): OptionGridHandle {
   };
   if (options.disabled) handle.setDisabled(true);
   return handle;
+}
+
+function kindIsSound(option: ActivityOption): boolean {
+  return optionKind(option) === 'sound';
+}
+
+function iconKind(kind: 'ear' | 'speaker'): SVGElement {
+  return kind === 'ear' ? iconEar() : iconSpeaker();
 }

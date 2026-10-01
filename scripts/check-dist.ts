@@ -41,7 +41,27 @@ if (!existsSync(DIST)) {
     if (/unsafe-inline/i.test(csp)) fail("CSP bevat 'unsafe-inline' (SEC-004).");
     if (!/script-src 'self'/.test(csp)) fail("CSP mist een strikte script-src 'self'.");
     if (!/style-src 'self'/.test(csp)) fail("CSP mist een strikte style-src 'self' (SEC-004).");
+    if (!/img-src 'self'/.test(csp)) fail("CSP mist img-src 'self' (SEC-R2-005).");
+    if (!/media-src 'self'/.test(csp)) fail("CSP mist media-src 'self' (SEC-R2-005).");
+    if (/\b(data|blob):/i.test(csp)) fail('CSP bevat data:/blob: (SEC-R2-005).');
     if (/<script(?![^>]*\bsrc=)[^>]*>\s*[^<\s]/i.test(html)) fail('Inline script in dist/index.html.');
+  }
+
+  // SEC-R2-003: hardening-headers moeten met de build meekomen (Netlify _headers).
+  const headersPath = join(DIST, '_headers');
+  if (!existsSync(headersPath)) {
+    fail("dist/_headers ontbreekt; lever hostconfig mee (SEC-R2-003).");
+  } else {
+    const headers = readFileSync(headersPath, 'utf8');
+    const expected: readonly (readonly [string, RegExp])[] = [
+      ["frame-ancestors 'none'", /frame-ancestors 'none'/i],
+      ['X-Content-Type-Options nosniff', /x-content-type-options:\s*nosniff/i],
+      ['Referrer-Policy no-referrer', /referrer-policy:\s*no-referrer/i],
+      ['Permissions-Policy camera/microphone/geolocation', /permissions-policy:.*camera=\(\).*microphone=\(\).*geolocation=\(\)/i],
+    ];
+    for (const [label, pattern] of expected) {
+      if (!pattern.test(headers)) fail(`dist/_headers mist ${label} (SEC-R2-003).`);
+    }
   }
 
   // Geen externe URL's in de meeleverde HTML/CSS/JS (licentieteksten uitgezonderd).

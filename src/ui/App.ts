@@ -6,7 +6,7 @@
  * `SessionQueue.reportOutcome`, resume-opslag, `saveProfile → {ok}`).
  */
 import type { ActivityItem, AnswerEvent, Profile, ProfileSettings, Rng } from '../types';
-import type { AudioService } from '../audio/AudioService';
+import type { AudioService, PlayResult } from '../audio/AudioService';
 import {
   completeSession,
   createInitialState,
@@ -67,6 +67,7 @@ export function createApp(deps: AppDeps): App {
   const rng = deps.rng ?? Math.random;
   const now = deps.now ?? (() => Date.now());
   let audioFallbackSeen = false;
+  let approximateSeen = false;
   const baseAudio =
     deps.audio ??
     createAppAudio({
@@ -74,6 +75,11 @@ export function createApp(deps: AppDeps): App {
         audioFallbackSeen = true;
       },
     });
+  // EDU-R2-007: observeer of er ooit een benadering (TTS van losse klank) speelt,
+  // zodat de ouderzone dat rustig kan melden.
+  const observedAudio = observeApproximate(baseAudio, () => {
+    approximateSeen = true;
+  });
 
   let state: GameState = createInitialState(deps.profile ?? loadProfile(storage));
   let disposed = false;
@@ -111,13 +117,18 @@ export function createApp(deps: AppDeps): App {
   }
 
   function effectiveAudio(): AudioService {
-    if (state.profile.settings.audioEnabled !== false) return baseAudio;
-    return mutedAudio(baseAudio);
+    if (state.profile.settings.audioEnabled !== false) return observedAudio;
+    return mutedAudio(observedAudio);
   }
 
   function audioUnavailable(): boolean {
     if (state.profile.settings.audioEnabled === false) return false;
     return audioFallbackSeen || !baseAudio.isAvailable();
+  }
+
+  function audioApproximate(): boolean {
+    if (state.profile.settings.audioEnabled === false) return false;
+    return approximateSeen;
   }
 
   const app: App = {
@@ -229,6 +240,7 @@ export function createApp(deps: AppDeps): App {
           storage,
           saveFailed,
           audioUnavailable: audioUnavailable(),
+          audioApproximate: audioApproximate(),
           onSettingsChange: (patch) => updateSettings(patch),
           onBack: () => app.showMap(),
           onReset: () => {
@@ -274,6 +286,30 @@ export function createApp(deps: AppDeps): App {
 /** Profiel met alle grafemen vrijgegeven (voor De Speelwei, vrij oefenen). */
 function freeProfile(profile: Profile): Profile {
   return { ...profile, unlockedGraphemes: graphemes.map((g) => g.id) };
+}
+
+/**
+ * Omhult een AudioService en meldt wanneer een weergave een benadering was
+ * (TTS van een losse klank/gerekte reeks, EDU-R2-007). Puur observerend.
+ * Geëxporteerd zodat het gedrag los getest kan worden.
+ */
+export function observeApproximate(audio: AudioService, onApproximate: () => void): AudioService {
+  const note = (result: PlayResult): PlayResult => {
+    if (result.approximate) onApproximate();
+    return result;
+  };
+  return {
+    preload: (keys) => audio.preload(keys),
+    play: (key) => audio.play(key).then(note),
+    playClip: (clip) => audio.playClip(clip).then(note),
+    playSequence: (clips) => audio.playSequence(clips).then(note),
+    playStretched: (word) => audio.playStretched(word).then(note),
+    stop: () => audio.stop(),
+    isAvailable: () => audio.isAvailable(),
+    get mode() {
+      return audio.mode;
+    },
+  };
 }
 
 /** Audio die niets afspeelt wanneer het geluid uit staat. */

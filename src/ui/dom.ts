@@ -23,8 +23,6 @@ export function applyAttrs(node: HTMLElement, attrs: Attrs): void {
       node.className = String(value);
     } else if (key === 'text') {
       node.textContent = String(value);
-    } else if (key === 'html') {
-      node.innerHTML = String(value);
     } else if (value === true) {
       node.setAttribute(key, '');
     } else {

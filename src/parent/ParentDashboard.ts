@@ -13,6 +13,8 @@ import { median } from '../core/Mastery';
 import { exportProfile, defaultStorage, type SaveStorage } from '../core/SaveSystem';
 import { loadConfusions, type ConfusionEntry } from './confusions';
 import { el } from '../ui/dom';
+import { uiText } from '../ui/text';
+import { iconSpeaker } from '../ui/icons';
 
 export interface ParentDashboardOptions {
   profile: Profile;
@@ -25,6 +27,11 @@ export interface ParentDashboardOptions {
   saveFailed?: boolean;
   /** Toon een rustige melding als er geen geluid/stem is (QA-002). */
   audioUnavailable?: boolean;
+  /**
+   * EDU-R2-007: er is minstens één losse klank via de tijdelijke computerstem
+   * (benadering) gespeeld. Kleine, niet-alarmerende ouderindicatie.
+   */
+  audioApproximate?: boolean;
 }
 
 type Status = 'zeker' | 'oefent' | 'nog';
@@ -94,6 +101,17 @@ export function createParentDashboard(options: ParentDashboardOptions): HTMLElem
     const warn = el('div', { class: 'la-card', 'data-notice': 'audio-unavailable' });
     warn.append(el('p', { class: 'la-hint-text', text: ui('ui.parent.audio.missing') }));
     container.append(warn);
+  }
+  if (options.audioApproximate === true) {
+    // EDU-R2-007: niet-alarmerend, alleen voor de ouder. Het kind ziet dit niet.
+    const note = el('p', { class: 'la-hint-text la-approximate', 'data-notice': 'audio-approximate' });
+    note.append(iconSpeaker());
+    note.append(
+      document.createTextNode(
+        ` ${uiText('ui.audio.approximate') || 'Klanken via benadering (tijdelijke computerstem).'}`,
+      ),
+    );
+    container.append(note);
   }
 
   // Geleerde klanken (MVP-grafemen, blok 1).

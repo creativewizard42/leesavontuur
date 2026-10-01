@@ -95,6 +95,38 @@ describe('ParentDashboard', () => {
       expect(text).not.toContain(forbidden);
     }
   });
+
+  it('toont een rustige benadering-indicator in de ouderzone (EDU-R2-007)', () => {
+    const profile = createFreshProfile(0, () => 0.5);
+    const dashboard = createParentDashboard({
+      profile,
+      storage: createMemoryStorage(),
+      onBack: vi.fn(),
+      onReset: vi.fn(),
+      audioApproximate: true,
+    });
+    host.append(dashboard);
+    const note = dashboard.querySelector('[data-notice="audio-approximate"]');
+    expect(note).not.toBeNull();
+    expect((note?.textContent ?? '').toLowerCase()).not.toContain('fout');
+  });
+
+  it('gebruikt ruime instellingen-rijen met checkbox (QA-R2-006)', () => {
+    const profile = createFreshProfile(0, () => 0.5);
+    const dashboard = createParentDashboard({
+      profile,
+      storage: createMemoryStorage(),
+      onBack: vi.fn(),
+      onReset: vi.fn(),
+      onSettingsChange: vi.fn(),
+    });
+    host.append(dashboard);
+    const rows = dashboard.querySelectorAll('.la-setting-row');
+    expect(rows.length).toBeGreaterThanOrEqual(1);
+    for (const row of Array.from(rows)) {
+      expect(row.querySelector('input[type="checkbox"]')).not.toBeNull();
+    }
+  });
 });
 
 describe('Confusions-log', () => {

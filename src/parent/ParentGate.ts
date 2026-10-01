@@ -4,7 +4,7 @@
  * Kind ziet alleen de zachte hulptekst (fb.help.parent.1).
  */
 import { fbText, ui } from '../content';
-import { el, clear } from '../ui/dom';
+import { el } from '../ui/dom';
 import { iconPloef } from '../ui/icons';
 
 export interface ParentGateOptions {
@@ -52,7 +52,6 @@ export function createParentGate(options: ParentGateOptions): HTMLElement {
     'data-action': 'answer',
     'aria-label': ui('ui.parent.gate.sum'),
   });
-  const error = el('p', { class: 'la-hint-text', 'data-gate-error': 'true' });
   const verify = el('button', {
     type: 'button',
     class: 'la-btn la-btn--primary',
@@ -76,7 +75,6 @@ export function createParentGate(options: ParentGateOptions): HTMLElement {
     stopHold();
     fill.style.height = '100%';
     sumSection.hidden = false;
-    clear(error);
     input.focus();
   }
 
@@ -128,7 +126,8 @@ export function createParentGate(options: ParentGateOptions): HTMLElement {
     if (Number.isInteger(value) && value === a + b) {
       options.onPass();
     } else {
-      error.textContent = ui('ui.parent.gate.error');
+      // QA-R2-008: bewust stil terug naar het spel (anti-kind). Er wordt géén
+      // melding gezet die door de directe navigatie toch onzichtbaar zou zijn.
       options.onFail();
     }
   }
@@ -140,7 +139,7 @@ export function createParentGate(options: ParentGateOptions): HTMLElement {
     }
   });
 
-  sumSection.append(sumLine, input, verify, error);
+  sumSection.append(sumLine, input, verify);
   card.append(hold, sumSection);
   card.append(el('p', { class: 'la-hint-text', text: fbText('fb.help.parent.1') }));
 
