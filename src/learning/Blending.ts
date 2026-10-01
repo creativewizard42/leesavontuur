@@ -64,6 +64,7 @@ export function generate(options: BlendingOptions): ActivityItem {
         model: 'fb.model.1',
       }),
       ...wordMetadata(targetWord, { task: 'blend', sequence }),
+      scored: placed.length >= 2,
     },
   };
 }

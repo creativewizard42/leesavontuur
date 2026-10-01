@@ -14,9 +14,22 @@ export {
   ALL_GRAPHEMES,
   allowedWords,
   allowedWordObjects,
+  formatFeedbackText,
+  applyFeedbackVars,
   hasSameSound,
   commonConfusion,
+  isScoredActivityItem,
   pickGraphemeDistractors,
   pickWordDistractors,
+  unscoredMetadata,
   wordDistance,
 } from './util';
+export {
+  skillsForWord,
+  decodeSkillForGraphemes,
+  segmentSkillForGraphemes,
+  blendSkillForGraphemes,
+} from './skills';
+export type { WordSkills } from './skills';
+export { DEFAULT_AUDITORY_WORDS } from './FirstSound';
+export { secondarySkillFor } from './Segmenting';

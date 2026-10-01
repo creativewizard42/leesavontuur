@@ -188,6 +188,11 @@ export function allowedWords(learned: ReadonlySet<string>): string[] {
 /**
  * Afleider-woorden op basis van woordafstand (ED §10.5): niveau A/B zoekt
  * maximaal verschil, C/D minimale paren. Alleen toegestane woorden.
+ *
+ * ED §11 regel 6: de afleiders hebben dezelfde lengte als het doelwoord
+ * (zelfde aantal grafemen), zodat lengte het antwoord niet verraadt. Als er
+ * onvoldoende even lange kandidaten zijn, blijven we bij even lange kandidaten
+ * (liever een optie minder dan een lengte-hint).
  */
 export function pickWordDistractors(
   target: Word,
@@ -196,18 +201,18 @@ export function pickWordDistractors(
   count: number,
   rng: Rng,
 ): Word[] {
-  const candidates = pool.filter((w) => w.word !== target.word);
+  const others = pool.filter((w) => w.word !== target.word);
+  const sameLength = others.filter((w) => w.graphemes.length === target.graphemes.length);
+  const candidates = sameLength;
   const scored = candidates.map((w) => ({
     w,
     r: rng(),
     distance: wordDistance(target, w),
-    lenDiff: Math.abs(w.graphemes.length - target.graphemes.length),
   }));
   const preferDifferent = difficulty === 'A' || difficulty === 'B';
   scored.sort((a, b) => {
     const primary = preferDifferent ? b.distance - a.distance : a.distance - b.distance;
     if (primary !== 0) return primary;
-    if (a.lenDiff !== b.lenDiff) return a.lenDiff - b.lenDiff;
     return a.r - b.r;
   });
   return scored.slice(0, Math.max(0, count)).map((s) => s.w);
@@ -224,15 +229,39 @@ export interface OptionSpec {
   image?: string;
 }
 
-/** Kiest een index voor het juiste antwoord, vermijdt de laatste twee posities. */
+/**
+ * Kiest een index voor het juiste antwoord. De correcte index wordt
+ * gelijkmatig over de posities verdeeld (geen positie-patroon, ED §10.5 regel
+ * 6) en nooit 3× achter elkaar dezelfde positie.
+ */
 export function chooseCorrectIndex(n: number, rng: Rng, avoid: readonly number[] = []): number {
   if (n <= 0) return 0;
-  const forbidden = new Set(avoid.slice(-2));
-  const allowed: number[] = [];
-  for (let i = 0; i < n; i++) if (!forbidden.has(i)) allowed.push(i);
-  const pool = allowed.length > 0 ? allowed : Array.from({ length: n }, (_, i) => i);
-  const index = Math.floor(rng() * pool.length);
-  return pool[index < 0 ? 0 : index >= pool.length ? pool.length - 1 : index] ?? 0;
+  if (n === 1) return 0;
+  const lastTwo = new Set(avoid.slice(-2));
+  const windowSize = Math.max(n, Math.min(avoid.length, n * 2));
+  const recent = avoid.slice(-windowSize);
+  const counts = new Array<number>(n).fill(0);
+  for (const index of recent) {
+    if (index >= 0 && index < n) counts[index] = (counts[index] ?? 0) + 1;
+  }
+  let best = Number.POSITIVE_INFINITY;
+  const candidates: number[] = [];
+  for (let i = 0; i < n; i++) {
+    if (lastTwo.has(i)) continue;
+    const count = counts[i] ?? 0;
+    if (count < best) {
+      best = count;
+      candidates.length = 0;
+      candidates.push(i);
+    } else if (count === best) {
+      candidates.push(i);
+    }
+  }
+  if (candidates.length === 0) {
+    for (let i = 0; i < n; i++) candidates.push(i);
+  }
+  const pick = Math.floor(rng() * candidates.length);
+  return candidates[pick] ?? 0;
 }
 
 export function placeOptions(
@@ -332,6 +361,37 @@ export function wordMetadata(word: string, extra: Record<string, unknown> = {}):
     if (w.image) meta['revealImage'] = w.image;
   }
   return meta;
+}
+
+/**
+ * Vult `{placeholder}`-variabelen in een template (EDU-006). Puur, zodat het
+ * los van de content getest kan worden.
+ */
+export function applyFeedbackVars(template: string, vars?: Record<string, string>): string {
+  if (!vars) return template;
+  return template.replace(/\{(\w+)\}/g, (match, name: string) => vars[name] ?? match);
+}
+
+/**
+ * Vult `{placeholder}`-variabelen in een feedbacktekst (EDU-006). F3 gebruikt
+ * dit om `feedbackKey` + `feedbackVars` als spreekbare tekst/aria weer te geven.
+ */
+export function formatFeedbackText(key: string, vars?: Record<string, string>): string {
+  return applyFeedbackVars(fbText(key), vars);
+}
+
+/**
+ * Een item is gescoord als het minstens twee opties heeft en niet expliciet als
+ * ongescoord is gemarkeerd (kennismaking/modeling, EDU-004).
+ */
+export function isScoredActivityItem(item: Pick<ActivityItem, 'options' | 'metadata'>): boolean {
+  if (item.metadata?.['scored'] === false) return false;
+  return item.options.length >= 2;
+}
+
+/** Metadata dat een item ongescoord (kennismaking/modeling) markeert. */
+export function unscoredMetadata(extra: Record<string, unknown> = {}): Record<string, unknown> {
+  return { scored: false, ...extra };
 }
 
 let itemCounter = 0;

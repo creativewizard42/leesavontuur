@@ -1,9 +1,15 @@
 /**
  * Auditieve analyse / hakken: AN.VC, AN.CVC, AN.CLUSTER, FN.COUNT (ED §2.4).
+ *
+ * EDU-003: het antwoord mag niet verraden worden. Het item toont daarom nooit
+ * de gesegmenteerde vorm naast het woord. Het kind hoort het woord en kiest het
+ * **aantal klanken**; voor een rijkere UI staat de grafeemreeks als
+ * `metadata.tapUnits` klaar (tik-in-volgorde), maar de gescoorde keuze is het
+ * aantal (ED §4.1 "Klanken tellen" ↔ FN.COUNT + AN.CVC, EDU-021).
  * DOM-vrij.
  */
-import type { ActivityItem, Difficulty, Rng, SkillId, Word } from '../types';
-import { getWord, graphemes, isWordAllowed, segmentWord } from '../content';
+import type { ActivityItem, Difficulty, Rng, SkillId } from '../types';
+import { graphemes, segmentWord } from '../content';
 import { optionCountFor } from '../core/Adaptive';
 import {
   feedbackMeta,
@@ -29,18 +35,21 @@ export function segment(word: string): string[] {
   return segmentWord(word, graphemes) ?? Array.from(word);
 }
 
+/** Secundair doel zodat FN.COUNT en AN.CVC elkaar versterken (EDU-021). */
+export function secondarySkillFor(skillId: SkillId): SkillId | undefined {
+  if (skillId === 'FN.COUNT') return 'AN.CVC';
+  if (skillId.startsWith('AN.')) return 'FN.COUNT';
+  return undefined;
+}
+
 export function generate(options: SegmentingOptions): ActivityItem {
   const { skillId, word, rng } = options;
   const difficulty: Difficulty = options.difficulty ?? 'A';
   const segmented = segment(word);
   const phonemeCount = segmented.length;
-  const isCountTask = skillId === 'FN.COUNT';
 
-  const correctLabel = isCountTask ? String(phonemeCount) : segmented.join('-');
-  const correct: OptionSpec = { id: `ans:${correctLabel}`, label: correctLabel };
-  const distractorSpecs = isCountTask
-    ? countDistractors(phonemeCount, optionCountFor(difficulty) - 1)
-    : sequenceDistractors(word, segmented, difficulty, rng, options);
+  const correct: OptionSpec = { id: `n:${phonemeCount}`, label: String(phonemeCount) };
+  const distractorSpecs = countDistractors(phonemeCount, Math.max(1, optionCountFor(difficulty) - 1));
 
   const { options: placed, targetId } = placeOptions(
     correct,
@@ -49,36 +58,40 @@ export function generate(options: SegmentingOptions): ActivityItem {
     options.avoidCorrectIndices ?? [],
   );
 
-  const prompt = isCountTask
-    ? {
-        audio: wordClip(word),
-        text: `Hoeveel klanken hoor je in ${word}?`,
-        showText: false,
-      }
-    : {
-        text: word,
-        showText: true,
-      };
-
-  const feedback = isCountTask
-    ? { correct: 'fb.correct.7', try1: 'fb.try1.1', hint: 'fb.hint.5', model: 'fb.model.1' }
-    : { correct: 'fb.correct.7', try1: 'fb.try1.4', hint: 'fb.hint.5', model: 'fb.model.1' };
-
-  return {
+  const item: ActivityItem = {
     id: itemId('hakken', `${skillId}.${word}`, rng),
     skillId,
     kind: 'hakken',
-    prompt,
+    prompt: {
+      audio: wordClip(word),
+      text: `Hoeveel klanken hoor je in ${word}?`,
+      // Auditief: geen geschreven woord in beeld (ED §11 regel 3).
+      showText: false,
+    },
     options: placed,
     targetId,
     difficulty,
     isRetry: false,
     itemKey: word,
     metadata: {
-      ...feedbackMeta(feedback),
-      ...wordMetadata(word, { task: isCountTask ? 'count' : 'segment', phonemeCount }),
+      ...feedbackMeta(
+        skillId === 'FN.COUNT'
+          ? { correct: 'fb.correct.7', try1: 'fb.try1.1', hint: 'fb.hint.5', model: 'fb.model.1' }
+          : { correct: 'fb.correct.7', try1: 'fb.try1.4', hint: 'fb.hint.5', model: 'fb.model.1' },
+      ),
+      ...wordMetadata(word, {
+        task: 'segment',
+        // Beide responsmodi zijn beschikbaar; UI kiest 'tap' (tik-in-volgorde)
+        // of 'count' (aantal klanken). Nooit de gesegmenteerde vorm als optie.
+        responseMode: 'count',
+        tapUnits: segmented,
+        phonemeCount,
+      }),
     },
   };
+  const secondary = secondarySkillFor(skillId);
+  if (secondary) item.secondarySkillId = secondary;
+  return item;
 }
 
 function countDistractors(count: number, needed: number): OptionSpec[] {
@@ -86,50 +99,7 @@ function countDistractors(count: number, needed: number): OptionSpec[] {
   const out: OptionSpec[] = [];
   for (const c of candidates) {
     if (out.length >= needed) break;
-    out.push({ id: `ans:${c}`, label: String(c) });
-  }
-  return out;
-}
-
-function sequenceDistractors(
-  word: string,
-  segmented: readonly string[],
-  difficulty: Difficulty,
-  rng: Rng,
-  options: SegmentingOptions,
-): OptionSpec[] {
-  const needed = Math.max(1, optionCountFor(difficulty) - 1);
-  const seen = new Set<string>([segmented.join('-')]);
-  const out: OptionSpec[] = [];
-
-  const learned = options.learned;
-  if (learned && options.availableWords) {
-    const candidates: Word[] = options.availableWords
-      .filter((w) => w !== word && isWordAllowed(w, learned))
-      .map((w) => getWord(w))
-      .filter((w): w is Word => w !== undefined && w.graphemes.length === segmented.length);
-    const start = Math.floor(rng() * Math.max(1, candidates.length));
-    for (let i = 0; i < candidates.length && out.length < needed; i++) {
-      const candidate = candidates[(start + (i % candidates.length)) % candidates.length];
-      if (!candidate) continue;
-      const label = candidate.graphemes.join('-');
-      if (seen.has(label)) continue;
-      seen.add(label);
-      out.push({ id: `ans:${label}`, label });
-    }
-  }
-
-  // Vul aan met omkeringen/rotaties van de correcte segmentatie.
-  const reversed = [...segmented].reverse().join('-');
-  if (out.length < needed && !seen.has(reversed)) {
-    seen.add(reversed);
-    out.push({ id: `ans:${reversed}`, label: reversed });
-  }
-  for (let shift = 1; shift < segmented.length && out.length < needed; shift++) {
-    const rotated = [...segmented.slice(shift), ...segmented.slice(0, shift)].join('-');
-    if (seen.has(rotated)) continue;
-    seen.add(rotated);
-    out.push({ id: `ans:${rotated}`, label: rotated });
+    out.push({ id: `n:${c}`, label: String(c) });
   }
   return out;
 }

@@ -1,10 +1,15 @@
 /**
  * Fonemisch bewustzijn: FN.FIRST_SOUND, FN.LAST_SOUND (ED §2.2).
  * Auditief, geen geschreven woord in beeld (ED §11.3).
+ *
+ * EDU-005: elke kandidaat heeft eigen audio en het item markeert expliciet een
+ * luisterstap vóór de keuzestap (`metadata.interaction`), zodat de UI op touch
+ * eerst alle kandidaten afspeelt en pas daarna laat kiezen. Er is nooit meer dan
+ * één juiste optie (afleiders hebben een andere relevante klank).
  * DOM-vrij.
  */
 import type { ActivityItem, Difficulty, Rng, Word } from '../types';
-import { getGrapheme, getWord, isWordAllowed } from '../content';
+import { getGrapheme, getWord, isBlockedWord, isWordAllowed } from '../content';
 import {
   feedbackMeta,
   instructionClip,
@@ -24,9 +29,34 @@ export interface FirstSoundOptions {
   rng: Rng;
   /** Vrijgegeven grafemen; filtert woorden via isWordAllowed (ED §6.4). */
   learned?: ReadonlySet<string>;
+  /**
+   * Puur auditieve oefening (fase 1): woorden mogen niet-geleerde grafemen
+   * bevatten (ED §6.2 regel 8 / §5.3). De woordenlijst blijft kindvriendelijk.
+   */
+  auditory?: boolean;
+  auditoryWords?: readonly string[];
   /** Posities van het juiste antwoord in recente items (nooit 3× op rij). */
   avoidCorrectIndices?: readonly number[];
 }
+
+/**
+ * Auditieve woorden voor fase 1; los van de vrijgegeven grafemen (ED §6.2
+ * regel 8). Kort, kindvriendelijk, met duidelijke eerste/laatste klank.
+ */
+export const DEFAULT_AUDITORY_WORDS: readonly string[] = [
+  'maan',
+  'as',
+  'vis',
+  'kat',
+  'mat',
+  'tas',
+  'soep',
+  'raam',
+  'mus',
+  'bus',
+  'kip',
+  'zon',
+];
 
 function relevantGrapheme(word: Word, last: boolean): string | undefined {
   return last ? word.graphemes[word.graphemes.length - 1] : word.graphemes[0];
@@ -36,8 +66,11 @@ export function generate(options: FirstSoundOptions): ActivityItem[] {
   const { skillId, difficulty, count, rng } = options;
   const last = skillId === 'FN.LAST_SOUND';
   const learned = options.learned ?? new Set(options.availableWords.flatMap((w) => getWord(w)?.graphemes ?? []));
-  const pool = options.availableWords
-    .filter((w) => isWordAllowed(w, learned))
+  const auditief = options.auditory === true;
+  const source = auditief ? (options.auditoryWords ?? DEFAULT_AUDITORY_WORDS) : options.availableWords;
+  const pool = source
+    .filter((w) => !isBlockedWord(w))
+    .filter((w) => auditief || isWordAllowed(w, learned))
     .map((w) => getWord(w))
     .filter((w): w is Word => w !== undefined && w.graphemes.length > 0);
 
@@ -56,8 +89,11 @@ export function generate(options: FirstSoundOptions): ActivityItem[] {
     if (!targetGrapheme) continue;
     const targetSound = getGrapheme(targetGrapheme)?.soundHint ?? targetGrapheme;
 
-    const distractorPool = remaining.filter((w) => relevantGrapheme(w, last) !== targetGrapheme);
-    const usable = distractorPool.length >= 1 ? distractorPool : remaining;
+    // Afleiders: andere relevante klank (nooit dubbel-juist) en bij voorkeur
+    // even lang (ED §11 regel 6). Liever één optie dan een dubbel-juiste knop.
+    const distinctSound = remaining.filter((w) => relevantGrapheme(w, last) !== targetGrapheme);
+    const sameLength = distinctSound.filter((w) => w.graphemes.length === target.graphemes.length);
+    const usable = sameLength.length >= 1 ? sameLength : distinctSound;
     const distractors = pickDistinct(usable, Math.max(1, Math.min(2, usable.length)), rng);
 
     const correct: OptionSpec = { id: target.word, audio: wordClip(target.word) };
@@ -93,6 +129,12 @@ export function generate(options: FirstSoundOptions): ActivityItem[] {
           model: 'fb.model.3',
         }),
         ...wordMetadata(target.word, { targetGrapheme, task: last ? 'last-sound' : 'first-sound' }),
+        // EDU-005: expliciete luisterstap vóór de keuzestap; elke optie heeft audio.
+        interaction: 'listen-then-choose',
+        listenFirst: true,
+        candidateIds: placed.map((o) => o.id),
+        auditory: auditief,
+        scored: placed.length >= 2,
       },
     });
   }

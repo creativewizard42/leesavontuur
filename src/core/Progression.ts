@@ -2,12 +2,15 @@
  * Voortgang en poortcondities, ED §3 regel 2 / ARCHITECTURE §4.6.
  * DOM-vrij. Alles is gebaseerd op mastery-waarden in het profiel.
  */
-import type { Grapheme, Profile, SkillId } from '../types';
+import type { Grapheme, Profile, SkillId, SkillState } from '../types';
 import { getGrapheme, getGraphemesUpTo, getPhase, graphemes, phases } from '../content';
+import { isMastered } from './Mastery';
 
 const MASTERED = 0.8;
 const WEAK = 0.6;
 const MAX_WEAK = 2;
+/** Minimum aantal meetellende items voor "beheerst" (ED §3, LK.SOUND ≥ 12). */
+export const MIN_MASTERY_ITEMS = 12;
 
 /** LK.<g>.SOUND – het hoofddoel per grafeem (ED §2.3). */
 export function soundSkillFor(graphemeId: string): SkillId {
@@ -57,12 +60,14 @@ function anyRecognizeMastered(profile: Profile, threshold = 0.6): boolean {
 }
 
 /**
- * True als een nieuw grafeem mag worden geïntroduceerd (poortconditie ED §3.2):
- * 1. vorige grafeem in volgorde heeft LK.SOUND ≥ 0.8, en
- * 2. som zwakke grafemen ≤ 2, en
- * 3. deze sessie is er nog geen nieuw grafeem geïntroduceerd.
+ * True als een nieuw grafeem mag worden geïntroduceerd (ED §3):
+ * 1. fase 2 is open (FN.FIRST_SOUND ≥ 0.8), en
+ * 2. het vorige grafeem in volgorde is **beheerst** (isMastered: mastery ≥ 0.8,
+ *    ≥ 12 items, consecutive ≥ 4, ≥ 2 sessies, EDU-025), en
+ * 3. som zwakke grafemen ≤ 2, en
+ * 4. deze sessie is er nog geen nieuw grafeem geïntroduceerd.
  *
- * De derde voorwaarde leeft in GameState; geef hem optioneel mee.
+ * De vierde voorwaarde leeft in GameState; geef hem optioneel mee.
  */
 export function canIntroduceNewGrapheme(
   profile: Profile,
@@ -71,11 +76,13 @@ export function canIntroduceNewGrapheme(
   if (options.introducedGraphemeThisSession === true) return false;
   const next = nextGraphemeToIntroduce(profile);
   if (!next) return false;
-  if (next.order <= 1) return true; // eerste grafeem is altijd vrij
+  // Eerste letters passen pas als fase 1 (fonemisch bewustzijn) op orde is.
+  if (!phaseUnlocked(profile, 2)) return false;
+  if (next.order <= 1) return true;
   const previous = graphemes.find((g) => g.order === next.order - 1);
   if (!previous) return true;
   if (!profile.unlockedGraphemes.includes(previous.id)) return false;
-  if (masteryOf(profile, soundSkillFor(previous.id)) < MASTERED) return false;
+  if (!isMastered(profile.skills[soundSkillFor(previous.id)], MIN_MASTERY_ITEMS)) return false;
   if (weakGraphemes(profile).length > MAX_WEAK) return false;
   return true;
 }
@@ -114,5 +121,23 @@ export function unlockedPhases(profile: Profile): number[] {
 }
 
 export const THRESHOLDS = { MASTERED, WEAK, MAX_WEAK } as const;
+
+/**
+ * Status van één doel voor dashboard/UI (EDU-029): "Beheerst" alleen via de
+ * volledige beheersingsdefinitie `isMastered` (ED §10.3), nooit op mastery
+ * alleen.
+ */
+export type SkillStatus = 'mastered' | 'developing' | 'not_started';
+
+export function skillStatus(
+  profile: Profile,
+  skillId: SkillId,
+  minItems: number = MIN_MASTERY_ITEMS,
+): SkillStatus {
+  const state: SkillState | undefined = profile.skills[skillId];
+  if (isMastered(state, minItems)) return 'mastered';
+  if (state && (state.attempts > 0 || state.mastery > 0)) return 'developing';
+  return 'not_started';
+}
 
 export { getGraphemesUpTo, getPhase };

@@ -1,11 +1,12 @@
 /**
  * Antwoord-checkers en event-opbouw.
- * Feedback-flow: 1e fout → fb.try1.*, 2e fout → hint, 3e fout → modeling
- * (ED §9.2 / GD §5). DOM-vrij.
+ * Feedback-flow: 1e fout → foutspecifieke fb.specific.* (EDU-006) of fb.try1.*,
+ * 2e fout → hint, 3e fout → modeling (ED §9.2 / GD §5). DOM-vrij.
  */
-import type { ActivityItem, AnswerEvent } from '../types';
+import type { ActivityItem, AnswerEvent, Word } from '../types';
 import { effectiveItemScore } from '../core/Mastery';
-import { getItemFeedback } from './util';
+import { getGrapheme, getWord } from '../content';
+import { commonConfusion, getItemFeedback } from './util';
 
 export interface AnswerInput {
   /** Gekozen optie-id, of null bij timeout/geen antwoord. */
@@ -22,7 +23,147 @@ export interface AnswerCheckResult {
   feedbackKey: string;
   isGuess: boolean;
   modeled: boolean;
+  /** Variabelen voor {placeholder}s in de feedbacktekst (EDU-006). */
+  feedbackVars?: Record<string, string>;
 }
+
+// ---------------------------------------------------------------------------
+// Foutspecifieke detectie (EDU-006 / ED §9.3)
+// ---------------------------------------------------------------------------
+
+interface SpecificFeedback {
+  key: string;
+  vars: Record<string, string>;
+}
+
+function soundHint(id: string | undefined): string {
+  if (!id) return '';
+  return getGrapheme(id)?.soundHint ?? id;
+}
+
+function lettersOf(id: string | undefined): string {
+  if (!id) return '';
+  return getGrapheme(id)?.letters ?? id;
+}
+
+function wordFromItem(item: ActivityItem): Word | undefined {
+  const key = typeof item.itemKey === 'string' ? item.itemKey : item.metadata?.['word'];
+  return typeof key === 'string' ? getWord(key) : undefined;
+}
+
+function sameGraphemesDifferentOrder(a: readonly string[], b: readonly string[]): boolean {
+  if (a.length !== b.length || a.length < 2) return false;
+  if (a.join('|') === b.join('|')) return false;
+  const sortedA = [...a].sort().join('|');
+  const sortedB = [...b].sort().join('|');
+  return sortedA === sortedB;
+}
+
+function specificForWordChoice(item: ActivityItem, chosenId: string): SpecificFeedback | undefined {
+  const target = wordFromItem(item);
+  const chosen = getWord(chosenId);
+  if (!target || !chosen) return undefined;
+  const tg = target.graphemes;
+  const cg = chosen.graphemes;
+  const word = target.word;
+
+  if (sameGraphemesDifferentOrder(tg, cg)) {
+    return { key: 'fb.specific.order', vars: { word } };
+  }
+
+  let first = -1;
+  let last = -1;
+  const shared = Math.min(tg.length, cg.length);
+  for (let i = 0; i < shared; i++) {
+    if (tg[i] !== cg[i]) {
+      if (first < 0) first = i;
+      last = i;
+    }
+  }
+  if (first < 0) {
+    // Zelfde prefix, ander aantal klanken.
+    if (cg.length > tg.length) {
+      const extra = tg[tg.length - 1];
+      return { key: 'fb.specific.last_sound', vars: { sound: soundHint(extra), word } };
+    }
+    return undefined;
+  }
+
+  if (first === last && commonConfusion(tg[first] ?? '', cg[first] ?? '')) {
+    return {
+      key: 'fb.specific.letter_confusion',
+      vars: { letter: lettersOf(cg[first]), sound: soundHint(tg[first]), word },
+    };
+  }
+  if (first === 0) {
+    return { key: 'fb.specific.first_sound', vars: { sound: soundHint(tg[0]), letter: lettersOf(tg[0]), word } };
+  }
+  if (first === tg.length - 1 && first === last) {
+    return { key: 'fb.specific.last_sound', vars: { sound: soundHint(tg[first]), letter: lettersOf(tg[first]), word } };
+  }
+  return {
+    key: 'fb.specific.middle_sound',
+    vars: {
+      sounds: tg.map((g) => soundHint(g)).join(' '),
+      sound: soundHint(tg[first]),
+      letter: lettersOf(tg[first]),
+      word,
+    },
+  };
+}
+
+function specificForKlankjager(item: ActivityItem, chosenId: string): SpecificFeedback | undefined {
+  const targetGrapheme = item.metadata?.['targetGrapheme'];
+  if (typeof targetGrapheme !== 'string') return undefined;
+  const targetWord = wordFromItem(item);
+  const chosen = getWord(chosenId);
+  const last = item.skillId === 'FN.LAST_SOUND';
+  const relevant = (w: Word | undefined): string | undefined =>
+    w ? (last ? w.graphemes[w.graphemes.length - 1] : w.graphemes[0]) : undefined;
+  if (chosen && relevant(chosen) === targetGrapheme) return undefined;
+  return {
+    key: last ? 'fb.specific.last_sound' : 'fb.specific.first_sound',
+    vars: {
+      sound: soundHint(targetGrapheme),
+      letter: lettersOf(targetGrapheme),
+      word: targetWord?.word ?? '',
+    },
+  };
+}
+
+function specificForLetterSound(item: ActivityItem, chosenId: string): SpecificFeedback | undefined {
+  const targetGrapheme = item.metadata?.['targetGrapheme'];
+  if (typeof targetGrapheme !== 'string') return undefined;
+  const chosenGrapheme = chosenId.startsWith('g:') ? chosenId.slice(2) : chosenId;
+  if (chosenGrapheme === targetGrapheme) return undefined;
+  if (commonConfusion(targetGrapheme, chosenGrapheme)) {
+    return { key: 'fb.specific.letter_confusion', vars: { letter: lettersOf(chosenGrapheme), sound: soundHint(targetGrapheme) } };
+  }
+  return {
+    key: 'fb.specific.middle_sound',
+    vars: { sounds: `${soundHint(targetGrapheme)} ${soundHint(chosenGrapheme)}`, letter: lettersOf(targetGrapheme) },
+  };
+}
+
+function specificFeedback(item: ActivityItem, chosenId: string): SpecificFeedback | undefined {
+  switch (item.kind) {
+    case 'plakken':
+      return { key: 'fb.specific.blend_retry', vars: { word: wordFromItem(item)?.word ?? '', sounds: '' } };
+    case 'woordlezen':
+    case 'klimboom':
+      return specificForWordChoice(item, chosenId);
+    case 'klankjager':
+      return specificForKlankjager(item, chosenId);
+    case 'letterklank':
+      return specificForLetterSound(item, chosenId);
+    default:
+      return undefined;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Antwoordcheck
+// ---------------------------------------------------------------------------
 
 /** Bepaalt correctheid en de juiste feedback-sleutel voor dit antwoord. */
 export function checkAnswer(item: ActivityItem, answer: AnswerInput): AnswerCheckResult {
@@ -45,13 +186,17 @@ export function checkAnswer(item: ActivityItem, answer: AnswerInput): AnswerChec
   if (attempt === 2) {
     return { correct: false, feedbackKey: feedback?.hint ?? 'fb.hint.1', isGuess: false, modeled: false };
   }
-  const specific = answer.optionId ? feedback?.try1ByOption?.[answer.optionId] : undefined;
-  return {
+
+  const specific = answer.optionId ? specificFeedback(item, answer.optionId) : undefined;
+  const byOption = answer.optionId ? feedback?.try1ByOption?.[answer.optionId] : undefined;
+  const result: AnswerCheckResult = {
     correct: false,
-    feedbackKey: specific ?? feedback?.try1 ?? 'fb.try1.1',
+    feedbackKey: specific?.key ?? byOption ?? feedback?.try1 ?? 'fb.try1.1',
     isGuess: false,
     modeled: false,
   };
+  if (specific) result.feedbackVars = specific.vars;
+  return result;
 }
 
 export interface AnswerEventParams {
