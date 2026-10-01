@@ -1,23 +1,43 @@
-import type { SightWord } from '../types';
+import type { AudioClip, SightWord } from '../types';
 
 /**
- * Sight words (ED §7.1). Buiten de MVP-scope, maar de data staat klaar.
- * Introductieketen: SW.de -> SW.een -> SW.het; SW.ze/we/je na bekend blok.
+ * Sight words (ED §7.1). Bewust klein; maximaal één nieuw per sessie.
+ * Introductieketen: SW.de → SW.een → SW.het. SW.ze/we/je pas nadat het
+ * betreffende blok geleerd is.
+ *
+ * Sight words zijn niet-klankzuiver (sjwa) en worden direct herkend. Ze tellen
+ * nooit mee voor DE.*-mastery (ED §7.3).
  */
-export const SIGHT_WORDS: readonly SightWord[] = [
-  { id: 'SW.de', word: 'de', requiresBlock: 1, audio: clip('de', 'de') },
-  { id: 'SW.een', word: 'een', requiresBlock: 1, introducedAfter: 'SW.de', audio: clip('een', 'een') },
-  { id: 'SW.het', word: 'het', requiresBlock: 1, introducedAfter: 'SW.een', audio: clip('het', 'het') },
-  { id: 'SW.ze', word: 'ze', requiresBlock: 4, audio: clip('ze', 'ze') },
-  { id: 'SW.we', word: 'we', requiresBlock: 6, audio: clip('we', 'we') },
-  { id: 'SW.je', word: 'je', requiresBlock: 5, audio: clip('je', 'je') },
-];
 
-function clip(word: string, text: string) {
+function clip(id: string, word: string): AudioClip {
   return {
-    key: `de.${word}`,
-    src: `audio/words/${word}.mp3`,
-    text,
-    kind: 'sightword' as const,
+    key: `sw.${id}`,
+    src: `audio/sightwords/${id}.mp3`,
+    text: word,
+    kind: 'sightword',
   };
 }
+
+interface RawSightWord {
+  id: string;
+  word: string;
+  requiresBlock: number;
+  introducedAfter?: string;
+}
+
+const RAW: readonly RawSightWord[] = [
+  { id: 'SW.de', word: 'de', requiresBlock: 1 },
+  { id: 'SW.een', word: 'een', requiresBlock: 1, introducedAfter: 'SW.de' },
+  { id: 'SW.het', word: 'het', requiresBlock: 1, introducedAfter: 'SW.een' },
+  { id: 'SW.ze', word: 'ze', requiresBlock: 4 },
+  { id: 'SW.we', word: 'we', requiresBlock: 6 },
+  { id: 'SW.je', word: 'je', requiresBlock: 5 },
+];
+
+export const SIGHT_WORDS: readonly SightWord[] = RAW.map((sw) => ({
+  id: sw.id,
+  word: sw.word,
+  requiresBlock: sw.requiresBlock,
+  ...(sw.introducedAfter === undefined ? {} : { introducedAfter: sw.introducedAfter }),
+  audio: clip(sw.id, sw.word),
+}));

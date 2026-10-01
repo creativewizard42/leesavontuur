@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="een tak met blaadjes">
+  <path d="M40 168 Q100 130 162 58" fill="none" stroke="#8B5A2B" stroke-width="12" stroke-linecap="round"/>
+  <path d="M92 128 q-30 -6 -44 18" fill="none" stroke="#8B5A2B" stroke-width="8" stroke-linecap="round"/>
+  <ellipse cx="52" cy="150" rx="26" ry="15" fill="#4CAF6D" stroke="#14342A" stroke-width="4" transform="rotate(-24 52 150)"/>
+  <ellipse cx="168" cy="48" rx="26" ry="15" fill="#4CAF6D" stroke="#14342A" stroke-width="4" transform="rotate(-40 168 48)"/>
+  <ellipse cx="122" cy="86" rx="26" ry="15" fill="#4CAF6D" stroke="#14342A" stroke-width="4" transform="rotate(-40 122 86)"/>
+</svg>

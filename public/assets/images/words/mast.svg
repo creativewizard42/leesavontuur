@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="een mast met een vlag">
+  <rect x="94" y="26" width="12" height="140" fill="#8B5A2B" stroke="#14342A" stroke-width="4"/>
+  <path d="M100 34 v40 l48 12 -48 12 z" fill="#2E7DAF" stroke="#14342A" stroke-width="4" stroke-linejoin="round"/>
+  <ellipse cx="100" cy="172" rx="46" ry="12" fill="#4CAF6D" stroke="#14342A" stroke-width="4"/>
+</svg>

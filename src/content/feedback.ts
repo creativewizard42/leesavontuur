@@ -40,3 +40,46 @@ export const FEEDBACK: Readonly<Record<string, string>> = {
   'fb.letterarrive.1': 'Ooo, luister! Er is een nieuwe klank.',
   'fb.help.parent.1': 'Vraag maar aan een grote mens.',
 };
+
+/**
+ * Alle feedback-IDs die in GAME_DESIGN §5.1–§5.5 genoemd worden. De validator
+ * eist dat elk van deze keys bestaat (ARCHITECTURE §5.1 regel 10).
+ */
+export const REQUIRED_FEEDBACK_KEYS: readonly string[] = [
+  // 5.1 Correct
+  'fb.correct.1',
+  'fb.correct.2',
+  'fb.correct.3',
+  'fb.correct.4',
+  'fb.correct.5',
+  'fb.correct.6',
+  'fb.correct.7',
+  'fb.correct.8',
+  // 5.2 Eerste poging fout
+  'fb.try1.1',
+  'fb.try1.2',
+  'fb.try1.3',
+  'fb.try1.4',
+  'fb.try1.5',
+  'fb.try1.6',
+  'fb.try1.7',
+  // 5.3 Tweede poging fout (hint)
+  'fb.hint.1',
+  'fb.hint.2',
+  'fb.hint.3',
+  'fb.hint.4',
+  'fb.hint.5',
+  // 5.4 Derde poging fout (modeling)
+  'fb.model.1',
+  'fb.model.2',
+  'fb.model.3',
+  'fb.model.4',
+  // 5.5 Overig
+  'fb.guess.1',
+  'fb.nav.stop.1',
+  'fb.nav.done.1',
+  'fb.audio.repeat.1',
+  'fb.reward.1',
+  'fb.letterarrive.1',
+  'fb.help.parent.1',
+];
