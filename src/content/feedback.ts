@@ -46,6 +46,7 @@ export const FEEDBACK: Readonly<Record<string, string>> = {
   'fb.specific.order': 'We lezen van links naar rechts: {word}. Probeer het nog eens.',
   'fb.specific.letter_confusion': 'Dat is de letter {letter}. Luister naar de klank: {sound}.',
   'fb.specific.blend_retry': 'Luister nog eens: {sounds}. Kun jij ze samenplakken?',
+  'fb.specific.count': 'Je telde {count}. Tel nog eens mee: hoeveel klanken hoor je?',
 };
 
 /**
@@ -59,6 +60,7 @@ export const SPECIFIC_FEEDBACK_KEYS: readonly string[] = [
   'fb.specific.order',
   'fb.specific.letter_confusion',
   'fb.specific.blend_retry',
+  'fb.specific.count',
 ];
 
 /**

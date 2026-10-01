@@ -5,7 +5,11 @@ import { SIGHT_WORDS } from './sightWords';
 import { SENTENCES } from './sentences';
 import { PROPER_NAMES } from './properNames';
 import { FEEDBACK } from './feedback';
-import { INSTRUCTIONS } from './instructions';
+import { INSTRUCTIONS, hasPlaceholders } from './instructions';
+import {
+  feedbackVariantClips,
+  instructionVariantClips,
+} from './dynamicClips';
 
 /**
  * Volledige opnamelijst voor audio (ARCHITECTURE §6.2, GD §11.2, EDU-009/EDU-022).
@@ -45,13 +49,6 @@ export function buildAudioManifest(): AudioClip[] {
       text: blendText(w.graphemes),
       kind: 'blend',
     });
-    // Klimopdracht per doelwoord (dynamische instructie-key, EDU-009).
-    put({
-      key: `instr.klim.${w.word}`,
-      src: `audio/feedback/instr.klim.${w.word}.mp3`,
-      text: `Klim naar ${w.word}.`,
-      kind: 'instruction',
-    });
   }
 
   for (const pn of PROPER_NAMES) put(pn.audio);
@@ -66,12 +63,18 @@ export function buildAudioManifest(): AudioClip[] {
   }
 
   for (const [key, text] of Object.entries(FEEDBACK)) {
+    if (hasPlaceholders(text)) continue; // varianten via feedbackVariantClips()
     put({ key, src: `audio/feedback/${key}.mp3`, text, kind: 'feedback' });
   }
 
   for (const [key, text] of Object.entries(INSTRUCTIONS)) {
+    if (hasPlaceholders(text)) continue; // varianten via instructionVariantClips()
     put({ key, src: `audio/feedback/${key}.mp3`, text, kind: 'instruction' });
   }
+
+  // Concrete varianten per variabele (EDU-R2-002): geen {placeholders} in de lijst.
+  for (const clip of feedbackVariantClips()) put(clip);
+  for (const clip of instructionVariantClips()) put(clip);
 
   return [...clips.values()];
 }

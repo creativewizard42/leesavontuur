@@ -20,6 +20,11 @@ import { FEEDBACK, REQUIRED_FEEDBACK_KEYS } from './feedback';
 import { UI_TEXTS } from './uiTexts';
 import { INSTRUCTIONS } from './instructions';
 import { resolveInstructionKey, REQUIRED_INSTRUCTION_KEYS } from './instructions';
+import {
+  instructionClips,
+  instructionVariantClips,
+  instructionVariantKeys,
+} from './dynamicClips';
 import { PROPER_NAMES } from './properNames';
 import { AUDIO_MANIFEST } from './audioManifest';
 import { getArea, getPhase, AREAS, PHASES } from './phases';
@@ -62,6 +67,14 @@ export const rhymeGroups = RHYME_GROUPS;
 export const syllableWords = SYLLABLE_WORDS;
 export const phonologyKnownWords = PHONOLOGY_KNOWN_WORDS;
 
+// --- dynamische audio (EDU-R2-002) ---------------------------------------
+export {
+  instructionClips,
+  instructionVariantClips,
+  instructionVariantKeys,
+};
+export type { AudioClip } from '../types';
+
 // --- queries --------------------------------------------------------------
 
 export function getGrapheme(id: string): Grapheme | undefined {
@@ -82,9 +95,24 @@ export function getGraphemesUpTo(order: number): Grapheme[] {
   return graphemes.filter((g) => g.order <= order);
 }
 
-/** Alle woorden die volledig uit `learned` grafemen bestaan. */
-export function wordsForGraphemes(learned: ReadonlySet<string>): Word[] {
-  return words.filter((w) => w.graphemes.every((g) => learned.has(g)));
+/**
+ * Alle woorden die volledig uit `learned` grafemen bestaan.
+ *
+ * Standaard worden niet-kindvriendelijke woorden (`kidFriendly:false`) NIET
+ * teruggegeven, zodat ze nooit als doel- of afleiderwoord in generatoren
+ * kunnen komen (QA-R2-004, EDU-016). Geef `includeNotKidFriendly: true` mee
+ * voor expliciete ouder-/validatiedoeleinden.
+ */
+export function wordsForGraphemes(
+  learned: ReadonlySet<string>,
+  options: { includeNotKidFriendly?: boolean } = {},
+): Word[] {
+  const includeNotKidFriendly = options.includeNotKidFriendly === true;
+  return words.filter(
+    (w) =>
+      (includeNotKidFriendly || w.kidFriendly) &&
+      w.graphemes.every((g) => learned.has(g)),
+  );
 }
 
 /** MVP-woorden (ED §5.2): alleen m, a, s, t, k, r. */
