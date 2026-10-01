@@ -67,6 +67,37 @@ describe('checkAnswer – foutspecifieke feedback (EDU-006)', () => {
     expect(result.feedbackKey).toBe('fb.specific.blend_retry');
   });
 
+  it('vult de gerekte klankreeks bij plak-feedback (EDU-R2-004)', () => {
+    const item = wordItem('plakken', 'kam', ['kat'], 'SY.CVC');
+    item.metadata = { ...(item.metadata ?? {}), sequence: ['k', 'a', 'mmm'] };
+    const result = checkAnswer(item, { optionId: 'kat', attempt: 1 });
+    expect(result.feedbackKey).toBe('fb.specific.blend_retry');
+    expect(result.feedbackVars?.['sounds']).toBe('k - a - mmm');
+    expect(result.feedbackVars?.['sounds']).not.toBe('');
+  });
+
+  it('gebruikt tel-feedback bij een hakfout (EDU-R2-005)', () => {
+    const item: ActivityItem = {
+      id: 'hak1',
+      skillId: 'AN.CVC',
+      kind: 'hakken',
+      prompt: { text: 'Hoeveel klanken hoor je in kam?', showText: false },
+      options: [
+        { id: 'n:3', label: '3', correct: true },
+        { id: 'n:2', label: '2', correct: false },
+      ],
+      targetId: 'n:3',
+      difficulty: 'A',
+      isRetry: false,
+      itemKey: 'kam',
+      metadata: { ...feedbackMeta({ correct: 'fb.correct.7', try1: 'fb.try1.4', hint: 'fb.hint.5', model: 'fb.model.1' }), phonemeCount: 3 },
+    };
+    const result = checkAnswer(item, { optionId: 'n:2', attempt: 1 });
+    expect(result.feedbackKey).toBe('fb.specific.count');
+    expect(result.feedbackVars?.['count']).toBe('2');
+    expect(result.feedbackKey).not.toBe('fb.try1.4');
+  });
+
   it('detecteert een foute eerste klank bij klankjager', () => {
     const item: ActivityItem = {
       id: 'k1',

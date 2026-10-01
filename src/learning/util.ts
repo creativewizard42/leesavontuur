@@ -135,27 +135,48 @@ function graphemeScore(target: Grapheme, candidate: Grapheme, difficulty: Diffic
   }
 }
 
-/** Afleiders voor een grafeem, gesorteerd op afstandsniveau (ED §10.5). */
+/**
+ * Afleiders voor een grafeem, gesorteerd op afstandsniveau (ED §10.5).
+ *
+ * `allowUnlearnedAuditory` (QA-R2-001 / EDU-R2-001): alleen toegestaan voor
+ * **grafeem→klank**-taken. Als er nog geen tweede geleerd grafeem is (de
+ * allereerste letter), mogen maximale-afstand-afleiders uit de volledige
+ * inventaris worden gebruikt. Die worden als **audio-only klankknop** getoond
+ * (geen letter in beeld) en gelden als auditieve discriminatie, de expliciete
+ * uitzondering uit ED §6.2 regel 8. Geleerde afleiders krijgen altijd voorrang
+ * (ED §10.5 regel 2).
+ */
 export function pickGraphemeDistractors(
   targetId: string,
   learned: ReadonlySet<string>,
   difficulty: Difficulty,
   count: number,
   rng: Rng,
+  allowUnlearnedAuditory = false,
 ): Grapheme[] {
   const target = getGrapheme(targetId);
   if (!target) return [];
-  const pool = graphemes.filter(
+  const chosen: Grapheme[] = [];
+  const pickFrom = (pool: readonly Grapheme[], need: number): void => {
+    const scored = pool.map((g) => ({ g, score: graphemeScore(target, g, difficulty), r: rng() }));
+    scored.sort((a, b) => a.score - b.score || a.r - b.r);
+    for (const candidate of scored) {
+      if (chosen.length >= Math.max(0, count) || need <= 0) break;
+      // Nooit twee opties die hetzelfde klinken (voorkomt dubbel-juiste knoppen).
+      if (chosen.some((c) => hasSameSound(c.id, candidate.g.id))) continue;
+      chosen.push(candidate.g);
+      need -= 1;
+    }
+  };
+  const learnedPool = graphemes.filter(
     (g) => learned.has(g.id) && g.id !== targetId && !hasSameSound(targetId, g.id),
   );
-  const scored = pool.map((g) => ({ g, score: graphemeScore(target, g, difficulty), r: rng() }));
-  scored.sort((a, b) => a.score - b.score || a.r - b.r);
-  const chosen: Grapheme[] = [];
-  for (const candidate of scored) {
-    if (chosen.length >= Math.max(0, count)) break;
-    // Nooit twee opties die hetzelfde klinken (voorkomt dubbel-juiste knoppen).
-    if (chosen.some((c) => hasSameSound(c.id, candidate.g.id))) continue;
-    chosen.push(candidate.g);
+  pickFrom(learnedPool, count);
+  if (chosen.length < count && allowUnlearnedAuditory) {
+    const extraPool = graphemes.filter(
+      (g) => !learned.has(g.id) && g.id !== targetId && !hasSameSound(targetId, g.id),
+    );
+    pickFrom(extraPool, count - chosen.length);
   }
   return chosen;
 }
