@@ -29,4 +29,8 @@ export const INSTRUCTIONS: Readonly<Record<string, string>> = {
   'instr.repeat': 'Ik zeg het nog een keer.',
   'instr.guess': 'Rustig maar. Eerst goed kijken.',
   'instr.audio.options': 'Luister maar.',
+  // Aanvulling door de UI-builder (start/map/introductie).
+  'instr.start': 'We gaan lezen! Tik op de groene knop.',
+  'instr.map': 'Kies een plek in het Klankwoud.',
+  'instr.new_letter': 'Ooo, luister! Er is een nieuwe klank.',
 };

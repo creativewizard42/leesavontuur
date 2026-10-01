@@ -1,14 +1,19 @@
 /**
  * LEESAVONTUUR – app-boot.
- * TODO(Builder): laad profiel (SaveSystem), toon startscherm/wereldkaart en
- * start de sessie-loop. Houd dit bestand dun; logica hoort in core/learning.
+ * Laadt lokaal gebundelde fonts (geen externe CDN), startstijlen en de app.
  */
+import '@fontsource/andika/400.css';
+import '@fontsource/andika/700.css';
+import '@fontsource/atkinson-hyperlegible/400.css';
+import '@fontsource/atkinson-hyperlegible/700.css';
 import './styles.css';
+
+import { createApp } from './ui/App';
 
 function mount(): void {
   const app = document.querySelector<HTMLDivElement>('#app');
   if (!app) return;
-  app.textContent = 'LEESAVONTUUR';
+  createApp({ root: app });
 }
 
 if (typeof document !== 'undefined') {
