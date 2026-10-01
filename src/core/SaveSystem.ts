@@ -1,10 +1,25 @@
 /**
  * Save-systeem (ARCHITECTURE §7): localStorage met schemaVersion + migratie,
  * storage-agnostisch, geen persoonsgegevens.
- * TODO(Builder): implementeer migraties en export/reset.
+ *
+ * Robuustheid: corrupte of onbruikbare data levert altijd een veilige, verse
+ * start op — nooit een crash en nooit verlies van een bruikbaar profiel
+ * zonder dat de aanroeper een export kan aanbieden.
  */
-import type { Profile } from '../types';
+import type {
+  Profile,
+  ProfileSettings,
+  Rewards,
+  SkillState,
+  ItemState,
+  SkillId,
+  ItemKey,
+  Rng,
+} from '../types';
 import { SAVE_SCHEMA_VERSION } from '../types';
+import { ensureSkillDetail, type SkillStateDetail } from './Mastery';
+import { createItemState } from './SpacedRepetition';
+import { graphemes } from '../content';
 
 export const SAVE_KEY = 'leesavontuur.save.v1';
 
@@ -34,43 +49,199 @@ export function defaultStorage(): SaveStorage {
   };
 }
 
-export function createFreshProfile(now: number = Date.now()): Profile {
+function defaultSettings(): ProfileSettings {
+  return {
+    audioEnabled: true,
+    reducedMotion: false,
+    highContrast: false,
+    autoRepeatPrompt: true,
+  };
+}
+
+function defaultRewards(): Rewards {
+  return { klankvonkjes: 0, vriendjeskaarten: [], leaves: [] };
+}
+
+/** Eerste grafeem (m) is altijd vrij, maar wordt pas bij introductie toegevoegd. */
+export function createFreshProfile(now: number = Date.now(), rng: Rng = Math.random): Profile {
   return {
     schemaVersion: SAVE_SCHEMA_VERSION,
-    profileId: Math.random().toString(36).slice(2),
+    profileId: Math.floor(rng() * 0xffffffff).toString(36),
     avatarIcon: 'eekhoorn',
     createdAt: new Date(now).toISOString(),
     unlockedGraphemes: [],
     skills: {},
     items: {},
-    rewards: { klankvonkjes: 0, vriendjeskaarten: [], leaves: [] },
-    settings: {
-      audioEnabled: true,
-      reducedMotion: false,
-      highContrast: false,
-      autoRepeatPrompt: true,
-    },
+    rewards: defaultRewards(),
+    settings: defaultSettings(),
     sessionCount: 0,
   };
 }
 
-export function loadProfile(_storage: SaveStorage = defaultStorage()): Profile {
-  throw new Error('TODO(Builder): SaveSystem.loadProfile');
+// ---------------------------------------------------------------------------
+// Normalisatie / migratie
+// ---------------------------------------------------------------------------
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
-export function saveProfile(_profile: Profile, _storage: SaveStorage = defaultStorage()): void {
-  throw new Error('TODO(Builder): SaveSystem.saveProfile');
+function asStringArray(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter((v): v is string => typeof v === 'string');
 }
 
-/** Migreert een (oud) save-object naar de huidige schemaVersion. */
-export function migrate(_raw: unknown): Profile {
-  throw new Error('TODO(Builder): SaveSystem.migrate');
+function coerceBoolean(value: unknown, fallback: boolean): boolean {
+  return typeof value === 'boolean' ? value : fallback;
 }
 
-export function exportProfile(_profile: Profile): string {
-  throw new Error('TODO(Builder): SaveSystem.exportProfile');
+function toFiniteNumber(value: unknown, fallback: number): number {
+  return typeof value === 'number' && Number.isFinite(value) ? value : fallback;
 }
 
-export function resetProfile(_storage: SaveStorage = defaultStorage()): Profile {
-  throw new Error('TODO(Builder): SaveSystem.resetProfile');
+function normalizeSettings(raw: unknown): ProfileSettings {
+  const source = isRecord(raw) ? raw : {};
+  const base = defaultSettings();
+  return {
+    audioEnabled: coerceBoolean(source.audioEnabled, base.audioEnabled),
+    reducedMotion: coerceBoolean(source.reducedMotion, base.reducedMotion),
+    highContrast: coerceBoolean(source.highContrast, base.highContrast),
+    autoRepeatPrompt: coerceBoolean(source.autoRepeatPrompt, base.autoRepeatPrompt),
+  };
+}
+
+function normalizeRewards(raw: unknown): Rewards {
+  const source = isRecord(raw) ? raw : {};
+  return {
+    klankvonkjes: Math.max(0, Math.floor(toFiniteNumber(source.klankvonkjes, 0))),
+    vriendjeskaarten: asStringArray(source.vriendjeskaarten),
+    leaves: asStringArray(source.leaves),
+  };
+}
+
+function normalizeSkills(raw: unknown): Record<SkillId, SkillState> {
+  const out: Record<SkillId, SkillState> = {};
+  if (!isRecord(raw)) return out;
+  for (const [skillId, value] of Object.entries(raw)) {
+    if (!skillId) continue;
+    out[skillId] = ensureSkillDetail(isRecord(value) ? (value as Partial<SkillStateDetail>) : undefined);
+  }
+  return out;
+}
+
+function normalizeItems(raw: unknown): Record<ItemKey, ItemState> {
+  const out: Record<ItemKey, ItemState> = {};
+  if (!isRecord(raw)) return out;
+  for (const [itemKey, value] of Object.entries(raw)) {
+    if (!itemKey) continue;
+    if (!isRecord(value)) continue;
+    const skillId = typeof value.skillId === 'string' ? value.skillId : itemKey;
+    const base = createItemState(itemKey, skillId);
+    out[itemKey] = {
+      ...base,
+      leitnerBox: Math.min(5, Math.max(1, Math.floor(toFiniteNumber(value.leitnerBox, 1)))),
+      lastSeenSession: Math.max(0, Math.floor(toFiniteNumber(value.lastSeenSession, 0))),
+      consecutiveCorrect: Math.max(0, Math.floor(toFiniteNumber(value.consecutiveCorrect, 0))),
+    };
+  }
+  return out;
+}
+
+/** Bouwt een geldig Profile uit een willekeurig JSON-object. */
+export function normalizeProfile(raw: unknown, now: number = Date.now()): Profile {
+  const source = isRecord(raw) ? raw : {};
+  const fresh = createFreshProfile(now);
+  const unlocked = asStringArray(source.unlockedGraphemes);
+  const validIds = new Set(graphemes.map((g) => g.id));
+  const filteredUnlocked = unlocked.filter((id) => validIds.has(id));
+  const createdAt = typeof source.createdAt === 'string' ? source.createdAt : fresh.createdAt;
+  return {
+    schemaVersion: SAVE_SCHEMA_VERSION,
+    profileId: typeof source.profileId === 'string' && source.profileId ? source.profileId : fresh.profileId,
+    avatarIcon: typeof source.avatarIcon === 'string' && source.avatarIcon ? source.avatarIcon : fresh.avatarIcon,
+    createdAt,
+    unlockedGraphemes: filteredUnlocked.length > 0 ? filteredUnlocked : fresh.unlockedGraphemes,
+    skills: normalizeSkills(source.skills),
+    items: normalizeItems(source.items),
+    rewards: normalizeRewards(source.rewards),
+    settings: normalizeSettings(source.settings),
+    sessionCount: Math.max(0, Math.floor(toFiniteNumber(source.sessionCount, 0))),
+  };
+}
+
+/**
+ * Migreert een (oud) save-object naar de huidige schemaVersion. Onbekende of
+ * te nieuwe versies vallen veilig terug op een vers profiel. Gooit nooit.
+ */
+export function migrate(raw: unknown): Profile {
+  let value: unknown = raw;
+  if (typeof raw === 'string') {
+    try {
+      value = JSON.parse(raw);
+    } catch {
+      return createFreshProfile();
+    }
+  }
+  if (!isRecord(value)) return createFreshProfile();
+
+  const rawVersion = value.schemaVersion;
+  let version = typeof rawVersion === 'number' && Number.isFinite(rawVersion) ? Math.floor(rawVersion) : 0;
+  if (version > SAVE_SCHEMA_VERSION) return createFreshProfile();
+
+  let current: Record<string, unknown> = value;
+  while (version < SAVE_SCHEMA_VERSION) {
+    current = migrateStep(version, current);
+    version += 1;
+  }
+  return normalizeProfile(current);
+}
+
+/**
+ * Eén migratiestap v(n) → v(n+1). v0 = pre-schemaVersion (impliciet). Bij een
+ * onbekende versie krijgt de aanroeper een vers profiel via normalizeProfile
+ * (dat alle onbekende velden negeert en veilige defaults invult).
+ */
+function migrateStep(version: number, raw: Record<string, unknown>): Record<string, unknown> {
+  switch (version) {
+    case 0:
+      // v0 → v1: onbekende/ontbrekende velden worden door normalizeProfile
+      // aangevuld; we markeren de versie expliciet.
+      return { ...raw, schemaVersion: 1 };
+    default:
+      return { ...raw, schemaVersion: version + 1 };
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Publieke API
+// ---------------------------------------------------------------------------
+
+/** Laadt het profiel; ontbrekende/corrupte data → veilige verse start. */
+export function loadProfile(storage: SaveStorage = defaultStorage()): Profile {
+  let raw: string | null = null;
+  try {
+    raw = storage.read(SAVE_KEY);
+  } catch {
+    return createFreshProfile();
+  }
+  if (raw === null || raw === '') return createFreshProfile();
+  return migrate(raw);
+}
+
+export function saveProfile(profile: Profile, storage: SaveStorage = defaultStorage()): void {
+  const safe = normalizeProfile(profile);
+  storage.write(SAVE_KEY, JSON.stringify(safe));
+}
+
+/** JSON-export (ouderzone). Nooit PII: alleen het lokale profiel. */
+export function exportProfile(profile: Profile): string {
+  return JSON.stringify(normalizeProfile(profile), null, 2);
+}
+
+/** Wist de save en geeft een vers profiel terug (dubbele bevestiging in UI). */
+export function resetProfile(storage: SaveStorage = defaultStorage()): Profile {
+  storage.remove(SAVE_KEY);
+  const fresh = createFreshProfile();
+  saveProfile(fresh, storage);
+  return fresh;
 }
