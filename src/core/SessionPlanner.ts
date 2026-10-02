@@ -658,6 +658,23 @@ function nonNegInt(value: unknown, fallback = 0): number {
   return Math.floor(value);
 }
 
+/**
+ * SEC-R3-005: valideer een audio-`src` uit hervat-JSON. Alleen lokale,
+ * relatieve paden zijn toegestaan. We trimmen eerst whitespace/C0-controls,
+ * weigeren lege waarden, protocol-relatieve ('//') en absolute (`scheme:`)
+ * paden, en '..'-segmenten (path traversal). Bij ongeldig resultaat laten we
+ * de `src` weg zodat de clip via key/TTS blijft werken (defense-in-depth;
+ * `isLocalAudioSrc` in de audio-laag wordt met dezelfde regels verstevigd).
+ */
+function sanitizeAudioSrc(value: string): string | undefined {
+  const trimmed = value.replace(/^[\u0000-\u0020]+|[\u0000-\u0020]+$/g, '');
+  if (trimmed.length === 0) return undefined;
+  if (trimmed.startsWith('//')) return undefined;
+  if (/^[a-z][a-z0-9+.-]*:/i.test(trimmed)) return undefined;
+  if (trimmed.split(/[\\/]+/).includes('..')) return undefined;
+  return trimmed;
+}
+
 function readAudio(value: unknown): AudioClip | undefined {
   if (!isRecord(value)) return undefined;
   const key = value['key'];
@@ -665,7 +682,9 @@ function readAudio(value: unknown): AudioClip | undefined {
   const kind = value['kind'];
   if (typeof key !== 'string' || typeof src !== 'string' || typeof kind !== 'string') return undefined;
   if (!KNOWN_AUDIO_KEYS.has(key)) return undefined;
-  const clip: AudioClip = { key, src, kind: kind as AudioClip['kind'] };
+  const safeSrc = sanitizeAudioSrc(src);
+  // Ongeldige src weglaten; de clip blijft via key/TTS beschikbaar.
+  const clip: AudioClip = { key, src: safeSrc ?? '', kind: kind as AudioClip['kind'] };
   if (typeof value['text'] === 'string') clip.text = value['text'];
   return clip;
 }
@@ -1036,12 +1055,20 @@ export class SessionQueue {
     }
   }
 
+  /**
+   * Serialiseert de queue. De teruggegeven `sections` zijn de **live**
+   * secties (geen deep clone): `reportOutcome` muteert ze in-place. Dit is
+   * veilig zolang de aanroeper de snapshot synchroon stringify't —
+   * `saveSessionState` doet dat direct — zodat er niets muteert vóór het
+   * serialiseren. De eerdere `JSON.parse(JSON.stringify(...))` was een
+   * overbodige dubbele (de)serialisatie.
+   */
   toJSON(now: number = Date.now()): SerializedSessionQueue {
     return {
       version: 1,
       savedAt: now,
       sessionNumber: this.context.sessionNumber,
-      sections: JSON.parse(JSON.stringify(this.sections)) as SessionSection[],
+      sections: this.sections,
       sectionIndex: this.sectionIndex,
       itemIndex: this.itemIndex,
       consecutiveModeled: this.consecutiveModeled,
@@ -1126,6 +1153,11 @@ export const SESSION_RESUME_KEY = 'leesavontuur.session.v1';
 /** Een onderbroken sessie vervalt na 12 uur (GD §3.2). */
 export const RESUME_TTL_MS = 12 * 60 * 60 * 1000;
 
+/**
+ * Schrijft de queue synchroon weg. `toJSON` levert de live secties; omdat we
+ * hier direct stringifyen (één expressie) kan er niets muteren tussen snapshot
+ * en serialisatie (zie `SessionQueue.toJSON`).
+ */
 export function saveSessionState(
   queue: SessionQueue,
   storage: SaveStorage,

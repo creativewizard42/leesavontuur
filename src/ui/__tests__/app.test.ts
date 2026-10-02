@@ -12,7 +12,7 @@ import { createApp, type App } from '../App';
 import { createMemoryStorage, createFreshProfile, SAVE_KEY } from '../../core/SaveSystem';
 import { createMockAudioService } from '../../audio/AudioService';
 import { createSeededRng } from '../../core/rng';
-import { createSessionQueue, planSession, saveSessionState, SESSION_RESUME_KEY } from '../../core/SessionPlanner';
+import { createSessionQueue, loadSessionState, planSession, saveSessionState, SESSION_RESUME_KEY } from '../../core/SessionPlanner';
 import { createInitialState } from '../../core/GameState';
 import { createSessionScreen } from '../screens/SessionScreen';
 import { CONFUSION_KEY } from '../../parent/confusions';
@@ -184,5 +184,65 @@ describe('SessionScreen – geen dubbele afronding (QA-005)', () => {
     next?.click();
     expect(onFinished).toHaveBeenCalledTimes(1);
     handle.destroy();
+  });
+});
+
+describe('App – De Speelwei geeft geen score (GD §3.1)', () => {
+  let root: HTMLElement;
+  let storage: ReturnType<typeof createMemoryStorage>;
+  let app: App | null = null;
+
+  beforeEach(() => {
+    root = document.createElement('div');
+    document.body.append(root);
+    storage = createMemoryStorage();
+    app = null;
+  });
+
+  afterEach(() => {
+    app?.destroy();
+    app = null;
+    root.remove();
+  });
+
+  function startFree(): void {
+    // Met een profiel opent de app direct de kaart; De Speelwei is fase 0.
+    const profile = createFreshProfile(0, () => 0.5);
+    app = createApp({
+      root,
+      profile,
+      storage,
+      audio: createMockAudioService(),
+      rng: createSeededRng(7),
+      now: () => 6000,
+    });
+    expect(root.querySelector('[data-screen="map"]')).not.toBeNull();
+    root.querySelector<HTMLButtonElement>('[data-area="0"]')?.click();
+    expect(root.querySelector('[data-screen="session"]')).not.toBeNull();
+  }
+
+  it('laat profiel.skills/items/sessionCount/rewards onveranderd bij vrij spelen', () => {
+    startFree();
+    root.querySelector<HTMLButtonElement>('.la-option')?.click();
+    expect(app?.state.profile.skills).toEqual({});
+    expect(app?.state.profile.items).toEqual({});
+    expect(app?.state.profile.sessionCount).toBe(0);
+    expect(app?.state.profile.rewards).toEqual({ klankvonkjes: 0, vriendjeskaarten: [], leaves: [] });
+  });
+
+  it('raakt de resume-sleutel van een lopende normale sessie niet aan', () => {
+    const profile = createFreshProfile(0, () => 0.5);
+    const queue = createSessionQueue(planSession(profile, createSeededRng(3)), { sessionNumber: 1, profile });
+    queue.next();
+    queue.next();
+    const expected = queue.current()?.id;
+    expect(expected).toBeDefined();
+    saveSessionState(queue, storage, 5000);
+
+    startFree();
+    root.querySelector<HTMLButtonElement>('.la-option')?.click();
+
+    // De vrije sessie heeft de normale resume-state niet overschreven of gewist.
+    expect(loadSessionState(storage, 6000)?.current()?.id).toBe(expected);
   });
 });

@@ -4,6 +4,7 @@ import { createFreshProfile } from '../SaveSystem';
 import { createSkillState } from '../Mastery';
 import {
   canIntroduceNewGrapheme,
+  masteredGraphemeCount,
   nextGraphemeToIntroduce,
   PHASE_2_FALLBACK_SESSIONS,
   phaseUnlocked,
@@ -98,5 +99,35 @@ describe('Progression – unlock en poortconditie', () => {
     p.skills['LK.m.SOUND'] = mastered();
     expect(skillStatus(p, 'LK.m.SOUND')).toBe('mastered');
     expect(skillStatus(p, 'LK.a.SOUND')).toBe('not_started');
+  });
+
+  it('ED §15.5: masteredGraphemeCount telt alleen beheerste SOUND-skills', () => {
+    const p = profile();
+    p.unlockedGraphemes = ['m'];
+    // Eén correct antwoord zet mastery op 1.0 (alpha = 1), maar attempts = 1.
+    p.skills['LK.m.SOUND'] = createSkillState({ mastery: 1, attempts: 1, consecutiveCorrect: 1, sessionsSeen: 1 });
+    expect(masteredGraphemeCount(p)).toBe(0);
+    p.skills['LK.m.SOUND'] = mastered();
+    expect(masteredGraphemeCount(p)).toBe(1);
+  });
+
+  it('ED §15.2: fase 3 opent op beheerst LK.<g>.SOUND, niet op RECOGNIZE', () => {
+    const p = profile();
+    p.unlockedGraphemes = ['m'];
+    p.skills['LK.m.SOUND'] = createSkillState({ mastery: 1, attempts: 1, consecutiveCorrect: 1, sessionsSeen: 1 });
+    p.skills['LK.m.RECOGNIZE'] = mastered();
+    expect(phaseUnlocked(p, 3)).toBe(false);
+    p.skills['LK.m.SOUND'] = mastered();
+    expect(phaseUnlocked(p, 3)).toBe(true);
+  });
+
+  it('ED §15.5: fase 4 vereist beheerste SOUND-skills (niet alleen mastery)', () => {
+    const p = profile();
+    p.unlockedGraphemes = ['m', 's', 't', 'a'];
+    for (const g of ['m', 's', 't']) p.skills[`LK.${g}.SOUND`] = mastered();
+    p.skills['LK.a.SOUND'] = createSkillState({ mastery: 1, attempts: 1, consecutiveCorrect: 1, sessionsSeen: 1 });
+    expect(phaseUnlocked(p, 4)).toBe(false);
+    p.skills['LK.a.SOUND'] = mastered();
+    expect(phaseUnlocked(p, 4)).toBe(true);
   });
 });

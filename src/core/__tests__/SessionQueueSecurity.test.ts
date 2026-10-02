@@ -123,6 +123,33 @@ describe('loadSessionState – omvang- en corruptiecap (SEC-R2-002)', () => {
   });
 });
 
+describe('SessionQueue – audio-src-validatie uit hervat-JSON (SEC-R3-005)', () => {
+  function restoredWithAudio(src: string) {
+    const item = makeItem('a');
+    item.prompt.audio = { key: 'lk.m.sound', src, kind: 'grapheme-sound' };
+    const queue = createSessionQueue(
+      { sessionNumber: 1, sections: [{ step: 5, name: 'x', items: [item] }] },
+      { sessionNumber: 1 },
+    );
+    return SessionQueue.fromJSON(queue.toJSON(1000));
+  }
+
+  it('weigert whitespace/C0, protocol-relatieve, absolute en traversal-srcs (clip blijft via key/TTS)', () => {
+    for (const src of ['\t//evil/x.mp3', ' https://x', '../../x']) {
+      const restored = restoredWithAudio(src);
+      expect(restored, src).not.toBeNull();
+      const audio = restored!.current()?.prompt.audio;
+      expect(audio?.key, src).toBe('lk.m.sound');
+      expect(audio?.src, src).toBe('');
+    }
+  });
+
+  it('accepteert een geldige lokale relatieve src', () => {
+    const restored = restoredWithAudio('audio/graphemes/m_sound.mp3');
+    expect(restored!.current()?.prompt.audio?.src).toBe('audio/graphemes/m_sound.mp3');
+  });
+});
+
 describe('SessionQueue – audio-key-whitelist (SEC-R3-005)', () => {
   it('laat alleen audio-keys uit manifest/instructies/feedback toe', () => {
     const queue = createSessionQueue(plan(), { sessionNumber: 1 });

@@ -43,20 +43,26 @@ export function weakGraphemes(profile: Profile): string[] {
   return profile.unlockedGraphemes.filter((id) => masteryOf(profile, soundSkillFor(id)) < WEAK);
 }
 
-/** Aantal vrijgegeven grafemen met LK.SOUND ≥ 0.8. */
+/** Aantal vrijgegeven grafemen met LK.<g>.SOUND daadwerkelijk beheerst (ED §15.5). */
 export function masteredGraphemeCount(profile: Profile): number {
-  return profile.unlockedGraphemes.filter((id) => masteryOf(profile, soundSkillFor(id)) >= MASTERED).length;
+  return profile.unlockedGraphemes.filter((id) =>
+    isMastered(profile.skills[soundSkillFor(id)], MIN_MASTERY_ITEMS),
+  ).length;
 }
 
-/** True als minstens één vrijgegeven klinker LK.SOUND ≥ 0.8 heeft. */
+/** True als minstens één vrijgegeven klinker LK.<g>.SOUND beheerst is (ED §15.5). */
 function hasMasteredVowel(profile: Profile): boolean {
   return profile.unlockedGraphemes.some(
-    (id) => isVowelGrapheme(id) && masteryOf(profile, soundSkillFor(id)) >= MASTERED,
+    (id) => isVowelGrapheme(id) && isMastered(profile.skills[soundSkillFor(id)], MIN_MASTERY_ITEMS),
   );
 }
 
-function anyRecognizeMastered(profile: Profile, threshold = 0.6): boolean {
-  return profile.unlockedGraphemes.some((id) => masteryOf(profile, recognizeSkillFor(id)) >= threshold);
+/**
+ * True als minstens één vrijgegeven grafeem LK.<g>.SOUND beheerst is. Dit is de
+ * poort naar fase 3; ED §15.2: de poort toetst `LK.<g>.SOUND`, niet RECOGNIZE.
+ */
+function hasMasteredSound(profile: Profile): boolean {
+  return profile.unlockedGraphemes.some((id) => isMastered(profile.skills[soundSkillFor(id)], MIN_MASTERY_ITEMS));
 }
 
 /**
@@ -130,7 +136,7 @@ export function nextGraphemeToIntroduce(profile: Profile): Grapheme | undefined 
  */
 const PHASE_ENTRY: Readonly<Record<number, (profile: Profile) => boolean>> = {
   2: (p) => phaseTwoOpen(p),
-  3: (p) => anyRecognizeMastered(p, 0.6),
+  3: (p) => hasMasteredSound(p),
   4: (p) => masteredGraphemeCount(p) >= 3 && hasMasteredVowel(p),
   5: (p) => masteryOf(p, 'SY.CVC') >= 0.7,
   6: (p) => masteryOf(p, 'DE.CVC') >= 0.8,
