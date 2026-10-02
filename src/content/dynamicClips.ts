@@ -17,10 +17,11 @@
  * `feedbackVariantClips`).
  */
 import type { AudioClip, Word } from '../types';
-import { GRAPHEMES, getGraphemeById } from './graphemes';
+import { GRAPHEMES, getGraphemeById, isVowelType } from './graphemes';
 import { WORDS } from './words';
 import { RHYME_GROUPS, SYLLABLE_WORDS } from './phonology';
 import { INSTRUCTIONS, resolveInstructionKey, hasPlaceholders } from './instructions';
+import { FEEDBACK } from './feedback';
 
 function getWord(word: string): Word | undefined {
   return WORDS.find((w) => w.word === word);
@@ -35,6 +36,8 @@ function lettersOf(id: string): string {
 }
 
 const GRAPHEME_IDS: readonly string[] = GRAPHEMES.map((g) => g.id);
+const VOWEL_GRAPHEME_IDS: readonly string[] = GRAPHEMES.filter((g) => isVowelType(g.type)).map((g) => g.id);
+const CONSONANT_GRAPHEME_IDS: readonly string[] = GRAPHEMES.filter((g) => !isVowelType(g.type)).map((g) => g.id);
 const ALL_WORD_IDS: readonly string[] = WORDS.map((w) => w.word);
 const SYLLABLE_IDS: readonly string[] = SYLLABLE_WORDS.map((s) => s.word);
 const RHYME_IDS: readonly string[] = [...new Set(RHYME_GROUPS.flat())];
@@ -110,8 +113,18 @@ const FEEDBACK_VARIANTS: readonly VariantSpec[] = [
   },
   {
     base: 'fb.specific.middle_sound',
-    values: GRAPHEME_IDS,
+    values: VOWEL_GRAPHEME_IDS,
     text: (id) => `Luister naar het midden: ${soundOf(id)}… Welke klinker hoor je?`,
+  },
+  {
+    base: 'fb.specific.middle_consonant',
+    values: CONSONANT_GRAPHEME_IDS,
+    text: (id) => `Luister naar het midden: ${soundOf(id)}…`,
+  },
+  {
+    base: 'fb.specific.letter_sound',
+    values: GRAPHEME_IDS,
+    text: (id) => `Deze letter zegt ${soundOf(id)}. Probeer het nog eens.`,
   },
   {
     base: 'fb.specific.order',
@@ -158,6 +171,11 @@ export function instructionVariantClips(): AudioClip[] {
 export function feedbackVariantClips(): AudioClip[] {
   return variantClips(FEEDBACK_VARIANTS, 'feedback');
 }
+
+/** Snelle lookup van bestaande concrete feedback-variantkeys (SEC-R3-005). */
+const FEEDBACK_VARIANT_KEY_SET: ReadonlySet<string> = new Set(
+  feedbackVariantClips().map((clip) => clip.key),
+);
 
 /**
  * Concrete sleutels die een dynamische instructie-key in de manifest moet
@@ -245,4 +263,49 @@ export function instructionClips(key: string, vars: Record<string, string> = {})
   if (raw === undefined || primary === undefined) return [clipFor(key, text)];
   const slug = GRAPHEME_VARS.has(primary) ? resolveGraphemeId(raw) : raw;
   return [clipFor(`${key}.${slug}`, text)];
+}
+
+/** Primair variabel placeholdernaam per foutspecifieke feedback-key. */
+const FEEDBACK_PRIMARY_VAR: Readonly<Record<string, string>> = {
+  'fb.specific.first_sound': 'sound',
+  'fb.specific.last_sound': 'sound',
+  'fb.specific.middle_sound': 'sound',
+  'fb.specific.middle_consonant': 'sound',
+  'fb.specific.letter_sound': 'sound',
+  'fb.specific.order': 'word',
+  'fb.specific.letter_confusion': 'letter',
+  'fb.specific.blend_retry': 'word',
+  'fb.specific.count': 'count',
+};
+
+/**
+ * Bouwt de afspeelreeks voor een feedback-key (EDU-R3-002). Net als bij
+ * instructies levert dit één concrete clip (`fb.specific.first_sound.m`) met de
+ * al ingevulde tekst als TTS/aria-fallback. Zo wordt elke feedbackzin ook
+ * daadwerkelijk uitgesproken en verschijnt er nooit een `{placeholder}` in
+ * beeld. De concrete key wordt alleen gebruikt als hij echt in de manifest
+ * bestaat (SEC-R3-005); anders blijft de basiskey met ingevulde tekst staan.
+ */
+export function feedbackClips(key: string, vars: Record<string, string> = {}): AudioClip[] {
+  const template = FEEDBACK[key];
+  if (template === undefined) return [];
+  if (!hasPlaceholders(template)) return [clipFor(key, template, 'feedback')];
+
+  const primary = FEEDBACK_PRIMARY_VAR[key];
+  const raw = primary ? vars[primary] : undefined;
+  const effective: Record<string, string> = { ...vars };
+  const graphemeId =
+    primary !== undefined && GRAPHEME_VARS.has(primary) && raw !== undefined
+      ? resolveGraphemeId(raw)
+      : undefined;
+  if (graphemeId !== undefined) {
+    for (const name of ['sound', 'klank', 'letter']) {
+      if (!(name in effective)) effective[name] = graphemeId;
+    }
+  }
+  const text = fillTemplate(template, effective);
+  if (primary === undefined || raw === undefined) return [clipFor(key, text, 'feedback')];
+  const slug = GRAPHEME_VARS.has(primary) ? resolveGraphemeId(raw) : raw;
+  const concrete = `${key}.${slug}`;
+  return [clipFor(FEEDBACK_VARIANT_KEY_SET.has(concrete) ? concrete : key, text, 'feedback')];
 }

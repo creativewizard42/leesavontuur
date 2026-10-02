@@ -936,8 +936,8 @@ body.la-reduced-motion {
 }
 
 .la-setting-row input[type="checkbox"] {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   flex: 0 0 auto;
 }
 

@@ -5,6 +5,7 @@ import { createSkillState } from '../Mastery';
 import {
   canIntroduceNewGrapheme,
   nextGraphemeToIntroduce,
+  PHASE_2_FALLBACK_SESSIONS,
   phaseUnlocked,
   skillStatus,
   unlockedPhases,
@@ -74,6 +75,20 @@ describe('Progression – unlock en poortconditie', () => {
     expect(phaseUnlocked(p, 2)).toBe(true);
     expect(unlockedPhases(p)).toContain(1);
     expect(unlockedPhases(p)).toContain(2);
+  });
+
+  it('QA-R3-001: fase 2 opent al bij mastery 0.75 (haalbaar voor een tweede-poging-leerling)', () => {
+    const p = profile();
+    p.skills['FN.FIRST_SOUND'] = createSkillState({ mastery: 0.75 });
+    expect(phaseUnlocked(p, 2)).toBe(true);
+  });
+
+  it('QA-R3-001: het sessie-vangnet opent fase 2 na PHASE_2_FALLBACK_SESSIONS', () => {
+    const p = profile();
+    p.sessionCount = PHASE_2_FALLBACK_SESSIONS - 1;
+    expect(phaseUnlocked(p, 2)).toBe(false);
+    p.sessionCount = PHASE_2_FALLBACK_SESSIONS;
+    expect(phaseUnlocked(p, 2)).toBe(true);
   });
 
   it('geeft "Beheerst" alleen via isMastered (EDU-029)', () => {

@@ -86,7 +86,8 @@ export function generate(options: LetterSoundOptions): ActivityItem {
         }
       : {
           // EDU-005 (review): spreek de opdracht uit, niet alleen de losse klank.
-          audio: instructionClip('instr.lk.sound_to_grapheme', promptText),
+          // EDU-R3-005: meteen de concrete variantkey (per doelgrafeem).
+          audio: instructionClip(`instr.lk.sound_to_grapheme.${targetGrapheme}`, promptText),
           text: promptText,
           showText: false,
         };

@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest';
 import type { ActivityItem, ActivityOption } from '../../types';
 import { checkAnswer } from '../answer';
 import { applyFeedbackVars, feedbackMeta } from '../util';
+import { fbText } from '../../content';
 
 function wordOption(id: string): ActivityOption {
   return { id, label: id, correct: false };
@@ -60,6 +61,27 @@ describe('checkAnswer – foutspecifieke feedback (EDU-006)', () => {
     const result = checkAnswer(wordItem('woordlezen', 'mat', ['nat']), { optionId: 'nat', attempt: 1 });
     expect(result.feedbackKey).toBe('fb.specific.letter_confusion');
     expect(result.feedbackVars?.['letter']).toBe('n');
+  });
+
+  it('EDU-R3-001: letterklank gebruikt een eigen key met gevulde {sound} en vraagt niet naar een klinker', () => {
+    const item: ActivityItem = {
+      id: 'lk1',
+      skillId: 'LK.m.SOUND',
+      kind: 'letterklank',
+      prompt: { text: 'm', showText: true },
+      options: [wordOption('g:m'), wordOption('g:a')],
+      targetId: 'g:m',
+      difficulty: 'A',
+      isRetry: false,
+      itemKey: 'm',
+      metadata: { targetGrapheme: 'm' },
+    };
+    const result = checkAnswer(item, { optionId: 'g:a', attempt: 1 });
+    expect(result.feedbackKey).toBe('fb.specific.letter_sound');
+    const text = fbText(result.feedbackKey, result.feedbackVars);
+    expect(text).not.toContain('{');
+    expect(text).not.toMatch(/klinker/i);
+    expect(text).toContain('mmm');
   });
 
   it('gebruikt blend_retry bij plakken', () => {

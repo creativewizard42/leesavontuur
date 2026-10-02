@@ -126,8 +126,13 @@ function specificForWordChoice(item: ActivityItem, chosenId: string): SpecificFe
   if (first === tg.length - 1 && first === last) {
     return { key: 'fb.specific.last_sound', vars: { sound: soundHint(tg[first]), letter: lettersOf(tg[first]), word } };
   }
+  // EDU-R3-001: de middelste klank is niet altijd een klinker. Vraag "welke
+  // klinker" alleen wanneer het doel een klinker/tweeklank is.
+  const middleId = tg[first];
+  const middle = middleId ? getGrapheme(middleId) : undefined;
+  const middleIsVowel = middle ? middle.type.startsWith('vowel') || middle.type === 'diphthong' : false;
   return {
-    key: 'fb.specific.middle_sound',
+    key: middleIsVowel ? 'fb.specific.middle_sound' : 'fb.specific.middle_consonant',
     vars: {
       sounds: tg.map((g) => soundHint(g)).join(' '),
       sound: soundHint(tg[first]),
@@ -164,9 +169,11 @@ function specificForLetterSound(item: ActivityItem, chosenId: string): SpecificF
   if (commonConfusion(targetGrapheme, chosenGrapheme)) {
     return { key: 'fb.specific.letter_confusion', vars: { letter: lettersOf(chosenGrapheme), sound: soundHint(targetGrapheme) } };
   }
+  // EDU-R3-001: eigen letterklank-key die {sound} altijd vult en niet ten
+  // onrechte naar een klinker vraagt (de doelletter is vaak een medeklinker).
   return {
-    key: 'fb.specific.middle_sound',
-    vars: { sounds: `${soundHint(targetGrapheme)} ${soundHint(chosenGrapheme)}`, letter: lettersOf(targetGrapheme) },
+    key: 'fb.specific.letter_sound',
+    vars: { sound: soundHint(targetGrapheme), letter: lettersOf(targetGrapheme), chosen: soundHint(chosenGrapheme) },
   };
 }
 

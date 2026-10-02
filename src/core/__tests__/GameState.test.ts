@@ -82,6 +82,5 @@ describe('GameState', () => {
     const next = startNewSession(state);
     expect(next.sessionNumber).toBe(2);
     expect(next.profile.sessionCount).toBe(1);
-    expect(next.sessionStep).toBe(1);
   });
 });

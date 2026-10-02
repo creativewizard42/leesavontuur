@@ -5,12 +5,12 @@
 > **Losse klanken, gerekte reeksen en feedback zijn altijd echte opnames** (ED §13.1);
 > TTS is alleen een tijdelijke, gemarkeerde fallback.
 
-Totaal: **1521** clips.
+Totaal: **1562** clips.
 
 | Type | Aantal |
 |---|---|
 | Gerekte/gehakte reeks | 142 |
-| Feedback | 442 |
+| Feedback | 483 |
 | Voorbeeldwoord (auditief) | 37 |
 | Letternaam | 41 |
 | Losse klank | 41 |
@@ -422,47 +422,88 @@ Totaal: **1521** clips.
 | `audio/feedback/fb.specific.last_sound.x.mp3` | `fb.specific.last_sound.x` | Bijna! Luister naar het laatste stukje: ks… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.last_sound.y.mp3` | `fb.specific.last_sound.y` | Bijna! Luister naar het laatste stukje: j… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.last_sound.z.mp3` | `fb.specific.last_sound.z` | Bijna! Luister naar het laatste stukje: zzz… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.a.mp3` | `fb.specific.letter_sound.a` | Deze letter zegt a. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.aa.mp3` | `fb.specific.letter_sound.aa` | Deze letter zegt aaa. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.au.mp3` | `fb.specific.letter_sound.au` | Deze letter zegt au. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.b.mp3` | `fb.specific.letter_sound.b` | Deze letter zegt b. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.c.mp3` | `fb.specific.letter_sound.c` | Deze letter zegt k. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.ch.mp3` | `fb.specific.letter_sound.ch` | Deze letter zegt chch. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.d.mp3` | `fb.specific.letter_sound.d` | Deze letter zegt d. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.e.mp3` | `fb.specific.letter_sound.e` | Deze letter zegt e. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.ee.mp3` | `fb.specific.letter_sound.ee` | Deze letter zegt eee. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.ei.mp3` | `fb.specific.letter_sound.ei` | Deze letter zegt ei. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.eu.mp3` | `fb.specific.letter_sound.eu` | Deze letter zegt eu. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.f.mp3` | `fb.specific.letter_sound.f` | Deze letter zegt fff. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.g.mp3` | `fb.specific.letter_sound.g` | Deze letter zegt ggg. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.h.mp3` | `fb.specific.letter_sound.h` | Deze letter zegt hhh. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.i.mp3` | `fb.specific.letter_sound.i` | Deze letter zegt i. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.ie.mp3` | `fb.specific.letter_sound.ie` | Deze letter zegt ie. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.ij.mp3` | `fb.specific.letter_sound.ij` | Deze letter zegt ij. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.j.mp3` | `fb.specific.letter_sound.j` | Deze letter zegt jjj. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.k.mp3` | `fb.specific.letter_sound.k` | Deze letter zegt k. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.l.mp3` | `fb.specific.letter_sound.l` | Deze letter zegt lll. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.m.mp3` | `fb.specific.letter_sound.m` | Deze letter zegt mmm. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.n.mp3` | `fb.specific.letter_sound.n` | Deze letter zegt nnn. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.ng.mp3` | `fb.specific.letter_sound.ng` | Deze letter zegt ng. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.nk.mp3` | `fb.specific.letter_sound.nk` | Deze letter zegt ngk. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.o.mp3` | `fb.specific.letter_sound.o` | Deze letter zegt o. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.oe.mp3` | `fb.specific.letter_sound.oe` | Deze letter zegt oe. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.oo.mp3` | `fb.specific.letter_sound.oo` | Deze letter zegt ooo. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.ou.mp3` | `fb.specific.letter_sound.ou` | Deze letter zegt ou. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.p.mp3` | `fb.specific.letter_sound.p` | Deze letter zegt p. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.q.mp3` | `fb.specific.letter_sound.q` | Deze letter zegt k. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.r.mp3` | `fb.specific.letter_sound.r` | Deze letter zegt rrr. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.s.mp3` | `fb.specific.letter_sound.s` | Deze letter zegt sss. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.t.mp3` | `fb.specific.letter_sound.t` | Deze letter zegt t. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.u.mp3` | `fb.specific.letter_sound.u` | Deze letter zegt u. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.ui.mp3` | `fb.specific.letter_sound.ui` | Deze letter zegt ui. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.uu.mp3` | `fb.specific.letter_sound.uu` | Deze letter zegt uuu. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.v.mp3` | `fb.specific.letter_sound.v` | Deze letter zegt vvv. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.w.mp3` | `fb.specific.letter_sound.w` | Deze letter zegt www. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.x.mp3` | `fb.specific.letter_sound.x` | Deze letter zegt ks. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.y.mp3` | `fb.specific.letter_sound.y` | Deze letter zegt j. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.letter_sound.z.mp3` | `fb.specific.letter_sound.z` | Deze letter zegt zzz. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.b.mp3` | `fb.specific.middle_consonant.b` | Luister naar het midden: b… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.c.mp3` | `fb.specific.middle_consonant.c` | Luister naar het midden: k… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.ch.mp3` | `fb.specific.middle_consonant.ch` | Luister naar het midden: chch… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.d.mp3` | `fb.specific.middle_consonant.d` | Luister naar het midden: d… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.f.mp3` | `fb.specific.middle_consonant.f` | Luister naar het midden: fff… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.g.mp3` | `fb.specific.middle_consonant.g` | Luister naar het midden: ggg… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.h.mp3` | `fb.specific.middle_consonant.h` | Luister naar het midden: hhh… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.j.mp3` | `fb.specific.middle_consonant.j` | Luister naar het midden: jjj… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.k.mp3` | `fb.specific.middle_consonant.k` | Luister naar het midden: k… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.l.mp3` | `fb.specific.middle_consonant.l` | Luister naar het midden: lll… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.m.mp3` | `fb.specific.middle_consonant.m` | Luister naar het midden: mmm… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.n.mp3` | `fb.specific.middle_consonant.n` | Luister naar het midden: nnn… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.ng.mp3` | `fb.specific.middle_consonant.ng` | Luister naar het midden: ng… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.nk.mp3` | `fb.specific.middle_consonant.nk` | Luister naar het midden: ngk… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.p.mp3` | `fb.specific.middle_consonant.p` | Luister naar het midden: p… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.q.mp3` | `fb.specific.middle_consonant.q` | Luister naar het midden: k… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.r.mp3` | `fb.specific.middle_consonant.r` | Luister naar het midden: rrr… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.s.mp3` | `fb.specific.middle_consonant.s` | Luister naar het midden: sss… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.t.mp3` | `fb.specific.middle_consonant.t` | Luister naar het midden: t… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.v.mp3` | `fb.specific.middle_consonant.v` | Luister naar het midden: vvv… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.w.mp3` | `fb.specific.middle_consonant.w` | Luister naar het midden: www… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.x.mp3` | `fb.specific.middle_consonant.x` | Luister naar het midden: ks… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.y.mp3` | `fb.specific.middle_consonant.y` | Luister naar het midden: j… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.middle_consonant.z.mp3` | `fb.specific.middle_consonant.z` | Luister naar het midden: zzz… | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.a.mp3` | `fb.specific.middle_sound.a` | Luister naar het midden: a… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.aa.mp3` | `fb.specific.middle_sound.aa` | Luister naar het midden: aaa… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.au.mp3` | `fb.specific.middle_sound.au` | Luister naar het midden: au… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.b.mp3` | `fb.specific.middle_sound.b` | Luister naar het midden: b… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.c.mp3` | `fb.specific.middle_sound.c` | Luister naar het midden: k… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.ch.mp3` | `fb.specific.middle_sound.ch` | Luister naar het midden: chch… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.d.mp3` | `fb.specific.middle_sound.d` | Luister naar het midden: d… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.e.mp3` | `fb.specific.middle_sound.e` | Luister naar het midden: e… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.ee.mp3` | `fb.specific.middle_sound.ee` | Luister naar het midden: eee… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.ei.mp3` | `fb.specific.middle_sound.ei` | Luister naar het midden: ei… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.eu.mp3` | `fb.specific.middle_sound.eu` | Luister naar het midden: eu… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.f.mp3` | `fb.specific.middle_sound.f` | Luister naar het midden: fff… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.g.mp3` | `fb.specific.middle_sound.g` | Luister naar het midden: ggg… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.h.mp3` | `fb.specific.middle_sound.h` | Luister naar het midden: hhh… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.i.mp3` | `fb.specific.middle_sound.i` | Luister naar het midden: i… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.ie.mp3` | `fb.specific.middle_sound.ie` | Luister naar het midden: ie… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.ij.mp3` | `fb.specific.middle_sound.ij` | Luister naar het midden: ij… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.j.mp3` | `fb.specific.middle_sound.j` | Luister naar het midden: jjj… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.k.mp3` | `fb.specific.middle_sound.k` | Luister naar het midden: k… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.l.mp3` | `fb.specific.middle_sound.l` | Luister naar het midden: lll… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.m.mp3` | `fb.specific.middle_sound.m` | Luister naar het midden: mmm… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.n.mp3` | `fb.specific.middle_sound.n` | Luister naar het midden: nnn… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.ng.mp3` | `fb.specific.middle_sound.ng` | Luister naar het midden: ng… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.nk.mp3` | `fb.specific.middle_sound.nk` | Luister naar het midden: ngk… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.o.mp3` | `fb.specific.middle_sound.o` | Luister naar het midden: o… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.oe.mp3` | `fb.specific.middle_sound.oe` | Luister naar het midden: oe… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.oo.mp3` | `fb.specific.middle_sound.oo` | Luister naar het midden: ooo… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.ou.mp3` | `fb.specific.middle_sound.ou` | Luister naar het midden: ou… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.p.mp3` | `fb.specific.middle_sound.p` | Luister naar het midden: p… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.q.mp3` | `fb.specific.middle_sound.q` | Luister naar het midden: k… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.r.mp3` | `fb.specific.middle_sound.r` | Luister naar het midden: rrr… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.s.mp3` | `fb.specific.middle_sound.s` | Luister naar het midden: sss… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.t.mp3` | `fb.specific.middle_sound.t` | Luister naar het midden: t… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.u.mp3` | `fb.specific.middle_sound.u` | Luister naar het midden: u… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.ui.mp3` | `fb.specific.middle_sound.ui` | Luister naar het midden: ui… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.middle_sound.uu.mp3` | `fb.specific.middle_sound.uu` | Luister naar het midden: uuu… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.v.mp3` | `fb.specific.middle_sound.v` | Luister naar het midden: vvv… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.w.mp3` | `fb.specific.middle_sound.w` | Luister naar het midden: www… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.x.mp3` | `fb.specific.middle_sound.x` | Luister naar het midden: ks… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.y.mp3` | `fb.specific.middle_sound.y` | Luister naar het midden: j… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.middle_sound.z.mp3` | `fb.specific.middle_sound.z` | Luister naar het midden: zzz… Welke klinker hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.order.al.mp3` | `fb.specific.order.al` | We lezen van links naar rechts: al. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.order.ark.mp3` | `fb.specific.order.ark` | We lezen van links naar rechts: ark. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.order.arm.mp3` | `fb.specific.order.arm` | We lezen van links naar rechts: arm. Probeer het nog eens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
@@ -708,10 +749,10 @@ Totaal: **1521** clips.
 | `audio/graphemes/a_sound.mp3` | `lk.a.sound` | a | KLANK, geen letternaam. Korte klinker ("a"), niet de letternaam. Grafeem "a" (vowel-short), blok 1, letternaam "aa". TTS-benadering: "a-". |
 | `audio/graphemes/aa_sound.mp3` | `lk.aa.sound` | aaa | KLANK, geen letternaam. Lange klinker aanhouden ("aaa"). Grafeem "aa" (vowel-long), blok 2, letternaam "lange aa". |
 | `audio/graphemes/au_sound.mp3` | `lk.au.sound` | au | KLANK, geen letternaam. Tweeklank in één beweging ("au"). Grafeem "au" (diphthong), blok 7, letternaam "au". |
-| `audio/graphemes/b_sound.mp3` | `lk.b.sound` | b | KLANK, geen letternaam. Korte, stemloze plof; geen naklinkende "uh" ("b"). Grafeem "b" (plosive), blok 5, letternaam "bee". TTS-benadering: "b-". |
+| `audio/graphemes/b_sound.mp3` | `lk.b.sound` | b | KLANK, geen letternaam. Stemhebbende plof: zet je stem aan, geen naklinkende "uh" ("b"). Grafeem "b" (plosive), blok 5, letternaam "bee". TTS-benadering: "b-". |
 | `audio/graphemes/c_sound.mp3` | `lk.c.sound` | k | KLANK, geen letternaam. Korte, stemloze plof; geen naklinkende "uh" ("k"). Grafeem "c" (plosive), blok 9, letternaam "see". TTS-benadering: "k-". |
 | `audio/graphemes/ch_sound.mp3` | `lk.ch.sound` | chch | KLANK, geen letternaam. Houd de continuant aan, zonder sjwa ("chch"). Grafeem "ch" (continuant), blok 7, letternaam "cee-haa". |
-| `audio/graphemes/d_sound.mp3` | `lk.d.sound` | d | KLANK, geen letternaam. Korte, stemloze plof; geen naklinkende "uh" ("d"). Grafeem "d" (plosive), blok 3, letternaam "dee". TTS-benadering: "d-". |
+| `audio/graphemes/d_sound.mp3` | `lk.d.sound` | d | KLANK, geen letternaam. Stemhebbende plof: zet je stem aan, geen naklinkende "uh" ("d"). Grafeem "d" (plosive), blok 3, letternaam "dee". TTS-benadering: "d-". |
 | `audio/graphemes/e_sound.mp3` | `lk.e.sound` | e | KLANK, geen letternaam. Korte klinker ("e"), niet de letternaam. Grafeem "e" (vowel-short), blok 3, letternaam "ee". TTS-benadering: "e-". |
 | `audio/graphemes/ee_sound.mp3` | `lk.ee.sound` | eee | KLANK, geen letternaam. Lange klinker aanhouden ("eee"). Grafeem "ee" (vowel-long), blok 3, letternaam "lange ee". |
 | `audio/graphemes/ei_sound.mp3` | `lk.ei.sound` | ei | KLANK, geen letternaam. Tweeklank in één beweging ("ei"). Grafeem "ei" (diphthong), blok 7, letternaam "korte ei". |

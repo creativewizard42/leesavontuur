@@ -44,9 +44,13 @@ function graphemeForClip(clip: AudioClip): Grapheme | undefined {
   return id ? GRAPHEMES.find((x) => x.id === id) : undefined;
 }
 
+/** Stemhebbende plosieven: stem aanzetten i.p.v. "stemloze plof" (EDU-R3-003). */
+const VOICED_PLOSIVES: ReadonlySet<string> = new Set(['b', 'd']);
+
 /**
- * Uitspraakaanwijzing per klanktype (EDU-R2-003): continuanten aanhouden,
- * plosieven kort zonder sjwa, korte vs. lange klinkers onderscheiden.
+ * Uitspraakaanwijzing per klanktype (EDU-R2-003 / EDU-R3-003): continuanten
+ * aanhouden, plosieven kort zonder sjwa (stemhebbend vs. stemloos), korte vs.
+ * lange klinkers onderscheiden.
  */
 function graphemeSoundHint(clip: AudioClip, g: Grapheme | undefined): string {
   const notation = g?.soundHint ?? clip.text ?? '';
@@ -54,6 +58,9 @@ function graphemeSoundHint(clip: AudioClip, g: Grapheme | undefined): string {
     case 'continuant':
       return `KLANK, geen letternaam. Houd de continuant aan, zonder sjwa ("${notation}").`;
     case 'plosive':
+      if (g !== undefined && VOICED_PLOSIVES.has(g.id)) {
+        return `KLANK, geen letternaam. Stemhebbende plof: zet je stem aan, geen naklinkende "uh" ("${notation}").`;
+      }
       return `KLANK, geen letternaam. Korte, stemloze plof; geen naklinkende "uh" ("${notation}").`;
     case 'vowel-short':
       return `KLANK, geen letternaam. Korte klinker ("${notation}"), niet de letternaam.`;

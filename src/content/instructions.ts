@@ -24,10 +24,13 @@ export const INSTRUCTIONS: Readonly<Record<string, string>> = {
   'instr.letterklank.r1': 'Welke klank zegt deze letter?',
   'instr.letterklank.r2': 'Welke letter hoort bij {klank}?',
   // Hakken (GD §4c)
+  // EDU-R3-004: `instr.hakken.start` hoort bij de (nog) niet geplande
+  // tap-responsmodus; bewaard voor de toekomst, niet in REQUIRED_INSTRUCTION_KEYS.
   'instr.hakken.start': 'Tik de letters één voor één. Hoor je de klanken?',
   'instr.hakken.count': 'Hoeveel klanken hoor je?',
   // Plakken (GD §4d)
   'instr.plakken.r1': 'Plak de klanken aan elkaar. Welk woord hoor je?',
+  // EDU-R3-004: sleepvariant `r2` is nog niet in gebruik; niet verplicht.
   'instr.plakken.r2': 'Sleep de klanken in de goede volgorde.',
   // Woord lezen (GD §4e)
   'instr.de.read': 'Lees dit woord. Tik eerst de letters, plak ze daarna aan elkaar.',
@@ -68,10 +71,8 @@ export const REQUIRED_INSTRUCTION_KEYS: readonly string[] = [
   'instr.ph.rhyme',
   'instr.de.read',
   'instr.klim',
-  'instr.hakken.start',
   'instr.hakken.count',
   'instr.plakken.r1',
-  'instr.plakken.r2',
 ];
 
 /**

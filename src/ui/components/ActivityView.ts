@@ -18,8 +18,8 @@ import { buildAnswerEvent, checkAnswer, type AnswerCheckResult } from '../../lea
 import { graphemeSoundClip, wordClip } from '../../learning/util';
 import { fbText, getGrapheme, getWord, ui } from '../../content';
 import { el, clear } from '../dom';
-import { iconCheck, iconNoSound, iconPloef, iconSpark, iconStar, iconTap } from '../icons';
-import { instructionSequence } from '../audioPrompts';
+import { iconCheck, iconEar, iconNoSound, iconPloef, iconSpark, iconStar, iconTap } from '../icons';
+import { feedbackSequence, instructionSequence } from '../audioPrompts';
 import { uiText } from '../text';
 import { createOptionGrid, type OptionGridHandle } from './OptionGrid';
 
@@ -189,6 +189,11 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     return row;
   }
 
+  /**
+   * QA-R3-004: de audio-fallback is niet langer tekst-afhankelijk voor het kind.
+   * Het kind ziet een groot oor-/geen-geluid-icoon en de letters die oplichten;
+   * de uitleg staat alleen nog onzichtbaar (sr-only) voor ouders/AT.
+   */
   function showAudioFallback(): void {
     if (audioFallbackShown) return;
     audioFallbackShown = true;
@@ -196,8 +201,9 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     const icon = iconNoSound();
     icon.classList.add('la-audio-fallback__icon');
     wrap.append(icon);
-    wrap.append(el('p', { class: 'la-audio-fallback__text', text: ui('ui.audio.unavailable') }));
-    wrap.append(el('p', { class: 'la-audio-fallback__hint', text: ui('ui.audio.unavailable.hint') }));
+    // Alleen voor ouders/AT; niet leesbaar voor de doelgroep in beeld.
+    wrap.append(el('p', { class: 'la-sr-only', text: ui('ui.audio.unavailable') }));
+    wrap.append(el('p', { class: 'la-sr-only', text: ui('ui.audio.unavailable.hint') }));
 
     const targetGrapheme = metaString(item, 'targetGrapheme');
     const word = wordFromItem(item);
@@ -207,6 +213,11 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     } else if (word) {
       const graphemes = getWord(word)?.graphemes ?? [...word];
       wrap.append(stretchedRow(graphemes.map((id) => getGrapheme(id)?.letters ?? id)));
+    } else {
+      // Geen letters beschikbaar: toon een grote luister-/oor-ondersteuning.
+      const ear = iconEar();
+      ear.classList.add('la-audio-fallback__ear');
+      wrap.append(ear);
     }
     playfield.append(wrap);
   }
@@ -413,7 +424,18 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     return wrap;
   }
 
-  function setFeedback(kind: FeedbackKind, key: string, vars?: Record<string, string>): void {
+  /**
+   * Toont feedback (icoon + kleur) en **spreekt de feedbackzin uit** (EDU-R3-002,
+   * GD §5/regel 498). `preceding` is de audio die eerst moet klinken (b.v. de
+   * zojuist gekozen klank of de modeling), zodat feedback de stimulus niet
+   * onderbreekt.
+   */
+  function setFeedback(
+    kind: FeedbackKind,
+    key: string,
+    vars?: Record<string, string>,
+    preceding?: Promise<PlayResult>,
+  ): void {
     const text = fbText(key, vars ?? {});
     feedback.classList.remove('is-hidden', 'la-feedback--correct', 'la-feedback--hint', 'la-feedback--retry');
     if (kind === 'correct') feedback.classList.add('la-feedback--correct');
@@ -430,6 +452,12 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
       feedbackIcon.append(iconPloef('la-ploef--small'));
     }
     feedbackText.textContent = text;
+    const playFeedback = (): void => {
+      const clips = feedbackSequence(key, vars ?? {});
+      if (clips.length > 0) void playSequenceSafe(clips);
+    };
+    if (preceding) void preceding.then(playFeedback, playFeedback);
+    else playFeedback();
     options.onFeedback?.({ key, kind, text });
   }
 
@@ -438,31 +466,31 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     for (const block of litBlocks) block.classList.remove('is-lit');
   }
 
-  function applyHint(): void {
+  function applyHint(): Promise<PlayResult> | undefined {
     const graphemeId = metaString(item, 'targetGrapheme');
     // Auditieve/letter-taken: laat de doelklank horen (geen woord verklappen).
     if (graphemeId && getGrapheme(graphemeId) && litBlocks.length === 0) {
-      void playClipSafe(graphemeSoundClip(graphemeId));
-      return;
+      return playClipSafe(graphemeSoundClip(graphemeId));
     }
     const word = wordFromItem(item);
     if (word) {
-      void audio.playStretched(word).then((result) => {
+      const playing = audio.playStretched(word).then((result) => {
         if (result.result === 'unavailable') showAudioFallback();
+        return result;
       });
       litBlocks.forEach((block, index) => {
         later(() => block.classList.add('is-lit'), index * 180);
       });
-      return;
+      return playing;
     }
     if (graphemeId && getGrapheme(graphemeId)) {
-      void playClipSafe(graphemeSoundClip(graphemeId));
-    } else {
-      repeat();
+      return playClipSafe(graphemeSoundClip(graphemeId));
     }
+    repeat();
+    return undefined;
   }
 
-  function markCorrectOption(): void {
+  function markCorrectOption(includeAudio = true): Promise<PlayResult> | undefined {
     const correctOption = item.options.find((o) => o.id === item.targetId);
     grid?.mark(item.targetId, 'correct');
     if (!reveal) {
@@ -470,8 +498,11 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
       if (reveal) root.append(reveal);
     }
     if (reveal) reveal.classList.add('la-spark');
-    if (correctOption?.audio) void playClipSafe(correctOption.audio);
-    else if (wordFromItem(item)) void playClipSafe(wordClip(wordFromItem(item) as string));
+    if (!includeAudio) return undefined;
+    if (correctOption?.audio) return playClipSafe(correctOption.audio);
+    const word = wordFromItem(item);
+    if (word) return playClipSafe(wordClip(word));
+    return undefined;
   }
 
   function handleSelect(optionId: string): void {
@@ -491,17 +522,16 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     options.onEvent(event, result);
 
     if (result.isGuess) {
-      setFeedback('guess', result.feedbackKey, result.feedbackVars);
       grid?.mark(optionId, 'retry');
-      void audio.play('fb.guess.1');
+      setFeedback('guess', result.feedbackKey, result.feedbackVars);
       return;
     }
 
     if (result.correct) {
       done = true;
       grid?.setDisabled(true);
-      markCorrectOption();
-      setFeedback('correct', result.feedbackKey, result.feedbackVars);
+      const optionAudio = markCorrectOption();
+      setFeedback('correct', result.feedbackKey, result.feedbackVars, optionAudio);
       options.onDone('correct');
       return;
     }
@@ -511,17 +541,18 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     if (attempt >= 3 || result.modeled) {
       done = true;
       grid?.setDisabled(true);
-      applyHint();
-      markCorrectOption();
-      setFeedback('model', result.feedbackKey, result.feedbackVars);
+      const modeling = applyHint();
+      // Alleen visueel markeren; de modeling-audio is al gestart door applyHint.
+      markCorrectOption(false);
+      setFeedback('model', result.feedbackKey, result.feedbackVars, modeling);
       options.onDone('modeled');
       return;
     }
 
     if (attempt === 2) {
       usedHint = true;
-      applyHint();
-      setFeedback('hint', result.feedbackKey, result.feedbackVars);
+      const hintAudio = applyHint();
+      setFeedback('hint', result.feedbackKey, result.feedbackVars, hintAudio);
     } else {
       setFeedback('retry', result.feedbackKey, result.feedbackVars);
     }

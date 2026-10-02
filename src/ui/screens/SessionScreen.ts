@@ -155,6 +155,14 @@ export function createSessionScreen(deps: SessionScreenDeps): SessionScreenHandl
         nextBtn.disabled = false;
         nextBtn.focus();
       },
+      // EDU-R3-002: nu er echte feedback-audio speelt, is een geplande
+      // prompt-herhaling niet meer nodig (voorkomt dubbel praten).
+      onFeedback: () => {
+        if (autoRepeatTimer !== null) {
+          clearTimeout(autoRepeatTimer);
+          autoRepeatTimer = null;
+        }
+      },
     });
     stage.append(activity.element);
     focusFirstInteractive(stage);

@@ -16,6 +16,11 @@ interface InstructionClipsApi {
   instructionClips?: (key: string, vars?: Record<string, string>) => unknown;
 }
 
+interface FeedbackClipsApi {
+  feedbackClips?: (key: string, vars?: Record<string, string>) => unknown;
+  fbText?: (key: string, vars?: Record<string, string>) => string;
+}
+
 function isAudioClip(value: unknown): value is AudioClip {
   if (typeof value !== 'object' || value === null) return false;
   const candidate = value as Partial<AudioClip>;
@@ -39,4 +44,25 @@ export function instructionSequence(key: string, vars: Record<string, string> = 
   const text = contentApi.instruction(key, vars);
   if (!text || text === key) return [];
   return [instructionClip(key, text)];
+}
+
+/**
+ * Bouwt de spreekreeks voor een feedback-key (EDU-R3-002). Gebruikt de
+ * content-API `feedbackClips` (met vars-variant); valt anders terug op één clip
+ * met de al ingevulde feedbacktekst, zodat er nooit een `{placeholder}` wordt
+ * uitgesproken of getoond.
+ */
+export function feedbackSequence(key: string, vars: Record<string, string> = {}): AudioClip[] {
+  const api = contentApi as unknown as FeedbackClipsApi;
+  if (typeof api.feedbackClips === 'function') {
+    try {
+      const clips = api.feedbackClips(key, vars);
+      if (Array.isArray(clips)) return clips.filter(isAudioClip);
+    } catch {
+      /* val terug op de enkelvoudige clip */
+    }
+  }
+  const text = api.fbText ? api.fbText(key, vars) : '';
+  if (!text || text === key) return [];
+  return [{ key, src: `audio/feedback/${key}.mp3`, text, kind: 'feedback' }];
 }

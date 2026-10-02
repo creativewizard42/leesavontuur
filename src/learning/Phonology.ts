@@ -46,7 +46,7 @@ function generateSyllables(options: PhonologyOptions): ActivityItem[] {
       skillId: 'PH.SYLLABLE',
       kind: 'klapbrug',
       prompt: {
-        audio: instructionClip('instr.ph.syllable', `Hoeveel klappen hoor je in ${entry.word}?`),
+        audio: instructionClip(`instr.ph.syllable.${entry.word}`, `Hoeveel klappen hoor je in ${entry.word}?`),
         text: `Hoeveel klappen hoor je in ${entry.word}?`,
         showText: false,
       },
@@ -96,7 +96,7 @@ function generateRhymes(options: PhonologyOptions): ActivityItem[] {
       skillId: 'PH.RHYME',
       kind: 'rijmpoort',
       prompt: {
-        audio: instructionClip('instr.ph.rhyme', `Wat rijmt op ${target}?`),
+        audio: instructionClip(`instr.ph.rhyme.${target}`, `Wat rijmt op ${target}?`),
         text: `Wat rijmt op ${target}?`,
         showText: false,
       },

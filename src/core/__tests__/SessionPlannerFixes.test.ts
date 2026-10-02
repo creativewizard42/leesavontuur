@@ -6,7 +6,7 @@ import type { Profile } from '../../types';
 import { createFreshProfile } from '../SaveSystem';
 import { createSkillState } from '../Mastery';
 import { createSeededRng } from '../rng';
-import { canIntroduceNewGrapheme } from '../Progression';
+import { canIntroduceNewGrapheme, PHASE_2_FALLBACK_SESSIONS } from '../Progression';
 import { isScoredActivityItem } from '../../learning/util';
 import { skillsForWord } from '../../learning/skills';
 import { flattenPlan, MIN_SCORED_PRACTICE, planSession, SESSION_MIX } from '../SessionPlanner';
@@ -78,8 +78,7 @@ describe('SessionPlanner – nooit een gescoorde 1-optie-oefening (QA-006 / EDU-
   });
 });
 
-describe('SessionPlanner – nieuwe grafeem-unlock pas na beheersing over ≥ 2 sessies (EDU-025)', () => {
-  it('opent de poort pas bij isMastered over ≥ 2 sessies', () => {
+describe('SessionPlanner – nieuwe grafeem-unlock pas na beheersing over ≥ 2 sessies (EDU-025)', () => {  it('opent de poort pas bij isMastered over ≥ 2 sessies', () => {
     const profile = createFreshProfile(0, () => 0.5);
     profile.unlockedGraphemes = ['m'];
     profile.skills['FN.FIRST_SOUND'] = createSkillState({ mastery: 0.9 });
@@ -155,5 +154,24 @@ describe('Sessieplan – determinisme en beloning', () => {
     const b = planSession(createFreshProfile(0, () => 0.5), createSeededRng(7));
     expect(flattenPlan(a).map((i) => i.targetId)).toEqual(flattenPlan(b).map((i) => i.targetId));
     expect(flattenPlan(a).map((i) => i.skillId)).toEqual(flattenPlan(b).map((i) => i.skillId));
+  });
+});
+
+describe('SessionPlanner – fase-2-vangnet (QA-R3-001)', () => {
+  it('introduceert na het vangnet de eerste letter met extra audio en houdt fase 1 in de warming-up', () => {
+    const profile = createFreshProfile(0, () => 0.5);
+    profile.sessionCount = PHASE_2_FALLBACK_SESSIONS;
+    const plan = planSession(profile, createSeededRng(5));
+
+    const step3 = plan.sections.find((s) => s.step === 3);
+    expect(step3, 'het vangnet introduceert de eerste letter').toBeDefined();
+    const intro = step3!.items.find((i) => i.metadata?.['introduction'] === true);
+    expect(intro?.metadata?.['extraAudio']).toBe(true);
+    expect(intro?.metadata?.['fallbackIntro']).toBe(true);
+
+    // Fase 1 blijft in de warming-up staan.
+    const step2 = plan.sections.find((s) => s.step === 2);
+    expect(step2).toBeDefined();
+    expect(step2!.items.some((i) => i.skillId === 'FN.FIRST_SOUND')).toBe(true);
   });
 });

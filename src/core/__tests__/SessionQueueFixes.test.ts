@@ -210,4 +210,41 @@ describe('SessionQueue – stoppen en hervatten (QA-007)', () => {
 
     expect(loadSessionState(storage, now + RESUME_TTL_MS + 1)).toBeUndefined();
   });
+
+  it('hervat met profielcontext zodat het succes-item een beheerst grafeem kiest (QA-R3-003)', () => {
+    const profile = createFreshProfile(0, () => 0.5);
+    profile.unlockedGraphemes = ['m', 'a'];
+    for (const g of ['m', 'a']) {
+      profile.skills[`LK.${g}.SOUND`] = createSkillState({
+        mastery: 0.95,
+        attempts: 12,
+        consecutiveCorrect: 4,
+        sessionsSeen: 2,
+      });
+    }
+    const items = [makeItem('a', 'DE.CVC', 3), makeItem('b', 'DE.CVC', 3), makeItem('c', 'DE.CVC', 3), makeItem('d', 'DE.CVC', 3)];
+    const queue = createSessionQueue(plan(items), {
+      sessionNumber: 1,
+      profile,
+      learned: new Set(['m', 'a']),
+      rng: () => 0.5,
+    });
+    const context = { sessionNumber: 1, profile, learned: new Set(['m', 'a']), rng: () => 0.5 };
+    const restored = SessionQueue.fromJSON(queue.toJSON(1000), context);
+    expect(restored).not.toBeNull();
+    const restoredQueue = restored!;
+
+    // Drie gemodelleerde items triggeren een makkelijk succes-item.
+    for (let i = 0; i < 3; i++) {
+      const current = restoredQueue.current();
+      if (!current) break;
+      restoredQueue.reportOutcome(event(current, { correct: false, modeled: true, attempt: 3, itemScore: 0 }), current);
+      if (i < 2) restoredQueue.next();
+    }
+    restoredQueue.next();
+    const success = restoredQueue.current();
+    // Zonder context zou dit een generiek fase-1-item (PH) zijn; mét context
+    // kiest buildSuccessItem een beheerst grafeem (letterklank).
+    expect(success?.kind).toBe('letterklank');
+  });
 });
