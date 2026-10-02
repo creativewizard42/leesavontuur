@@ -413,8 +413,14 @@ export function resetProfile(storage?: SaveStorage): Profile; // verse start
 
 - **Geen netwerkverzoeken tijdens gebruik.** Geen fetch/XHR, geen analytics, geen tracking, geen externe
   fonts/CDN's. Alles lokaal.
-- **CSP meta-tag** in `index.html`: `default-src 'self'; script-src 'self'; …; connect-src 'self';
-  object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'`. Geen externe hosts.
+- **CSP meta-tag** in de productiebuild (`vite.config.ts`, plugin
+  `leesavontuur-production-csp`): `default-src 'self'; script-src 'self'; style-src 'self';
+  img-src 'self'; media-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none';
+  base-uri 'none'; form-action 'none'`. Geen externe hosts en geen `data:`/`blob:`.
+  `frame-ancestors` staat **niet** in de meta-CSP: browsers negeren die directive in een
+  `<meta http-equiv>`-tag. Anti-clickjacking loopt via de **HTTP-header** op de hostingserver
+  (voorbeelden in `deploy/`; zie ook `docs/SECURITY_HEADERS.md`). `vite preview` stuurt dezelfde
+  hardening-headers lokaal mee (`preview.headers`).
 - **Geen cloud-TTS** (zie §6.2) en geen spraakherkenning (ED §13 regel 2).
 - Ouderzone toont **nooit** diagnose-/stoornis-termen, percentielen of vergelijking met anderen (ED §12.3).
 - Audio- en savewerking blijven volledig offline; de app is bruikbaar zonder internet.

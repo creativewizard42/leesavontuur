@@ -19,6 +19,7 @@ import { graphemeSoundClip, wordClip } from '../../learning/util';
 import { fbText, getGrapheme, getWord, ui } from '../../content';
 import { el, clear } from '../dom';
 import { iconCheck, iconNoSound, iconPloef, iconSpark, iconStar, iconTap } from '../icons';
+import { instructionSequence } from '../audioPrompts';
 import { createOptionGrid, type OptionGridHandle } from './OptionGrid';
 
 export type FeedbackKind = 'correct' | 'retry' | 'hint' | 'model' | 'guess';
@@ -117,6 +118,32 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
       if (result.result === 'unavailable') showAudioFallback();
       return result;
     });
+  }
+
+  function playSequenceSafe(clips: readonly AudioClip[]): Promise<PlayResult> {
+    if (clips.length === 0) return Promise.resolve(UNAVAILABLE);
+    if (clips.length === 1) return playClipSafe(clips[0]);
+    return audio.playSequence(clips).then((result) => {
+      if (result.result === 'unavailable') showAudioFallback();
+      return result;
+    });
+  }
+
+  /**
+   * EDU-R2-006: de hak-/plakinstructie wordt vóór de stimulus gesproken. De
+   * instructie-sequentie komt (indien beschikbaar) uit `instructionClips`
+   * (dragers + variabelen); anders valt ze terug op één `instructionClip`.
+   */
+  function promptClips(): AudioClip[] {
+    const clips: AudioClip[] = [];
+    if (item.kind === 'hakken') {
+      const key = metaString(item, 'responseMode') === 'tap' ? 'instr.hakken.start' : 'instr.hakken.count';
+      clips.push(...instructionSequence(key));
+    } else if (item.kind === 'plakken') {
+      clips.push(...instructionSequence('instr.plakken.r1'));
+    }
+    if (item.prompt.audio) clips.push(item.prompt.audio);
+    return clips;
   }
 
   function stretchedRow(letters: readonly string[]): HTMLElement {
@@ -422,8 +449,12 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
   }
 
   function repeat(): void {
-    if (item.prompt.audio) void playClipSafe(item.prompt.audio);
-    else if (wordFromItem(item)) {
+    const clips = promptClips();
+    if (clips.length > 0) {
+      void playSequenceSafe(clips);
+      return;
+    }
+    if (wordFromItem(item)) {
       void audio.playStretched(wordFromItem(item) as string).then((result) => {
         if (result.result === 'unavailable') showAudioFallback();
       });
@@ -452,9 +483,10 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
   };
   document.addEventListener('keydown', onKeyDown);
 
-  // Prompt afspelen + optionele herhaling/adaptieve extra audio.
-  if (item.prompt.audio) {
-    void playClipSafe(item.prompt.audio);
+  // Prompt afspelen (instructie + stimulus) + optionele herhaling/adaptieve extra audio.
+  const initialClips = promptClips();
+  if (initialClips.length > 0) {
+    void playSequenceSafe(initialClips);
   } else if (wordFromItem(item) && item.kind === 'hakken') {
     // Auditieve hakopdracht zonder opname: laat de gerekte reeks horen.
     void audio.playStretched(wordFromItem(item) as string).then((result) => {
@@ -463,7 +495,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
   }
   if (item.metadata?.['extraAudio'] === true && item.prompt.audio) {
     later(() => {
-      if (!done) void playClipSafe(item.prompt.audio);
+      if (!done) void playSequenceSafe(promptClips());
     }, 1500);
   }
   if (listenFirst) void playListenFirst();

@@ -93,6 +93,37 @@ export function iconNoSound(): SVGElement {
   );
 }
 
+/**
+ * Vorm voor vorm-afleiders (G1, ronde 2): een niet-tekstuele optie zodat ook
+ * een niet-lezer onderscheid kan maken. Onbekende naam -> cirkel.
+ */
+export function iconShape(name?: string): SVGElement {
+  const key = (name ?? '').toLowerCase();
+  switch (key) {
+    case 'square':
+    case 'vierkant':
+      return wrap('<rect x="12" y="12" width="40" height="40" rx="4" fill="#8d7fb5" stroke="#14342a" stroke-width="5"/>');
+    case 'triangle':
+    case 'driehoek':
+      return wrap('<path d="M32 10 L56 52 H8 Z" fill="#e0843f" stroke="#14342a" stroke-width="5" stroke-linejoin="round"/>');
+    case 'diamond':
+    case 'ruit':
+      return wrap('<path d="M32 8 L56 32 L32 56 L8 32 Z" fill="#f2b705" stroke="#14342a" stroke-width="5" stroke-linejoin="round"/>');
+    case 'star':
+    case 'ster':
+      return wrap('<path d="M32 6 L40 24 L60 26 L45 40 L49 60 L32 50 L15 60 L19 40 L4 26 L24 24 Z" fill="#f2b705" stroke="#14342a" stroke-width="4" stroke-linejoin="round"/>');
+    case 'rectangle':
+    case 'rechthoek':
+      return wrap('<rect x="6" y="18" width="52" height="28" rx="4" fill="#4caf6d" stroke="#14342a" stroke-width="5"/>');
+    case 'circle':
+    case 'cirkel':
+    case '':
+      return wrap('<circle cx="32" cy="32" r="24" fill="#2e7daf" stroke="#14342a" stroke-width="5"/>');
+    default:
+      return wrap('<circle cx="32" cy="32" r="24" fill="#a9d6b0" stroke="#14342a" stroke-width="5"/>');
+  }
+}
+
 /** Tikken op de klanken (hakken tap-modus). */
 export function iconTap(): SVGElement {
   return wrap(

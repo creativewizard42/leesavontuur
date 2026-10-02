@@ -436,6 +436,32 @@ body.la-reduced-motion {
   color: var(--la-water-diep);
 }
 
+.la-option--shape {
+  font-family: var(--la-font-ui);
+}
+
+.la-option__number {
+  margin-left: var(--la-s2);
+  min-width: 34px;
+  height: 34px;
+  padding: 0 var(--la-s1);
+  border-radius: var(--la-radius-rond);
+  background: var(--la-honing);
+  color: var(--la-tekst);
+  font-family: var(--la-font-ui);
+  font-size: var(--la-text-m);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.la-option__shape-img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
 .la-option[aria-checked="true"] {
   box-shadow: var(--la-schaduw-op);
 }
@@ -573,6 +599,31 @@ body.la-reduced-motion {
 
 .la-audio-fallback__hint {
   font-size: var(--la-text-s);
+}
+
+/* EDU-R2-007: rustige ouderindicatie "klanken via benadering". */
+.la-approximate {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--la-s2);
+  color: var(--la-tekst-zacht);
+  font-size: var(--la-text-s);
+}
+
+.la-approximate svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* QA-012: intro-knoppen icoongedreven (tekst alleen voor screenreaders). */
+.la-letter-intro__btn {
+  min-width: var(--la-tik-super);
+  min-height: var(--la-tik-super);
+}
+
+.la-letter-intro__btn svg {
+  width: 56px;
+  height: 56px;
 }
 
 /* ---------- Hakken: tik de klanken (tap-modus) ---------- */
@@ -846,10 +897,20 @@ body.la-reduced-motion {
   font-family: inherit;
 }
 
-.la-hint-text input[type="checkbox"] {
-  width: 32px;
-  height: 32px;
-  vertical-align: middle;
+/* QA-R2-006: instellingen-toggles met ruim tikdoel (label = >= 64 px). */
+.la-setting-row {
+  display: flex;
+  align-items: center;
+  gap: var(--la-s3);
+  min-height: var(--la-tik);
+  padding: var(--la-s2) var(--la-s3);
+  cursor: pointer;
+}
+
+.la-setting-row input[type="checkbox"] {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
 }
 
 .la-gate-hold {
