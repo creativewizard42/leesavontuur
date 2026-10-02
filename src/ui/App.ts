@@ -206,24 +206,42 @@ export function createApp(deps: AppDeps): App {
           if (!event.correct && !event.isGuess) {
             recordConfusion(item.targetId, event.selectedOptionId, item.kind, storage);
           }
+          if (free) {
+            // GD §3.1: De Speelwei is "vrij oefenen zonder opdracht, zonder
+            // score". Alleen de adaptieve queue reageert binnen de sessie; het
+            // profiel (skills/items/sessionCount/rewards) blijft ongewijzigd.
+            queue.reportOutcome(event, item);
+            return;
+          }
           state = recordItemAnswer(state, event, item);
           queue.reportOutcome(event, item);
           save();
           saveSessionState(queue, storage, now());
         },
         onIntroduce: (graphemeId) => {
+          if (free) return;
           state = introduceGrapheme(state, graphemeId);
           save();
         },
         onAdvance: () => {
+          // Vrij spelen mag de normale resume-sleutel niet overschrijven (GD §3.1).
+          if (free) return;
           saveSessionState(queue, storage, now());
         },
         onExit: () => {
-          saveSessionState(queue, storage, now());
-          save();
+          if (!free) {
+            saveSessionState(queue, storage, now());
+            save();
+          }
           app.showMap();
         },
         onFinished: () => {
+          if (free) {
+            // Geen sessie-afronding (sessionCount/vonkjes/bladeren) en de
+            // normale resume-state blijft ongemoeid.
+            app.showMap();
+            return;
+          }
           state = completeSession(state, sessionId);
           clearSessionState(storage);
           save();
