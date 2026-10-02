@@ -99,6 +99,7 @@ Extra onafhankelijke uitvoer (probes buiten de repo):
 | ID | Ernst | Onderwerp |
 |---|---|---|
 | DOC-R3-001 | **Minor** | `docs/EDUCATIONAL_DESIGN.md` §15.2 (regel ~729) noemt nog de oude drempel: "Zolang de fase-2-poort (`FN.FIRST_SOUND ≥ 0.8`) dicht is…". Elders in ED (§3 tabel, §15.7, §15.11) staat correct `≥ 0.7`. Documentatie-inconsistentie, geen code-afwijking. |
+| DOC-R3-001 | **Opgelost** | Opgelost in 6f59c399ae8f665517e30087264ea2fcd27219e9. |
 
 **Geen nieuwe Blocker of Major.** De vastgestelde restpunten zijn bekend en voorwaardelijk (zie §5): echte audio-opnames, tweede taalkundige review, contactadres in `PRIVACY.md`, host-hardening-headers.
 
