@@ -203,8 +203,7 @@ Er zijn **geen plaatjes** in deze taak (ED §4.1). Alle opties zijn gesproken wo
 | Poging | Reactie |
 |---|---|
 | Correct | fb.correct.1 *"Super!"* + de klank wordt herhaald: *"Deze letter zegt mmm."* |
-| 1e fout (letternaam gekozen, ED §9.3) | fb.try1.5 *"Dat is de naam van de letter. Welke klank maakt hij?"* |
-| 1e fout (andere klank) | fb.try1.2 *"Luister nog eens goed."* |
+| 1e fout (letternaam of andere klank) | fb.try1.2 *"Luister nog eens goed."* |
 | 2e fout (hint) | fb.hint.2 *"Deze letter zegt sss."* + klank gerekt |
 | 3e fout (modeling) | fb.model.4 *"Samen: de s zegt sss. Jij mag het straks nog eens."* |
 
@@ -251,7 +250,7 @@ Geen plaatjes en geen voorbeeldwoord naast de letter (ED §11 regel 4). De klank
 | 2e fout (hint) | fb.hint.5 *"Luister: k… a… m. Tik ze in deze volgorde."* |
 | 3e fout (modeling) | fb.model.1 *"We doen het samen. k-a-m … kam! Straks komt hij nog een keer."* → spel tikt de letters mee, kind tikt na |
 
-**Afleiders / fouttypen:** verwisselde volgorde (tak ↔ kat) → omkeer-hint (ED §9.3); verkeerde letter → *"Kijk naar de eerste letter. Welke klank zegt die?"*.
+**Afleiders / fouttypen:** verwisselde volgorde (tak ↔ kat) → omkeer-hint (ED §9.3); verkeerde letter → fb.try1.2 *"Luister nog eens goed."*.
 
 **Bijgewerkte leerdoelen**
 - AN.CVC / AN.VC (hakken) en FN.COUNT (aantal klanken). **Niet** DE.* (ED §4.1).
@@ -288,7 +287,6 @@ Er is geen plaatje; het woord staat als **letters** in beeld en er is geen gespr
 | Poging | Reactie |
 |---|---|
 | Correct | fb.correct.5 *"Knap geplakt!"* + het hele woord nog eens vlot: *"kam."* |
-| 1e fout (klinker) | fb.try1.6 *"Luister naar het midden. Hoor je a of o?"* |
 | 1e fout (begin/eind) | fb.try1.3 *"Het begin klopt! Kijk nog eens naar het eind."* |
 | 2e fout (hint) | fb.hint.1 *"Luister: k… a… m. Plak maar aan elkaar."* + klanken 1× gerekt |
 | 3e fout (modeling) | fb.model.1 *"We doen het samen. k-a-m … kam! Straks komt hij nog een keer."* |
@@ -327,8 +325,7 @@ Route 1 toont **geen plaatjes** en speelt het doelwoord niet vooraf als woord; d
 | Poging | Reactie |
 |---|---|
 | Correct | fb.correct.4 *"Mooi gelezen!"* + woord + raam opent |
-| 1e fout (kort/lang) | fb.try1.7 *"Kijk: staat er één a of twee? Eén a klinkt kort."* |
-| 1e fout (overig) | fb.try1.3 *"Kijk nog eens naar het eind."* of fb.try1.6 *"Luister naar het midden."* |
+| 1e fout | fb.try1.3 *"Kijk nog eens naar het eind."* of fb.try1.2 *"Luister nog eens goed."* |
 | 2e fout (hint) | fb.hint.1 gerekte klanken zonder het plaatje |
 | 3e fout (modeling) | fb.model.1 modeling; daarna raam alsnog open (succeservaring) |
 
@@ -396,7 +393,6 @@ Alle feedback is **klankbestand** (opname), niet TTS, vanwege de onbetrouwbaarhe
 | fb.correct.5 | "Knap geplakt!" |
 | fb.correct.6 | "Je luisterde goed." |
 | fb.correct.7 | "Goed gehakt!" |
-| fb.correct.8 | "Fijn dat je het nog eens probeerde." |
 
 ### 5.2 Eerste poging fout (foutspecifiek, ED §9.3)
 | ID | Tekst |
@@ -405,16 +401,12 @@ Alle feedback is **klankbestand** (opname), niet TTS, vanwege de onbetrouwbaarhe
 | fb.try1.2 | "Luister nog eens goed." |
 | fb.try1.3 | "Het begin klopt! Kijk nog eens naar het eind." |
 | fb.try1.4 | "We lezen van links naar rechts. Begin hier." |
-| fb.try1.5 | "Dat is de naam van de letter. Welke klank maakt hij?" |
-| fb.try1.6 | "Luister naar het midden. Hoor je a of o?" |
-| fb.try1.7 | "Kijk: staat er één a of twee? Eén a klinkt kort." |
 
 ### 5.3 Tweede poging fout (hint)
 | ID | Tekst |
 |---|---|
 | fb.hint.1 | "Luister: k… a… m. Plak maar aan elkaar." |
 | fb.hint.2 | "Deze letter zegt sss." |
-| fb.hint.3 | "Kijk naar de eerste letter. Welke klank zegt die?" |
 | fb.hint.4 | "De klank is mmm. Welk woord begint daarmee?" |
 | fb.hint.5 | "Luister: k… a… m. Tik ze in deze volgorde." |
 

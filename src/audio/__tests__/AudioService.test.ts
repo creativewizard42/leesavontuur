@@ -8,6 +8,7 @@ import {
   splitSoundHints,
   type SpeechSynthesisLike,
 } from '../AudioService';
+import { sanitizeLocalAudioSrc } from '../localSrc';
 
 function clip(overrides: Partial<AudioClip> = {}): AudioClip {
   return {
@@ -127,6 +128,32 @@ describe('AudioService – resolutie en fallbacks', () => {
     // Geldige relatieve paden blijven toegestaan, ook met omringende whitespace.
     expect(isLocalAudioSrc('audio/ok.mp3')).toBe(true);
     expect(isLocalAudioSrc(' audio/ok.mp3 ')).toBe(true);
+  });
+
+  it('SEC-R3-005: planner- en runtime-validatie geven hetzelfde oordeel', () => {
+    // `sanitizeLocalAudioSrc` is wat SessionPlanner.readAudio gebruikt; de
+    // runtime gebruikt `isLocalAudioSrc`. Beide delen dezelfde basisregels en
+    // moeten dus voor elke invoer hetzelfde accepteren/weigeren.
+    const inputs = [
+      'audio/ok.mp3',
+      ' audio/ok.mp3 ',
+      '',
+      '   ',
+      '//evil.example/x.mp3',
+      '\t//evil/x.mp3',
+      '\u0000//evil/x.mp3',
+      '\\\\evil\\x',
+      'https://evil.example/x.mp3',
+      ' https://x/y.mp3',
+      'data:audio/mp3;base64,AAAA',
+      '  data:text/html,<script>',
+      'javascript:alert(1)',
+      '../audio/x.mp3',
+      'audio/../secret.mp3',
+    ];
+    for (const src of inputs) {
+      expect(isLocalAudioSrc(src), src).toBe(sanitizeLocalAudioSrc(src) !== undefined);
+    }
   });
 
   it('splitst hint-reeksen in losse klanken', () => {

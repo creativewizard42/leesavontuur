@@ -123,15 +123,8 @@ leesavontuur/
    ├─ audio/
    │  └─ AudioService.ts         # opnames + Web Speech fallback + stilte-fallback (§6)
    ├─ ui/                        # schermen en componenten (DOM)
-   │  ├─ components/             # Button, AudioRepeatButton, HomeButton, OptionGrid, ...
-   │  └─ screens/                # MapScreen, SessionScreen, RewardScreen, SettingsScreen, ...
-   ├─ games/                     # activiteit-schermen (gebruiken learning-generators)
-   │  ├─ Klankjager.ts           # 4a
-   │  ├─ LetterKlank.ts          # 4b
-   │  ├─ Hakken.ts               # 4c
-   │  ├─ Plakken.ts              # 4d
-   │  ├─ WoordLezen.ts           # 4e
-   │  └─ DeKlimboom.ts           # 4f (mini-game)
+   │  ├─ components/             # Button, ActivityView (rendert 4a–4f), LetterIntro, OptionGrid, ...
+   │  └─ screens/                # StartScreen, MapScreen, SessionScreen, RewardScreen, ...
    └─ parent/
       ├─ ParentGate.ts           # 5 s indrukken + rekensom (GD §9.1)
       └─ ParentDashboard.ts      # indicatoren volgens ED §12 / GD §9.2
@@ -452,7 +445,7 @@ export function resetProfile(storage?: SaveStorage): Profile; // verse start
   RNG): `kam → k-a-m`; plakken van `k,a,m → kam`; afleiders zijn minimale paren; nooit geblokkeerde of
   niet-geleerde items.
 - **Letter-klank** (`learning/LetterSound.ts`): correct/incorrect, letternaam-vs-klank-detectie
-  (`fb.try1.5`), nooit `ei/ij` of `ou/au` als twee geldige opties.
+  (`fb.specific.letter_confusion`/`fb.specific.letter_sound`), nooit `ei/ij` of `ou/au` als twee geldige opties.
 
 ### 9.2 Integratie tests
 

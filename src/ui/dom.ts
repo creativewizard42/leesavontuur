@@ -1,5 +1,5 @@
 /**
- * Kleine DOM-helper voor de UI-laag (alleen hier e.a. ui/games/parent mogen
+ * Kleine DOM-helper voor de UI-laag (alleen hier e.a. ui/parent mogen
  * `document` gebruiken). Geen framework, geen runtime-dependency.
  */
 

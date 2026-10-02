@@ -13,6 +13,12 @@
  * opnames zijn (ED §13.1, EDU-010).
  */
 import type { AudioClip } from '../types';
+import { isLocalAudioSrc } from './localSrc';
+
+// SEC-R3-005: de src-validatie is gedeeld met `SessionPlanner.readAudio`
+// (`src/audio/localSrc.ts`), zodat runtime-audio en hervatte audio hetzelfde
+// oordeel geven. Hier opnieuw geëxporteerd voor bestaande importers/tests.
+export { isLocalAudioSrc } from './localSrc';
 
 /** Uitkomst van een audio-poging: echte opname, (tijdelijke) TTS of niets. */
 export type PlayOutcome = 'file' | 'tts' | 'unavailable';
@@ -120,35 +126,10 @@ const APPROXIMATE_TTS_KINDS: ReadonlySet<AudioClip['kind']> = new Set([
 
 /**
  * Alleen relatieve, same-origin paden toestaan (privacy, ARCHITECTURE §6/§8).
- *
- * We strippen eerst leading/trailing whitespace en C0-controltekens: zo kan een
- * aanvallende bron geen `"//evil"`, `"\\evil"` of `"https://evil"` verbergen
- * achter een spatie/controlekarakter. Daarna weigeren we lege waarden, een
- * protocol-relatief (`//`) of Windows-pad (`\`) begin, elk scheme
- * (`https:`, `data:`, `javascript:`, …) en `..`-segmenten (path traversal).
- * Wanneer `location` bestaat, toetsen we bovendien dat het pad naar dezelfde
- * origin resolvet (defense-in-depth).
- *
- * Deze regels lopen gelijk met `SessionPlanner.readAudio` (resume-src-validatie),
- * zodat runtime-audio en hervatte audio dezelfde bron accepteren.
+ * De implementatie staat in `src/audio/localSrc.ts` en wordt gedeeld met
+ * `SessionPlanner.readAudio` (resume-src-validatie), zodat runtime-audio en
+ * hervatte audio dezelfde bron accepteren (SEC-R3-005).
  */
-export function isLocalAudioSrc(src: string): boolean {
-  if (typeof src !== 'string') return false;
-  const trimmed = src.replace(/^[\u0000-\u0020]+|[\u0000-\u0020]+$/g, '');
-  if (!trimmed) return false;
-  if (trimmed.startsWith('//')) return false;
-  if (trimmed.startsWith('\\')) return false;
-  if (/^[a-z][a-z0-9+.-]*:/i.test(trimmed)) return false;
-  if (trimmed.split(/[\\/]+/).includes('..')) return false;
-  if (typeof location !== 'undefined' && location.href) {
-    try {
-      if (new URL(trimmed, location.href).origin !== location.origin) return false;
-    } catch {
-      return false;
-    }
-  }
-  return true;
-}
 
 function isLocalDutchVoice(voice: SpeechVoiceLike): boolean {
   return voice.localService === true && /^nl(-|_)?/i.test(voice.lang ?? '');

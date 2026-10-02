@@ -777,3 +777,12 @@ De generatoren kiezen de foutspecifieke feedback op basis van de gekozen afleide
 - **`fb.specific.middle_sound` is klinker-only.** De vraag "welke klinker hoor je?" klopt alleen als de afwijkende middelste klank een klinker of tweeklank is (`answer.ts`). Is het een medeklinker, dan kiest de code **`fb.specific.middle_consonant`**: "Luister naar het midden: {sound}…" zonder klinkervraag.
 - **`fb.specific.letter_sound`** dekt de letter-klank-taak (`letterklank`): "Deze letter zegt {sound}. Probeer het nog eens." De eerdere, generieke sleutel liet `{sound}` oningevuld of vroeg naar een klinker bij een medeklinkerdoel.
 - Beide sleutels staan in `REQUIRED_FEEDBACK_KEYS` en `dynamicClips.ts`; de validator en `feedbackText.test.ts` controleren dat er **nooit** een `{placeholder}` in zichtbare feedback achterblijft.
+
+### 15.13 Beheersingspoorten en vrij spelen (reviewfix set A)
+De poortcondities van §3 zijn aangescherpt zodat vrijgave en rapportage **altijd** de volledige beheersingsdefinitie `isMastered` (§10.3, §15.5) gebruiken en niet `mastery ≥ 0.8` alleen:
+
+- **Beheersingstellingen via `isMastered`.** `masteredGraphemeCount` en `hasMasteredVowel` (`Progression.ts`) tellen respectievelijk toetsen een grafeem pas als beheerst wanneer `isMastered` op `LK.<g>.SOUND` slaagt (mastery ≥ 0.8 **en** ≥ 12 items **en** ≥ 4 op rij correct **en** ≥ 2 sessies). Eén correct item met `alpha = 1` kan dus geen letter meer "vrijgeven" (zie §15.5).
+- **Fase-3-poort op `LK.<g>.SOUND`.** De poort naar fase 3 toetst `LK.<g>.SOUND` via `isMastered`, niet `LK.<g>.RECOGNIZE` (consistent met §15.2). Klank→grafeem blijft een ondergeschikt doel in de MVP.
+- **Fase-4-poort.** Fase 4 opent bij **≥ 3 beheerste `LK.<g>.SOUND`-doelen waarvan ≥ 1 klinker** — beide via `isMastered`, niet op mastery alleen.
+- **Vrij spelen (Speelwei) telt niet mee.** In de vrije oefenmodus (GD §3.1, "zonder opdracht, zonder score") worden **geen** profielmutaties opgeslagen: `skills`, `items`, `sessionCount` en beloningen blijven ongewijzigd en de normale hervat-sleutel wordt niet overschreven. Alleen de adaptieve queue reageert binnen de sessie; stoppen/afronden in vrij spelen sluit geen sessie af.
+- **Nieuwe map-poorten (perfecte leerling, vers profiel).** Met uitsluitend perfecte antwoorden opent **fase 3 in sessie 4** en **fase 4 in sessie 11**. Het **letter-tempo blijft ongewijzigd**: `m:2, a:5, s:8, t:12, k:15, r:18` (zie §15.10).
