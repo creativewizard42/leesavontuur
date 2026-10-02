@@ -94,3 +94,40 @@ Alle noemenswaardige wijzigingen van LEESAVONTUUR. Opmaak losjes gebaseerd op
   `[contact invullen]` en is duidelijk gemarkeerd als **vóór publicatie in te
   vullen**; echte native audio-opnames en de tweede taalkundige/leerkracht-review
   blijven voorwaarden vóór gebruik met kinderen (ED §13).
+
+### Code review fixes
+
+#### Set A (core/UI)
+
+- **Free-play scoort niet en hervat niet:** items in de vrije speelmodus tellen
+  niet mee voor mastery/Leitner en worden niet als sessie hervat.
+- **Mastery-poorten via `isMastered`:** fase- en letterpoorten toetsen aan
+  `isMastered` in plaats van aan losse drempels, zodat poort en mastery gelijk
+  lopen.
+- **Fase-3-poort op SOUND:** de fase-3-poort toetst de klankherkenning
+  (`LK.<g>.SOUND`), niet de letternaam.
+- **Resume-src-validatie:** hervatte sessies valideren hun bron/queue strikt.
+- **`toJSON` zonder dubbele serialisatie:** de sessie-queue serialiseert niet
+  dubbel (geen geneste JSON-strings).
+
+#### Set B (audio/content/learning/games)
+
+- **`isLocalAudioSrc` hardening:** leading/trailing whitespace en
+  C0-controletekens worden gestript; lege waarden, `//`-, `\`- en elk
+  `scheme:`-pad worden geweigerd, plus een same-origin-check via `new URL`.
+- **Node-engines:** `engines.node` naar `^22.12.0 || ^24.0.0 || >=26.0.0`
+  (strengste eis van Vite 8 en Vitest 5); README en `docs/BUILD.md` bijgewerkt.
+- **`src/games/**` verwijderd:** ongebruikt (geen importers; de UI/planner
+  bouwen items via `src/learning`) en met een afwijkende skill-mapping.
+  ARCHITECTURE en README beschrijven activiteiten nu als `src/learning`
+  (generatoren) + `src/ui` (`ActivityView`/schermen).
+- **Canonieke klankreeksen:** nieuwe `formatSoundSequence(ids, mode)` met
+  `'speech'` (TTS/opnamelijst/clip-tekst, `" … "`) en `'display'`
+  (schermtekst/feedbackvariabelen, `" - "`). `dynamicClips`, `answer`, `util`,
+  `audioManifest` en `ui/audioClips` gebruiken de helper; `blend.<woord>` is in
+  manifest en runtime-index identiek en de gesproken `blend_retry`-clip en de
+  getoonde tekst hebben dezelfde klanken in dezelfde volgorde.
+- **Ongebruikte feedbackvarianten verwijderd:** `fb.correct.8`, `fb.try1.5`,
+  `fb.try1.6`, `fb.try1.7` en `fb.hint.3` zijn uit `FEEDBACK`,
+  `REQUIRED_FEEDBACK_KEYS`, de audiomanifest en de opnamelijst gehaald; de
+  foutspecifieke `fb.specific.*`-ladder dekt deze gevallen taalkundig correct.

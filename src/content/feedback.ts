@@ -11,19 +11,14 @@ export const FEEDBACK: Readonly<Record<string, string>> = {
   'fb.correct.5': 'Knap geplakt!',
   'fb.correct.6': 'Je luisterde goed.',
   'fb.correct.7': 'Goed gehakt!',
-  'fb.correct.8': 'Fijn dat je het nog eens probeerde.',
   // 5.2 Eerste poging fout
   'fb.try1.1': 'Bijna. Probeer nog een keer.',
   'fb.try1.2': 'Luister nog eens goed.',
   'fb.try1.3': 'Het begin klopt! Kijk nog eens naar het eind.',
   'fb.try1.4': 'We lezen van links naar rechts. Begin hier.',
-  'fb.try1.5': 'Dat is de naam van de letter. Welke klank maakt hij?',
-  'fb.try1.6': 'Luister naar het midden. Hoor je a of o?',
-  'fb.try1.7': 'Kijk: staat er één a of twee? Eén a klinkt kort.',
   // 5.3 Tweede poging fout (hint)
   'fb.hint.1': 'Luister: k… a… m. Plak maar aan elkaar.',
   'fb.hint.2': 'Deze letter zegt sss.',
-  'fb.hint.3': 'Kijk naar de eerste letter. Welke klank zegt die?',
   'fb.hint.4': 'De klank is mmm. Welk woord begint daarmee?',
   'fb.hint.5': 'Luister: k… a… m. Tik ze in deze volgorde.',
   // 5.4 Derde poging fout (modeling)
@@ -70,8 +65,14 @@ export const SPECIFIC_FEEDBACK_KEYS: readonly string[] = [
 ];
 
 /**
- * Alle feedback-IDs die in GAME_DESIGN §5.1–§5.5 genoemd worden. De validator
- * eist dat elk van deze keys bestaat (ARCHITECTURE §5.1 regel 10).
+ * Alle feedback-IDs die in GAME_DESIGN §5.1–§5.5 genoemd worden **en** door de
+ * runtime gebruikt kunnen worden. De validator eist dat elk van deze keys
+ * bestaat (ARCHITECTURE §5.1 regel 10).
+ *
+ * Reviewfix (set B): de ongebruikte varianten `fb.correct.8`, `fb.try1.5`,
+ * `fb.try1.6`, `fb.try1.7` en `fb.hint.3` zijn verwijderd; de generatoren/het
+ * antwoordmodel kiezen deze nooit (de foutspecifieke `fb.specific.*`-ladder
+ * vult dit gat taalkundig correct).
  */
 export const REQUIRED_FEEDBACK_KEYS: readonly string[] = [
   // 5.1 Correct
@@ -82,19 +83,14 @@ export const REQUIRED_FEEDBACK_KEYS: readonly string[] = [
   'fb.correct.5',
   'fb.correct.6',
   'fb.correct.7',
-  'fb.correct.8',
   // 5.2 Eerste poging fout
   'fb.try1.1',
   'fb.try1.2',
   'fb.try1.3',
   'fb.try1.4',
-  'fb.try1.5',
-  'fb.try1.6',
-  'fb.try1.7',
   // 5.3 Tweede poging fout (hint)
   'fb.hint.1',
   'fb.hint.2',
-  'fb.hint.3',
   'fb.hint.4',
   'fb.hint.5',
   // 5.4 Derde poging fout (modeling)

@@ -114,6 +114,21 @@ describe('AudioService – resolutie en fallbacks', () => {
     expect(isLocalAudioSrc('data:audio/mp3;base64,AAAA')).toBe(false);
   });
 
+  it('weigert bronnen met whitespace/controle-voorloop en backslash-paden', () => {
+    expect(isLocalAudioSrc('\t//evil/x.mp3')).toBe(false);
+    expect(isLocalAudioSrc(' https://x/y.mp3')).toBe(false);
+    expect(isLocalAudioSrc('\\\\evil\\x')).toBe(false);
+    expect(isLocalAudioSrc('\u0000//evil/x.mp3')).toBe(false);
+    expect(isLocalAudioSrc('  data:text/html,<script>')).toBe(false);
+    expect(isLocalAudioSrc('../audio/x.mp3')).toBe(false);
+    expect(isLocalAudioSrc('audio/../secret.mp3')).toBe(false);
+    expect(isLocalAudioSrc('')).toBe(false);
+    expect(isLocalAudioSrc('   ')).toBe(false);
+    // Geldige relatieve paden blijven toegestaan, ook met omringende whitespace.
+    expect(isLocalAudioSrc('audio/ok.mp3')).toBe(true);
+    expect(isLocalAudioSrc(' audio/ok.mp3 ')).toBe(true);
+  });
+
   it('splitst hint-reeksen in losse klanken', () => {
     expect(splitSoundHints('k-a-mmm')).toEqual(['k', 'a', 'mmm']);
     expect(splitSoundHints('k … a … m')).toEqual(['k', 'a', 'm']);

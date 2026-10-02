@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { buildRecordingList } from '../../../scripts/recording-list';
-import { audioManifest, instructionClips, instructions } from '../index';
+import { audioManifest, feedback, instructionClips, instructions, requiredFeedbackKeys } from '../index';
 import { INSTRUCTIONS } from '../instructions';
 
 describe('opnamelijst (EDU-009)', () => {
@@ -47,6 +47,16 @@ describe('opnamelijst (EDU-009)', () => {
     expect(manifestKeys.has('instr.fn.first_sound')).toBe(false);
     expect(manifestKeys.has('instr.lk.intro')).toBe(false);
     expect(manifestKeys.has('fb.specific.count')).toBe(false);
+  });
+
+  it('laat ongebruikte feedbackvarianten weg uit content en opnamelijst (reviewfix set B)', () => {
+    const removed = ['fb.correct.8', 'fb.try1.5', 'fb.try1.6', 'fb.try1.7', 'fb.hint.3'];
+    const manifestKeys = new Set(audioManifest.map((c) => c.key));
+    for (const key of removed) {
+      expect(feedback[key], key).toBeUndefined();
+      expect(requiredFeedbackKeys, key).not.toContain(key);
+      expect(manifestKeys.has(key), key).toBe(false);
+    }
   });
 });
 

@@ -10,6 +10,7 @@ import {
   feedbackVariantClips,
   instructionVariantClips,
 } from './dynamicClips';
+import { formatSoundSequence } from './soundSequence';
 
 /**
  * Volledige opnamelijst voor audio (ARCHITECTURE §6.2, GD §11.2, EDU-009/EDU-022).
@@ -20,15 +21,9 @@ import {
  *
  * Gerekte reeksen gebruiken één canonieke key-conventie (`blend.<woord>`) en
  * expliciete pauzes tussen de klank-hints ("k … a … mmm"), zodat de TTS-fallback
- * en de opnamelijst dezelfde tekst delen.
+ * en de opnamelijst dezelfde tekst delen. De opmaak loopt via de canonieke
+ * `formatSoundSequence` (zie `soundSequence.ts`).
  */
-function blendText(graphemes: readonly string[]): string {
-  const byId = new Map(GRAPHEMES.map((g) => [g.id, g]));
-  return graphemes
-    .map((id) => byId.get(id)?.soundHint ?? id)
-    .join(' … ');
-}
-
 export function buildAudioManifest(): AudioClip[] {
   const clips = new Map<string, AudioClip>();
   const put = (clip: AudioClip): void => {
@@ -46,7 +41,7 @@ export function buildAudioManifest(): AudioClip[] {
     put({
       key: `blend.${w.word}`,
       src: `audio/blends/${w.word}.mp3`,
-      text: blendText(w.graphemes),
+      text: formatSoundSequence(w.graphemes, 'speech'),
       kind: 'blend',
     });
   }

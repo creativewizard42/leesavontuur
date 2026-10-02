@@ -5,7 +5,7 @@
  */
 import type { ActivityItem, AnswerEvent, Word } from '../types';
 import { effectiveItemScore } from '../core/Mastery';
-import { getGrapheme, getWord } from '../content';
+import { formatSoundSequence, getGrapheme, getWord } from '../content';
 import { commonConfusion, getItemFeedback } from './util';
 
 export interface AnswerInput {
@@ -54,16 +54,18 @@ function wordFromItem(item: ActivityItem): Word | undefined {
 /**
  * EDU-R2-004: de gerekte klankreeks van het doelwoord voor plak-feedback.
  * Gebruikt `metadata.sequence` (de generatoren zetten daar de soundHints in) en
- * valt anders terug op de grafeemsegmentatie van het woord.
+ * valt anders terug op de grafeemsegmentatie van het woord. De weergavevorm is
+ * `'display'` (koppelteken), zodat de getoonde tekst en de gesproken clip
+ * (`'speech'`) dezelfde klanken in dezelfde volgorde houden.
  */
 function sequenceSounds(item: ActivityItem): string {
   const raw = item.metadata?.['sequence'];
   if (Array.isArray(raw)) {
     const sounds = raw.filter((s): s is string => typeof s === 'string');
-    if (sounds.length > 0) return sounds.join(' - ');
+    if (sounds.length > 0) return formatSoundSequence(sounds, 'display');
   }
   const word = wordFromItem(item);
-  if (word) return word.graphemes.map((g) => soundHint(g)).join(' - ');
+  if (word) return formatSoundSequence(word.graphemes, 'display');
   return '';
 }
 

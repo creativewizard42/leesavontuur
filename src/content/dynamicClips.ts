@@ -22,6 +22,7 @@ import { WORDS } from './words';
 import { RHYME_GROUPS, SYLLABLE_WORDS } from './phonology';
 import { INSTRUCTIONS, resolveInstructionKey, hasPlaceholders } from './instructions';
 import { FEEDBACK } from './feedback';
+import { formatSoundSequence } from './soundSequence';
 
 function getWord(word: string): Word | undefined {
   return WORDS.find((w) => w.word === word);
@@ -136,8 +137,11 @@ const FEEDBACK_VARIANTS: readonly VariantSpec[] = [
     values: ALL_WORD_IDS,
     text: (w) => {
       const word = getWord(w);
-      const sequence = word ? word.graphemes.map((id) => soundOf(id)).join(' ') : w;
-      return `Luister nog eens: ${sequence}. Kun jij ze samenplakken?`;
+      const sequence = word ? formatSoundSequence(word.graphemes, 'speech') : w;
+      const template =
+        FEEDBACK['fb.specific.blend_retry'] ??
+        'Luister nog eens: {sounds}. Kun jij ze samenplakken?';
+      return template.replace('{sounds}', sequence);
     },
   },
   {

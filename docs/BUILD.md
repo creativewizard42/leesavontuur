@@ -2,7 +2,9 @@
 
 ## Vereisten
 
-- **Node.js ≥ 20** (getest met Node 22).
+- **Node.js `^22.12.0 || ^24.0.0 || >=26.0.0`** (strengste eis van Vite 8 en
+  Vitest 5; getest met Node 22). Node 20 wordt niet meer ondersteund omdat de
+  testsuite (Vitest 5) dat niet doet.
 - Een moderne browser met ondersteuning voor ES-modules, Pointer Events en
   (optioneel) de Web Speech API voor de tijdelijke TTS-fallback.
 - Geen backend, database of netwerkverbinding nodig.
