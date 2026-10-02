@@ -141,6 +141,21 @@ werken en `npm run validate` om te controleren of alle vereiste clips bestaan.
   richt zich op **m, a, s, t, k, r**.
 - Geen Cloud-TTS, geen synchronisatie, geen analytics (bewust).
 
+## Status & sign-offs
+
+De drie onafhankelijke reviews van ronde 3 hebben de status **"Akkoord met
+voorwaarden"**. De voorwaarden zijn expliciet en moeten vóór daadwerkelijk
+gebruik met kinderen zijn afgerond:
+
+| Discipline | Status | Voorwaarden |
+|---|---|---|
+| **QA** | Akkoord met voorwaarden | Geen openstaande blockers/majors; de R3-regressies (haalbare fase-2-poort, nooit 1-optie-keuzes, feedbackaudio, resume-hardening) zijn gedekt door tests. Restpunt: echte audio-opnames moeten de TTS-fallback vervangen en de opnamelijst (`docs/RECORDINGS.md`) moet kloppen. |
+| **Educational** | Akkoord met voorwaarden | Echte audio-opnames door een **native spreker** vóór gebruik met kinderen (losse klanken/gerekte reeksen nooit via TTS, ED §13.1). Tweede taalkundige/leerkracht-review van de **woordenlijst**, de **rijm-/lettergreepbank** en de r-in-coda-aandachtspunten (ED §13.7, §6.3). |
+| **Security/Privacy** | Akkoord met voorwaarden | Contactadres in `docs/PRIVACY.md` invullen (nu placeholder `[contact invullen]`). HTTP-hardening-headers bij webhosting toepassen via `deploy/` (`docs/SECURITY_HEADERS.md`, `public/_headers`). |
+
+Zolang deze voorwaarden openstaan, is het spel geschikt voor begeleide
+kennismaking/test, **niet** voor onbegeleid gebruik met kinderen.
+
 ## Licenties
 
 - **Code:** eigen werk van het LEESAVONTUUR-project.

@@ -43,13 +43,18 @@ Alle noemenswaardige wijzigingen van LEESAVONTUUR. Opmaak losjes gebaseerd op
   bijgewerkt), auditieve niet-getoonde klank-afleiders bij de eerste letter
   (`LK.<g>.SOUND`, RECOGNIZE pas vanaf ≥ 2 grafemen), poort toetst SOUND, r-in-coda
   herzien (§6.3), CVVC-fase → 6, `alpha=1`-waarschuwing i.c.m. `isMastered`,
-  `requiresBlock`-proxy voor sight words, fase-1-vangnet, woordsecties pas bij
-  ≥ 2 even lange woorden, feedback wordt altijd uitgesproken, en het gemeten
-  unlock-tempo (`m:2, a:5, s:9, t:13, k:16, r:19`).
+  `requiresBlock`-proxy voor sight words, haalbare fase-2-poort
+  (`FN.FIRST_SOUND ≥ 0.7`), sessie-vangnet (`PHASE_2_FALLBACK_SESSIONS = 8`),
+  vereenvoudigde warming-up (max. 2 opties zolang de poort niet is gehaald),
+  woordsecties pas bij ≥ 2 even lange woorden, feedback wordt altijd
+  uitgesproken, en het gemeten unlock-tempo (`m:2, a:5, s:8, t:12, k:15, r:18`).
 - **EDU-R3-001:** foutspecifieke letter-klank-feedback (`fb.specific.*` bij
   `letterklank`) vult de klank/gekozen klank en gebruikt een taalkundig juiste
   formulering voor medeklinkers (geen "welke klinker", geen onvervulde
-  `{sound}`).
+  `{sound}`). Nieuwe sleutels: **`fb.specific.letter_sound`** (letter-klank-taak)
+  en **`fb.specific.middle_consonant`** (middelste klank is een medeklinker);
+  `fb.specific.middle_sound` wordt alleen nog gekozen als de middelste klank een
+  klinker/tweeklank is (klinker-only, `answer.ts`).
 - **EDU-R3-002:** feedbackzinnen worden daadwerkelijk uitgesproken (audio + tekst/
   icoon), conform GD §5 / §8.1; `onFeedback`/`setFeedback` speelt de concrete
   feedbackclip.
@@ -60,10 +65,18 @@ Alle noemenswaardige wijzigingen van LEESAVONTUUR. Opmaak losjes gebaseerd op
   `REQUIRED_INSTRUCTION_KEYS` de werkelijk gebruikte sleutels volgt.
 - **EDU-R3-005:** dynamische items zetten waar mogelijk de concrete
   instructiesleutel i.p.v. de generieke `prompt.audio`-key (fallback-pad Fix).
-- **QA-R3-001:** vangnet op de fase-1-poort: een zwakkere leerling die
-  `FN.FIRST_SOUND ≥ 0.8` niet haalt, krijgt na verloop van tijd toch de eerste
-  letter met extra auditieve ondersteuning, terwijl de fase-1-oefening in de
-  warming-up blijft ("niet eindeloos vasthouden in één fase").
+- **QA-R3-001 (H1):** haalbare fase-2-poort. De drempel is verlaagd van 0,8 naar
+  `PHASE_2_MASTERY = 0.7` (een 50%-leerling plafonneert op ~0,78 en haalde 0,8
+  nooit), met daarnaast een **sessie-vangnet**: een leerling die ook 0,7 niet
+  haalt, krijgt na `PHASE_2_FALLBACK_SESSIONS = 8` sessies tóch de eerste letter
+  met extra auditieve ondersteuning, terwijl de fase-1-oefening in de warming-up
+  blijft ("niet eindeloos vasthouden in één fase"). Zolang de poort niet is
+  gehaald, biedt de klankoefening **maximaal 2 opties** (`maxDistractors: 1`) +
+  één extra item op `FN.FIRST_SOUND`. Voor elke letter ná de eerste geldt weer
+  volledig `isMastered`; de 50%-leerling krijgt dus geen nieuwe letter zonder
+  beheersing van de vorige. Tests: `Progression.test.ts` (vangnet op sessie 8),
+  `SessionPlannerFixes.test.ts` en `ProgressionSimulation.test.ts`
+  (m in sessie 9, daarna alleen met beheersing).
 - **QA-R3-002:** woordsecties (stap 5/6) openen pas bij ≥ 2 kindvriendelijke
   woorden van gelijke grafeemlengte; nooit 1-optie-keuzes als gescoord item.
 - **QA-R3-003:** hervatten herstelt de queue-context (`profile`/`rng`/`learned`)

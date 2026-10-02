@@ -114,8 +114,8 @@ De fasen zijn **niet strikt lineair**: elk nieuw grafeem doorloopt fase 2→3→
 
 | Fase | Naam | Doelen (IDs) | Instapcriteria | Beheersingscriteria | Kernactiviteiten |
 |---|---|---|---|---|---|
-| 1 | Klanken herkennen (auditief) | PH.RHYME, PH.SYLLABLE, FN.FIRST_SOUND, FN.LAST_SOUND, FN.COUNT | Geen (startfase); korte instapcheck | PH.* ≥ 0.75 over ≥ 10 items; FN.FIRST_SOUND ≥ 0.8 over ≥ 12 items | Rijmpoort, klapbrug, "wat hoor je eerst?" |
-| 2 | Letters (vorm) | LK.`<g>`.RECOGNIZE voor nieuw grafeem | FN.FIRST_SOUND ≥ 0.8 | LK.`<g>`.RECOGNIZE ≥ 0.8 over ≥ 10 items | Klank horen → letter vinden; letter natekenen (optioneel, niet gescoord) |
+| 1 | Klanken herkennen (auditief) | PH.RHYME, PH.SYLLABLE, FN.FIRST_SOUND, FN.LAST_SOUND, FN.COUNT | Geen (startfase); korte instapcheck | PH.* ≥ 0.75 over ≥ 10 items; FN.FIRST_SOUND ≥ 0.7 over ≥ 12 items | Rijmpoort, klapbrug, "wat hoor je eerst?" |
+| 2 | Letters (vorm) | LK.`<g>`.RECOGNIZE voor nieuw grafeem | FN.FIRST_SOUND ≥ 0.7 (of het sessie-vangnet, zie §15.7) | LK.`<g>`.RECOGNIZE ≥ 0.8 over ≥ 10 items | Klank horen → letter vinden; letter natekenen (optioneel, niet gescoord) |
 | 3 | Letter-klankkoppeling | LK.`<g>`.SOUND | LK.`<g>`.RECOGNIZE ≥ 0.6 | LK.`<g>`.SOUND ≥ 0.8 over ≥ 12 items, in ≥ 2 sessies | Letter zien → juiste klank-knop kiezen |
 | 4 | Samenvoegen (analyse/synthese) | AN.VC, SY.VC, AN.CVC, SY.CVC, FN.COUNT | ≥ 3 grafemen gemeesterd (LK.SOUND ≥ 0.8) waaronder 1 klinker | SY.CVC en AN.CVC ≥ 0.8 over ≥ 12 items | Klankenbrug (plakken), stenen leggen (hakken) |
 | 5 | Korte klankzuivere woorden | DE.VC, DE.CVC | SY.CVC ≥ 0.7 en alle grafemen in het woord LK.SOUND ≥ 0.8 | DE.CVC ≥ 0.8 over ≥ 15 items | Lees-en-kies (audio), woordbouwer, raam-onthul (plaatje ná lezen) |
@@ -130,7 +130,8 @@ De fasen zijn **niet strikt lineair**: elk nieuw grafeem doorloopt fase 2→3→
 3. Per sessie hooguit **één** nieuw grafeem.
 4. Een sessie duurt 10–15 minuten (aanbeveling; kleuters/groep-3-kinderen hebben korte aandachtsspanne [VK]).
 5. **Eerste letter en poort (afwijking, zie §15.2):** de allereerste letter wordt geïntroduceerd met uitsluitend `LK.<g>.SOUND` (met auditieve, niet-getoonde klank-afleiders), en de poort naar fase 3 toetst `LK.<g>.SOUND`. `LK.<g>.RECOGNIZE` start pas zodra er ≥ 2 geleerde grafemen zijn.
-6. **Niet eindeloos vasthouden in fase 1 (vangnet, zie §15.7):** een leerling die de fase-1-poort (`FN.FIRST_SOUND ≥ 0.8`) ondanks gerichte oefening niet haalt, krijgt na verloop van tijd **toch** de eerste letter, met extra auditieve ondersteuning, terwijl de fase-1-oefening in de warming-up blijft. Principe: een kind mag niet onbeperkt in één fase vastzitten.
+6. **Niet eindeloos vasthouden in fase 1 (vangnet, zie §15.7):** een leerling die de fase-1-poort (`FN.FIRST_SOUND ≥ 0.7`, zie §15.7) ondanks gerichte oefening niet haalt, krijgt na `PHASE_2_FALLBACK_SESSIONS = 8` sessies **toch** de eerste letter, met extra auditieve ondersteuning, terwijl de fase-1-oefening in de warming-up blijft. Principe: een kind mag niet onbeperkt in één fase vastzitten.
+7. **Vereenvoudigde warming-up (afwijking, zie §15.11):** zolang de fase-2-poort nog niet op mastery (`FN.FIRST_SOUND ≥ 0.7`) is gehaald, blijft de klankoefening gericht op `FN.FIRST_SOUND` met **maximaal 2 opties** (vereenvoudigd), zodat ook een zwakkere leerling via vereenvoudiging beheersing kan bereiken.
 
 ---
 
@@ -534,7 +535,9 @@ Begripsvraag: "Wat eet de geit?" (gras / soep / kaas). Verworpen: *aait* (aai no
 |---|---|
 | Eerste klank fout (kam → ram) | "Kijk naar de eerste letter. Welke klank zegt die?" |
 | Laatste klank fout (kam → kat) | "Het begin klopt! Kijk nog eens naar het eind." |
-| Klinker fout (kam → kom) | "Luister naar het midden. Hoor je a of o?" |
+| Klinker fout (kam → kom) | "Luister naar het midden. Hoor je a of o?" (`fb.specific.middle_sound`; **alleen** als het doel een klinker/tweeklank is, §15.12) |
+| Middelste klank fout – medeklinker (kam → kas) | "Luister naar het midden: {sound}…" (`fb.specific.middle_consonant`; geen "welke klinker"-vraag) |
+| Letter-klank fout (verkeerde klank bij de getoonde letter) | "Deze letter zegt {sound}. Probeer het nog eens." (`fb.specific.letter_sound`) |
 | Kort/lang (kas → kaas) | "Kijk: staat er één a of twee? Eén a klinkt kort." |
 | Omkering (tak → kat) | "We lezen van links naar rechts. Begin hier." (pijl/vinger-animatie) |
 | Letternaam i.p.v. klank (kiest "em" bij m) | "Dat is de naam van de letter. Welke klank maakt hij? mmm." |
@@ -741,11 +744,12 @@ De EWMA-formule (§10.2) geeft bij `attempts = 0` `alpha = 1`, waardoor één co
 §7.1 drukt de introductie uit in mastery (`SW.de` na `DE.CVC ≥ 0.7`). De implementatie gebruikt voor SW.de/een/het `requiresBlock: 7` als **proxy** (zie de noot in §7.1), omdat de skill-drempel in het huidige contentmodel niet uitgedrukt kan worden. De volgorde/keten (`introducedAfter`) blijft gelijk; SW.ze/we/je hangen aan hun eigen blok.
 
 ### 15.7 Vangnet fase-1-poort: niet eindeloos vasthouden in één fase
-Uit de QA-review bleek de fase-2-drempel (`FN.FIRST_SOUND ≥ 0.8`) voor een leerling die de helft van de items pas bij de tweede poging goed heeft **onbereikbaar**: de EWMA convergeert dan naar ~0,78 en een harde drempel geeft nooit letters. De implementatie voegt daarom een **vangnet** toe:
+Uit de QA-review bleek de fase-2-drempel (`FN.FIRST_SOUND ≥ 0.8`) voor een leerling die de helft van de items pas bij de tweede poging goed heeft **onbereikbaar**: de EWMA convergeert dan naar ~0,78 en een harde drempel geeft nooit letters. De implementatie doet daarom twee dingen (zie de constanten in `Progression.ts`):
 
-- Een leerling die na een aantal sessies de fase-1-poort niet haalt, krijgt **toch de eerste letter**, met **extra auditieve ondersteuning**.
+- **Haalbare poort.** De poort naar fase 2 is verlaagd van 0,8 naar **`PHASE_2_MASTERY = 0.7`** (`FN.FIRST_SOUND`-mastery ≥ 0.7). Daarmee haalt de 50%-leerling (scoretabel 1,0/0,5) de poort via mastery.
+- **Vangnet.** Een leerling die ook 0,7 niet haalt, krijgt na **`PHASE_2_FALLBACK_SESSIONS = 8`** sessies zonder poort-doorgang **toch de eerste letter**, met **extra auditieve ondersteuning**.
 - De fase-1-oefening blijft intussen in de **warming-up** staan, zodat fonemisch bewustzijn niet verdwijnt.
-- Ontwerpprincipe: **een kind mag niet onbeperkt in één fase vastzitten.** Er is geen exact getal in dit document; de implementatie gebruikt een ruwe sessiegrens (indicatief **na ongeveer 6–10 sessies zonder poort-doorgang, zie code**). De precieze waarde is een implementatie-/testdetail en mag worden bijgesteld op basis van observatie met kinderen.
+- Ontwerpprincipe: **een kind mag niet onbeperkt in één fase vastzitten.** De precieze waarde (8) is een implementatie-/testdetail en mag worden bijgesteld op basis van observatie met kinderen. Zodra de eerste letter via het vangnet is geïntroduceerd, geldt voor **elke volgende** letter weer volledig de beheersingspoort `isMastered` (§10.3): het vangnet geldt alleen voor fase 2 en herhaalt zich niet per letter.
 
 ### 15.8 Woordsecties pas bij ≥ 2 even lange kindvriendelijke woorden
 De lees-/klimsecties (stap 5 en 6) openen niet meer op "er is überhaupt een woord", maar pas als er **minimaal 2 kindvriendelijke woorden van dezelfde grafeemlengte** zijn, zodat er een echte keuze is zonder lengte-hint (ED §11 regel 6). Eén-optie-items worden niet als gescoorde keuze aangeboden; als die situatie toch optreedt, is het item ongescoord (blootstelling/model) en niet een schijnkeuze. Dit volgt de fix-richting uit de QA-review en houdt de gelijke-lengte-eis van §11.6 intact.
@@ -758,6 +762,18 @@ Met een vers profiel en uitsluitend perfecte antwoorden komen de MVP-grafemen vr
 
 | Grafeem | m | a | s | t | k | r |
 |---|---|---|---|---|---|---|
-| **Unlock-sessie** | 2 | 5 | 9 | 13 | 16 | 19 |
+| **Unlock-sessie** | 2 | 5 | 8 | 12 | 15 | 18 |
 
-Vanaf `m` kosten de letters dus **3–4 sessies** per grafeem (intervallen 3, 4, 4, 3, 3). Bij sessies van 5–10 minuten is dat ~15–40 minuten per letter en ~19 sessies (≈ 1,5–3 uur) voor de hele MVP, gespreid over meerdere dagen. Dat is passend voor 5–6-jarigen en respecteert de beheersingspoort. Een kind dat fouten maakt gaat langzamer — precies de bedoeling. Dit tempo is een **bovengrens** (perfecte leerling), geen norm.
+Vanaf `m` kosten de letters dus **3–4 sessies** per grafeem (intervallen 3, 3, 4, 3, 3). Bij sessies van 5–10 minuten is dat ~15–40 minuten per letter en ~18 sessies (≈ 1,5–3 uur) voor de hele MVP, gespreid over meerdere dagen. Dat is passend voor 5–6-jarigen en respecteert de beheersingspoort. Een kind dat fouten maakt gaat langzamer — precies de bedoeling. Dit tempo is een **bovengrens** (perfecte leerling), geen norm.
+
+Ter vergelijking: een leerling met de helft van de items fout (afwisselend goed/gemodelleerd) haalt de **eerste letter m in sessie 9 via het vangnet** (`PHASE_2_FALLBACK_SESSIONS = 8` + de sessieteller) en krijgt daarna **geen enkele volgende letter zonder beheersing** van de vorige (`isMastered`, §10.3). Dat gedrag is vastgelegd in `src/core/__tests__/ProgressionSimulation.test.ts` (QA-R3-001).
+
+### 15.11 Vereenvoudigde warming-up: maximaal 2 opties zolang fase 2 niet is gehaald
+Zolang de fase-2-poort nog niet op mastery is (`!PHASE_2_MASTERY`), blijft de klankoefening (sessiestap 2) gericht op `FN.FIRST_SOUND` en wordt het aantal opties teruggebracht tot **maximaal 2** (`maxDistractors: 1` in `SessionPlanner.ts`). Reden: met 3 opties blijft de slagingskans voor een zwakke leerling te laag om ooit de poort te halen; 2 opties geven de vereiste succeservaring (§10.3 "Vereenvoudigen") zonder de taak inhoudelijk te veranderen. Er wordt dan ook **één extra klankitem** aangeboden (4 i.p.v. 3). Zodra de poort is gehaald, oefent de warming-up afwisselend `FN.FIRST_SOUND`/`FN.LAST_SOUND` op het normale aantal opties en moeilijkheidsniveau.
+
+### 15.12 Foutspecifieke feedbacksleutels: `middle_consonant` en `letter_sound`
+De generatoren kiezen de foutspecifieke feedback op basis van de gekozen afleider. Twee sleutels zijn toegevoegd om de feedback taalkundig kloppend en **altijd volledig gevuld** te houden (EDU-R3-001):
+
+- **`fb.specific.middle_sound` is klinker-only.** De vraag "welke klinker hoor je?" klopt alleen als de afwijkende middelste klank een klinker of tweeklank is (`answer.ts`). Is het een medeklinker, dan kiest de code **`fb.specific.middle_consonant`**: "Luister naar het midden: {sound}…" zonder klinkervraag.
+- **`fb.specific.letter_sound`** dekt de letter-klank-taak (`letterklank`): "Deze letter zegt {sound}. Probeer het nog eens." De eerdere, generieke sleutel liet `{sound}` oningevuld of vroeg naar een klinker bij een medeklinkerdoel.
+- Beide sleutels staan in `REQUIRED_FEEDBACK_KEYS` en `dynamicClips.ts`; de validator en `feedbackText.test.ts` controleren dat er **nooit** een `{placeholder}` in zichtbare feedback achterblijft.
