@@ -93,6 +93,8 @@ export const UI_TEXTS: Readonly<Record<string, string>> = {
   'ui.pause.continue': 'Doorgaan',
   'ui.pause.toMap': 'Naar de kaart',
   'ui.pause.title': 'Even stoppen?',
+  // Rustige frustratie-wind-down (QA-R2-003): visueel anker naast Ploef.
+  'ui.winddown': 'We ronden rustig af.',
   'ui.parent.back': 'Terug',
   'ui.parent.privacy': 'Alles blijft lokaal op dit apparaat. Er worden geen gegevens verstuurd.',
   'ui.parent.learnedCount': '{n} van {total} klanken beheerst',

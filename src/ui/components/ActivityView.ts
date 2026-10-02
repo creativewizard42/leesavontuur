@@ -20,6 +20,7 @@ import { fbText, getGrapheme, getWord, ui } from '../../content';
 import { el, clear } from '../dom';
 import { iconCheck, iconNoSound, iconPloef, iconSpark, iconStar, iconTap } from '../icons';
 import { instructionSequence } from '../audioPrompts';
+import { uiText } from '../text';
 import { createOptionGrid, type OptionGridHandle } from './OptionGrid';
 
 export type FeedbackKind = 'correct' | 'retry' | 'hint' | 'model' | 'guess';
@@ -79,8 +80,32 @@ function metaStringArray(item: ActivityItem, key: string): string[] | undefined 
   return raw.filter((v): v is string => typeof v === 'string');
 }
 
+/** Placeholders voor dynamische (per-variabele) instructieclips (EDU-R2-002). */
+function promptVars(item: ActivityItem): Record<string, string> {
+  const vars: Record<string, string> = {};
+  const word = wordFromItem(item);
+  if (word) {
+    vars['word'] = word;
+    vars['woord'] = word;
+  }
+  const targetGrapheme = metaString(item, 'targetGrapheme');
+  if (targetGrapheme) {
+    vars['sound'] = targetGrapheme;
+    vars['klank'] = targetGrapheme;
+    vars['letter'] = targetGrapheme;
+  }
+  return vars;
+}
+
 export function createActivityView(options: ActivityViewOptions): ActivityViewHandle {
   const { item, audio } = options;
+  // Adaptieve/review-metadata (G1): de queue markeert items voor rustige
+  // modeling (modelFirst), een kalmer scherm (simplified), rustig afronden
+  // (windDown) en audio-only klankafleiders (auditoryDistractors).
+  const modelFirst = item.metadata?.['modelFirst'] === true;
+  const simplified = item.metadata?.['simplified'] === true;
+  const windDown = item.metadata?.['windDown'] === true;
+  const auditoryDistractors = item.metadata?.['auditoryDistractors'] === true;
   let attempt = 1;
   let done = false;
   let usedHint = false;
@@ -89,6 +114,9 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
   let audioFallbackShown = false;
 
   const root = el('div', { class: 'la-activity', 'data-kind': item.kind, 'data-item-id': item.id });
+  if (simplified) root.classList.add('la-activity--simplified');
+  if (windDown) root.classList.add('la-activity--winddown');
+  if (modelFirst) root.setAttribute('data-model-first', 'true');
 
   const feedback = el('div', {
     class: 'la-feedback is-hidden',
@@ -142,7 +170,12 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     } else if (item.kind === 'plakken') {
       clips.push(...instructionSequence('instr.plakken.r1'));
     }
-    if (item.prompt.audio) clips.push(item.prompt.audio);
+    if (item.prompt.audio) {
+      // EDU-R2-002: gebruik de concrete per-variabele clip (`instr.fn...m`) via
+      // de content-API `instructionClips`; val terug op de prompt-clip zelf.
+      const resolved = instructionSequence(item.prompt.audio.key, promptVars(item));
+      clips.push(...(resolved.length > 0 ? resolved : [item.prompt.audio]));
+    }
     return clips;
   }
 
@@ -180,6 +213,15 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
 
   // ----- prompt / speelveld per soort -----
   const playfield = el('div', { class: 'la-playfield' });
+
+  // windDown (QA-R2-003): rond rustig af met Ploef als visueel anker.
+  if (windDown) {
+    const calm = el('div', { class: 'la-winddown', 'data-winddown': 'true' });
+    calm.append(iconPloef('la-ploef--small'));
+    const calmText = uiText('ui.winddown');
+    if (calmText) calm.append(el('span', { class: 'la-winddown__text', text: calmText }));
+    playfield.append(calm);
+  }
 
   function renderPromptAudioButton(): HTMLElement {
     const button = el('button', {
@@ -295,9 +337,47 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     grid = createOptionGrid({
       options: item.options,
       mode: gridMode,
+      ...(auditoryDistractors ? { auditory: true } : {}),
       onSelect: (optionId) => handleSelect(optionId),
       ...(isAudioOptions ? { onPreview } : {}),
       ...(listenFirst ? { onListen: (option: ActivityOption) => void playClipSafe(option.audio) } : {}),
+    });
+  }
+
+  /** Letters van het doel (woord of grafeem) voor rustige modeling. */
+  function modelLetters(): string[] {
+    const word = wordFromItem(item);
+    if (word) {
+      const ids = getWord(word)?.graphemes ?? [...word];
+      return ids.map((id) => getGrapheme(id)?.letters ?? id);
+    }
+    const graphemeId = metaString(item, 'targetGrapheme');
+    if (graphemeId) return [...(getGrapheme(graphemeId)?.letters ?? graphemeId)];
+    return [];
+  }
+
+  /**
+   * modelFirst (QA-R2-003): doe de klank/het woord rustig voor met oplichtende
+   * letters vóór de keuze. De opties blijven even uit tot het model klaar is.
+   */
+  function runModelFirst(): void {
+    grid?.setDisabled(true);
+    const letters = modelLetters();
+    if (letters.length > 0) {
+      const row = stretchedRow(letters);
+      row.classList.add('la-model-row');
+      row.setAttribute('data-model-row', 'true');
+      playfield.prepend(row);
+      litBlocks = Array.from(row.querySelectorAll<HTMLElement>('.la-letterblock'));
+    }
+    const word = wordFromItem(item);
+    const graphemeId = metaString(item, 'targetGrapheme');
+    const clip = word ? wordClip(word) : graphemeId ? graphemeSoundClip(graphemeId) : undefined;
+    const finished = clip ? playClipSafe(clip) : Promise.resolve(UNAVAILABLE);
+    void finished.then(() => {
+      if (done) return;
+      grid?.setDisabled(false);
+      litBlocks = [];
     });
   }
 
@@ -498,6 +578,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
       if (!done) void playSequenceSafe(promptClips());
     }, 1500);
   }
+  if (modelFirst && !isIntroduction && item.kind !== 'beloning') runModelFirst();
   if (listenFirst) void playListenFirst();
 
   return {

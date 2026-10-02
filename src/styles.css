@@ -515,6 +515,34 @@ body.la-reduced-motion {
   box-shadow: 0 0 0 4px var(--la-hint-ring);
 }
 
+/* modelFirst (QA-R2-003): rustige modeling vóór de keuze. */
+.la-model-row {
+  margin-bottom: var(--la-s3);
+}
+
+/* simplified (QA-R2-003): kalmer scherm, minder afleiding. */
+.la-activity--simplified .la-options {
+  gap: var(--la-s4);
+}
+
+.la-activity--simplified .la-option {
+  box-shadow: var(--la-schaduw-1);
+}
+
+/* windDown (QA-R2-003): rustig afronden met Ploef. */
+.la-winddown {
+  display: flex;
+  align-items: center;
+  gap: var(--la-s2);
+  align-self: center;
+  padding: var(--la-s1) var(--la-s4);
+  border-radius: var(--la-radius-rond);
+  background: var(--la-room);
+  border: 2px dashed var(--la-mos);
+  color: var(--la-water-diep);
+  font-size: var(--la-text-m);
+}
+
 .la-reveal {
   display: flex;
   flex-direction: column;

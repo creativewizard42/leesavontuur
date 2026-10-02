@@ -196,14 +196,24 @@ export function wordDistance(a: Word, b: Word): number {
   return diff;
 }
 
-/** Alle toegestane woorden (content) voor een geleerde grafeem-set. */
-export function allowedWordObjects(learned: ReadonlySet<string>): Word[] {
-  return words.filter((w) => !isBlockedWord(w.word) && isWordAllowed(w.word, learned));
+/**
+ * Alle toegestane woorden (content) voor een geleerde grafeem-set.
+ *
+ * Net als `content.wordsForGraphemes` worden niet-kindvriendelijke woorden
+ * (`kidFriendly:false`) uitgesloten, zodat ze nooit als doel- of afleiderwoord
+ * in generatoren/planner kunnen opduiken (EDU-016 / EDU-R2-002 / QA-R2-004).
+ * De optionele `pool` is injecteerbaar voor tests.
+ */
+export function allowedWordObjects(
+  learned: ReadonlySet<string>,
+  pool: readonly Word[] = words,
+): Word[] {
+  return pool.filter((w) => w.kidFriendly && !isBlockedWord(w.word) && isWordAllowed(w.word, learned));
 }
 
 /** Alleen de woordteksten (gemak voor generatoren). */
-export function allowedWords(learned: ReadonlySet<string>): string[] {
-  return allowedWordObjects(learned).map((w) => w.word);
+export function allowedWords(learned: ReadonlySet<string>, pool: readonly Word[] = words): string[] {
+  return allowedWordObjects(learned, pool).map((w) => w.word);
 }
 
 /**

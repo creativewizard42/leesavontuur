@@ -27,6 +27,8 @@ export interface OptionGridOptions {
   onListen?: (option: ActivityOption) => void;
   /** Hoe de optie getoond wordt. */
   mode?: 'auto' | 'word' | 'audio' | 'letters';
+  /** Auditieve discriminatie: toon audio-only opties met een oor-icoon. */
+  auditory?: boolean;
   disabled?: boolean;
 }
 
@@ -110,7 +112,8 @@ export function createOptionGrid(options: OptionGridOptions): OptionGridHandle {
       'aria-label': optionAriaLabel(option, index, resolved),
     });
     if (resolved === 'audio') {
-      button.append(iconKind(kindIsSound(option) ? 'ear' : 'speaker'));
+      const ear = options.auditory === true || kindIsSound(option);
+      button.append(iconKind(ear ? 'ear' : 'speaker'));
       button.append(el('span', { class: 'la-option__number', 'aria-hidden': 'true', text: String(index + 1) }));
     } else if (resolved === 'shape') {
       const image = option.image;
