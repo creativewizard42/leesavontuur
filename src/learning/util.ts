@@ -14,6 +14,7 @@ import type {
 } from '../types';
 import {
   fbText,
+  formatSoundSequence,
   getGrapheme,
   getWord,
   graphemes,
@@ -64,9 +65,7 @@ export function wordClip(word: string): AudioClip {
 /** Gerekte/gehakte klankreeks ("k … a … m") – altijd als opname (ED §13.1). */
 export function blendClip(word: string): AudioClip {
   const w = getWord(word);
-  const text = w
-    ? w.graphemes.map((id) => getGrapheme(id)?.soundHint ?? id).join(' … ')
-    : word;
+  const text = w ? formatSoundSequence(w.graphemes, 'speech') : word;
   return { key: `blend.${word}`, src: `audio/blends/${word}.mp3`, text, kind: 'blend' };
 }
 

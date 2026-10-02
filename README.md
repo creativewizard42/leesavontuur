@@ -45,7 +45,8 @@ escalatie (retry → hint → voordoen), en de moeilijkheid past zich per kind a
 
 ## Snelle start
 
-Vereisten: **Node ≥ 20** (Windows/macOS/Linux).
+Vereisten: **Node `^22.12.0 || ^24.0.0 || >=26.0.0`** (Windows/macOS/Linux;
+strengste eis van Vite 8 en Vitest 5, getest met Node 22).
 
 ```bash
 npm install        # afhankelijkheden (alleen dev + twee gebundelde lettertypen)
@@ -67,12 +68,15 @@ npm run check:dist # controleert de build: CSP, geen externe URL's, licenties
 src/
   core/       spellogica: GameState, Mastery, Progression, Adaptive,
               SessionPlanner (queue), SaveSystem, SpacedRepetition, rng
-  learning/   DOM-vrije generatoren: LetterSound, FirstSound, Segmenting,
-              Blending, WordReading, Klimboom, Phonology, answer, util
+  learning/   DOM-vrije activiteit-generatoren: LetterSound, FirstSound,
+              Segmenting, Blending, WordReading, Klimboom, Phonology,
+              answer, util (bron voor alle activiteiten)
   content/    databank + validator: graphemes, words, sightWords, sentences,
-              feedback, instructions, dynamicClips, audioManifest, validator
-  games/      dunne koppelingen tussen content/generatoren en de UI
-  ui/         schermen (Start/Map/Session/Reward), componenten, audioClips
+              feedback, instructions, dynamicClips, audioManifest,
+              soundSequence, validator
+  ui/         schermen (Start/Map/Session/Reward), componenten (ActivityView),
+              audioClips; rendert de activiteiten Klankjager, Letter-klank,
+              Hakken, Plakken, Woord Lezen en De Klimboom
   parent/     ouder-gate, dashboard, verwarringslog
   audio/      AudioService (opname → lokale TTS → stil)
 scripts/      validate.ts, check-dist.ts, recording-list.ts

@@ -486,10 +486,9 @@ Er zijn **twee** builders. Bestandsgrenzen zijn **strikt**; wijzig nooit een bes
 
 - `src/main.ts`
 - `src/core/**` (GameState, Progression, Mastery, SpacedRepetition, Adaptive, SaveSystem, SessionPlanner)
-- `src/learning/**` (Phonology, FirstSound, LetterSound, Segmenting, Blending, WordReading)
+- `src/learning/**` (DOM-vrije activiteit-generatoren: Phonology, FirstSound, LetterSound, Segmenting, Blending, WordReading, Klimboom)
 - `src/audio/**` (AudioService)
-- `src/ui/**` (screens + components)
-- `src/games/**` (Klankjager, LetterKlank, Hakken, Plakken, WoordLezen, DeKlimboom)
+- `src/ui/**` (schermen + componenten, incl. `ActivityView`; de activiteiten Klankjager, Letter-klank, Hakken, Plakken, Woord Lezen en De Klimboom worden hier gerenderd)
 - `src/parent/**` (ParentGate, ParentDashboard)
 
 De Builder **leest** de content-API en **schrijft nooit** in `src/content/**` of `src/types.ts`.

@@ -3,18 +3,12 @@
  * (ARCHITECTURE §6). Alles same-origin; geen netwerk, geen cloud-TTS.
  */
 import type { AudioClip } from '../types';
-import { content, getGrapheme, getWord, graphemes, instructions, properNames, sentences, sightWords } from '../content';
+import { content, formatSoundSequence, graphemes, instructions, properNames, sentences, sightWords } from '../content';
 import {
   createAudioService,
   type AudioService,
   type AudioServiceOptions,
 } from '../audio/AudioService';
-
-function blendText(word: string): string {
-  const w = getWord(word);
-  if (w) return w.graphemes.map((id) => getGrapheme(id)?.soundHint ?? id).join('-');
-  return word;
-}
 
 /** Index van alle clips op key, inclusief beide blend-key-conventies. */
 export function buildClipIndex(): Map<string, AudioClip> {
@@ -33,7 +27,7 @@ export function buildClipIndex(): Map<string, AudioClip> {
     const blend: AudioClip = {
       key: `blend.${w.word}`,
       src: `audio/blends/${w.word}.mp3`,
-      text: blendText(w.word),
+      text: formatSoundSequence(w.graphemes, 'speech'),
       kind: 'blend',
     };
     put(blend);

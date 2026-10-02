@@ -75,6 +75,8 @@ export {
   instructionVariantClips,
   instructionVariantKeys,
 };
+export { formatSoundSequence } from './soundSequence';
+export type { SoundSequenceMode } from './soundSequence';
 export type { AudioClip } from '../types';
 
 // --- queries --------------------------------------------------------------

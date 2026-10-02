@@ -5,12 +5,12 @@
 > **Losse klanken, gerekte reeksen en feedback zijn altijd echte opnames** (ED §13.1);
 > TTS is alleen een tijdelijke, gemarkeerde fallback.
 
-Totaal: **1562** clips.
+Totaal: **1557** clips.
 
 | Type | Aantal |
 |---|---|
 | Gerekte/gehakte reeks | 142 |
-| Feedback | 483 |
+| Feedback | 478 |
 | Voorbeeldwoord (auditief) | 37 |
 | Letternaam | 41 |
 | Losse klank | 41 |
@@ -178,12 +178,10 @@ Totaal: **1562** clips.
 | `audio/feedback/fb.correct.5.mp3` | `fb.correct.5` | Knap geplakt! | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.correct.6.mp3` | `fb.correct.6` | Je luisterde goed. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.correct.7.mp3` | `fb.correct.7` | Goed gehakt! | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.correct.8.mp3` | `fb.correct.8` | Fijn dat je het nog eens probeerde. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.guess.1.mp3` | `fb.guess.1` | Rustig maar. Eerst goed kijken. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.help.parent.1.mp3` | `fb.help.parent.1` | Vraag maar aan een grote mens. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.hint.1.mp3` | `fb.hint.1` | Luister: k… a… m. Plak maar aan elkaar. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.hint.2.mp3` | `fb.hint.2` | Deze letter zegt sss. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.hint.3.mp3` | `fb.hint.3` | Kijk naar de eerste letter. Welke klank zegt die? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.hint.4.mp3` | `fb.hint.4` | De klank is mmm. Welk woord begint daarmee? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.hint.5.mp3` | `fb.hint.5` | Luister: k… a… m. Tik ze in deze volgorde. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.letterarrive.1.mp3` | `fb.letterarrive.1` | Ooo, luister! Er is een nieuwe klank. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
@@ -194,148 +192,148 @@ Totaal: **1562** clips.
 | `audio/feedback/fb.nav.done.1.mp3` | `fb.nav.done.1` | We zijn klaar! Je hebt goed geoefend. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.nav.stop.1.mp3` | `fb.nav.stop.1` | We stoppen. Knap gedaan vandaag! | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.reward.1.mp3` | `fb.reward.1` | Een klankvonkje voor jou! | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.al.mp3` | `fb.specific.blend_retry.al` | Luister nog eens: a lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.ark.mp3` | `fb.specific.blend_retry.ark` | Luister nog eens: a rrr k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.arm.mp3` | `fb.specific.blend_retry.arm` | Luister nog eens: a rrr mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.as.mp3` | `fb.specific.blend_retry.as` | Luister nog eens: a sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.bal.mp3` | `fb.specific.blend_retry.bal` | Luister nog eens: b a lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.bank.mp3` | `fb.specific.blend_retry.bank` | Luister nog eens: b a ngk. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.been.mp3` | `fb.specific.blend_retry.been` | Luister nog eens: b eee nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.bes.mp3` | `fb.specific.blend_retry.bes` | Luister nog eens: b e sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.bij.mp3` | `fb.specific.blend_retry.bij` | Luister nog eens: b ij. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.boek.mp3` | `fb.specific.blend_retry.boek` | Luister nog eens: b oe k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.boom.mp3` | `fb.specific.blend_retry.boom` | Luister nog eens: b ooo mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.boot.mp3` | `fb.specific.blend_retry.boot` | Luister nog eens: b ooo t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.buik.mp3` | `fb.specific.blend_retry.buik` | Luister nog eens: b ui k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.bus.mp3` | `fb.specific.blend_retry.bus` | Luister nog eens: b u sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.dak.mp3` | `fb.specific.blend_retry.dak` | Luister nog eens: d a k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.dal.mp3` | `fb.specific.blend_retry.dal` | Luister nog eens: d a lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.das.mp3` | `fb.specific.blend_retry.das` | Luister nog eens: d a sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.diep.mp3` | `fb.specific.blend_retry.diep` | Luister nog eens: d ie p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.duim.mp3` | `fb.specific.blend_retry.duim` | Luister nog eens: d ui mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.eet.mp3` | `fb.specific.blend_retry.eet` | Luister nog eens: eee t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.en.mp3` | `fb.specific.blend_retry.en` | Luister nog eens: e nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.fles.mp3` | `fb.specific.blend_retry.fles` | Luister nog eens: fff lll e sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.gat.mp3` | `fb.specific.blend_retry.gat` | Luister nog eens: ggg a t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.geel.mp3` | `fb.specific.blend_retry.geel` | Luister nog eens: ggg eee lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.geit.mp3` | `fb.specific.blend_retry.geit` | Luister nog eens: ggg ei t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.gras.mp3` | `fb.specific.blend_retry.gras` | Luister nog eens: ggg rrr a sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.haas.mp3` | `fb.specific.blend_retry.haas` | Luister nog eens: hhh aaa sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.hek.mp3` | `fb.specific.blend_retry.hek` | Luister nog eens: hhh e k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.hok.mp3` | `fb.specific.blend_retry.hok` | Luister nog eens: hhh o k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.huis.mp3` | `fb.specific.blend_retry.huis` | Luister nog eens: hhh ui sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.hut.mp3` | `fb.specific.blend_retry.hut` | Luister nog eens: hhh u t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.ijs.mp3` | `fb.specific.blend_retry.ijs` | Luister nog eens: ij sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.ik.mp3` | `fb.specific.blend_retry.ik` | Luister nog eens: i k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.in.mp3` | `fb.specific.blend_retry.in` | Luister nog eens: i nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.is.mp3` | `fb.specific.blend_retry.is` | Luister nog eens: i sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.jas.mp3` | `fb.specific.blend_retry.jas` | Luister nog eens: jjj a sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kaal.mp3` | `fb.specific.blend_retry.kaal` | Luister nog eens: k aaa lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kaart.mp3` | `fb.specific.blend_retry.kaart` | Luister nog eens: k aaa rrr t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kaas.mp3` | `fb.specific.blend_retry.kaas` | Luister nog eens: k aaa sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kam.mp3` | `fb.specific.blend_retry.kam` | Luister nog eens: k a mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kan.mp3` | `fb.specific.blend_retry.kan` | Luister nog eens: k a nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kar.mp3` | `fb.specific.blend_retry.kar` | Luister nog eens: k a rrr. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kas.mp3` | `fb.specific.blend_retry.kas` | Luister nog eens: k a sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kast.mp3` | `fb.specific.blend_retry.kast` | Luister nog eens: k a sss t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kat.mp3` | `fb.specific.blend_retry.kat` | Luister nog eens: k a t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.keel.mp3` | `fb.specific.blend_retry.keel` | Luister nog eens: k eee lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kies.mp3` | `fb.specific.blend_retry.kies` | Luister nog eens: k ie sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kin.mp3` | `fb.specific.blend_retry.kin` | Luister nog eens: k i nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kip.mp3` | `fb.specific.blend_retry.kip` | Luister nog eens: k i p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kist.mp3` | `fb.specific.blend_retry.kist` | Luister nog eens: k i sss t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.klok.mp3` | `fb.specific.blend_retry.klok` | Luister nog eens: k lll o k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.koek.mp3` | `fb.specific.blend_retry.koek` | Luister nog eens: k oe k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kool.mp3` | `fb.specific.blend_retry.kool` | Luister nog eens: k ooo lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kop.mp3` | `fb.specific.blend_retry.kop` | Luister nog eens: k o p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kraan.mp3` | `fb.specific.blend_retry.kraan` | Luister nog eens: k rrr aaa nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.kras.mp3` | `fb.specific.blend_retry.kras` | Luister nog eens: k rrr a sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.lach.mp3` | `fb.specific.blend_retry.lach` | Luister nog eens: lll a chch. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.lacht.mp3` | `fb.specific.blend_retry.lacht` | Luister nog eens: lll a chch t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.lam.mp3` | `fb.specific.blend_retry.lam` | Luister nog eens: lll a mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.lief.mp3` | `fb.specific.blend_retry.lief` | Luister nog eens: lll ie fff. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.lijm.mp3` | `fb.specific.blend_retry.lijm` | Luister nog eens: lll ij mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.lint.mp3` | `fb.specific.blend_retry.lint` | Luister nog eens: lll i nnn t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.lip.mp3` | `fb.specific.blend_retry.lip` | Luister nog eens: lll i p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.look.mp3` | `fb.specific.blend_retry.look` | Luister nog eens: lll ooo k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.maan.mp3` | `fb.specific.blend_retry.maan` | Luister nog eens: mmm aaa nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.mam.mp3` | `fb.specific.blend_retry.mam` | Luister nog eens: mmm a mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.man.mp3` | `fb.specific.blend_retry.man` | Luister nog eens: mmm a nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.mast.mp3` | `fb.specific.blend_retry.mast` | Luister nog eens: mmm a sss t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.mat.mp3` | `fb.specific.blend_retry.mat` | Luister nog eens: mmm a t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.melk.mp3` | `fb.specific.blend_retry.melk` | Luister nog eens: mmm e lll k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.mes.mp3` | `fb.specific.blend_retry.mes` | Luister nog eens: mmm e sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.mis.mp3` | `fb.specific.blend_retry.mis` | Luister nog eens: mmm i sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.mist.mp3` | `fb.specific.blend_retry.mist` | Luister nog eens: mmm i sss t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.mol.mp3` | `fb.specific.blend_retry.mol` | Luister nog eens: mmm o lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.muis.mp3` | `fb.specific.blend_retry.muis` | Luister nog eens: mmm ui sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.mus.mp3` | `fb.specific.blend_retry.mus` | Luister nog eens: mmm u sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.muur.mp3` | `fb.specific.blend_retry.muur` | Luister nog eens: mmm uuu rrr. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.nat.mp3` | `fb.specific.blend_retry.nat` | Luister nog eens: nnn a t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.nek.mp3` | `fb.specific.blend_retry.nek` | Luister nog eens: nnn e k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.net.mp3` | `fb.specific.blend_retry.net` | Luister nog eens: nnn e t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.neus.mp3` | `fb.specific.blend_retry.neus` | Luister nog eens: nnn eu sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.noot.mp3` | `fb.specific.blend_retry.noot` | Luister nog eens: nnn ooo t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.oom.mp3` | `fb.specific.blend_retry.oom` | Luister nog eens: ooo mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.op.mp3` | `fb.specific.blend_retry.op` | Luister nog eens: o p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.pakt.mp3` | `fb.specific.blend_retry.pakt` | Luister nog eens: p a k t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.pan.mp3` | `fb.specific.blend_retry.pan` | Luister nog eens: p a nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.pet.mp3` | `fb.specific.blend_retry.pet` | Luister nog eens: p e t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.pijl.mp3` | `fb.specific.blend_retry.pijl` | Luister nog eens: p ij lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.pink.mp3` | `fb.specific.blend_retry.pink` | Luister nog eens: p i ngk. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.poes.mp3` | `fb.specific.blend_retry.poes` | Luister nog eens: p oe sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.pop.mp3` | `fb.specific.blend_retry.pop` | Luister nog eens: p o p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.pot.mp3` | `fb.specific.blend_retry.pot` | Luister nog eens: p o t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.raam.mp3` | `fb.specific.blend_retry.raam` | Luister nog eens: rrr aaa mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.ram.mp3` | `fb.specific.blend_retry.ram` | Luister nog eens: rrr a mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.rat.mp3` | `fb.specific.blend_retry.rat` | Luister nog eens: rrr a t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.rem.mp3` | `fb.specific.blend_retry.rem` | Luister nog eens: rrr e mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.rent.mp3` | `fb.specific.blend_retry.rent` | Luister nog eens: rrr e nnn t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.riem.mp3` | `fb.specific.blend_retry.riem` | Luister nog eens: rrr ie mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.ring.mp3` | `fb.specific.blend_retry.ring` | Luister nog eens: rrr i ng. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.rit.mp3` | `fb.specific.blend_retry.rit` | Luister nog eens: rrr i t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.rok.mp3` | `fb.specific.blend_retry.rok` | Luister nog eens: rrr o k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.rolt.mp3` | `fb.specific.blend_retry.rolt` | Luister nog eens: rrr o lll t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.rook.mp3` | `fb.specific.blend_retry.rook` | Luister nog eens: rrr ooo k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.saus.mp3` | `fb.specific.blend_retry.saus` | Luister nog eens: sss au sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.slak.mp3` | `fb.specific.blend_retry.slak` | Luister nog eens: sss lll a k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.slang.mp3` | `fb.specific.blend_retry.slang` | Luister nog eens: sss lll a ng. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.sloot.mp3` | `fb.specific.blend_retry.sloot` | Luister nog eens: sss lll ooo t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.slot.mp3` | `fb.specific.blend_retry.slot` | Luister nog eens: sss lll o t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.soep.mp3` | `fb.specific.blend_retry.soep` | Luister nog eens: sss oe p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.sok.mp3` | `fb.specific.blend_retry.sok` | Luister nog eens: sss o k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.staart.mp3` | `fb.specific.blend_retry.staart` | Luister nog eens: sss t aaa rrr t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.stal.mp3` | `fb.specific.blend_retry.stal` | Luister nog eens: sss t a lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.stam.mp3` | `fb.specific.blend_retry.stam` | Luister nog eens: sss t a mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.start.mp3` | `fb.specific.blend_retry.start` | Luister nog eens: sss t a rrr t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.steen.mp3` | `fb.specific.blend_retry.steen` | Luister nog eens: sss t eee nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.stoel.mp3` | `fb.specific.blend_retry.stoel` | Luister nog eens: sss t oe lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.stok.mp3` | `fb.specific.blend_retry.stok` | Luister nog eens: sss t o k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.taart.mp3` | `fb.specific.blend_retry.taart` | Luister nog eens: t aaa rrr t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.tak.mp3` | `fb.specific.blend_retry.tak` | Luister nog eens: t a k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.tas.mp3` | `fb.specific.blend_retry.tas` | Luister nog eens: t a sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.teen.mp3` | `fb.specific.blend_retry.teen` | Luister nog eens: t eee nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.tent.mp3` | `fb.specific.blend_retry.tent` | Luister nog eens: t e nnn t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.tik.mp3` | `fb.specific.blend_retry.tik` | Luister nog eens: t i k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.tuin.mp3` | `fb.specific.blend_retry.tuin` | Luister nog eens: t ui nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.vaas.mp3` | `fb.specific.blend_retry.vaas` | Luister nog eens: vvv aaa sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.vak.mp3` | `fb.specific.blend_retry.vak` | Luister nog eens: vvv a k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.val.mp3` | `fb.specific.blend_retry.val` | Luister nog eens: vvv a lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.vat.mp3` | `fb.specific.blend_retry.vat` | Luister nog eens: vvv a t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.vin.mp3` | `fb.specific.blend_retry.vin` | Luister nog eens: vvv i nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.vis.mp3` | `fb.specific.blend_retry.vis` | Luister nog eens: vvv i sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.voet.mp3` | `fb.specific.blend_retry.voet` | Luister nog eens: vvv oe t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.vos.mp3` | `fb.specific.blend_retry.vos` | Luister nog eens: vvv o sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.vuur.mp3` | `fb.specific.blend_retry.vuur` | Luister nog eens: vvv uuu rrr. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.wiel.mp3` | `fb.specific.blend_retry.wiel` | Luister nog eens: www ie lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.wol.mp3` | `fb.specific.blend_retry.wol` | Luister nog eens: www o lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.zak.mp3` | `fb.specific.blend_retry.zak` | Luister nog eens: zzz a k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.zeep.mp3` | `fb.specific.blend_retry.zeep` | Luister nog eens: zzz eee p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.zes.mp3` | `fb.specific.blend_retry.zes` | Luister nog eens: zzz e sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.ziet.mp3` | `fb.specific.blend_retry.ziet` | Luister nog eens: zzz ie t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.zit.mp3` | `fb.specific.blend_retry.zit` | Luister nog eens: zzz i t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.zon.mp3` | `fb.specific.blend_retry.zon` | Luister nog eens: zzz o nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.specific.blend_retry.zout.mp3` | `fb.specific.blend_retry.zout` | Luister nog eens: zzz ou t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.al.mp3` | `fb.specific.blend_retry.al` | Luister nog eens: a … lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.ark.mp3` | `fb.specific.blend_retry.ark` | Luister nog eens: a … rrr … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.arm.mp3` | `fb.specific.blend_retry.arm` | Luister nog eens: a … rrr … mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.as.mp3` | `fb.specific.blend_retry.as` | Luister nog eens: a … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.bal.mp3` | `fb.specific.blend_retry.bal` | Luister nog eens: b … a … lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.bank.mp3` | `fb.specific.blend_retry.bank` | Luister nog eens: b … a … ngk. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.been.mp3` | `fb.specific.blend_retry.been` | Luister nog eens: b … eee … nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.bes.mp3` | `fb.specific.blend_retry.bes` | Luister nog eens: b … e … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.bij.mp3` | `fb.specific.blend_retry.bij` | Luister nog eens: b … ij. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.boek.mp3` | `fb.specific.blend_retry.boek` | Luister nog eens: b … oe … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.boom.mp3` | `fb.specific.blend_retry.boom` | Luister nog eens: b … ooo … mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.boot.mp3` | `fb.specific.blend_retry.boot` | Luister nog eens: b … ooo … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.buik.mp3` | `fb.specific.blend_retry.buik` | Luister nog eens: b … ui … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.bus.mp3` | `fb.specific.blend_retry.bus` | Luister nog eens: b … u … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.dak.mp3` | `fb.specific.blend_retry.dak` | Luister nog eens: d … a … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.dal.mp3` | `fb.specific.blend_retry.dal` | Luister nog eens: d … a … lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.das.mp3` | `fb.specific.blend_retry.das` | Luister nog eens: d … a … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.diep.mp3` | `fb.specific.blend_retry.diep` | Luister nog eens: d … ie … p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.duim.mp3` | `fb.specific.blend_retry.duim` | Luister nog eens: d … ui … mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.eet.mp3` | `fb.specific.blend_retry.eet` | Luister nog eens: eee … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.en.mp3` | `fb.specific.blend_retry.en` | Luister nog eens: e … nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.fles.mp3` | `fb.specific.blend_retry.fles` | Luister nog eens: fff … lll … e … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.gat.mp3` | `fb.specific.blend_retry.gat` | Luister nog eens: ggg … a … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.geel.mp3` | `fb.specific.blend_retry.geel` | Luister nog eens: ggg … eee … lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.geit.mp3` | `fb.specific.blend_retry.geit` | Luister nog eens: ggg … ei … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.gras.mp3` | `fb.specific.blend_retry.gras` | Luister nog eens: ggg … rrr … a … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.haas.mp3` | `fb.specific.blend_retry.haas` | Luister nog eens: hhh … aaa … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.hek.mp3` | `fb.specific.blend_retry.hek` | Luister nog eens: hhh … e … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.hok.mp3` | `fb.specific.blend_retry.hok` | Luister nog eens: hhh … o … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.huis.mp3` | `fb.specific.blend_retry.huis` | Luister nog eens: hhh … ui … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.hut.mp3` | `fb.specific.blend_retry.hut` | Luister nog eens: hhh … u … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.ijs.mp3` | `fb.specific.blend_retry.ijs` | Luister nog eens: ij … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.ik.mp3` | `fb.specific.blend_retry.ik` | Luister nog eens: i … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.in.mp3` | `fb.specific.blend_retry.in` | Luister nog eens: i … nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.is.mp3` | `fb.specific.blend_retry.is` | Luister nog eens: i … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.jas.mp3` | `fb.specific.blend_retry.jas` | Luister nog eens: jjj … a … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kaal.mp3` | `fb.specific.blend_retry.kaal` | Luister nog eens: k … aaa … lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kaart.mp3` | `fb.specific.blend_retry.kaart` | Luister nog eens: k … aaa … rrr … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kaas.mp3` | `fb.specific.blend_retry.kaas` | Luister nog eens: k … aaa … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kam.mp3` | `fb.specific.blend_retry.kam` | Luister nog eens: k … a … mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kan.mp3` | `fb.specific.blend_retry.kan` | Luister nog eens: k … a … nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kar.mp3` | `fb.specific.blend_retry.kar` | Luister nog eens: k … a … rrr. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kas.mp3` | `fb.specific.blend_retry.kas` | Luister nog eens: k … a … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kast.mp3` | `fb.specific.blend_retry.kast` | Luister nog eens: k … a … sss … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kat.mp3` | `fb.specific.blend_retry.kat` | Luister nog eens: k … a … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.keel.mp3` | `fb.specific.blend_retry.keel` | Luister nog eens: k … eee … lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kies.mp3` | `fb.specific.blend_retry.kies` | Luister nog eens: k … ie … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kin.mp3` | `fb.specific.blend_retry.kin` | Luister nog eens: k … i … nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kip.mp3` | `fb.specific.blend_retry.kip` | Luister nog eens: k … i … p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kist.mp3` | `fb.specific.blend_retry.kist` | Luister nog eens: k … i … sss … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.klok.mp3` | `fb.specific.blend_retry.klok` | Luister nog eens: k … lll … o … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.koek.mp3` | `fb.specific.blend_retry.koek` | Luister nog eens: k … oe … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kool.mp3` | `fb.specific.blend_retry.kool` | Luister nog eens: k … ooo … lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kop.mp3` | `fb.specific.blend_retry.kop` | Luister nog eens: k … o … p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kraan.mp3` | `fb.specific.blend_retry.kraan` | Luister nog eens: k … rrr … aaa … nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.kras.mp3` | `fb.specific.blend_retry.kras` | Luister nog eens: k … rrr … a … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.lach.mp3` | `fb.specific.blend_retry.lach` | Luister nog eens: lll … a … chch. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.lacht.mp3` | `fb.specific.blend_retry.lacht` | Luister nog eens: lll … a … chch … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.lam.mp3` | `fb.specific.blend_retry.lam` | Luister nog eens: lll … a … mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.lief.mp3` | `fb.specific.blend_retry.lief` | Luister nog eens: lll … ie … fff. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.lijm.mp3` | `fb.specific.blend_retry.lijm` | Luister nog eens: lll … ij … mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.lint.mp3` | `fb.specific.blend_retry.lint` | Luister nog eens: lll … i … nnn … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.lip.mp3` | `fb.specific.blend_retry.lip` | Luister nog eens: lll … i … p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.look.mp3` | `fb.specific.blend_retry.look` | Luister nog eens: lll … ooo … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.maan.mp3` | `fb.specific.blend_retry.maan` | Luister nog eens: mmm … aaa … nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.mam.mp3` | `fb.specific.blend_retry.mam` | Luister nog eens: mmm … a … mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.man.mp3` | `fb.specific.blend_retry.man` | Luister nog eens: mmm … a … nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.mast.mp3` | `fb.specific.blend_retry.mast` | Luister nog eens: mmm … a … sss … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.mat.mp3` | `fb.specific.blend_retry.mat` | Luister nog eens: mmm … a … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.melk.mp3` | `fb.specific.blend_retry.melk` | Luister nog eens: mmm … e … lll … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.mes.mp3` | `fb.specific.blend_retry.mes` | Luister nog eens: mmm … e … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.mis.mp3` | `fb.specific.blend_retry.mis` | Luister nog eens: mmm … i … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.mist.mp3` | `fb.specific.blend_retry.mist` | Luister nog eens: mmm … i … sss … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.mol.mp3` | `fb.specific.blend_retry.mol` | Luister nog eens: mmm … o … lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.muis.mp3` | `fb.specific.blend_retry.muis` | Luister nog eens: mmm … ui … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.mus.mp3` | `fb.specific.blend_retry.mus` | Luister nog eens: mmm … u … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.muur.mp3` | `fb.specific.blend_retry.muur` | Luister nog eens: mmm … uuu … rrr. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.nat.mp3` | `fb.specific.blend_retry.nat` | Luister nog eens: nnn … a … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.nek.mp3` | `fb.specific.blend_retry.nek` | Luister nog eens: nnn … e … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.net.mp3` | `fb.specific.blend_retry.net` | Luister nog eens: nnn … e … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.neus.mp3` | `fb.specific.blend_retry.neus` | Luister nog eens: nnn … eu … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.noot.mp3` | `fb.specific.blend_retry.noot` | Luister nog eens: nnn … ooo … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.oom.mp3` | `fb.specific.blend_retry.oom` | Luister nog eens: ooo … mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.op.mp3` | `fb.specific.blend_retry.op` | Luister nog eens: o … p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.pakt.mp3` | `fb.specific.blend_retry.pakt` | Luister nog eens: p … a … k … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.pan.mp3` | `fb.specific.blend_retry.pan` | Luister nog eens: p … a … nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.pet.mp3` | `fb.specific.blend_retry.pet` | Luister nog eens: p … e … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.pijl.mp3` | `fb.specific.blend_retry.pijl` | Luister nog eens: p … ij … lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.pink.mp3` | `fb.specific.blend_retry.pink` | Luister nog eens: p … i … ngk. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.poes.mp3` | `fb.specific.blend_retry.poes` | Luister nog eens: p … oe … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.pop.mp3` | `fb.specific.blend_retry.pop` | Luister nog eens: p … o … p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.pot.mp3` | `fb.specific.blend_retry.pot` | Luister nog eens: p … o … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.raam.mp3` | `fb.specific.blend_retry.raam` | Luister nog eens: rrr … aaa … mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.ram.mp3` | `fb.specific.blend_retry.ram` | Luister nog eens: rrr … a … mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.rat.mp3` | `fb.specific.blend_retry.rat` | Luister nog eens: rrr … a … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.rem.mp3` | `fb.specific.blend_retry.rem` | Luister nog eens: rrr … e … mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.rent.mp3` | `fb.specific.blend_retry.rent` | Luister nog eens: rrr … e … nnn … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.riem.mp3` | `fb.specific.blend_retry.riem` | Luister nog eens: rrr … ie … mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.ring.mp3` | `fb.specific.blend_retry.ring` | Luister nog eens: rrr … i … ng. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.rit.mp3` | `fb.specific.blend_retry.rit` | Luister nog eens: rrr … i … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.rok.mp3` | `fb.specific.blend_retry.rok` | Luister nog eens: rrr … o … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.rolt.mp3` | `fb.specific.blend_retry.rolt` | Luister nog eens: rrr … o … lll … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.rook.mp3` | `fb.specific.blend_retry.rook` | Luister nog eens: rrr … ooo … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.saus.mp3` | `fb.specific.blend_retry.saus` | Luister nog eens: sss … au … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.slak.mp3` | `fb.specific.blend_retry.slak` | Luister nog eens: sss … lll … a … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.slang.mp3` | `fb.specific.blend_retry.slang` | Luister nog eens: sss … lll … a … ng. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.sloot.mp3` | `fb.specific.blend_retry.sloot` | Luister nog eens: sss … lll … ooo … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.slot.mp3` | `fb.specific.blend_retry.slot` | Luister nog eens: sss … lll … o … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.soep.mp3` | `fb.specific.blend_retry.soep` | Luister nog eens: sss … oe … p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.sok.mp3` | `fb.specific.blend_retry.sok` | Luister nog eens: sss … o … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.staart.mp3` | `fb.specific.blend_retry.staart` | Luister nog eens: sss … t … aaa … rrr … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.stal.mp3` | `fb.specific.blend_retry.stal` | Luister nog eens: sss … t … a … lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.stam.mp3` | `fb.specific.blend_retry.stam` | Luister nog eens: sss … t … a … mmm. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.start.mp3` | `fb.specific.blend_retry.start` | Luister nog eens: sss … t … a … rrr … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.steen.mp3` | `fb.specific.blend_retry.steen` | Luister nog eens: sss … t … eee … nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.stoel.mp3` | `fb.specific.blend_retry.stoel` | Luister nog eens: sss … t … oe … lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.stok.mp3` | `fb.specific.blend_retry.stok` | Luister nog eens: sss … t … o … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.taart.mp3` | `fb.specific.blend_retry.taart` | Luister nog eens: t … aaa … rrr … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.tak.mp3` | `fb.specific.blend_retry.tak` | Luister nog eens: t … a … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.tas.mp3` | `fb.specific.blend_retry.tas` | Luister nog eens: t … a … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.teen.mp3` | `fb.specific.blend_retry.teen` | Luister nog eens: t … eee … nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.tent.mp3` | `fb.specific.blend_retry.tent` | Luister nog eens: t … e … nnn … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.tik.mp3` | `fb.specific.blend_retry.tik` | Luister nog eens: t … i … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.tuin.mp3` | `fb.specific.blend_retry.tuin` | Luister nog eens: t … ui … nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.vaas.mp3` | `fb.specific.blend_retry.vaas` | Luister nog eens: vvv … aaa … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.vak.mp3` | `fb.specific.blend_retry.vak` | Luister nog eens: vvv … a … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.val.mp3` | `fb.specific.blend_retry.val` | Luister nog eens: vvv … a … lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.vat.mp3` | `fb.specific.blend_retry.vat` | Luister nog eens: vvv … a … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.vin.mp3` | `fb.specific.blend_retry.vin` | Luister nog eens: vvv … i … nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.vis.mp3` | `fb.specific.blend_retry.vis` | Luister nog eens: vvv … i … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.voet.mp3` | `fb.specific.blend_retry.voet` | Luister nog eens: vvv … oe … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.vos.mp3` | `fb.specific.blend_retry.vos` | Luister nog eens: vvv … o … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.vuur.mp3` | `fb.specific.blend_retry.vuur` | Luister nog eens: vvv … uuu … rrr. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.wiel.mp3` | `fb.specific.blend_retry.wiel` | Luister nog eens: www … ie … lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.wol.mp3` | `fb.specific.blend_retry.wol` | Luister nog eens: www … o … lll. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.zak.mp3` | `fb.specific.blend_retry.zak` | Luister nog eens: zzz … a … k. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.zeep.mp3` | `fb.specific.blend_retry.zeep` | Luister nog eens: zzz … eee … p. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.zes.mp3` | `fb.specific.blend_retry.zes` | Luister nog eens: zzz … e … sss. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.ziet.mp3` | `fb.specific.blend_retry.ziet` | Luister nog eens: zzz … ie … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.zit.mp3` | `fb.specific.blend_retry.zit` | Luister nog eens: zzz … i … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.zon.mp3` | `fb.specific.blend_retry.zon` | Luister nog eens: zzz … o … nnn. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
+| `audio/feedback/fb.specific.blend_retry.zout.mp3` | `fb.specific.blend_retry.zout` | Luister nog eens: zzz … ou … t. Kun jij ze samenplakken? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.count.2.mp3` | `fb.specific.count.2` | Je telde 2. Tel nog eens mee: hoeveel klanken hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.count.3.mp3` | `fb.specific.count.3` | Je telde 3. Tel nog eens mee: hoeveel klanken hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.specific.count.4.mp3` | `fb.specific.count.4` | Je telde 4. Tel nog eens mee: hoeveel klanken hoor je? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
@@ -650,9 +648,6 @@ Totaal: **1562** clips.
 | `audio/feedback/fb.try1.2.mp3` | `fb.try1.2` | Luister nog eens goed. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.try1.3.mp3` | `fb.try1.3` | Het begin klopt! Kijk nog eens naar het eind. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 | `audio/feedback/fb.try1.4.mp3` | `fb.try1.4` | We lezen van links naar rechts. Begin hier. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.try1.5.mp3` | `fb.try1.5` | Dat is de naam van de letter. Welke klank maakt hij? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.try1.6.mp3` | `fb.try1.6` | Luister naar het midden. Hoor je a of o? | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
-| `audio/feedback/fb.try1.7.mp3` | `fb.try1.7` | Kijk: staat er één a of twee? Eén a klinkt kort. | Feedbackzin: kort, positief, gelijk volume bij goed en fout. |
 
 ## Voorbeeldwoord (auditief) (grapheme-example)
 
