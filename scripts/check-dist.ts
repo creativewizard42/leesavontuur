@@ -45,6 +45,20 @@ if (!existsSync(DIST)) {
     if (!/media-src 'self'/.test(csp)) fail("CSP mist media-src 'self' (SEC-R2-005).");
     if (/\b(data|blob):/i.test(csp)) fail('CSP bevat data:/blob: (SEC-R2-005).');
     if (/<script(?![^>]*\bsrc=)[^>]*>\s*[^<\s]/i.test(html)) fail('Inline script in dist/index.html.');
+
+    // SEC-R3-001: de meta-CSP moet vóór het eerste script/stylesheet staan,
+    // anders vallen die initiële loads formeel buiten de meta.
+    const cspIndex = cspMatch ? html.indexOf(cspMatch[0]) : -1;
+    const firstScript = html.search(/<script\b/i);
+    const firstStyle = html.search(/<link\b[^>]*\brel=["']?stylesheet/i);
+    if (cspIndex >= 0) {
+      if (firstScript >= 0 && cspIndex > firstScript) {
+        fail('CSP-meta staat niet vóór het eerste <script> (SEC-R3-001).');
+      }
+      if (firstStyle >= 0 && cspIndex > firstStyle) {
+        fail('CSP-meta staat niet vóór de eerste stylesheet (SEC-R3-001).');
+      }
+    }
   }
 
   // SEC-R2-003: hardening-headers moeten met de build meekomen (Netlify _headers).

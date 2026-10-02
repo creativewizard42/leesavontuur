@@ -98,10 +98,21 @@ describe('loadSessionState – omvang- en corruptiecap (SEC-R2-002)', () => {
     expect(loadSessionState(storage, 1000)).toBeUndefined();
   });
 
+  it('verwijdert een verlopen resume-sleutel actief (SEC-R3-002)', () => {
+    const storage = createMemoryStorage();
+    const queue = createSessionQueue(plan(), { sessionNumber: 1 });
+    const ttl = 60_000;
+    expect(saveSessionState(queue, storage, 1000)).toEqual({ ok: true });
+    expect(loadSessionState(storage, 1000 + ttl + 1, ttl)).toBeUndefined();
+    expect(storage.read(SESSION_RESUME_KEY)).toBeNull();
+  });
+
   it('negeert corrupte JSON zonder crash', () => {
     const storage = createMemoryStorage();
     storage.write(SESSION_RESUME_KEY, '{niet-json');
     expect(loadSessionState(storage, 1000)).toBeUndefined();
+    // SEC-R3-002: ook ongeldige data wordt actief opgeruimd.
+    expect(storage.read(SESSION_RESUME_KEY)).toBeNull();
   });
 
   it('hervat nog steeds een geldige sleutel', () => {
@@ -109,5 +120,33 @@ describe('loadSessionState – omvang- en corruptiecap (SEC-R2-002)', () => {
     const queue = createSessionQueue(plan(), { sessionNumber: 1 });
     expect(saveSessionState(queue, storage, 1000)).toEqual({ ok: true });
     expect(loadSessionState(storage, 2000)?.current()?.id).toBe('a');
+  });
+});
+
+describe('SessionQueue – audio-key-whitelist (SEC-R3-005)', () => {
+  it('laat alleen audio-keys uit manifest/instructies/feedback toe', () => {
+    const queue = createSessionQueue(plan(), { sessionNumber: 1 });
+    const data = queue.toJSON(1000) as unknown as {
+      sections: { items: ActivityItem[] }[];
+    };
+    const item = data.sections[0]?.items[0];
+    expect(item).toBeDefined();
+    // Gemanipuleerde, onbekende keys moeten sneuvelen; bekende blijven.
+    (item as unknown as { prompt: { audio?: unknown } }).prompt.audio = {
+      key: '../../evil',
+      src: '../evil.mp3',
+      kind: 'word',
+    };
+    (item!.options[0] as unknown as { audio?: unknown }).audio = {
+      key: 'lk.m.sound',
+      src: 'audio/graphemes/m_sound.mp3',
+      kind: 'grapheme-sound',
+    };
+
+    const restored = SessionQueue.fromJSON(data);
+    expect(restored).not.toBeNull();
+    const current = restored!.current();
+    expect(current?.prompt.audio).toBeUndefined();
+    expect(current?.options[0]?.audio?.key).toBe('lk.m.sound');
   });
 });

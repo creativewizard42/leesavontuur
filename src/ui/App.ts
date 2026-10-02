@@ -172,7 +172,16 @@ export function createApp(deps: AppDeps): App {
     startSession(free = false) {
       applySettings();
       const planProfile = free ? freeProfile(state.profile) : state.profile;
-      const resumed = free ? undefined : loadSessionState(storage, now());
+      // QA-R3-003: hervat met dezelfde context (profiel/rng/geleerde set) als
+      // een verse queue, zodat adaptief gedrag en succes-items niet afwijken.
+      const resumed = free
+        ? undefined
+        : loadSessionState(storage, now(), undefined, {
+            sessionNumber: state.sessionNumber,
+            profile: planProfile,
+            learned: new Set(planProfile.unlockedGraphemes),
+            rng,
+          });
       let queue: SessionQueue;
       if (resumed) {
         queue = resumed;

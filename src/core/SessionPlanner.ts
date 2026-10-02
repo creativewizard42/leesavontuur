@@ -21,12 +21,13 @@ import type {
   Word,
 } from '../types';
 import { defaultRng } from '../types';
-import { getGrapheme, getWord } from '../content';
+import { audioManifest, feedback, getGrapheme, getWord, instructions } from '../content';
 import {
   canIntroduceNewGrapheme,
   MIN_MASTERY_ITEMS,
   nextGraphemeToIntroduce,
-  phaseUnlocked,
+  phaseTwoFallbackActive,
+  phaseTwoOpenedByMastery,
   recognizeSkillFor,
   skillStatus,
   soundSkillFor,
@@ -52,8 +53,7 @@ import {
 } from '../learning/util';
 import { skillsForWord as skillsForWordFn } from '../learning/skills';
 import type { SaveResult, SaveStorage } from './SaveSystem';
-import * as FirstSound from '../learning/FirstSound';
-import * as LetterSound from '../learning/LetterSound';
+import * as FirstSound from '../learning/FirstSound';import * as LetterSound from '../learning/LetterSound';
 import * as Segmenting from '../learning/Segmenting';
 import * as Blending from '../learning/Blending';
 import * as WordReading from '../learning/WordReading';
@@ -162,6 +162,16 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
   const sections: SessionSection[] = [];
   const avoid: number[] = [];
 
+  // QA-R3-001: de fase-2-poort is haalbaar (mastery ≥ 0.7) met een
+  // sessie-vangnet. `phase2Fallback` betekent: nog geen mastery, maar de
+  // eerste letter wordt tóch geïntroduceerd met extra auditieve steun.
+  const phase2Mastered = phaseTwoOpenedByMastery(profile);
+  const phase2Fallback = phaseTwoFallbackActive(profile);
+  // QA-R3-002: leessecties openen pas bij ≥ 2 even lange woorden; anders
+  // bestaan er geen gelijke-lengte-afleiders en zouden er 1-optie-"keuzes"
+  // ontstaan. In dat geval compenseren we met extra hak-/klankoefening.
+  const wordChoiceReady = choicePool.length >= 2;
+
   const record = (items: ActivityItem[]): void => {
     for (const item of items) {
       const index = item.options.findIndex((o) => o.id === item.targetId);
@@ -179,15 +189,17 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
   }
 
   // 2. Klankoefening – puur auditief (FN.FIRST_SOUND / FN.LAST_SOUND).
-  //    QA-R2-002: de fase-2-poort hangt aan FN.FIRST_SOUND (ED §3). Zolang die
-  //    poort dicht is, oefent de warming-up gericht FIRST_SOUND (vóór LAST) en
-  //    krijgt het kind een extra item, zodat de eerste letter niet pas na ~5
-  //    sessies komt.
+  //    QA-R2-002/QA-R3-001: de fase-2-poort hangt aan FN.FIRST_SOUND (ED §3).
+  //    Zolang die poort op mastery dicht is, blijft de warming-up gericht
+  //    FIRST_SOUND oefenen (vóór LAST) met maximaal 2 opties (vereenvoudigd),
+  //    zodat ook een zwakkere leerling via vereenvoudiging beheersing kan
+  //    bereiken. Is alleen het sessie-vangnet actief, dan blijft fase 1 óók
+  //    in de warming-up staan (extra auditieve steun).
   {
-    const phase2open = phaseUnlocked(profile, 2);
-    const nickname = phase2open ? (rng() < 0.5 ? 'FN.FIRST_SOUND' : 'FN.LAST_SOUND') : 'FN.FIRST_SOUND';
-    const soundCount = phase2open ? SOUND_ITEMS : SOUND_ITEMS + 1;
-    const difficulty = phase2open ? difficultyForSkill(profile, nickname) : 'A';
+    const targetedWarmup = !phase2Mastered;
+    const nickname = targetedWarmup ? 'FN.FIRST_SOUND' : rng() < 0.5 ? 'FN.FIRST_SOUND' : 'FN.LAST_SOUND';
+    const soundCount = targetedWarmup ? SOUND_ITEMS + 1 : SOUND_ITEMS;
+    const difficulty = targetedWarmup ? 'A' : difficultyForSkill(profile, nickname);
     const items = FirstSound.generate(
       wordPool.length >= 2
         ? {
@@ -197,6 +209,9 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
             availableWords: wordNames,
             rng,
             learned,
+            // 2 opties i.p.v. 3 zolang de leerling de klankoefening nog niet
+            // beheerst (QA-R3-001: haalbare vereenvoudiging).
+            ...(targetedWarmup ? { maxDistractors: 1 } : {}),
             avoidCorrectIndices: avoid,
           }
         : {
@@ -209,6 +224,7 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
             availableWords: [],
             rng,
             auditory: true,
+            maxDistractors: 1,
             avoidCorrectIndices: avoid,
           },
     );
@@ -296,6 +312,20 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
           );
         }
       }
+      // QA-R3-001: het sessie-vangnet introduceert de eerste letter zonder
+      // mastery. Die krijgt extra auditieve steun en rustige modeling, zodat de
+      // overgang niet onvoorbereid voelt (ED §3/§10).
+      if (phase2Fallback) {
+        for (const item of items) {
+          item.metadata = {
+            ...(item.metadata ?? {}),
+            extraAudio: true,
+            modelFirst: true,
+            simplified: true,
+            fallbackIntro: true,
+          };
+        }
+      }
       record(items);
       sections.push({ step: 3, name: 'Nieuwe letter/klank', items });
     }
@@ -307,7 +337,11 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
   //    auditief (ED §4.1). Plakken blijft wachten op ≥ 2 woorden, omdat het
   //    geschreven woordopties toont (EDU-R2-001c).
   if (wordPool.length >= 1) {
-    const targets = pickWords(wordPool, PRACTICE_ITEMS, rng);
+    // QA-R3-002: zolang de leessecties dicht zijn (geen even-lange
+    // woordparen), compenseren we met extra hak-oefening op de beschikbare
+    // woorden. Zo blijft er gescoord woordwerk zonder 1-optie-"keuzes".
+    const practiceCount = wordChoiceReady ? PRACTICE_ITEMS : PRACTICE_ITEMS + 2;
+    const targets = pickWords(wordPool, practiceCount, rng);
     const canBlend = choicePool.length >= 1;
     const items: ActivityItem[] = [];
     targets.forEach((target, index) => {
@@ -345,9 +379,9 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
   }
 
   // 5. Woorden lezen – geschreven woord, plaatje pas ná correct.
-  if (wordPool.length >= 2) {
-    const source = choicePool.length >= 2 ? choicePool : wordPool;
-    const targets = pickWords(source, WORD_READING_ITEMS, rng);
+  //    QA-R3-002: alleen openen bij ≥ 2 even lange woorden (echte keuze).
+  if (wordChoiceReady) {
+    const targets = pickWords(choicePool, WORD_READING_ITEMS, rng);
     const items = targets.map((target) => {
       const skill = skillsForWordFn(target).decode;
       return WordReading.generate({
@@ -365,12 +399,13 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
   }
 
   // 6. Mini-game De Klimboom – decoderen is de enige route omhoog.
-  if (wordPool.length >= 2) {
-    const source = choicePool.length >= 2 ? choicePool : wordPool;
+  //    QA-R3-002: ook hier alleen met ≥ 2 even lange woorden; de bron is de
+  //    choicePool zelf, zodat elk doelwoord een gelijke-lengte-afleider heeft.
+  if (wordChoiceReady) {
     const items = Klimboom.generate({
       count: MINI_GAME_ITEMS,
       difficulty: difficultyForSkill(profile, 'DE.CVC'),
-      availableWords: source.map((w) => w.word),
+      availableWords: choicePool.map((w) => w.word),
       rng,
       learned,
       skillId: 'DE.CVC',
@@ -601,6 +636,19 @@ const MAX_SKILL_STATES = 500;
 const MAX_METADATA_KEYS = 40;
 const DANGEROUS_KEYS: ReadonlySet<string> = new Set(['__proto__', 'constructor', 'prototype']);
 
+/**
+ * SEC-R3-005: whitelist van audio-keys die uit hervat-JSON mogen komen. Een
+ * gemanipuleerde resume-sleutel kan zo nooit een willekeurige `key`/`src` op de
+ * speler afdwingen (defense-in-depth bovenop `isLocalAudioSrc`). De manifest
+ * bevat alle concrete clips; `INSTRUCTIONS`/`FEEDBACK` dekken de dynamische
+ * template-keys die (nog) geen eigen opname hebben.
+ */
+const KNOWN_AUDIO_KEYS: ReadonlySet<string> = new Set([
+  ...audioManifest.map((clip) => clip.key),
+  ...Object.keys(instructions),
+  ...Object.keys(feedback),
+]);
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
@@ -616,6 +664,7 @@ function readAudio(value: unknown): AudioClip | undefined {
   const src = value['src'];
   const kind = value['kind'];
   if (typeof key !== 'string' || typeof src !== 'string' || typeof kind !== 'string') return undefined;
+  if (!KNOWN_AUDIO_KEYS.has(key)) return undefined;
   const clip: AudioClip = { key, src, kind: kind as AudioClip['kind'] };
   if (typeof value['text'] === 'string') clip.text = value['text'];
   return clip;
@@ -1009,13 +1058,24 @@ export class SessionQueue {
    * corrupt/ongeoorloofd schema (verkeerde types, te veel secties/items/opties,
    * `__proto__`-keys) wordt `null` teruggegeven in plaats van te crashen.
    */
-  static fromJSON(data: unknown): SessionQueue | null {
+  static fromJSON(data: unknown, context?: QueueContext): SessionQueue | null {
     if (!isRecord(data)) return null;
     if (data['version'] !== 1) return null;
     const sections = readSections(data['sections']);
     if (!sections) return null;
     const sessionNumber = nonNegInt(data['sessionNumber'], 0);
-    const queue = new SessionQueue({ sessionNumber, sections }, { sessionNumber });
+    // QA-R3-003: geef de hervat-context (profiel/rng/geleerde set) mee, zodat
+    // seedSkillState de profiel-mastery kent en buildSuccessItem het juiste
+    // (gemeesterde) grafeem kiest i.p.v. de generieke fase-1-fallback.
+    const queue = new SessionQueue(
+      { sessionNumber, sections },
+      {
+        sessionNumber,
+        ...(context?.rng ? { rng: context.rng } : {}),
+        ...(context?.learned ? { learned: context.learned } : {}),
+        ...(context?.profile ? { profile: context.profile } : {}),
+      },
+    );
     queue.sectionIndex = Math.min(nonNegInt(data['sectionIndex']), sections.length);
     queue.itemIndex = nonNegInt(data['itemIndex']);
     queue.consecutiveModeled = nonNegInt(data['consecutiveModeled']);
@@ -1079,12 +1139,30 @@ export function saveSessionState(
   }
 }
 
-/** Laadt een onderbroken sessie binnen de TTL; anders undefined. */
+/**
+ * Laadt een onderbroken sessie binnen de TTL; anders undefined.
+ *
+ * SEC-R3-002: een verlopen of ongeldige resume-sleutel wordt **actief
+ * verwijderd** i.p.v. alleen genegeerd, zodat de gedragsdata niet onbeperkt in
+ * localStorage blijft staan (AVG-retentie).
+ *
+ * QA-R3-003: geef `context` (profiel/rng/geleerde set) mee, zodat de hervatte
+ * queue dezelfde adaptieve context heeft als een verse queue.
+ */
 export function loadSessionState(
   storage: SaveStorage,
   now: number = Date.now(),
   ttl: number = RESUME_TTL_MS,
+  context?: QueueContext,
 ): SessionQueue | undefined {
+  const discard = (): undefined => {
+    try {
+      storage.remove(SESSION_RESUME_KEY);
+    } catch {
+      // Privémodus/quota: niets om te wissen.
+    }
+    return undefined;
+  };
   let raw: string | null = null;
   try {
     raw = storage.read(SESSION_RESUME_KEY);
@@ -1093,14 +1171,15 @@ export function loadSessionState(
   }
   if (!raw) return undefined;
   // SEC-R2-002: begrens de omvang vóór parsen/verwerken (lokale DoS).
-  if (raw.length > MAX_RESUME_BYTES) return undefined;
+  if (raw.length > MAX_RESUME_BYTES) return discard();
   try {
     const data = JSON.parse(raw) as unknown;
-    if (!isRecord(data) || data['version'] !== 1) return undefined;
-    if (typeof data['savedAt'] !== 'number' || now - data['savedAt'] > ttl) return undefined;
-    return SessionQueue.fromJSON(data) ?? undefined;
+    if (!isRecord(data) || data['version'] !== 1) return discard();
+    if (typeof data['savedAt'] !== 'number' || now - data['savedAt'] > ttl) return discard();
+    const queue = SessionQueue.fromJSON(data, context);
+    return queue ?? discard();
   } catch {
-    return undefined;
+    return discard();
   }
 }
 

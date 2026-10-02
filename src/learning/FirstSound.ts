@@ -35,6 +35,12 @@ export interface FirstSoundOptions {
    */
   auditory?: boolean;
   auditoryWords?: readonly string[];
+  /**
+   * QA-R3-001: maximaal aantal afleiders (default 2). Zolang de fase-2-poort
+   * dicht is, gebruiken we 1 afleider (2 opties) zodat een zwakkere leerling via
+   * vereenvoudiging beheersing kan bereiken.
+   */
+  maxDistractors?: number;
   /** Posities van het juiste antwoord in recente items (nooit 3× op rij). */
   avoidCorrectIndices?: readonly number[];
 }
@@ -94,7 +100,8 @@ export function generate(options: FirstSoundOptions): ActivityItem[] {
     const distinctSound = remaining.filter((w) => relevantGrapheme(w, last) !== targetGrapheme);
     const sameLength = distinctSound.filter((w) => w.graphemes.length === target.graphemes.length);
     const usable = sameLength.length >= 1 ? sameLength : distinctSound;
-    const distractors = pickDistinct(usable, Math.max(1, Math.min(2, usable.length)), rng);
+    const maxDistractors = Math.max(1, options.maxDistractors ?? 2);
+    const distractors = pickDistinct(usable, Math.max(1, Math.min(maxDistractors, usable.length)), rng);
 
     const correct: OptionSpec = { id: target.word, audio: wordClip(target.word) };
     const distractorSpecs: OptionSpec[] = distractors.map((w) => ({ id: w.word, audio: wordClip(w.word) }));
@@ -106,13 +113,17 @@ export function generate(options: FirstSoundOptions): ActivityItem[] {
     const text = last
       ? `Welk woord eindigt op ${targetSound}?`
       : `Welk woord begint met ${targetSound}?`;
+    // EDU-R3-005: zet meteen de concrete variantkey (geen generieke template
+    // met placeholder in `prompt.audio`), zodat de fallback-clip naar een
+    // bestaand manifestpad wijst.
+    const instructionKey = `${last ? 'instr.fn.last_sound' : 'instr.fn.first_sound'}.${targetGrapheme}`;
 
     items.push({
       id: itemId('klankjager', `${skillId}.${target.word}`, rng),
       skillId,
       kind: 'klankjager',
       prompt: {
-        audio: instructionClip(last ? 'instr.fn.last_sound' : 'instr.fn.first_sound', text),
+        audio: instructionClip(instructionKey, text),
         text,
         showText: false,
       },

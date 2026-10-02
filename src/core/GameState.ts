@@ -19,8 +19,6 @@ export interface GameState {
   profile: Profile;
   /** Huidig sessienummer (1-based). */
   sessionNumber: number;
-  /** Huidige fase in de sessie-loop (GD §3.1), 1..9. */
-  sessionStep: number;
   /** Of er deze sessie al een nieuw grafeem is geïntroduceerd. */
   introducedGraphemeThisSession: boolean;
   /** Aantal items op rij gemodelleerd (frustratiestop, ED §10.3). */
@@ -38,7 +36,6 @@ export function createInitialState(profile: Profile): GameState {
   return {
     profile,
     sessionNumber: profile.sessionCount + 1,
-    sessionStep: 1,
     introducedGraphemeThisSession: false,
     consecutiveModeled: 0,
     readingStepsDone: [],
@@ -132,7 +129,6 @@ export function startNewSession(state: GameState): GameState {
   return {
     profile,
     sessionNumber: profile.sessionCount + 1,
-    sessionStep: 1,
     introducedGraphemeThisSession: false,
     consecutiveModeled: 0,
     readingStepsDone: [],
@@ -157,7 +153,6 @@ export function completeSession(state: GameState, sessionId: number = state.sess
     ...state,
     profile,
     sessionNumber: sessionCount + 1,
-    sessionStep: 1,
     introducedGraphemeThisSession: false,
     consecutiveModeled: 0,
     readingStepsDone: [],
@@ -185,10 +180,6 @@ export function recordItemAnswer(state: GameState, event: AnswerEvent, item: Act
     return { ...next, readingStepsDone: [...next.readingStepsDone, step] };
   }
   return next;
-}
-
-export function advanceStep(state: GameState, step: number): GameState {
-  return { ...state, sessionStep: step };
 }
 
 /** Introduceert een grafeem: vrijgeven + RECOGNIZE/SOUND-skill aanmaken. */

@@ -21,6 +21,7 @@ import { UI_TEXTS } from './uiTexts';
 import { INSTRUCTIONS } from './instructions';
 import { resolveInstructionKey, REQUIRED_INSTRUCTION_KEYS } from './instructions';
 import {
+  feedbackClips,
   instructionClips,
   instructionVariantClips,
   instructionVariantKeys,
@@ -69,6 +70,7 @@ export const phonologyKnownWords = PHONOLOGY_KNOWN_WORDS;
 
 // --- dynamische audio (EDU-R2-002) ---------------------------------------
 export {
+  feedbackClips,
   instructionClips,
   instructionVariantClips,
   instructionVariantKeys,

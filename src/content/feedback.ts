@@ -43,6 +43,10 @@ export const FEEDBACK: Readonly<Record<string, string>> = {
   'fb.specific.first_sound': 'Bijna! Luister naar het begin: {sound}…',
   'fb.specific.last_sound': 'Bijna! Luister naar het laatste stukje: {sound}…',
   'fb.specific.middle_sound': 'Luister naar het midden: {sound}… Welke klinker hoor je?',
+  'fb.specific.middle_consonant': 'Luister naar het midden: {sound}…',
+  // EDU-R3-001: letterklank-foutfeedback met eigen, altijd gevulde {sound} en
+  // een taalkundig kloppende formulering (de doelletter is vaak een medeklinker).
+  'fb.specific.letter_sound': 'Deze letter zegt {sound}. Probeer het nog eens.',
   'fb.specific.order': 'We lezen van links naar rechts: {word}. Probeer het nog eens.',
   'fb.specific.letter_confusion': 'Dat is de letter {letter}. Luister naar de klank: {sound}.',
   'fb.specific.blend_retry': 'Luister nog eens: {sounds}. Kun jij ze samenplakken?',
@@ -57,6 +61,8 @@ export const SPECIFIC_FEEDBACK_KEYS: readonly string[] = [
   'fb.specific.first_sound',
   'fb.specific.last_sound',
   'fb.specific.middle_sound',
+  'fb.specific.middle_consonant',
+  'fb.specific.letter_sound',
   'fb.specific.order',
   'fb.specific.letter_confusion',
   'fb.specific.blend_retry',

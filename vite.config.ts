@@ -42,10 +42,11 @@ function productionCspPlugin(): Plugin {
     name: 'leesavontuur-production-csp',
     apply: 'build',
     transformIndexHtml(html: string): string {
+      // SEC-R3-001: zet de meta-CSP **vóór** alle andere <head>-elementen, zodat
+      // ook Vite's module-script en stylesheet binnen de meta-CSP vallen. De
+      // HTTP-header blijft daarnaast leidend (zie deploy/).
       const meta = `<meta http-equiv="Content-Security-Policy" content="${PRODUCTION_CSP}" />`;
-      return html.includes('</head>')
-        ? html.replace('</head>', `    ${meta}\n  </head>`)
-        : html;
+      return html.includes('<head>') ? html.replace('<head>', `<head>\n    ${meta}`) : html;
     },
   };
 }

@@ -139,6 +139,25 @@ describe('ActivityView – Woord lezen', () => {
     expect(option?.hasAttribute('aria-checked')).toBe(true);
     expect(option?.hasAttribute('aria-pressed')).toBe(false);
   });
+
+  it('speelt een feedbackclip bij een correct antwoord (EDU-R3-002)', async () => {
+    const item = wordItem();
+    const audio = mount(item);
+    container.querySelector<HTMLButtonElement>(`.la-option[data-option-id="${item.targetId}"]`)?.click();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(audio.played.some((key) => key.startsWith('fb.'))).toBe(true);
+  });
+
+  it('speelt een feedbackclip bij een fout antwoord (EDU-R3-002)', async () => {
+    const item = wordItem();
+    const audio = mount(item);
+    const wrong = item.options.find((o) => o.id !== item.targetId);
+    container.querySelector<HTMLButtonElement>(`.la-option[data-option-id="${wrong?.id}"]`)?.click();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(audio.played.some((key) => key.startsWith('fb.'))).toBe(true);
+  });
 });
 
 describe('ActivityView – Hakken (EDU-003)', () => {

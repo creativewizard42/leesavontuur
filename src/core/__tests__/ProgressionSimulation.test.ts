@@ -20,6 +20,8 @@ import {
 } from '../GameState';
 import { createSessionQueue, flattenPlan, planSession } from '../SessionPlanner';
 import { isScoredActivityItem } from '../../learning/util';
+import { createSkillState, isMastered } from '../Mastery';
+import { MIN_MASTERY_ITEMS } from '../Progression';
 
 const MVP = ['m', 'a', 's', 't', 'k', 'r'] as const;
 const MAX_SESSIONS = 30;
@@ -193,6 +195,67 @@ describe('QA-R2-001 – de allereerste letter is echt oefen-/masterbaar', () => 
       // Klank kiezen: geen letters op het scherm, alleen audio-knoppen.
       expect(item.options.every((o) => o.label === undefined && o.audio !== undefined)).toBe(true);
       expect(item.metadata?.['auditoryDistractors']).toBe(true);
+    }
+  });
+});
+
+describe('QA-R3-001 – haalbare fase-2-poort voor de 50%-leerling', () => {
+  it('geeft de eerste letter binnen ≤ 15 sessies; daarna nooit een letter zonder beheersing van de vorige', () => {
+    // Perfect, "herstelt bij tweede poging" (score 0,5) en "gemodelleerd"
+    // (score 0) — alle drie mogen niet eindeloos in fase 1 blijven hangen.
+    const learners: { label: string; isCorrect: (item: ActivityItem, index: number) => boolean }[] = [
+      { label: 'perfect', isCorrect: () => true },
+      { label: '50%-tweede-poging', isCorrect: (_i, index) => index % 2 === 0 },
+      { label: '50%-gemodelleerd', isCorrect: (_i, index) => index % 2 === 1 },
+    ];
+
+    for (const learner of learners) {
+      let state = createInitialState(createFreshProfile(0, () => 0.5));
+      const rng = createSeededRng(77);
+      const unlockSession: Record<string, number> = {};
+
+      for (let session = 1; session <= 15; session++) {
+        state = runSession(state, rng, learner.isCorrect).state;
+        const unlocked = [...state.profile.unlockedGraphemes];
+        // Vrijgave is altijd een prefix van de MVP-volgorde ...
+        expect(unlocked, learner.label).toEqual(MVP.filter((g) => unlocked.includes(g)));
+        // ... en elke letter ná de eerste vereist beheersing van de vorige.
+        for (let i = 1; i < unlocked.length; i++) {
+          const prev = unlocked[i - 1]!;
+          const skill = state.profile.skills[`LK.${prev}.SOUND`];
+          expect(skill !== undefined && isMastered(skill, MIN_MASTERY_ITEMS), `${learner.label}: ${prev} beheerst vóór ${unlocked[i]}`).toBe(true);
+        }
+        for (const id of unlocked) if (unlockSession[id] === undefined) unlockSession[id] = session;
+      }
+
+      expect(unlockSession['m'], `${learner.label}: eerste letter m binnen 15 sessies`).toBeDefined();
+      expect(unlockSession['m']!, learner.label).toBeLessThanOrEqual(15);
+    }
+  });
+});
+
+describe('QA-R3-002 – nooit 1-optie-"keuzes" in de leessecties', () => {
+  it('laat de leessecties weg zolang er geen ≥ 2 even lange woorden zijn, maar compenseert met hakwerk', () => {
+    const profile: Profile = createFreshProfile(0, () => 0.5);
+    // m,a,s → woordenbank = {mam, as}: geen enkel even-lang paar.
+    profile.unlockedGraphemes = ['m', 'a', 's'];
+    profile.skills['FN.FIRST_SOUND'] = createSkillState({ mastery: 0.9, attempts: 12 });
+    const plan = planSession(profile, createSeededRng(5));
+
+    expect(plan.sections.some((s) => s.step === 5), 'geen woordleessectie zonder keuze').toBe(false);
+    expect(plan.sections.some((s) => s.step === 6), 'geen Klimboom zonder keuze').toBe(false);
+
+    for (const section of plan.sections) {
+      if (section.step !== 5 && section.step !== 6) continue;
+      for (const item of section.items) expect(item.options.length).toBeGreaterThanOrEqual(2);
+    }
+
+    // Compensatie: er blijft gescoord hak-/klankwerk zonder 1-optie-items.
+    const practice = plan.sections.find((s) => s.step === 4);
+    expect(practice).toBeDefined();
+    expect(practice!.items.some((i) => isScoredActivityItem(i))).toBe(true);
+    for (const item of flattenPlan(plan)) {
+      if (item.options.length < 2) expect(item.metadata?.['scored'] === false || item.kind === 'beloning').toBe(true);
     }
   });
 });

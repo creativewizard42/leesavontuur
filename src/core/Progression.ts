@@ -60,8 +60,39 @@ function anyRecognizeMastered(profile: Profile, threshold = 0.6): boolean {
 }
 
 /**
+ * QA-R3-001: de fase-2-drempel. De review toonde aan dat een leerling die de
+ * helft van de items pas bij de tweede poging goed heeft een EWMA plafonneert op
+ * ~0,78 (scoretabel 1,0 / 0,5) en de oude drempel 0,8 dus **nooit** haalt. We
+ * verlagen de drempel naar 0,7 (review-fixrichting b) en voegen daarnaast een
+ * sessie-vangnet toe, zodat een zwakkere leerling niet eindeloos in één fase
+ * vastgehouden wordt (ED §3/§10: elke fase moet een haalbare uitweg hebben).
+ */
+export const PHASE_2_MASTERY = 0.7;
+/**
+ * Vangnet (ED §3/§10): na zoveel sessies zonder poort-doorgang wordt de eerste
+ * letter tóch geïntroduceerd, met extra auditieve ondersteuning. Fase 1
+ * (fonemisch bewustzijn) blijft daarnaast in de warming-up staan.
+ */
+export const PHASE_2_FALLBACK_SESSIONS = 8;
+
+/** True als fase 2 op mastery is gehaald (los van het sessie-vangnet). */
+export function phaseTwoOpenedByMastery(profile: Profile): boolean {
+  return masteryOf(profile, 'FN.FIRST_SOUND') >= PHASE_2_MASTERY;
+}
+
+/** True als het sessie-vangnet de eerste letter ontsluit zonder mastery. */
+export function phaseTwoFallbackActive(profile: Profile): boolean {
+  return !phaseTwoOpenedByMastery(profile) && profile.sessionCount >= PHASE_2_FALLBACK_SESSIONS;
+}
+
+/** True als fase 2 open is (mastery óf sessie-vangnet). */
+export function phaseTwoOpen(profile: Profile): boolean {
+  return phaseTwoOpenedByMastery(profile) || phaseTwoFallbackActive(profile);
+}
+
+/**
  * True als een nieuw grafeem mag worden geïntroduceerd (ED §3):
- * 1. fase 2 is open (FN.FIRST_SOUND ≥ 0.8), en
+ * 1. fase 2 is open (FN.FIRST_SOUND ≥ 0.7 of het sessie-vangnet), en
  * 2. het vorige grafeem in volgorde is **beheerst** (isMastered: mastery ≥ 0.8,
  *    ≥ 12 items, consecutive ≥ 4, ≥ 2 sessies, EDU-025), en
  * 3. som zwakke grafemen ≤ 2, en
@@ -98,7 +129,7 @@ export function nextGraphemeToIntroduce(profile: Profile): Grapheme | undefined 
  * onvoorwaardelijk open. Onbekende/nog niet ontworpen fasen → false.
  */
 const PHASE_ENTRY: Readonly<Record<number, (profile: Profile) => boolean>> = {
-  2: (p) => masteryOf(p, 'FN.FIRST_SOUND') >= 0.8,
+  2: (p) => phaseTwoOpen(p),
   3: (p) => anyRecognizeMastered(p, 0.6),
   4: (p) => masteredGraphemeCount(p) >= 3 && hasMasteredVowel(p),
   5: (p) => masteryOf(p, 'SY.CVC') >= 0.7,
