@@ -32,7 +32,9 @@ type RawWord = readonly [
 ];
 
 const RAW: readonly RawWord[] = [
-  // --- MVP (ED §6.5, m, a, s, t, k, r) – 21 woorden, 17 met plaatje (GD §11.1) ---
+  // --- MVP (ED §6.5, m, a, s, t, k, r) – 18 kindvriendelijke woorden, 17 met plaatje (GD §11.1) ---
+  // mak/smak/mars zijn verwijderd: niet kindvriendelijk (QA-R2-004/EDU-016) en
+  // konden als doel-/afleiderwoord opduiken. Het restant blijft ruim ≥ 8 (ED §5.2).
   ['mam', ['m', 'a', 'm'], { mvp: true, image: true }],
   ['as', ['a', 's'], { mvp: true, image: true }],
   ['mat', ['m', 'a', 't'], { mvp: true, image: true }],
@@ -41,7 +43,6 @@ const RAW: readonly RawWord[] = [
   ['kat', ['k', 'a', 't'], { mvp: true, image: true }],
   ['tak', ['t', 'a', 'k'], { mvp: true, image: true }],
   ['kas', ['k', 'a', 's'], { mvp: true, image: true }],
-  ['mak', ['m', 'a', 'k'], { mvp: true, kidFriendly: false }],
   ['ram', ['r', 'a', 'm'], { mvp: true, image: true }],
   ['rat', ['r', 'a', 't'], { mvp: true, image: true }],
   ['kar', ['k', 'a', 'r'], { mvp: true, image: true }],
@@ -51,8 +52,6 @@ const RAW: readonly RawWord[] = [
   ['mast', ['m', 'a', 's', 't'], { mvp: true, image: true }],
   ['stam', ['s', 't', 'a', 'm'], { mvp: true, image: true }],
   ['kras', ['k', 'r', 'a', 's'], { mvp: true, image: true }],
-  ['smak', ['s', 'm', 'a', 'k'], { mvp: true, kidFriendly: false }],
-  ['mars', ['m', 'a', 'r', 's'], { mvp: true, kidFriendly: false }],
   ['start', ['s', 't', 'a', 'r', 't'], { mvp: true }],
 
   // --- Fase 5, blok 2 (ED §6.5 #22–48) ---

@@ -20,6 +20,7 @@ export const INSTRUCTIONS: Readonly<Record<string, string>> = {
   // Letter-klank (GD §4b)
   'instr.lk.grapheme_to_sound': 'Welke klank zegt deze letter?',
   'instr.lk.sound_to_grapheme': 'Welke letter hoort bij {sound}?',
+  'instr.lk.intro': 'Dit is de letter {letter}. Hij zegt {sound}.',
   'instr.letterklank.r1': 'Welke klank zegt deze letter?',
   'instr.letterklank.r2': 'Welke letter hoort bij {klank}?',
   // Hakken (GD §4c)
@@ -62,12 +63,15 @@ export const REQUIRED_INSTRUCTION_KEYS: readonly string[] = [
   'instr.fn.last_sound',
   'instr.lk.grapheme_to_sound',
   'instr.lk.sound_to_grapheme',
+  'instr.lk.intro',
   'instr.ph.syllable',
   'instr.ph.rhyme',
   'instr.de.read',
   'instr.klim',
   'instr.hakken.start',
+  'instr.hakken.count',
   'instr.plakken.r1',
+  'instr.plakken.r2',
 ];
 
 /**
@@ -97,4 +101,21 @@ export function resolveInstructionKey(
     }
   }
   return undefined;
+}
+
+const PLACEHOLDER_PATTERN = /\{(\w+)\}/;
+
+/** True als een template `{placeholder}`s bevat die runtime ingevuld moeten worden. */
+export function hasPlaceholders(text: string): boolean {
+  return PLACEHOLDER_PATTERN.test(text);
+}
+
+/** Alle placeholder-namen in een template (in voorkomende orde, zonder duplicaten). */
+export function placeholdersOf(text: string): string[] {
+  const out: string[] = [];
+  for (const match of text.matchAll(/\{(\w+)\}/g)) {
+    const name = match[1];
+    if (name !== undefined && !out.includes(name)) out.push(name);
+  }
+  return out;
 }

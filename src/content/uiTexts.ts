@@ -63,11 +63,19 @@ export const UI_TEXTS: Readonly<Record<string, string>> = {
   'ui.option.letter.n': 'letter {letter}',
   'ui.option.word.n': 'woord {woord}',
   'ui.option.number.n': 'aantal {n}',
+  // Audio-only klankoptie (klankjager/plakken/klimboom): gelabeld voor de
+  // ouderzone/aria; het kind kiest op klank (EDU-R2-007, QA-R2-005).
+  'ui.option.sound': 'Luister naar klank {n}',
+  // Generiek label voor vorm-afleiders (G1 introduceert vorm-afleiders).
+  'ui.option.shape': 'vorm',
   'ui.play': 'Speel',
   'ui.avatar.group': 'Kies een dierenvriendje',
   'ui.audio.fallback': 'Luister goed',
   'ui.audio.unavailable': 'Geluid niet beschikbaar',
   'ui.audio.unavailable.hint': 'Kijk goed naar de klanken en de plaatjes.',
+  // Ouder-/ontwikkelmarkering: losse klanken/gerekte reeksen klinken nu via TTS
+  // (EDU-R2-007). Rustig, niet-diagnostisch (ED §9.1).
+  'ui.audio.approximate': 'Klank is een benadering, nog geen echte opname',
   'ui.tap.start': 'Tik voor elke klank die je hoort',
   'ui.tap.done': 'Klaar',
   'ui.tap.count': '{n} klanken getikt',

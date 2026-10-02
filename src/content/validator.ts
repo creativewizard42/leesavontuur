@@ -17,7 +17,8 @@ import { SIGHT_WORDS } from './sightWords';
 import { SENTENCES } from './sentences';
 import { FEEDBACK, REQUIRED_FEEDBACK_KEYS } from './feedback';
 import { UI_TEXTS } from './uiTexts';
-import { INSTRUCTIONS, INSTRUCTION_KEY_PATTERNS, REQUIRED_INSTRUCTION_KEYS } from './instructions';
+import { INSTRUCTIONS, INSTRUCTION_KEY_PATTERNS, hasPlaceholders, REQUIRED_INSTRUCTION_KEYS } from './instructions';
+import { instructionVariantKeys } from './dynamicClips';
 import { PROPER_NAMES } from './properNames';
 import { AUDIO_MANIFEST } from './audioManifest';
 import { isBlockedWord } from './blocklist';
@@ -560,12 +561,25 @@ export function validateContent(
     }
   }
 
-  // --- instructie-keys (EDU-009) -------------------------------------------
+  // --- instructie-keys (EDU-009, EDU-R2-002) --------------------------------
   for (const key of REQUIRED_INSTRUCTION_KEYS) {
-    if (!(key in instructions)) {
+    const template = instructions[key];
+    if (template === undefined) {
       add('MISSING_INSTRUCTION', `Vereiste instructie-key "${key}" ontbreekt in INSTRUCTIONS`, 'instructions');
+      continue;
     }
-    if (!clipByKey.has(key)) {
+    if (hasPlaceholders(template)) {
+      // Dynamische instructie: eis een concrete clip per variabele (EDU-R2-002).
+      for (const variantKey of instructionVariantKeys(key)) {
+        if (!clipByKey.has(variantKey)) {
+          add(
+            'MISSING_INSTRUCTION_AUDIO',
+            `Geen audio-clip voor dynamische instructie-variant "${variantKey}"`,
+            `audioManifest:${variantKey}`,
+          );
+        }
+      }
+    } else if (!clipByKey.has(key)) {
       add('MISSING_INSTRUCTION_AUDIO', `Geen audio-clip voor instructie-key "${key}"`, 'audioManifest');
     }
   }

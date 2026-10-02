@@ -349,7 +349,9 @@ export function createAudioService(options: AudioServiceOptions = {}): AudioServ
       if (result.reason !== undefined) reason = result.reason;
       if (i < hints.length - 1 && hintPauseMs > 0) await delay(hintPauseMs);
     }
-    return playResult(best, true, reason);
+    // Alleen een echte TTS-weergave is een "benadering"; bij volledige stilte
+    // (geen stem) is approximate onwaar (EDU-R2-007).
+    return playResult(best, best === 'tts', reason);
   }
 
   function stop(): void {
