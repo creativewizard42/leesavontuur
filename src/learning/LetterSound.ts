@@ -27,6 +27,14 @@ export interface LetterSoundOptions {
   rng: Rng;
   /** Posities van het juiste antwoord in recente items (nooit 3× op rij). */
   avoidCorrectIndices?: readonly number[];
+  /**
+   * QA-R2-001 / EDU-R2-001: sta bij **grafeem→klank** auditieve afleiders toe
+   * uit nog niet geleerde grafemen wanneer er nog geen tweede geleerd grafeem
+   * is. Deze opties zijn audio-only (geen letter in beeld) en gelden als
+   * auditieve discriminatie (ED §6.2 regel 8). Voor klank→grafeem wordt dit
+   * genegeerd, omdat daar geen ongeleerde letters getoond mogen worden.
+   */
+  allowUnlearnedAuditoryDistractors?: boolean;
 }
 
 export function generate(options: LetterSoundOptions): ActivityItem {
@@ -35,13 +43,16 @@ export function generate(options: LetterSoundOptions): ActivityItem {
   const targetSound = target?.soundHint ?? targetGrapheme;
 
   const distractorCount = Math.max(1, optionCountFor(difficulty) - 1);
+  const allowAuditory = options.allowUnlearnedAuditoryDistractors === true && direction === 'grapheme-to-sound';
   const distractors = pickGraphemeDistractors(
     targetGrapheme,
     learnedGraphemes,
     difficulty,
     distractorCount,
     rng,
+    allowAuditory,
   );
+  const unlearnedDistractors = distractors.filter((g) => !learnedGraphemes.has(g.id));
 
   let correct: OptionSpec;
   let distractorSpecs: OptionSpec[];
@@ -99,6 +110,10 @@ export function generate(options: LetterSoundOptions): ActivityItem {
       }),
       targetGrapheme,
       direction,
+      // QA-R2-001: afleiders die (nog) niet geleerd zijn, maar puur auditief
+      // worden aangeboden; de UI toont hier geen letters bij (audio-only).
+      auditoryDistractors: unlearnedDistractors.length > 0,
+      distractorGraphemes: distractors.map((g) => g.id),
       // Ongescoord wanneer er geen echte keuze mogelijk is (EDU-004).
       scored: placed.length >= 2,
     },

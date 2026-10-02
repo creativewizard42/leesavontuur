@@ -72,6 +72,41 @@ describe('GameState – idempotent afronden (QA-005)', () => {
   });
 });
 
+describe('GameState – vonkje per leesstap (EDU-027)', () => {
+  function readingItem(step: number, id: string): ActivityItem {
+    return {
+      id,
+      skillId: 'DE.CVC',
+      kind: 'woordlezen',
+      prompt: { text: 'kam', showText: true },
+      options: [
+        { id: `${id}.o0`, correct: true },
+        { id: `${id}.o1`, correct: false },
+      ],
+      targetId: `${id}.o0`,
+      difficulty: 'A',
+      isRetry: false,
+      metadata: { step },
+    };
+  }
+
+  it('kent één vonkje per afgeronde leesstap 3–6 toe', () => {
+    let state = createInitialState(baseProfile());
+    for (const step of [3, 4, 5, 6]) {
+      const it = readingItem(step, `i${step}`);
+      state = recordItemAnswer(state, event({ itemId: it.id }), it);
+    }
+    state = completeSession(state, state.sessionNumber);
+    expect(state.profile.rewards.klankvonkjes).toBe(4);
+  });
+
+  it('geeft minstens één vonkje bij een sessie zonder leesstappen', () => {
+    let state = createInitialState(baseProfile());
+    state = completeSession(state, state.sessionNumber);
+    expect(state.profile.rewards.klankvonkjes).toBe(1);
+  });
+});
+
 describe('GameState – ongescoorde items (QA-006 / EDU-004)', () => {
   it('negeert items met één optie volledig', () => {
     const state = createInitialState(baseProfile());

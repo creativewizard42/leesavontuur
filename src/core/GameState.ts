@@ -25,6 +25,11 @@ export interface GameState {
   introducedGraphemeThisSession: boolean;
   /** Aantal items op rij gemodelleerd (frustratiestop, ED §10.3). */
   consecutiveModeled: number;
+  /**
+   * Afgeronde leesstappen (3–6) in deze sessie. Elke stap levert één vonkje op
+   * (EDU-027 / GD §6.1) in plaats van één vonkje per sessie.
+   */
+  readingStepsDone: number[];
   /** Sessie-id dat al is afgerond; voorkomt dubbele beloning (QA-005). */
   lastCompletedSessionId: number;
 }
@@ -36,6 +41,7 @@ export function createInitialState(profile: Profile): GameState {
     sessionStep: 1,
     introducedGraphemeThisSession: false,
     consecutiveModeled: 0,
+    readingStepsDone: [],
     lastCompletedSessionId: 0,
   };
 }
@@ -129,6 +135,7 @@ export function startNewSession(state: GameState): GameState {
     sessionStep: 1,
     introducedGraphemeThisSession: false,
     consecutiveModeled: 0,
+    readingStepsDone: [],
     lastCompletedSessionId: state.lastCompletedSessionId,
   };
 }
@@ -142,7 +149,10 @@ export function completeSession(state: GameState, sessionId: number = state.sess
   if (state.lastCompletedSessionId === sessionId) return state;
   const sessionCount = Math.max(state.profile.sessionCount, sessionId);
   let profile: Profile = { ...state.profile, sessionCount };
-  profile = addSparks(profile, 1);
+  // EDU-027: één klankvonkje per afgeronde leesstap (3–6), minstens één per
+  // sessie zodat ook een korte sessie beloond wordt (GD §6.1).
+  const sparks = Math.max(1, new Set(state.readingStepsDone).size);
+  profile = addSparks(profile, sparks);
   return {
     ...state,
     profile,
@@ -150,6 +160,7 @@ export function completeSession(state: GameState, sessionId: number = state.sess
     sessionStep: 1,
     introducedGraphemeThisSession: false,
     consecutiveModeled: 0,
+    readingStepsDone: [],
     lastCompletedSessionId: sessionId,
   };
 }
@@ -161,7 +172,19 @@ export function completeSession(state: GameState, sessionId: number = state.sess
  */
 export function recordItemAnswer(state: GameState, event: AnswerEvent, item: ActivityItem): GameState {
   if (!isScoredActivityItem(item)) return state;
-  return recordAnswer(state, event);
+  const next = recordAnswer(state, event);
+  const step = item.metadata?.['step'];
+  if (
+    typeof step === 'number' &&
+    step >= 3 &&
+    step <= 6 &&
+    !event.isGuess &&
+    (event.correct || event.modeled) &&
+    !next.readingStepsDone.includes(step)
+  ) {
+    return { ...next, readingStepsDone: [...next.readingStepsDone, step] };
+  }
+  return next;
 }
 
 export function advanceStep(state: GameState, step: number): GameState {

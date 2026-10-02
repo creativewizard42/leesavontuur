@@ -51,6 +51,31 @@ function wordFromItem(item: ActivityItem): Word | undefined {
   return typeof key === 'string' ? getWord(key) : undefined;
 }
 
+/**
+ * EDU-R2-004: de gerekte klankreeks van het doelwoord voor plak-feedback.
+ * Gebruikt `metadata.sequence` (de generatoren zetten daar de soundHints in) en
+ * valt anders terug op de grafeemsegmentatie van het woord.
+ */
+function sequenceSounds(item: ActivityItem): string {
+  const raw = item.metadata?.['sequence'];
+  if (Array.isArray(raw)) {
+    const sounds = raw.filter((s): s is string => typeof s === 'string');
+    if (sounds.length > 0) return sounds.join(' - ');
+  }
+  const word = wordFromItem(item);
+  if (word) return word.graphemes.map((g) => soundHint(g)).join(' - ');
+  return '';
+}
+
+/** EDU-R2-005: het gekozen aantal klanken bij hakken (voor fb.specific.count). */
+function chosenCount(item: ActivityItem, chosenId: string): string {
+  const option = item.options.find((o) => o.id === chosenId);
+  if (option?.label) return option.label;
+  if (chosenId.startsWith('n:')) return chosenId.slice(2);
+  const target = item.metadata?.['phonemeCount'];
+  return typeof target === 'number' ? String(target) : '';
+}
+
 function sameGraphemesDifferentOrder(a: readonly string[], b: readonly string[]): boolean {
   if (a.length !== b.length || a.length < 2) return false;
   if (a.join('|') === b.join('|')) return false;
@@ -148,7 +173,11 @@ function specificForLetterSound(item: ActivityItem, chosenId: string): SpecificF
 function specificFeedback(item: ActivityItem, chosenId: string): SpecificFeedback | undefined {
   switch (item.kind) {
     case 'plakken':
-      return { key: 'fb.specific.blend_retry', vars: { word: wordFromItem(item)?.word ?? '', sounds: '' } };
+      // EDU-R2-004: nooit een lege {sounds}; vul de gerekte klankreeks.
+      return { key: 'fb.specific.blend_retry', vars: { word: wordFromItem(item)?.word ?? '', sounds: sequenceSounds(item) } };
+    case 'hakken':
+      // EDU-R2-005: tel-fout krijgt tel-feedback, niet de leesrichting-uitleg.
+      return { key: 'fb.specific.count', vars: { count: chosenCount(item, chosenId) } };
     case 'woordlezen':
     case 'klimboom':
       return specificForWordChoice(item, chosenId);

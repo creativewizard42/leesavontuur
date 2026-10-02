@@ -75,9 +75,10 @@ export function generate(options: SegmentingOptions): ActivityItem {
     itemKey: word,
     metadata: {
       ...feedbackMeta(
-        skillId === 'FN.COUNT'
-          ? { correct: 'fb.correct.7', try1: 'fb.try1.1', hint: 'fb.hint.5', model: 'fb.model.1' }
-          : { correct: 'fb.correct.7', try1: 'fb.try1.4', hint: 'fb.hint.5', model: 'fb.model.1' },
+        // EDU-R2-005: hakken is een auditieve telopdracht; de generieke
+        // leesrichting-uitleg (fb.try1.4) klopt hier niet. De foutspecifieke
+        // tel-feedback loopt via `kind: 'hakken'` (fb.specific.count).
+        { correct: 'fb.correct.7', try1: 'fb.try1.1', hint: 'fb.hint.5', model: 'fb.model.1' },
       ),
       ...wordMetadata(word, {
         task: 'segment',

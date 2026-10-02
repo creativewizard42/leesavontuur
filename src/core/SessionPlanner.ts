@@ -9,7 +9,10 @@
  */
 import type {
   ActivityItem,
+  ActivityOption,
+  ActivityPrompt,
   AnswerEvent,
+  AudioClip,
   Difficulty,
   Profile,
   Rng,
@@ -21,7 +24,9 @@ import { defaultRng } from '../types';
 import { getGrapheme, getWord } from '../content';
 import {
   canIntroduceNewGrapheme,
+  MIN_MASTERY_ITEMS,
   nextGraphemeToIntroduce,
+  phaseUnlocked,
   recognizeSkillFor,
   skillStatus,
   soundSkillFor,
@@ -34,7 +39,7 @@ import {
   shouldSimplify,
   shouldStopForFrustration,
 } from './Adaptive';
-import { createSkillState, updateSkillState } from './Mastery';
+import { createSkillState, ensureSkillDetail, isMastered, updateSkillState, type SkillStateDetail } from './Mastery';
 import {
   ALL_GRAPHEMES,
   allowedWordObjects,
@@ -73,9 +78,25 @@ const PRACTICE_ITEMS = 6;
 const WORD_READING_ITEMS = 6;
 const MINI_GAME_ITEMS = 8;
 const REPETITION_ITEMS = 4;
-const LETTER_PRACTICE_ITEMS = 2;
+/**
+ * Aantal LK.<g>.SOUND-oefeningen voor zwakke/vrijgegeven grafemen per sessie
+ * (QA-R2-001). Zonder deze oefening kan het vorige grafeem nooit `isMastered`
+ * worden en loopt de leerroute vast op de eerste letter.
+ */
+const LETTER_PRACTICE_ITEMS = 4;
 /** Minimaal aantal gescoorde oefenitems per sessie (QA-003 / GD §6.1). */
 export const MIN_SCORED_PRACTICE = 4;
+
+/**
+ * Sessiemix (ED §10.3 / EDU-026): 60% huidig doel, 25% herhaling (Leitner) en
+ * 15% voorbereidend (fase-1 auditief). De balans wordt ná het opbouwen van de
+ * secties bijgestuurd door Sectie 1/2 (voorbereidend) en Sectie 7 (herhaling)
+ * aan te vullen tot de streefverhouding; er wordt nooit iets weggeknipt, zodat
+ * de gegarandeerde leerroute intact blijft.
+ */
+export const SESSION_MIX = { current: 0.6, repetition: 0.25, preparatory: 0.15 } as const;
+/** Maximaal aantal items dat een rustige frustratie-wind-down per sectie laat. */
+const WIND_DOWN_ITEMS_PER_SECTION = 2;
 
 /** Moeilijkheid op basis van de mastery van een doel (ED §10.3). */
 export function difficultyForSkill(profile: Profile, skillId: SkillId): Difficulty {
@@ -122,6 +143,16 @@ function hasDistractorGrapheme(learned: ReadonlySet<string>, targetId: string): 
   return false;
 }
 
+/**
+ * QA-R2-001: een vrijgegeven grafeem heeft nog LK-oefening nodig zolang het
+ * niet volgens `isMastered` beheerst is. Alleen naar mastery kijken is fout:
+ * de eerste correcte beurt zet mastery al op 1.0 door `alpha = 1` bij attempts 0,
+ * terwijl er pas ≥ 12 items nodig zijn.
+ */
+function needsLetterPractice(profile: Profile, graphemeId: string): boolean {
+  return !isMastered(profile.skills[soundSkillFor(graphemeId)], MIN_MASTERY_ITEMS);
+}
+
 export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPlan {
   const sessionNumber = profile.sessionCount + 1;
   const learned = effectiveLearned(new Set(profile.unlockedGraphemes));
@@ -148,15 +179,21 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
   }
 
   // 2. Klankoefening – puur auditief (FN.FIRST_SOUND / FN.LAST_SOUND).
+  //    QA-R2-002: de fase-2-poort hangt aan FN.FIRST_SOUND (ED §3). Zolang die
+  //    poort dicht is, oefent de warming-up gericht FIRST_SOUND (vóór LAST) en
+  //    krijgt het kind een extra item, zodat de eerste letter niet pas na ~5
+  //    sessies komt.
   {
-    const nickname = rng() < 0.5 ? 'FN.FIRST_SOUND' : 'FN.LAST_SOUND';
-    const difficulty = difficultyForSkill(profile, nickname);
+    const phase2open = phaseUnlocked(profile, 2);
+    const nickname = phase2open ? (rng() < 0.5 ? 'FN.FIRST_SOUND' : 'FN.LAST_SOUND') : 'FN.FIRST_SOUND';
+    const soundCount = phase2open ? SOUND_ITEMS : SOUND_ITEMS + 1;
+    const difficulty = phase2open ? difficultyForSkill(profile, nickname) : 'A';
     const items = FirstSound.generate(
       wordPool.length >= 2
         ? {
             skillId: nickname,
             difficulty,
-            count: SOUND_ITEMS,
+            count: soundCount,
             availableWords: wordNames,
             rng,
             learned,
@@ -168,7 +205,7 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
             // de eerste letters (EDU-010).
             skillId: nickname,
             difficulty: 'A',
-            count: SOUND_ITEMS,
+            count: soundCount,
             availableWords: [],
             rng,
             auditory: true,
@@ -206,8 +243,16 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
           scored: false,
         },
       });
-      // Gescoorde oefening pas als er ≥ 2 opties mogelijk zijn (EDU-004).
-      if (hasDistractorGrapheme(learned, next.id)) {
+      // Gescoorde oefening. Voor de allereerste letter is er nog geen tweede
+      // geleerd grafeem: dan oefenen we bewust LK.<g>.SOUND (letter zien →
+      // klank kiezen) met audio-only KLANK-afleiders uit de volledige
+      // inventaris (QA-R2-001 / EDU-R2-001 keuze (a)); er komt dus geen
+      // ongeleerde letter in beeld en het is echte auditieve discriminatie.
+      // Klank→grafeem (RECOGNIZE) stellen we uit tot er ≥ 2 geleerde grafemen
+      // zijn, zodat er nooit een ongeleerde letter als optie verschijnt
+      // (EDU-R2-001 keuze (b)).
+      const hasLearnedDistractor = hasDistractorGrapheme(learned, next.id);
+      if (hasLearnedDistractor) {
         const half = Math.ceil(NEW_LETTER_ITEMS / 2);
         for (let i = 0; i < half; i++) {
           items.push(
@@ -235,6 +280,21 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
             }),
           );
         }
+      } else {
+        for (let i = 0; i < NEW_LETTER_ITEMS; i++) {
+          items.push(
+            LetterSound.generate({
+              skillId: soundSkillFor(next.id),
+              direction: 'grapheme-to-sound',
+              targetGrapheme: next.id,
+              learnedGraphemes: learned,
+              allowUnlearnedAuditoryDistractors: true,
+              difficulty: 'A',
+              rng,
+              avoidCorrectIndices: avoid,
+            }),
+          );
+        }
       }
       record(items);
       sections.push({ step: 3, name: 'Nieuwe letter/klank', items });
@@ -242,11 +302,16 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
   }
 
   // 4. Oefenen – hakken + plakken met de nieuwste/zwakke grafemen.
-  if (wordPool.length >= 2) {
+  //    Met één toegestaan woord (bv. alleen m+a → "mam") is hakken op een
+  //    gesproken woord al mogelijk: de opties zijn aantallen klanken, puur
+  //    auditief (ED §4.1). Plakken blijft wachten op ≥ 2 woorden, omdat het
+  //    geschreven woordopties toont (EDU-R2-001c).
+  if (wordPool.length >= 1) {
     const targets = pickWords(wordPool, PRACTICE_ITEMS, rng);
+    const canBlend = choicePool.length >= 1;
     const items: ActivityItem[] = [];
     targets.forEach((target, index) => {
-      if (index % 2 === 0) {
+      if (index % 2 === 0 || !canBlend) {
         const skill = skillsForWordFn(target).segment;
         items.push(
           Segmenting.generate({
@@ -351,23 +416,27 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
         );
       }
     }
-    // Zwakke vrijgegeven grafemen blijven oefenbaar, ook zonder woorden.
-    if (wordPool.length < 2 && hasDistractorGrapheme(learned, '')) {
-      const weak = new Set<string>();
-      for (const id of profile.unlockedGraphemes) {
-        const skill = soundSkillFor(id);
-        if ((profile.skills[skill]?.mastery ?? 0) < 0.8) weak.add(id);
-      }
-      // Valt terug op alle vrijgegeven grafemen als er (nog) geen zwakke zijn.
-      const targets = [...(weak.size > 0 ? weak : new Set(profile.unlockedGraphemes))].slice(0, LETTER_PRACTICE_ITEMS);
-      for (const id of targets) {
-        if (!hasDistractorGrapheme(learned, id)) continue;
+    // Zwakke vrijgegeven grafemen blijven oefenbaar, ook zonder woorden en ook
+    // wanneer er al woordsecties zijn (anders kan het zojuist geïntroduceerde
+    // grafeem nooit `isMastered` worden; QA-R2-001). Voor de allereerste
+    // letter gebruiken we audio-only klank-afleiders uit de inventaris.
+    {
+      const weak = profile.unlockedGraphemes.filter((id) => needsLetterPractice(profile, id));
+      const fallback = wordPool.length < 2 ? [...profile.unlockedGraphemes] : [];
+      const targets = (weak.length > 0 ? weak : fallback).slice(0, LETTER_PRACTICE_ITEMS);
+      // Herhaal de zwakke/nieuwste grafemen tot het gewenste aantal oefeningen,
+      // ook als er maar één zwak grafeem is (QA-R2-001: anders kan een zojuist
+      // geïntroduceerde letter nooit `isMastered` worden).
+      for (let n = 0; n < LETTER_PRACTICE_ITEMS && targets.length > 0; n++) {
+        const id = targets[n % targets.length] as string;
+        const hasLearnedDistractor = hasDistractorGrapheme(learned, id);
         items.push(
           LetterSound.generate({
             skillId: soundSkillFor(id),
             direction: 'grapheme-to-sound',
             targetGrapheme: id,
             learnedGraphemes: learned,
+            allowUnlearnedAuditoryDistractors: !hasLearnedDistractor,
             difficulty: difficultyForSkill(profile, soundSkillFor(id)),
             rng,
             avoidCorrectIndices: avoid,
@@ -400,6 +469,66 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
       const existing = sections.find((s) => s.step === 7);
       if (existing) existing.items.push(...extra);
       else if (extra.length > 0) sections.push({ step: 7, name: 'Extra oefening', items: extra });
+    }
+  }
+
+  // EDU-026: stuur de sessiemix bij richting 60/25/15 (ED §10.3). Er wordt
+  // alleen aangevuld, nooit weggeknipt, zodat de gegarandeerde leerroute
+  // (QA-003/QA-R2-001) intact blijft.
+  {
+    const scoredOf = (list: readonly ActivityItem[]): number => list.filter((i) => isScoredActivityItem(i)).length;
+    const total = sections.reduce((sum, section) => sum + scoredOf(section.items), 0);
+    const desiredPrep = Math.round(total * SESSION_MIX.preparatory);
+    const desiredRep = Math.round(total * SESSION_MIX.repetition);
+    let prep = sections.filter((s) => s.step === 1 || s.step === 2).reduce((sum, s) => sum + scoredOf(s.items), 0);
+    let rep = sections.filter((s) => s.step === 7).reduce((sum, s) => sum + scoredOf(s.items), 0);
+
+    if (prep < desiredPrep) {
+      const extra = Phonology.generate({
+        skillId: rng() < 0.5 ? 'PH.RHYME' : 'PH.SYLLABLE',
+        difficulty: 'A',
+        count: desiredPrep - prep,
+        rng,
+        avoidCorrectIndices: avoid,
+      });
+      record(extra);
+      const host = sections.find((s) => s.step === 1) ?? sections.find((s) => s.step === 2);
+      if (host) host.items.push(...extra);
+      else if (extra.length > 0) sections.push({ step: 1, name: 'Klankwarming-up', items: extra });
+      prep += extra.filter((i) => isScoredActivityItem(i)).length;
+    }
+
+    if (rep < desiredRep && profile.unlockedGraphemes.length > 0) {
+      const weak = profile.unlockedGraphemes.filter((id) => needsLetterPractice(profile, id));
+      const pool = weak.length > 0 ? weak : [...profile.unlockedGraphemes];
+      let added = 0;
+      while (rep < desiredRep && added < pool.length) {
+        const id = pool[added % pool.length] as string;
+        const item = LetterSound.generate({
+          skillId: soundSkillFor(id),
+          direction: 'grapheme-to-sound',
+          targetGrapheme: id,
+          learnedGraphemes: learned,
+          allowUnlearnedAuditoryDistractors: !hasDistractorGrapheme(learned, id),
+          difficulty: difficultyForSkill(profile, soundSkillFor(id)),
+          rng,
+          avoidCorrectIndices: avoid,
+        });
+        record([item]);
+        const host = sections.find((s) => s.step === 7);
+        if (host) host.items.push(item);
+        else sections.push({ step: 7, name: 'Herhaling', items: [item] });
+        if (isScoredActivityItem(item)) rep += 1;
+        added += 1;
+      }
+    }
+  }
+
+  // EDU-027: markeer per item in welke sessiestap het valt, zodat GameState
+  // één vonkje per afgeronde leesstap (3–6) kan toekennen (GD §6.1).
+  for (const section of sections) {
+    for (const item of section.items) {
+      item.metadata = { ...(item.metadata ?? {}), step: section.step };
     }
   }
 
@@ -458,6 +587,141 @@ const MAX_EVENTS_PER_SKILL = 20;
 
 function cloneItem(item: ActivityItem): ActivityItem {
   return JSON.parse(JSON.stringify(item)) as ActivityItem;
+}
+
+// ---------------------------------------------------------------------------
+// SEC-R2-001/002: strikte schema-/omvangvalidatie van hervat-JSON
+// ---------------------------------------------------------------------------
+/** Maximale grootte van de resume-sleutel; groter → negeren (lokale DoS). */
+export const MAX_RESUME_BYTES = 200 * 1024;
+const MAX_SECTIONS = 32;
+const MAX_ITEMS_PER_SECTION = 40;
+const MAX_OPTIONS_PER_ITEM = 8;
+const MAX_SKILL_STATES = 500;
+const MAX_METADATA_KEYS = 40;
+const DANGEROUS_KEYS: ReadonlySet<string> = new Set(['__proto__', 'constructor', 'prototype']);
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function nonNegInt(value: unknown, fallback = 0): number {
+  if (typeof value !== 'number' || !Number.isFinite(value) || value < 0) return fallback;
+  return Math.floor(value);
+}
+
+function readAudio(value: unknown): AudioClip | undefined {
+  if (!isRecord(value)) return undefined;
+  const key = value['key'];
+  const src = value['src'];
+  const kind = value['kind'];
+  if (typeof key !== 'string' || typeof src !== 'string' || typeof kind !== 'string') return undefined;
+  const clip: AudioClip = { key, src, kind: kind as AudioClip['kind'] };
+  if (typeof value['text'] === 'string') clip.text = value['text'];
+  return clip;
+}
+
+/** Alleen eigen, veilige keys; `__proto__`/`constructor`/`prototype` eruit. */
+function sanitizeMetadata(value: unknown): Record<string, unknown> | undefined {
+  if (!isRecord(value)) return undefined;
+  const out: Record<string, unknown> = Object.create(null) as Record<string, unknown>;
+  let count = 0;
+  for (const [key, entry] of Object.entries(value)) {
+    if (DANGEROUS_KEYS.has(key)) continue;
+    out[key] = entry;
+    count += 1;
+    if (count >= MAX_METADATA_KEYS) break;
+  }
+  return out;
+}
+
+function readOption(value: unknown): ActivityOption | undefined {
+  if (!isRecord(value)) return undefined;
+  const id = value['id'];
+  const correct = value['correct'];
+  if (typeof id !== 'string' || typeof correct !== 'boolean') return undefined;
+  const option: ActivityOption = { id, correct };
+  if (typeof value['label'] === 'string') option.label = value['label'];
+  if (typeof value['image'] === 'string') option.image = value['image'];
+  const audio = readAudio(value['audio']);
+  if (audio) option.audio = audio;
+  return option;
+}
+
+function readItem(value: unknown): ActivityItem | undefined {
+  if (!isRecord(value)) return undefined;
+  const id = value['id'];
+  const skillId = value['skillId'];
+  const kind = value['kind'];
+  const targetId = value['targetId'];
+  const difficulty = value['difficulty'];
+  const isRetry = value['isRetry'];
+  if (typeof id !== 'string' || typeof skillId !== 'string' || typeof kind !== 'string') return undefined;
+  if (typeof targetId !== 'string') return undefined;
+  if (difficulty !== 'A' && difficulty !== 'B' && difficulty !== 'C' && difficulty !== 'D') return undefined;
+  if (typeof isRetry !== 'boolean') return undefined;
+  if (!isRecord(value['prompt'])) return undefined;
+  const promptRaw = value['prompt'];
+  const showText = promptRaw['showText'];
+  if (typeof showText !== 'boolean') return undefined;
+  const prompt: ActivityPrompt = { showText };
+  if (typeof promptRaw['text'] === 'string') prompt.text = promptRaw['text'];
+  const promptAudio = readAudio(promptRaw['audio']);
+  if (promptAudio) prompt.audio = promptAudio;
+
+  const optionsRaw = value['options'];
+  if (!Array.isArray(optionsRaw) || optionsRaw.length > MAX_OPTIONS_PER_ITEM) return undefined;
+  const options: ActivityOption[] = [];
+  for (const raw of optionsRaw) {
+    const option = readOption(raw);
+    if (!option) return undefined;
+    options.push(option);
+  }
+
+  const item: ActivityItem = { id, skillId, kind, prompt, options, targetId, difficulty, isRetry };
+  if (typeof value['secondarySkillId'] === 'string') item.secondarySkillId = value['secondarySkillId'];
+  if (typeof value['itemKey'] === 'string') item.itemKey = value['itemKey'];
+  const metadata = sanitizeMetadata(value['metadata']);
+  if (metadata) item.metadata = metadata;
+  return item;
+}
+
+function readSections(value: unknown): SessionSection[] | undefined {
+  if (!Array.isArray(value) || value.length > MAX_SECTIONS) return undefined;
+  const sections: SessionSection[] = [];
+  for (const raw of value) {
+    if (!isRecord(raw)) return undefined;
+    const step = raw['step'];
+    const name = raw['name'];
+    const itemsRaw = raw['items'];
+    if (typeof step !== 'number' || !Number.isFinite(step)) return undefined;
+    if (typeof name !== 'string') return undefined;
+    if (!Array.isArray(itemsRaw) || itemsRaw.length > MAX_ITEMS_PER_SECTION) return undefined;
+    const items: ActivityItem[] = [];
+    for (const rawItem of itemsRaw) {
+      const item = readItem(rawItem);
+      if (!item) return undefined;
+      items.push(item);
+    }
+    sections.push({ step, name, items });
+  }
+  return sections;
+}
+
+function isValidEvent(value: unknown): value is AnswerEvent {
+  if (!isRecord(value)) return false;
+  return (
+    typeof value['itemId'] === 'string' &&
+    typeof value['skillId'] === 'string' &&
+    typeof value['sessionNumber'] === 'number' &&
+    typeof value['timestamp'] === 'number' &&
+    typeof value['correct'] === 'boolean' &&
+    typeof value['attempt'] === 'number' &&
+    typeof value['usedHint'] === 'boolean' &&
+    typeof value['modeled'] === 'boolean' &&
+    typeof value['responseMs'] === 'number' &&
+    typeof value['isGuess'] === 'boolean'
+  );
 }
 
 /** Makkelijk succes-item: een gemeesterd grafeem, anders fase-1 auditief. */
@@ -530,7 +794,6 @@ export class SessionQueue {
     for (let s = this.sectionIndex; s < this.sections.length; s++) {
       const section = this.sections[s];
       if (!section) continue;
-      if (this.windDown && section.step !== 8) continue;
       const start = s === this.sectionIndex ? this.itemIndex : 0;
       total += Math.max(0, section.items.length - start);
     }
@@ -581,17 +844,27 @@ export class SessionQueue {
       this.consecutiveModeled = 0;
       this.frustrationCount += 1;
       this.insertSuccessItem();
-      if (this.frustrationCount >= 2) this.windDown = true;
+      if (this.frustrationCount >= 2) {
+        this.windDown = true;
+        this.applyWindDown();
+      }
     }
 
-    // QA-010: adaptieve bijsturing binnen de sessie.
+    // QA-010 / QA-R2-003: adaptieve bijsturing binnen de sessie. Bij lage
+    // mastery is het aantal opties vaak al 2, waardoor opties schrappen niets
+    // doet; daarom zetten we aanvullend altijd extra audio + een modelherhaling
+    // klaar (zichtbaar effect, geen no-op).
     const difficulty = item.difficulty;
     if (shouldSimplify(nextState, recent)) {
       this.applyOptionReduction(skillId);
       this.applyExtraAudio(skillId);
+      this.applyModelSupport(skillId);
     } else {
       const nextDiff = nextDifficulty(difficulty, nextState);
-      if (difficultyIndex(nextDiff) < difficultyIndex(difficulty)) this.applyOptionReduction(skillId);
+      if (difficultyIndex(nextDiff) < difficultyIndex(difficulty)) {
+        this.applyOptionReduction(skillId);
+        this.applyModelSupport(skillId);
+      }
     }
     if (audioSupportFor(nextState, difficulty)) this.applyExtraAudio(skillId);
   }
@@ -658,15 +931,52 @@ export class SessionQueue {
     }
   }
 
+  /**
+   * QA-R2-003: bij lage mastery ook een modelherhaling/vereenvoudigingsvlag
+   * zetten, óók als het item al 2 opties heeft. Dit is een zichtbaar effect
+   * (UI speelt het model rustig voor) en geen no-op zoals opties schrappen.
+   */
+  private applyModelSupport(skillId: SkillId): void {
+    let changed = 0;
+    for (let s = this.sectionIndex; s < this.sections.length && changed < 3; s++) {
+      const section = this.sections[s];
+      if (!section) continue;
+      const start = s === this.sectionIndex ? this.itemIndex : 0;
+      for (let i = start; i < section.items.length && changed < 3; i++) {
+        const item = section.items[i];
+        if (!item || item.skillId !== skillId) continue;
+        if (item.metadata?.['modelFirst'] === true) continue;
+        item.metadata = { ...(item.metadata ?? {}), modelFirst: true, extraAudio: true, simplified: true };
+        changed += 1;
+      }
+    }
+  }
+
+  /**
+   * QA-R2-003: de frustratie-wind-down rondt de sessie rustig af door elke
+   * resterende sectie tot max. {@link WIND_DOWN_ITEMS_PER_SECTION} items te
+   * beperken in plaats van de woord-/leessecties volledig over te slaan. Zo
+   * blijven de leesstappen (en hun adaptieve bijsturing) bereikbaar. De
+   * volgende sessie start vanzelf eenvoudiger omdat de gemodelleerde items de
+   * mastery verlagen (ED §10.3).
+   */
+  private applyWindDown(): void {
+    for (let s = this.sectionIndex; s < this.sections.length; s++) {
+      const section = this.sections[s];
+      if (!section || section.step === 8) continue;
+      const start = s === this.sectionIndex ? this.itemIndex : 0;
+      const future = section.items.slice(start);
+      for (const item of future.slice(0, WIND_DOWN_ITEMS_PER_SECTION)) {
+        item.metadata = { ...(item.metadata ?? {}), extraAudio: true, modelFirst: true, simplified: true, windDown: true };
+      }
+      if (future.length > WIND_DOWN_ITEMS_PER_SECTION) section.items.splice(start + WIND_DOWN_ITEMS_PER_SECTION);
+    }
+  }
+
   private normalize(): void {
     while (this.sectionIndex < this.sections.length) {
       const section = this.sections[this.sectionIndex];
       if (!section) {
-        this.sectionIndex += 1;
-        this.itemIndex = 0;
-        continue;
-      }
-      if (this.windDown && section.step !== 8) {
         this.sectionIndex += 1;
         this.itemIndex = 0;
         continue;
@@ -694,19 +1004,46 @@ export class SessionQueue {
     };
   }
 
-  static fromJSON(data: SerializedSessionQueue): SessionQueue {
-    const queue = new SessionQueue(
-      { sessionNumber: data.sessionNumber, sections: (data.sections ?? []).map((s) => ({ ...s, items: s.items.map(cloneItem) })) },
-      { sessionNumber: data.sessionNumber },
-    );
-    queue.sectionIndex = Math.max(0, data.sectionIndex);
-    queue.itemIndex = Math.max(0, data.itemIndex);
-    queue.consecutiveModeled = Math.max(0, data.consecutiveModeled);
-    queue.frustrationCount = Math.max(0, data.frustrationCount);
-    queue.windDown = data.windDown === true;
-    queue.requeueCount = Math.max(0, data.requeueCount);
-    for (const [skill, state] of Object.entries(data.skillStates ?? {})) queue.skillStates.set(skill, state);
-    for (const [skill, events] of Object.entries(data.recentEvents ?? {})) queue.recentEvents.set(skill, events);
+  /**
+   * SEC-R2-001/002: valideert het schema strikt vóór hervatten. Bij een
+   * corrupt/ongeoorloofd schema (verkeerde types, te veel secties/items/opties,
+   * `__proto__`-keys) wordt `null` teruggegeven in plaats van te crashen.
+   */
+  static fromJSON(data: unknown): SessionQueue | null {
+    if (!isRecord(data)) return null;
+    if (data['version'] !== 1) return null;
+    const sections = readSections(data['sections']);
+    if (!sections) return null;
+    const sessionNumber = nonNegInt(data['sessionNumber'], 0);
+    const queue = new SessionQueue({ sessionNumber, sections }, { sessionNumber });
+    queue.sectionIndex = Math.min(nonNegInt(data['sectionIndex']), sections.length);
+    queue.itemIndex = nonNegInt(data['itemIndex']);
+    queue.consecutiveModeled = nonNegInt(data['consecutiveModeled']);
+    queue.frustrationCount = nonNegInt(data['frustrationCount']);
+    queue.windDown = data['windDown'] === true;
+    queue.requeueCount = nonNegInt(data['requeueCount']);
+
+    const skillStates = data['skillStates'];
+    if (isRecord(skillStates)) {
+      let count = 0;
+      for (const [skill, state] of Object.entries(skillStates)) {
+        if (DANGEROUS_KEYS.has(skill) || !isRecord(state)) continue;
+        queue.skillStates.set(skill, ensureSkillDetail(state as Partial<SkillStateDetail>));
+        count += 1;
+        if (count >= MAX_SKILL_STATES) break;
+      }
+    }
+    const recentEvents = data['recentEvents'];
+    if (isRecord(recentEvents)) {
+      let count = 0;
+      for (const [skill, events] of Object.entries(recentEvents)) {
+        if (DANGEROUS_KEYS.has(skill) || !Array.isArray(events)) continue;
+        const safeEvents = events.filter(isValidEvent).slice(-MAX_EVENTS_PER_SKILL);
+        queue.recentEvents.set(skill, safeEvents);
+        count += 1;
+        if (count >= MAX_SKILL_STATES) break;
+      }
+    }
     queue.normalize();
     return queue;
   }
@@ -755,11 +1092,13 @@ export function loadSessionState(
     return undefined;
   }
   if (!raw) return undefined;
+  // SEC-R2-002: begrens de omvang vóór parsen/verwerken (lokale DoS).
+  if (raw.length > MAX_RESUME_BYTES) return undefined;
   try {
-    const data = JSON.parse(raw) as SerializedSessionQueue;
-    if (data.version !== 1) return undefined;
-    if (typeof data.savedAt !== 'number' || now - data.savedAt > ttl) return undefined;
-    return SessionQueue.fromJSON(data);
+    const data = JSON.parse(raw) as unknown;
+    if (!isRecord(data) || data['version'] !== 1) return undefined;
+    if (typeof data['savedAt'] !== 'number' || now - data['savedAt'] > ttl) return undefined;
+    return SessionQueue.fromJSON(data) ?? undefined;
   } catch {
     return undefined;
   }

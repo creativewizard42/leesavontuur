@@ -9,7 +9,7 @@ import { createSeededRng } from '../rng';
 import { canIntroduceNewGrapheme } from '../Progression';
 import { isScoredActivityItem } from '../../learning/util';
 import { skillsForWord } from '../../learning/skills';
-import { flattenPlan, MIN_SCORED_PRACTICE, planSession } from '../SessionPlanner';
+import { flattenPlan, MIN_SCORED_PRACTICE, planSession, SESSION_MIX } from '../SessionPlanner';
 
 function practiceSections(plan: ReturnType<typeof planSession>) {
   return plan.sections.filter((s) => s.step <= 7);
@@ -121,6 +121,24 @@ describe('skillsForWord – patroonclassificatie (EDU-011)', () => {
     expect(skillsForWord('as').blend).toBe('SY.VC');
     expect(skillsForWord('kam').blend).toBe('SY.CVC');
     expect(skillsForWord('kast').blend).toBe('SY.CLUSTER');
+  });
+});
+
+describe('Sessieplan – sessiemix 60/25/15 (EDU-026)', () => {
+  it('bevat voorbereidend (fase 1) én herhaling en mengt richting de verhouding', () => {
+    expect(SESSION_MIX.current + SESSION_MIX.repetition + SESSION_MIX.preparatory).toBeCloseTo(1);
+    const profile = createFreshProfile(0, () => 0.5);
+    profile.unlockedGraphemes = ['m', 'a', 's', 't'];
+    profile.skills['FN.FIRST_SOUND'] = createSkillState({ mastery: 0.9, attempts: 12 });
+    const plan = planSession(profile, createSeededRng(4));
+    const scored = (section: (typeof plan.sections)[number]): number =>
+      section.items.filter((i) => isScoredActivityItem(i)).length;
+    const prep = plan.sections.filter((s) => s.step === 1 || s.step === 2).reduce((t, s) => t + scored(s), 0);
+    const rep = plan.sections.filter((s) => s.step === 7).reduce((t, s) => t + scored(s), 0);
+    const total = plan.sections.reduce((t, s) => t + scored(s), 0);
+    expect(prep, 'voorbereidende fase-1-items').toBeGreaterThan(0);
+    expect(rep, 'herhalingsitems (Leitner/zwak)').toBeGreaterThan(0);
+    expect(rep / total, 'herhaling is een betekenisvol aandeel').toBeGreaterThanOrEqual(0.15);
   });
 });
 

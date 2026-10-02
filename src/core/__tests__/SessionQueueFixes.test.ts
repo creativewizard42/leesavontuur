@@ -136,6 +136,56 @@ describe('SessionQueue – frustratiestop (QA-008)', () => {
   });
 });
 
+describe('SessionQueue – vereenvoudiging bij lage mastery (QA-R2-003)', () => {
+  it('doet ook bij 2 opties zichtbaar iets (modelFirst/extraAudio)', () => {
+    const items = [makeItem('a', 'DE.CVC', 2), makeItem('b', 'DE.CVC', 2)];
+    const profile = profileWithWeakSkill();
+    profile.skills['DE.CVC'] = createSkillState({ mastery: 0.2, attempts: 6 });
+    const queue = createSessionQueue(plan(items), { sessionNumber: 1, profile, learned: new Set(['m', 'a']) });
+    const first = queue.current();
+    queue.reportOutcome(event(first!, { correct: false, attempt: 1, itemScore: 0 }), first!);
+    expect(items[1]?.metadata?.['modelFirst']).toBe(true);
+    expect(items[1]?.metadata?.['extraAudio']).toBe(true);
+    expect(items[1]?.metadata?.['simplified']).toBe(true);
+  });
+});
+
+describe('SessionQueue – frustratie-wind-down slaat leessecties niet over (QA-R2-003)', () => {
+  it('houdt woord-/leessecties bereikbaar na wind-down', () => {
+    const warmup = [
+      makeItem('a', 'PH.RHYME', 3),
+      makeItem('b', 'PH.RHYME', 3),
+      makeItem('c', 'PH.RHYME', 3),
+      makeItem('d', 'PH.RHYME', 3),
+    ];
+    const reading = [makeItem('w1', 'DE.CVC', 3), makeItem('w2', 'DE.CVC', 3), makeItem('w3', 'DE.CVC', 3)];
+    const windPlan: SessionPlan = {
+      sessionNumber: 1,
+      sections: [
+        { step: 1, name: 'Klankwarming-up', items: warmup },
+        { step: 5, name: 'Woorden lezen', items: reading },
+        { step: 8, name: 'Beloning', items: [makeItem('r', 'REWARD', 1)] },
+      ],
+    };
+    const queue = createSessionQueue(windPlan, { sessionNumber: 1, rng: () => 0.5 });
+    const visited = new Set<number>();
+    let windDownSeen = false;
+    let guard = 0;
+    while (queue.current() && guard++ < 100) {
+      const item = queue.current();
+      if (!item) break;
+      const section = queue.currentSection();
+      if (section) visited.add(section.step);
+      if (item.metadata?.['windDown'] === true) windDownSeen = true;
+      const wrong = item.options.find((o) => !o.correct)?.id ?? item.targetId;
+      queue.reportOutcome(event(item, { selectedOptionId: wrong, correct: false, attempt: 3, modeled: true, itemScore: 0 }), item);
+      queue.next();
+    }
+    expect(windDownSeen, 'wind-down moet zijn getriggerd').toBe(true);
+    expect(visited.has(5), 'de leessectie moet na wind-down nog worden bereikt').toBe(true);
+  });
+});
+
 describe('SessionQueue – stoppen en hervatten (QA-007)', () => {
   it('rondt een serialisatie-roundtrip identiek af', () => {
     const items = [makeItem('a', 'DE.CVC', 3), makeItem('b', 'DE.CVC', 3), makeItem('c', 'DE.CVC', 3)];
@@ -143,8 +193,9 @@ describe('SessionQueue – stoppen en hervatten (QA-007)', () => {
     queue.next();
     const json = queue.toJSON(1000);
     const restored = SessionQueue.fromJSON(json);
-    expect(restored.current()?.id).toBe(queue.current()?.id);
-    expect(restored.remaining()).toBe(queue.remaining());
+    expect(restored).not.toBeNull();
+    expect(restored!.current()?.id).toBe(queue.current()?.id);
+    expect(restored!.remaining()).toBe(queue.remaining());
   });
 
   it('hervat binnen de TTL en vervalt daarna', () => {
