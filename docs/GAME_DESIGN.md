@@ -369,7 +369,7 @@ Er is **geen plaatje vóór** het antwoord (ED §11 regel 1). De audio-opties zi
 | 2e fout (hint) | Ploef blijft staan; fb.hint.1 gerekte klanken van het doelwoord |
 | 3e fout (modeling) | fb.model.2 *"Samen: dit is tak. t-a-k. Jij mag hem straks nog eens."* + Ploef zakt één tak, daarna een makkelijker woord (niveau −1) |
 
-**Afleiders:** minimale paren uit de **MVP-woordenlijst** (kam / kat / tak; mat / mak / rat), niveau C/D alleen bij mastery ≥ 0.85 (ED §10.5 regel 5). Nooit *kak* of andere geblokkeerde woorden (ED §6.4).
+**Afleiders:** minimale paren uit de **MVP-woordenlijst** (kam / kat / tak; mat / rat / stam), niveau C/D alleen bij mastery ≥ 0.85 (ED §10.5 regel 5). Nooit *kak* of andere geblokkeerde woorden (ED §6.4).
 
 **Bijgewerkte leerdoelen**
 - DE.CVC: `mastery`, `accuracy`, `response_time`, `consecutive_correct`.
@@ -558,7 +558,7 @@ Het dashboard neemt **letterlijk** de indicatoren uit ED §12.1 en de formulerin
 ### 10.1 MVP (nu te bouwen)
 - **Grafemen:** m, a, s, t, k, r (ED §5.2), volgorde m → a → s → t → k → r.
 - **Leerdoelen:** FN.FIRST_SOUND, FN.LAST_SOUND, FN.COUNT, LK.`<g>`.SOUND, LK.`<g>`.RECOGNIZE, AN.VC, AN.CVC, SY.VC, SY.CVC, DE.VC, DE.CVC. (PH.RHYME/PH.SYLLABLE alleen als warming-up-herhaling.)
-- **Woorden:** de 21 MVP-woorden uit ED §6.5 (mam, mat, tas, kam, kat, tak, kas, ram, rat, kar, as, mak + arm, ark, kast, mast, stam, kras, smak, mars, start). Blokkeerlijst actief.
+- **Woorden:** de 18 MVP-woorden uit ED §6.5 (mam, mat, tas, kam, kat, tak, kas, ram, rat, kar, as + arm, ark, kast, mast, stam, kras, start). Blokkeerlijst actief.
 - **Gebieden:** Fluisterheuvel, Vormenwoud, Klankbron, Plakplek, Woordweide + Speelwei.
 - **Activiteiten:** 4a Klankjager, 4b Letter-klank, 4c Hakken, 4d Plakken, 4e Woord lezen, 4f De Klimboom.
 - **Beloningen:** klankvonkjes, blaadjes aan de Klankboom.
@@ -590,7 +590,7 @@ Het dashboard neemt **letterlijk** de indicatoren uit ED §12.1 en de formulerin
 **Lees-/klankmateriaal (geen hint-plaatjes in taken!)**
 - Lettervormen voor m, a, s, t, k, r (grote versie + gewone versie).
 - Plaatjes **alleen als beloning/betekenis ná lezen** (ED §11): mam, as, mat, tas, kam, kat, tak, kas, ram, rat, kar, arm, ark, kast, mast, stam, kras; optioneel start.
-- **Niet** afgebeeld (geen geschikt plaatje): mak, smak, mars.
+- **Nog niet afgebeeld (geen asset):** start.
 
 ### 11.2 Audio (opnames, native spreker, Standaardnederlands; geen TTS voor losse klanken – ED §13 regel 1)
 **Per grafeem (m, a, s, t, k, r)**
@@ -598,7 +598,7 @@ Het dashboard neemt **letterlijk** de indicatoren uit ED §12.1 en de formulerin
 - Klank (kern): "mmm", kort "a", "sss", "t", "k", "rrr" — zonder sjwa ("muh").
 - Voorbeeldwoord (auditief): m → maan; a → mam; s → as; t → mat/tas; k → kam/kat; r → ram/rat.
 
-**Woorden (21 MVP-woorden):** mam, as, mat, tas, kam, kat, tak, kas, mak, ram, rat, kar, arm, ark, kast, mast, stam, kras, smak, mars, start.
+**Woorden (18 MVP-woorden):** mam, as, mat, tas, kam, kat, tak, kas, ram, rat, kar, arm, ark, kast, mast, stam, kras, start.
 
 **Gerekte/gehakte klankreeksen:** k…a…m; m…a…t; t…a…s; s…t…a…m; (enz.) voor hint/modeling.
 

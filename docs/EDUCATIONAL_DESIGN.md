@@ -2,9 +2,10 @@
 
 | | |
 |---|---|
-| Versie | 0.1 (concept voor Game Designer en Architect) |
+| Versie | 1.1 (0.1 + ontwerpbeslissingen na review; zie §15) |
 | Doelgroep | kinderen van 5–6 jaar (eind groep 2 – groep 3), Nederlands |
 | Status | Didactisch ontwerp. Bevat geen code. IDs in dit document zijn bindend voor de software (mastery-skills). |
+| Herziening | 2026-10-02 – gelijkgetrokken met de implementatie naar aanleiding van de educational/QA/security-reviews (ronde 1–3). Bewuste afwijkingen zijn onderbouwd in §15. |
 | Afbakening | Origineel ontwerp. Er is géén lettervolgorde, geen personages en geen kernwoorden van een commerciële methode (o.a. *Veilig leren lezen*, *Lijn 3*) overgenomen. |
 
 **Leeswijzer bronmarkering**
@@ -117,17 +118,19 @@ De fasen zijn **niet strikt lineair**: elk nieuw grafeem doorloopt fase 2→3→
 | 2 | Letters (vorm) | LK.`<g>`.RECOGNIZE voor nieuw grafeem | FN.FIRST_SOUND ≥ 0.8 | LK.`<g>`.RECOGNIZE ≥ 0.8 over ≥ 10 items | Klank horen → letter vinden; letter natekenen (optioneel, niet gescoord) |
 | 3 | Letter-klankkoppeling | LK.`<g>`.SOUND | LK.`<g>`.RECOGNIZE ≥ 0.6 | LK.`<g>`.SOUND ≥ 0.8 over ≥ 12 items, in ≥ 2 sessies | Letter zien → juiste klank-knop kiezen |
 | 4 | Samenvoegen (analyse/synthese) | AN.VC, SY.VC, AN.CVC, SY.CVC, FN.COUNT | ≥ 3 grafemen gemeesterd (LK.SOUND ≥ 0.8) waaronder 1 klinker | SY.CVC en AN.CVC ≥ 0.8 over ≥ 12 items | Klankenbrug (plakken), stenen leggen (hakken) |
-| 5 | Korte klankzuivere woorden | DE.VC, DE.CVC, DE.CVVC (aa, oo, ee) | SY.CVC ≥ 0.7 en alle grafemen in het woord LK.SOUND ≥ 0.8 | DE.CVC ≥ 0.8 over ≥ 15 items; DE.CVVC ≥ 0.8 over ≥ 12 items | Lees-en-kies (audio), woordbouwer, raam-onthul (plaatje ná lezen) |
-| 6 | Meer woorden | DE.CVVC (alle tweetekenklanken), DE.CCVC, DE.CVCC, DE.CCVCC, AN/SY.CLUSTER | DE.CVC ≥ 0.8; ≥ 15 grafemen gemeesterd | Elk DE-patroon ≥ 0.8 over ≥ 15 items | Clusterbrug, minimale-parenpad |
+| 5 | Korte klankzuivere woorden | DE.VC, DE.CVC | SY.CVC ≥ 0.7 en alle grafemen in het woord LK.SOUND ≥ 0.8 | DE.CVC ≥ 0.8 over ≥ 15 items | Lees-en-kies (audio), woordbouwer, raam-onthul (plaatje ná lezen) |
+| 6 | Meer woorden | DE.CVVC (aa/oo/ee én latere tweetekenklanken), DE.CCVC, DE.CVCC, DE.CCVCC, AN/SY.CLUSTER | DE.CVC ≥ 0.8; ≥ 15 grafemen gemeesterd | Elk DE-patroon ≥ 0.8 over ≥ 15 items | Clusterbrug, minimale-parenpad |
 | 7 | Zinnen | SW.*, ZI.PHRASE, ZI.SIMPLE, ZI.CAPITAL, LK.`<g>`.UPPER | DE.CVC ≥ 0.85; SW.de en SW.een ≥ 0.8 | ZI.SIMPLE ≥ 0.8 over ≥ 10 zinnen | Zinnentrein, zin-actie (doe wat er staat) |
 | 8 | Korte teksten | TX.SHORT | ZI.SIMPLE ≥ 0.8 | TX.SHORT ≥ 0.8 over ≥ 5 teksten (begripsvraag + leesaccuraatheid) | Verhaalpagina's, kies-het-vervolg |
 | 9 | Automatiseren | FL.GRAPHEME, FL.CVC, FL.WORDLIST, FL.SENTENCE | DE.CVC ≥ 0.85 (accuraatheid eerst!) | FL.CVC: ≥ 90% correct én mediane responstijd ≤ 3 s over ≥ 20 items; FL.SENTENCE: herhaald lezen zonder fout | Flitsrace tegen eigen record (geen klok tegen anderen), woordenlint |
 
 **Regels bij fasen [ONTWERP]**
 1. Snelheid (FL.*) wordt nooit getraind voordat accuraatheid ≥ 0.85 is.
-2. Een nieuw grafeem wordt pas geïntroduceerd als het vorige LK.`<g>`.SOUND ≥ 0.8 heeft **en** de som van "zwakke" grafemen (mastery < 0.6) ≤ 2 is.
+2. Een nieuw grafeem wordt pas geïntroduceerd als het vorige LK.`<g>`.SOUND **beheerst** is volgens de volledige beheersingsdefinitie (§10.3: mastery ≥ 0.8 **en** ≥ 12 items **en** ≥ 4 op rij correct **en** ≥ 2 sessies) **en** de som van "zwakke" grafemen (mastery < 0.6) ≤ 2 is.
 3. Per sessie hooguit **één** nieuw grafeem.
 4. Een sessie duurt 10–15 minuten (aanbeveling; kleuters/groep-3-kinderen hebben korte aandachtsspanne [VK]).
+5. **Eerste letter en poort (afwijking, zie §15.2):** de allereerste letter wordt geïntroduceerd met uitsluitend `LK.<g>.SOUND` (met auditieve, niet-getoonde klank-afleiders), en de poort naar fase 3 toetst `LK.<g>.SOUND`. `LK.<g>.RECOGNIZE` start pas zodra er ≥ 2 geleerde grafemen zijn.
+6. **Niet eindeloos vasthouden in fase 1 (vangnet, zie §15.7):** een leerling die de fase-1-poort (`FN.FIRST_SOUND ≥ 0.8`) ondanks gerichte oefening niet haalt, krijgt na verloop van tijd **toch** de eerste letter, met extra auditieve ondersteuning, terwijl de fase-1-oefening in de warming-up blijft. Principe: een kind mag niet onbeperkt in één fase vastzitten.
 
 ---
 
@@ -182,7 +185,7 @@ De fasen zijn **niet strikt lineair**: elk nieuw grafeem doorloopt fase 2→3→
 - **Besluit [ONTWERP]**: MVP = **m, a, s, t, k, r** (6 grafemen) = het voorstel + t + r.
   - t (hoge frequentie) levert direct *mat, tas, kat, tak, kast, mast, stam*.
   - r (continuant) levert *ram, rat, kar, arm, kras*.
-  - Hiermee ontstaan **21 echte woorden**, waarvan 13 kindvriendelijk en goed afbeeldbaar (§6.5).
+  - Hiermee ontstaan **18 kindvriendelijke, klankzuivere woorden**, waarvan 17 goed afbeeldbaar (§6.5). Drie kandidaten uit de eerste versie zijn vervallen: `mak` (niet afbeeldbaar), `smak` en `mars` (niet kindvriendelijk/betekenisvol). Het restant blijft ruim boven de eis van ≥ 8.
   - Volgorde binnen het MVP: m → a → s → t → k → r. Na elk nieuw grafeem komen er meteen woorden bij (m+a: *mam*; +s: *as*; +t: *mat, tas*; +k: *kam, kat, tak, kas*; +r: *ram, rat, kar*).
   - Afweging: t en k zijn plofklanken (niet rekbaar). Ze komen pas na twee continuanten en een klinker en worden steeds aan het **eind** van het eerste plak-oefenwoord aangeboden (*mat* vóór *tas*), zodat het kind eerst met rekbare klanken leert plakken.
 
@@ -244,7 +247,7 @@ Noten bij de volgorde:
 |---|---|---|---|
 | 1 | VC | as, in, al | 4–5 |
 | 2 | MKM kort (CVC) | kam, tas, vis | 5 |
-| 3 | MKM lang (CVVC, met aa/oo/ee) | kaas, kool, been | 5 |
+| 3 | MKM lang (CVVC, met aa/oo/ee) | kaas, kool, been | 6 |
 | 4 | MKMM (CVCC) | kast, mist, tent | 5–6 |
 | 5 | MMKM (CCVC) | stam, slak, kras | 6 |
 | 6 | Tweetekenklanken oe, ie, ui, eu, ij/ei, ou/au | voet, riem, huis, neus | 6 |
@@ -264,7 +267,10 @@ Een woord is pas "klankzuiver" in LEESAVONTUUR als het aan **alle** regels voldo
 9. **Betekenis gecontroleerd**: correct standaardnederlands, geen ongepaste of kwetsende betekenis (blokkeerlijst §6.4).
 
 ### 6.3 Opmerking over r in de coda
-In *kar, arm, ark, mars, start* staat r na de klinker. In het Nederlands varieert die r sterk (tong-r, huig-r, "Gooise" r) [VK]. Deze woorden zijn klankzuiver, maar in het MVP komen eerst woorden met **r vooraan** (*ram, rat*). Opnames met een duidelijke r.
+In *kar, arm, ark* en *start* staat r **na** de klinker (coda). De eerdere formulering dat in het MVP "eerst woorden met r vooraan" komen, was strijdig met de eigen MVP-lijst (§6.5) en is vervallen: de implementatie volgt de lijst. Didactische onderbouwing:
+
+- **Korte a + r is geen klinkerkleuring.** Echte r-kleuring treedt op bij *ee, oo, eu, ie* vóór r (*beer, oor, deur, mier*); die worden uitgesloten tot na fase 6 (§6.2 regel 5). In *kar, arm, ark, start* staat een **korte a**, die in standaard-Nederlands geen gekleurde klank oplevert. De woorden zijn dus klankzuiver en verantwoord in het MVP.
+- **Aandachtspunt voor de leerkracht-review (§13 regel 7).** De realisatie van r varieert sterk (tongpunt-r, huig-r, "Gooise" r) en in *start* staat r in een cluster (s-t-a-r-t), wat de opname gevoelig maakt. Dit is geen reden om het woord te weren, maar wel een expliciet aandachtspunt bij de native opnames en de vakinhoudelijke review: opnemen met een duidelijke r en controleren dat de klinker niet onbedoeld kleurt.
 
 ### 6.4 Blokkeerlijst (nooit tonen, ook niet als afleider of gegenereerd item)
 *kak, pik, kut, lul, tiet, tet, pis, poep, kont, neuk, seks, lijk, dood, moord, dom, gek, dik, ras* (+ alle varianten). Toelichting: *dik/dom/gek* zijn kwetsend als ze over mensen gaan; *ras* kan als etnische term worden opgevat. **Regel voor de Architect**: elke generator van woorden of afleiders controleert tegen deze lijst, ook bij een combinatie die toevallig ontstaat (bv. als afleider bij *kam*).
@@ -282,70 +288,68 @@ Legenda: Patroon C = medeklinker, V = klinkerfoneem (tweeteken = 1 V). Kv = kind
 | 6 | kat | k-a-t | /kɑt/ | CVC | ja | ja | **MVP** |
 | 7 | tak | t-a-k | /tɑk/ | CVC | ja | ja | **MVP** |
 | 8 | kas | k-a-s | /kɑs/ | CVC | ja | ja (broeikas) | **MVP** |
-| 9 | mak | m-a-k | /mɑk/ | CVC | ja | nee | **MVP** |
-| 10 | ram | r-a-m | /rɑm/ | CVC | ja | ja (dier) | **MVP** |
-| 11 | rat | r-a-t | /rɑt/ | CVC | ja | ja | **MVP** |
-| 12 | kar | k-a-r | /kɑr/ | CVC | ja | ja | **MVP** |
-| 13 | arm | a-r-m | /ɑrm/ | VCC | ja | ja | **MVP** |
-| 14 | ark | a-r-k | /ɑrk/ | VCC | ja | matig | **MVP** |
-| 15 | kast | k-a-s-t | /kɑst/ | CVCC | ja | ja | **MVP** |
-| 16 | mast | m-a-s-t | /mɑst/ | CVCC | ja | ja | **MVP** |
-| 17 | stam | s-t-a-m | /stɑm/ | CCVC | ja | ja (boomstam) | **MVP** |
-| 18 | kras | k-r-a-s | /krɑs/ | CCVC | ja | matig | **MVP** |
-| 19 | smak | s-m-a-k | /smɑk/ | CCVC | ja | nee | **MVP** |
-| 20 | mars | m-a-r-s | /mɑrs/ | CVCC | ja | nee | **MVP** |
-| 21 | start | s-t-a-r-t | /stɑrt/ | CCVCC | ja | matig | **MVP** |
-| 22 | mis | m-i-s | /mɪs/ | CVC | ja | nee | 2 |
-| 23 | kist | k-i-s-t | /kɪst/ | CVCC | ja | ja | 2 |
-| 24 | mist | m-i-s-t | /mɪst/ | CVCC | ja | matig | 2 |
-| 25 | rit | r-i-t | /rɪt/ | CVC | ja | matig | 2 |
-| 26 | tik | t-i-k | /tɪk/ | CVC | ja | nee | 2 |
-| 27 | vis | v-i-s | /vɪs/ | CVC | ja | ja | 2 |
-| 28 | vat | v-a-t | /vɑt/ | CVC | ja | ja | 2 |
-| 29 | vak | v-a-k | /vɑk/ | CVC | ja | matig | 2 |
-| 30 | kaas | k-aa-s | /kaːs/ | CVVC | ja | ja | 2 |
-| 31 | raam | r-aa-m | /raːm/ | CVVC | ja | ja | 2 |
-| 32 | vaas | v-aa-s | /vaːs/ | CVVC | ja | ja | 2 |
-| 33 | kaart | k-aa-r-t | /kaːrt/ | CVVCC | ja | ja | 2 |
-| 34 | taart | t-aa-r-t | /taːrt/ | CVVCC | ja | ja | 2 |
-| 35 | staart | s-t-aa-r-t | /staːrt/ | CCVVCC | ja | ja | 2 |
-| 36 | lam | l-a-m | /lɑm/ | CVC | ja | ja | 2 |
-| 37 | slak | s-l-a-k | /slɑk/ | CCVC | ja | ja | 2 |
-| 38 | stal | s-t-a-l | /stɑl/ | CCVC | ja | ja | 2 |
-| 39 | val | v-a-l | /vɑl/ | CVC | ja | matig | 2 |
-| 40 | kaal | k-aa-l | /kaːl/ | CVVC | ja | matig | 2 |
-| 41 | kan | k-a-n | /kɑn/ | CVC | ja | ja | 2 |
-| 42 | man | m-a-n | /mɑn/ | CVC | ja | ja | 2 |
-| 43 | nat | n-a-t | /nɑt/ | CVC | ja | matig | 2 |
-| 44 | kin | k-i-n | /kɪn/ | CVC | ja | ja | 2 |
-| 45 | vin | v-i-n | /vɪn/ | CVC | ja | ja | 2 |
-| 46 | maan | m-aa-n | /maːn/ | CVVC | ja | ja | 2 |
-| 47 | kraan | k-r-aa-n | /kraːn/ | CCVVC | ja | ja | 2 |
-| 48 | lint | l-i-n-t | /lɪnt/ | CVCC | ja | ja | 2 |
-| 49 | kool | k-oo-l | /koːl/ | CVVC | ja | ja | 3 |
-| 50 | rook | r-oo-k | /roːk/ | CVVC | ja | ja | 3 |
-| 51 | oom | oo-m | /oːm/ | VVC | ja | matig | 3 |
-| 52 | noot | n-oo-t | /noːt/ | CVVC | ja | ja | 3 |
-| 53 | look | l-oo-k | /loːk/ | CVVC | ja | ja | 3 |
-| 54 | nek | n-e-k | /nɛk/ | CVC | ja | ja | 3 |
-| 55 | mes | m-e-s | /mɛs/ | CVC | ja | ja (botermes) | 3 |
-| 56 | net | n-e-t | /nɛt/ | CVC | ja | ja | 3 |
-| 57 | tent | t-e-n-t | /tɛnt/ | CVCC | ja | ja | 3 |
-| 58 | rem | r-e-m | /rɛm/ | CVC | ja | matig | 3 |
-| 59 | melk | m-e-l-k | /mɛlk/ | CVCC | ja | ja | 3 |
-| 60 | dak | d-a-k | /dɑk/ | CVC | ja | ja | 3 |
-| 61 | das | d-a-s | /dɑs/ | CVC | ja | ja (sjaal/dier) | 3 |
-| 62 | dal | d-a-l | /dɑl/ | CVC | ja | matig | 3 |
-| 63 | teen | t-ee-n | /teːn/ | CVVC | ja | ja | 3 |
-| 64 | steen | s-t-ee-n | /steːn/ | CCVVC | ja | ja | 3 |
-| 65 | keel | k-ee-l | /keːl/ | CVVC | ja | matig | 3 |
-| 66 | eet | ee-t | /eːt/ | VVC | ja | nee | 3 |
+| 9 | ram | r-a-m | /rɑm/ | CVC | ja | ja (dier) | **MVP** |
+| 10 | rat | r-a-t | /rɑt/ | CVC | ja | ja | **MVP** |
+| 11 | kar | k-a-r | /kɑr/ | CVC | ja | ja | **MVP** |
+| 12 | arm | a-r-m | /ɑrm/ | VCC | ja | ja | **MVP** |
+| 13 | ark | a-r-k | /ɑrk/ | VCC | ja | matig | **MVP** |
+| 14 | kast | k-a-s-t | /kɑst/ | CVCC | ja | ja | **MVP** |
+| 15 | mast | m-a-s-t | /mɑst/ | CVCC | ja | ja | **MVP** |
+| 16 | stam | s-t-a-m | /stɑm/ | CCVC | ja | ja (boomstam) | **MVP** |
+| 17 | kras | k-r-a-s | /krɑs/ | CCVC | ja | matig | **MVP** |
+| 18 | start | s-t-a-r-t | /stɑrt/ | CCVCC | ja | matig | **MVP** |
+| 19 | mis | m-i-s | /mɪs/ | CVC | ja | nee | 2 |
+| 20 | kist | k-i-s-t | /kɪst/ | CVCC | ja | ja | 2 |
+| 21 | mist | m-i-s-t | /mɪst/ | CVCC | ja | matig | 2 |
+| 22 | rit | r-i-t | /rɪt/ | CVC | ja | matig | 2 |
+| 23 | tik | t-i-k | /tɪk/ | CVC | ja | nee | 2 |
+| 24 | vis | v-i-s | /vɪs/ | CVC | ja | ja | 2 |
+| 25 | vat | v-a-t | /vɑt/ | CVC | ja | ja | 2 |
+| 26 | vak | v-a-k | /vɑk/ | CVC | ja | matig | 2 |
+| 27 | kaas | k-aa-s | /kaːs/ | CVVC | ja | ja | 2 |
+| 28 | raam | r-aa-m | /raːm/ | CVVC | ja | ja | 2 |
+| 29 | vaas | v-aa-s | /vaːs/ | CVVC | ja | ja | 2 |
+| 30 | kaart | k-aa-r-t | /kaːrt/ | CVVCC | ja | ja | 2 |
+| 31 | taart | t-aa-r-t | /taːrt/ | CVVCC | ja | ja | 2 |
+| 32 | staart | s-t-aa-r-t | /staːrt/ | CCVVCC | ja | ja | 2 |
+| 33 | lam | l-a-m | /lɑm/ | CVC | ja | ja | 2 |
+| 34 | slak | s-l-a-k | /slɑk/ | CCVC | ja | ja | 2 |
+| 35 | stal | s-t-a-l | /stɑl/ | CCVC | ja | ja | 2 |
+| 36 | val | v-a-l | /vɑl/ | CVC | ja | matig | 2 |
+| 37 | kaal | k-aa-l | /kaːl/ | CVVC | ja | matig | 2 |
+| 38 | kan | k-a-n | /kɑn/ | CVC | ja | ja | 2 |
+| 39 | man | m-a-n | /mɑn/ | CVC | ja | ja | 2 |
+| 40 | nat | n-a-t | /nɑt/ | CVC | ja | matig | 2 |
+| 41 | kin | k-i-n | /kɪn/ | CVC | ja | ja | 2 |
+| 42 | vin | v-i-n | /vɪn/ | CVC | ja | ja | 2 |
+| 43 | maan | m-aa-n | /maːn/ | CVVC | ja | ja | 2 |
+| 44 | kraan | k-r-aa-n | /kraːn/ | CCVVC | ja | ja | 2 |
+| 45 | lint | l-i-n-t | /lɪnt/ | CVCC | ja | ja | 2 |
+| 46 | kool | k-oo-l | /koːl/ | CVVC | ja | ja | 3 |
+| 47 | rook | r-oo-k | /roːk/ | CVVC | ja | ja | 3 |
+| 48 | oom | oo-m | /oːm/ | VVC | ja | matig | 3 |
+| 49 | noot | n-oo-t | /noːt/ | CVVC | ja | ja | 3 |
+| 50 | look | l-oo-k | /loːk/ | CVVC | ja | ja | 3 |
+| 51 | nek | n-e-k | /nɛk/ | CVC | ja | ja | 3 |
+| 52 | mes | m-e-s | /mɛs/ | CVC | ja | ja (botermes) | 3 |
+| 53 | net | n-e-t | /nɛt/ | CVC | ja | ja | 3 |
+| 54 | tent | t-e-n-t | /tɛnt/ | CVCC | ja | ja | 3 |
+| 55 | rem | r-e-m | /rɛm/ | CVC | ja | matig | 3 |
+| 56 | melk | m-e-l-k | /mɛlk/ | CVCC | ja | ja | 3 |
+| 57 | dak | d-a-k | /dɑk/ | CVC | ja | ja | 3 |
+| 58 | das | d-a-s | /dɑs/ | CVC | ja | ja (sjaal/dier) | 3 |
+| 59 | dal | d-a-l | /dɑl/ | CVC | ja | matig | 3 |
+| 60 | teen | t-ee-n | /teːn/ | CVVC | ja | ja | 3 |
+| 61 | steen | s-t-ee-n | /steːn/ | CCVVC | ja | ja | 3 |
+| 62 | keel | k-ee-l | /keːl/ | CVVC | ja | matig | 3 |
+| 63 | eet | ee-t | /eːt/ | VVC | ja | nee | 3 |
 
-Noot: *been* gebruikt b (blok 5) en staat daarom in fase 6 (§6.6). Fase 5 bevat 66 kandidaten, waarvan 21 MVP.
+Noot: *been* gebruikt b (blok 5) en staat daarom in fase 6 (§6.6). Fase 5 bevat **63 kandidaten, waarvan 18 MVP**. `mak`, `smak` en `mars` zijn uit de lijst verwijderd om didactische redenen (zie §15.1); de `Kv`-kolom is daarmee voor alle resterende woorden juist.
 
-**MVP-woordenlijst (m, a, s, t, k, r)** – 21 echte woorden:
-- Kern (MKM/VC, alle afbeeldbaar behalve *mak*): *mam, mat, tas, kam, kat, tak, kas, ram, rat, kar, as, mak* (12)
-- Uitbreiding (clusters, MVP-eindniveau): *arm, ark, kast, mast, stam, kras, smak, mars, start* (9)
+**MVP-woordenlijst (m, a, s, t, k, r)** – 18 kindvriendelijke, klankzuivere woorden (waarvan 17 met een belonings-SVG; `start` heeft nog geen asset):
+- Kern (MKM/VC): *mam, mat, tas, kam, kat, tak, kas, ram, rat, kar, as* (11)
+- Uitbreiding (clusters, MVP-eindniveau): *arm, ark, kast, mast, stam, kras, start* (7)
+- Verwijderd t.o.v. versie 0.1: *mak* (niet afbeeldbaar), *smak* en *mars* (niet kindvriendelijk/betekenisvol).
 - Geblokkeerd: *kak*. Vermeden: *ras* (zie §6.4), *tam* (zeldzaam).
 
 ### 6.6 Startlijst fase 6 – meer woorden (nieuwe grafemen + clusters)
@@ -433,6 +437,8 @@ Noten: fase 6 bevat 61 kandidaten. *jam* is uitgesloten (Engelse uitspraak bij v
 
 *ik, is, en, in, op, al* zijn **wel klankzuiver** en worden gewoon gedecodeerd (DE.VC), niet als sight word aangeleerd. Zo blijft het alfabetisch principe intact.
 
+> **Implementatienoot (afwijking, zie §15.6).** Dit document drukt de introductie uit in mastery (`SW.de` na `DE.CVC ≥ 0.7`); de implementatie gebruikt voor SW.de/een/het in plaats daarvan `requiresBlock: 7` als **proxy** (het echte blok), omdat de skill-drempel in het huidige model niet uitgedrukt kan worden. SW.ze/we/je hangen aan hun blok (4/6/5).
+
 ### 7.2 Hoe introduceren [ONTWERP]
 1. Aparte categorie en visueel herkenbare "flitskaart" (bv. eigen kleurrand) – nooit gemengd in decodeeroefeningen.
 2. Expliciet: "Dit woord lees je niet met klanken. Dit woord ken je uit je hoofd: **de**." (één keer met audio, dan oefenen).
@@ -513,6 +519,7 @@ Begripsvraag: "Wat eet de geit?" (gras / soep / kaas). Verworpen: *aait* (aai no
 - Na een fout volgt altijd een **succeservaring** binnen hetzelfde item (via hint of modeling).
 - Het gemodelleerde item komt later in de sessie terug (herkansing zonder druk).
 - Stem: vriendelijk, rustig, positief. Volume en tempo gelijk bij goed en fout.
+- **Feedback wordt altijd ook uitgesproken (audio), nooit alleen als tekst getoond.** De geschreven feedback en het icoon ondersteunen de gesproken boodschap; er staat geen zin in beeld die het kind zelf moet lezen (GD §5, GD §8.1). Dit geldt voor `fb.correct.*`, `fb.try1.*`, `fb.hint.*`, `fb.model.*` en `fb.specific.*` (zie §15.9).
 
 ### 9.2 Escalatieladder per item
 | Poging | Reactie | Voorbeeld (kort Nederlands) |
@@ -571,6 +578,7 @@ alpha = max(0.2, 1 / (attempts + 1))      # snelle opwarming bij de eerste items
 mastery_new = mastery_old + alpha * (s - mastery_old)
 startwaarde mastery = 0.0 (of instapcheck-uitkomst, max 0.5)
 ```
+**Let op (zie §15.5).** Bij `attempts = 0` geeft de formule `alpha = 1`, zodat één correct item de mastery direct op 1.0 zet. `mastery` alleen is daardoor **geen** betrouwbare beheersingsmaat. De formule is uitsluitend veilig in combinatie met de volledige beheersingspoort `isMastered` uit §10.3 (≥ 12 items, ≥ 4 op rij correct, ≥ 2 sessies). Elke vrijgave of rapportage moet die poort gebruiken, niet `mastery ≥ 0.8` alleen.
 `rt_slow` (voorstel): LK.* 4 s, DE.CVC 8 s, DE.CCVC 10 s, ZI.* 20 s. Voor FL.* telt tijd zwaarder: s = 1.0 alleen als RT ≤ doeltijd (FL.GRAPHEME 2 s, FL.CVC 3 s), anders 0.6.
 
 ### 10.3 Drempels en beslisregels
@@ -608,7 +616,7 @@ Afstandsniveaus (A = groot verschil, D = minimaal paar):
 
 Regels:
 1. Start elk nieuw doel op niveau A, hoogstens 2 afleiders.
-2. Alleen afleiders uit **geleerde** grafemen/woorden.
+2. Alleen afleiders uit **geleerde** grafemen/woorden. **Uitzondering (afwijking, zie §15.2):** bij de allereerste letter mogen bij `LK.<g>.SOUND` (grafeem→klank) **auditieve, niet-getoonde** klank-afleiders uit de volledige inventaris worden gebruikt zolang er nog geen tweede geleerd grafeem is. Deze opties zijn audio-only knoppen (geen letter in beeld) en gelden als auditieve discriminatie (ED §6.2 regel 8). Voor klank→grafeem (`LK.<g>.RECOGNIZE`) geldt de uitzondering **niet**; die taken starten pas zodra er ≥ 2 geleerde grafemen zijn.
 3. Nooit twee juiste antwoorden (ei/ij, ou/au, g/ch bij klank→grafeem).
 4. Nooit een geblokkeerd woord (§6.4).
 5. Niveau D alleen als niveau C ≥ 0.85.
@@ -701,3 +709,55 @@ Regels:
 
 ### 14.4 Bewust níét gebruikt
 Commerciële methodes (*Veilig leren lezen*, *Lijn 3* e.a.): geen lettervolgorde, kernwoorden, personages of teksten overgenomen. Overeenkomsten in algemene principes (bv. continuanten vroeg) volgen uit de vakliteratuur, niet uit een methode.
+
+---
+
+## 15. Ontwerpbeslissingen na review (versie 1.1)
+
+Deze sectie bundelt de **bewuste afwijkingen** van versie 0.1 en de punten waarop het document met de implementatie is gelijkgetrokken, naar aanleiding van de educational-, QA- en security-reviews (ronde 1–3, commits op `main`). De secties hierboven zijn waar nodig aangepast; waar de implementatie bewust afwijkt, staat de onderbouwing hier. De implementatie blijft leidend voor gedrag, dit document voor de didactische bedoeling.
+
+### 15.1 MVP-woordenlijst: 18 kindvriendelijke woorden
+- `mak`, `smak` en `mars` zijn uit de MVP-lijst verwijderd: `mak` is niet goed afbeeldbaar, `smak` en `mars` zijn weinig concreet/betekenisvol voor 5–6-jarigen. De implementatie (`src/content/words.ts`) bevat daarmee **18 MVP-woorden**, waarvan 17 met een belonings-SVG (`start` heeft nog geen asset).
+- De `Kv`-kolom in §6.5 was voor die drie woorden onterecht "ja"; met hun verwijdering is de kolom consistent. §5.2, §6.5 en de aantallen zijn bijgewerkt: **63 kandidaten in fase 5, waarvan 18 MVP**. Dat blijft ruim boven de eis van ≥ 8 (ED §5.2).
+
+### 15.2 Auditieve afleiders en de eerste letter (LK.`<g>`.SOUND vóór RECOGNIZE)
+Dit is een **bewuste omkering van de faseorde** in §3: in plaats van eerst fase 2 (RECOGNIZE, klank→grafeem) en dan fase 3 (SOUND, grafeem→klank), introduceert de implementatie de allereerste letter met uitsluitend `LK.<g>.SOUND`.
+
+- **Poort toetst SOUND.** De poort naar fase 3 hangt aan `LK.<g>.SOUND` (`Progression.ts`), niet aan RECOGNIZE. Zolang de fase-2-poort (`FN.FIRST_SOUND ≥ 0.8`) dicht is, oefent de warming-up gericht op `FN.FIRST_SOUND`.
+- **Auditieve, niet-getoonde afleiders.** Zolang er nog geen tweede geleerd grafeem is, mogen bij grafeem→klank afleiders uit de volledige inventaris komen (`allowUnlearnedAuditoryDistractors`). Er komt **geen ongeleerd grafeem in beeld**: de opties zijn audio-only klankknoppen (oor-icoon + nummer), op niveau A (klinker vs. medeklinker, dus akoestisch zo ver mogelijk van het doel). Dit is de expliciete uitzondering van §6.2 regel 8 en staat nu in §10.5 regel 2.
+- **RECOGNIZE vanaf 2 grafemen.** Klank→grafeem wordt uitgesteld tot er ≥ 2 geleerde grafemen zijn, zodat nooit een ongeleerde letter als optie verschijnt. Gevolg: RECOGNIZE wordt per grafeem beperkt geoefend en raakt in de MVP niet aan `isMastered`.
+- **Didactische eerlijkheid.** In de introductiesessie is er nog geen klank-tekenkoppeling; de gescoorde SOUND-items zijn dan vooral "herken de zojuist gemodelleerde klank" en nog geen echte retrieval. Zodra het tweede grafeem vrij is, worden de afleiders geleerd en wordt de taak betekenisvoller. Voor de allereerste letter is dit een verantwoorde **tijdelijke steiger** die de kip-ei-situatie (geen letter zonder geleerd grafeem, geen geleerd grafeem zonder letter) doorbreekt.
+
+### 15.3 r in de coda (§6.3)
+Zie de herziene §6.3. Kort: de eerdere eis "in het MVP eerst r vooraan" was intern tegenstrijdig met de MVP-lijst (*kar, arm, ark, start*) en is vervallen. Korte a + r geeft geen klinkerkleuring (die hoort bij *ee/oo/eu/ie* vóór r), dus de woorden zijn klankzuiver. De realisatie van r en de r in het cluster *start* blijven een **expliciet aandachtspunt voor de native opname en de vakinhoudelijke review** (§13 regel 7).
+
+### 15.4 CVVC-fase-mapping
+§3 en §6.1 plaatsten CVVC (aa/oo/ee) in fase 5; de implementatie (`phaseForPattern` in `words.ts`) mapt alleen `VC`/`CVC` naar fase 5 en **al het overige, inclusief CVVC, naar fase 6**. Het document is hierop gelijkgetrokken: CVVC staat nu in fase 6. Didactisch blijft de bedoeling dat kaas/raam als **staart van fase 5** worden geoefend; de faseadministratie volgt de patronenclassificatie van de code. De woordselectie (§6.5) is ongewijzigd.
+
+### 15.5 Mastery bij `attempts = 0` (alpha = 1)
+De EWMA-formule (§10.2) geeft bij `attempts = 0` `alpha = 1`, waardoor één correct item `mastery = 1.0` oplevert. Dat is **alleen veilig in combinatie met de volledige beheersingspoort** `isMastered` (§10.3): mastery ≥ 0.8 **en** ≥ 12 items **en** ≥ 4 op rij correct **en** ≥ 2 sessies. De implementatie gebruikt de poort dan ook overal waar "beheerst" of vrijgave wordt bepaald (`Progression.ts`, `SessionPlanner.ts`). `mastery ≥ 0.8` alleen mag nooit als beheersing worden geïnterpreteerd.
+
+### 15.6 Sight words: `requiresBlock`-proxy
+§7.1 drukt de introductie uit in mastery (`SW.de` na `DE.CVC ≥ 0.7`). De implementatie gebruikt voor SW.de/een/het `requiresBlock: 7` als **proxy** (zie de noot in §7.1), omdat de skill-drempel in het huidige contentmodel niet uitgedrukt kan worden. De volgorde/keten (`introducedAfter`) blijft gelijk; SW.ze/we/je hangen aan hun eigen blok.
+
+### 15.7 Vangnet fase-1-poort: niet eindeloos vasthouden in één fase
+Uit de QA-review bleek de fase-2-drempel (`FN.FIRST_SOUND ≥ 0.8`) voor een leerling die de helft van de items pas bij de tweede poging goed heeft **onbereikbaar**: de EWMA convergeert dan naar ~0,78 en een harde drempel geeft nooit letters. De implementatie voegt daarom een **vangnet** toe:
+
+- Een leerling die na een aantal sessies de fase-1-poort niet haalt, krijgt **toch de eerste letter**, met **extra auditieve ondersteuning**.
+- De fase-1-oefening blijft intussen in de **warming-up** staan, zodat fonemisch bewustzijn niet verdwijnt.
+- Ontwerpprincipe: **een kind mag niet onbeperkt in één fase vastzitten.** Er is geen exact getal in dit document; de implementatie gebruikt een ruwe sessiegrens (indicatief **na ongeveer 6–10 sessies zonder poort-doorgang, zie code**). De precieze waarde is een implementatie-/testdetail en mag worden bijgesteld op basis van observatie met kinderen.
+
+### 15.8 Woordsecties pas bij ≥ 2 even lange kindvriendelijke woorden
+De lees-/klimsecties (stap 5 en 6) openen niet meer op "er is überhaupt een woord", maar pas als er **minimaal 2 kindvriendelijke woorden van dezelfde grafeemlengte** zijn, zodat er een echte keuze is zonder lengte-hint (ED §11 regel 6). Eén-optie-items worden niet als gescoorde keuze aangeboden; als die situatie toch optreedt, is het item ongescoord (blootstelling/model) en niet een schijnkeuze. Dit volgt de fix-richting uit de QA-review en houdt de gelijke-lengte-eis van §11.6 intact.
+
+### 15.9 Feedback wordt altijd ook uitgesproken
+Zie §9.1. **Alle** feedback (`fb.correct.*`, `fb.try1.*`, `fb.hint.*`, `fb.model.*`, `fb.specific.*` en de gok-feedback) wordt naast de tekst-/icoonweergave **daadwerkelijk uitgesproken**. Er staat geen zin in beeld die het kind zelf moet lezen (GD §5, GD §8.1). Waar eerder alleen tekst werd getoond, moet de concrete feedbackclip worden afgespeeld.
+
+### 15.10 Gemeten tempo van een perfecte leerling
+Met een vers profiel en uitsluitend perfecte antwoorden komen de MVP-grafemen vrij in:
+
+| Grafeem | m | a | s | t | k | r |
+|---|---|---|---|---|---|---|
+| **Unlock-sessie** | 2 | 5 | 9 | 13 | 16 | 19 |
+
+Vanaf `m` kosten de letters dus **3–4 sessies** per grafeem (intervallen 3, 4, 4, 3, 3). Bij sessies van 5–10 minuten is dat ~15–40 minuten per letter en ~19 sessies (≈ 1,5–3 uur) voor de hele MVP, gespreid over meerdere dagen. Dat is passend voor 5–6-jarigen en respecteert de beheersingspoort. Een kind dat fouten maakt gaat langzamer — precies de bedoeling. Dit tempo is een **bovengrens** (perfecte leerling), geen norm.

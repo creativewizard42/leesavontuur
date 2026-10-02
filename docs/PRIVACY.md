@@ -14,8 +14,9 @@ verbinding nodig om te spelen.
 - Welke klanken of woorden wel eens verwisseld worden, zodat het spel daar extra
   mee kan oefenen.
 - Als een sessie wordt onderbroken: de tussenstand van die sessie, zodat uw kind
-  verder kan waar het gebleven was. Die tussenstand wordt na **12 uur automatisch
-  verwijderd**.
+  verder kan waar het gebleven was. Een tussenstand die ouder is dan **12 uur**
+  wordt niet meer hervat en wordt bij de volgende start van het spel
+  **verwijderd**.
 
 Al deze gegevens staan **alleen op dit apparaat** (in de browseropslag) onder de
 sleutels `leesavontuur.save.v1`, `leesavontuur.confusions.v1` en
@@ -46,3 +47,7 @@ versleuteld, en na een privacytoets (DPIA). Nu is dat er niet.
 
 **Vragen?** Neem contact op met de makers van LEESAVONTUUR:
 **[contact invullen]**.
+
+> **Let op — vóór publicatie invullen:** dit contactadres is nog een placeholder.
+> Vervang **[contact invullen]** door een werkend e-mailadres (of postadres) van
+> de makers voordat deze tekst openbaar wordt gemaakt.
