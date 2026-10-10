@@ -13,7 +13,7 @@
     "text": "mmm",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.m.example",
@@ -37,7 +37,7 @@
     "text": "a-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.a.example",
@@ -61,7 +61,7 @@
     "text": "sss",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.s.example",
@@ -85,7 +85,7 @@
     "text": "t-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.t.example",
@@ -109,7 +109,7 @@
     "text": "k-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.k.example",
@@ -133,7 +133,7 @@
     "text": "rrr",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.r.example",
@@ -157,7 +157,7 @@
     "text": "i-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.i.example",
@@ -181,7 +181,7 @@
     "text": "vvv",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.v.example",
@@ -205,7 +205,7 @@
     "text": "aaa",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.aa.example",
@@ -229,7 +229,7 @@
     "text": "lll",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.l.example",
@@ -253,7 +253,7 @@
     "text": "nnn",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.n.example",
@@ -277,7 +277,7 @@
     "text": "ooo",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.oo.example",
@@ -301,7 +301,7 @@
     "text": "e-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.e.example",
@@ -325,7 +325,7 @@
     "text": "d-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.d.example",
@@ -349,7 +349,7 @@
     "text": "eee",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.ee.example",
@@ -373,7 +373,7 @@
     "text": "p-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.p.example",
@@ -397,7 +397,7 @@
     "text": "o-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.o.example",
@@ -421,7 +421,7 @@
     "text": "zzz",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.z.example",
@@ -445,7 +445,7 @@
     "text": "ie",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.ie.example",
@@ -469,7 +469,7 @@
     "text": "hhh",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.h.example",
@@ -493,7 +493,7 @@
     "text": "oe",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.oe.example",
@@ -517,7 +517,7 @@
     "text": "u-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.u.example",
@@ -541,7 +541,7 @@
     "text": "b-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.b.example",
@@ -565,7 +565,7 @@
     "text": "uuu",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.uu.example",
@@ -589,7 +589,7 @@
     "text": "jjj",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.j.example",
@@ -613,7 +613,7 @@
     "text": "ij",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.ij.example",
@@ -637,7 +637,7 @@
     "text": "www",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.w.example",
@@ -661,7 +661,7 @@
     "text": "ggg",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.g.example",
@@ -685,7 +685,7 @@
     "text": "eu",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.eu.example",
@@ -709,7 +709,7 @@
     "text": "ui",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.ui.example",
@@ -733,7 +733,7 @@
     "text": "fff",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.f.example",
@@ -757,7 +757,7 @@
     "text": "ei",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.ei.example",
@@ -781,7 +781,7 @@
     "text": "ou",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.ou.example",
@@ -805,7 +805,7 @@
     "text": "au",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.au.example",
@@ -829,7 +829,7 @@
     "text": "chch",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.ch.example",
@@ -853,7 +853,7 @@
     "text": "ng",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.ng.example",
@@ -877,7 +877,7 @@
     "text": "ngk",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.nk.example",
@@ -901,7 +901,7 @@
     "text": "k-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.x.name",
@@ -917,7 +917,7 @@
     "text": "ks",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.y.name",
@@ -933,7 +933,7 @@
     "text": "jjj",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "lk.q.name",
@@ -949,7 +949,7 @@
     "text": "k-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.mam",
@@ -965,7 +965,7 @@
     "text": "mmm … a … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.as",
@@ -981,7 +981,7 @@
     "text": "a … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.mat",
@@ -997,7 +997,7 @@
     "text": "mmm … a … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.tas",
@@ -1013,7 +1013,7 @@
     "text": "t … a … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kam",
@@ -1029,7 +1029,7 @@
     "text": "k … a … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kat",
@@ -1045,7 +1045,7 @@
     "text": "k … a … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.tak",
@@ -1061,7 +1061,7 @@
     "text": "t … a … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kas",
@@ -1077,7 +1077,7 @@
     "text": "k … a … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.ram",
@@ -1093,7 +1093,7 @@
     "text": "rrr … a … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.rat",
@@ -1109,7 +1109,7 @@
     "text": "rrr … a … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kar",
@@ -1125,7 +1125,7 @@
     "text": "k … a … rrr",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.arm",
@@ -1141,7 +1141,7 @@
     "text": "a … rrr … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.ark",
@@ -1157,7 +1157,7 @@
     "text": "a … rrr … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kast",
@@ -1173,7 +1173,7 @@
     "text": "k … a … sss … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.mast",
@@ -1189,7 +1189,7 @@
     "text": "mmm … a … sss … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.stam",
@@ -1205,7 +1205,7 @@
     "text": "sss … t … a … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kras",
@@ -1221,7 +1221,7 @@
     "text": "k … rrr … a … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.start",
@@ -1237,7 +1237,7 @@
     "text": "sss … t … a … rrr … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.mis",
@@ -1253,7 +1253,7 @@
     "text": "mmm … i … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kist",
@@ -1269,7 +1269,7 @@
     "text": "k … i … sss … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.mist",
@@ -1285,7 +1285,7 @@
     "text": "mmm … i … sss … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.rit",
@@ -1301,7 +1301,7 @@
     "text": "rrr … i … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.tik",
@@ -1317,7 +1317,7 @@
     "text": "t … i … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.vis",
@@ -1333,7 +1333,7 @@
     "text": "vvv … i … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.vat",
@@ -1349,7 +1349,7 @@
     "text": "vvv … a … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.vak",
@@ -1365,7 +1365,7 @@
     "text": "vvv … a … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kaas",
@@ -1381,7 +1381,7 @@
     "text": "k … aaa … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.raam",
@@ -1397,7 +1397,7 @@
     "text": "rrr … aaa … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.vaas",
@@ -1413,7 +1413,7 @@
     "text": "vvv … aaa … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kaart",
@@ -1429,7 +1429,7 @@
     "text": "k … aaa … rrr … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.taart",
@@ -1445,7 +1445,7 @@
     "text": "t … aaa … rrr … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.staart",
@@ -1461,7 +1461,7 @@
     "text": "sss … t … aaa … rrr … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.lam",
@@ -1477,7 +1477,7 @@
     "text": "lll … a … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.slak",
@@ -1493,7 +1493,7 @@
     "text": "sss … lll … a … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.stal",
@@ -1509,7 +1509,7 @@
     "text": "sss … t … a … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.val",
@@ -1525,7 +1525,7 @@
     "text": "vvv … a … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kaal",
@@ -1541,7 +1541,7 @@
     "text": "k … aaa … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kan",
@@ -1557,7 +1557,7 @@
     "text": "k … a … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.man",
@@ -1573,7 +1573,7 @@
     "text": "mmm … a … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.nat",
@@ -1589,7 +1589,7 @@
     "text": "nnn … a … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kin",
@@ -1605,7 +1605,7 @@
     "text": "k … i … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.vin",
@@ -1621,7 +1621,7 @@
     "text": "vvv … i … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.maan",
@@ -1637,7 +1637,7 @@
     "text": "mmm … aaa … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kraan",
@@ -1653,7 +1653,7 @@
     "text": "k … rrr … aaa … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.lint",
@@ -1669,7 +1669,7 @@
     "text": "lll … i … nnn … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kool",
@@ -1685,7 +1685,7 @@
     "text": "k … ooo … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.rook",
@@ -1701,7 +1701,7 @@
     "text": "rrr … ooo … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.oom",
@@ -1717,7 +1717,7 @@
     "text": "ooo … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.noot",
@@ -1733,7 +1733,7 @@
     "text": "nnn … ooo … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.look",
@@ -1749,7 +1749,7 @@
     "text": "lll … ooo … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.nek",
@@ -1765,7 +1765,7 @@
     "text": "nnn … e … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.mes",
@@ -1781,7 +1781,7 @@
     "text": "mmm … e … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.net",
@@ -1797,7 +1797,7 @@
     "text": "nnn … e … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.tent",
@@ -1813,7 +1813,7 @@
     "text": "t … e … nnn … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.rem",
@@ -1829,7 +1829,7 @@
     "text": "rrr … e … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.melk",
@@ -1845,7 +1845,7 @@
     "text": "mmm … e … lll … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.dak",
@@ -1861,7 +1861,7 @@
     "text": "d … a … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.das",
@@ -1877,7 +1877,7 @@
     "text": "d … a … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.dal",
@@ -1893,7 +1893,7 @@
     "text": "d … a … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.teen",
@@ -1909,7 +1909,7 @@
     "text": "t … eee … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.steen",
@@ -1925,7 +1925,7 @@
     "text": "sss … t … eee … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.keel",
@@ -1941,7 +1941,7 @@
     "text": "k … eee … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.eet",
@@ -1957,7 +1957,7 @@
     "text": "eee … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.pan",
@@ -1973,7 +1973,7 @@
     "text": "p … a … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kip",
@@ -1989,7 +1989,7 @@
     "text": "k … i … p",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.pet",
@@ -2005,7 +2005,7 @@
     "text": "p … e … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.lip",
@@ -2021,7 +2021,7 @@
     "text": "lll … i … p",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.pop",
@@ -2037,7 +2037,7 @@
     "text": "p … o … p",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.mol",
@@ -2053,7 +2053,7 @@
     "text": "mmm … o … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kop",
@@ -2069,7 +2069,7 @@
     "text": "k … o … p",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.rok",
@@ -2085,7 +2085,7 @@
     "text": "rrr … o … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.sok",
@@ -2101,7 +2101,7 @@
     "text": "sss … o … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.vos",
@@ -2117,7 +2117,7 @@
     "text": "vvv … o … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.pot",
@@ -2133,7 +2133,7 @@
     "text": "p … o … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.stok",
@@ -2149,7 +2149,7 @@
     "text": "sss … t … o … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.slot",
@@ -2165,7 +2165,7 @@
     "text": "sss … lll … o … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.zon",
@@ -2181,7 +2181,7 @@
     "text": "zzz … o … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.zak",
@@ -2197,7 +2197,7 @@
     "text": "zzz … a … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.zes",
@@ -2213,7 +2213,7 @@
     "text": "zzz … e … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.zeep",
@@ -2229,7 +2229,7 @@
     "text": "zzz … eee … p",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.riem",
@@ -2245,7 +2245,7 @@
     "text": "rrr … ie … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.diep",
@@ -2261,7 +2261,7 @@
     "text": "d … ie … p",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.kies",
@@ -2277,7 +2277,7 @@
     "text": "k … ie … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.hek",
@@ -2293,7 +2293,7 @@
     "text": "hhh … e … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.hok",
@@ -2309,7 +2309,7 @@
     "text": "hhh … o … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.haas",
@@ -2325,7 +2325,7 @@
     "text": "hhh … aaa … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.klok",
@@ -2341,7 +2341,7 @@
     "text": "k … lll … o … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.voet",
@@ -2357,7 +2357,7 @@
     "text": "vvv … oe … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.koek",
@@ -2373,7 +2373,7 @@
     "text": "k … oe … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.poes",
@@ -2389,7 +2389,7 @@
     "text": "p … oe … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.soep",
@@ -2405,7 +2405,7 @@
     "text": "sss … oe … p",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.stoel",
@@ -2421,7 +2421,7 @@
     "text": "sss … t … oe … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.hut",
@@ -2437,7 +2437,7 @@
     "text": "hhh … u … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.mus",
@@ -2453,7 +2453,7 @@
     "text": "mmm … u … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.bus",
@@ -2469,7 +2469,7 @@
     "text": "b … u … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.bal",
@@ -2485,7 +2485,7 @@
     "text": "b … a … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.bes",
@@ -2501,7 +2501,7 @@
     "text": "b … e … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.been",
@@ -2517,7 +2517,7 @@
     "text": "b … eee … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.boom",
@@ -2533,7 +2533,7 @@
     "text": "b … ooo … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.boek",
@@ -2549,7 +2549,7 @@
     "text": "b … oe … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.muur",
@@ -2565,7 +2565,7 @@
     "text": "mmm … uuu … rrr",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.vuur",
@@ -2581,7 +2581,7 @@
     "text": "vvv … uuu … rrr",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.jas",
@@ -2597,7 +2597,7 @@
     "text": "jjj … a … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.ijs",
@@ -2613,7 +2613,7 @@
     "text": "ij … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.pijl",
@@ -2629,7 +2629,7 @@
     "text": "p … ij … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.lijm",
@@ -2645,7 +2645,7 @@
     "text": "lll … ij … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.wol",
@@ -2661,7 +2661,7 @@
     "text": "www … o … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.wiel",
@@ -2677,7 +2677,7 @@
     "text": "www … ie … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.gat",
@@ -2693,7 +2693,7 @@
     "text": "ggg … a … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.geel",
@@ -2709,7 +2709,7 @@
     "text": "ggg … eee … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.neus",
@@ -2725,7 +2725,7 @@
     "text": "nnn … eu … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.huis",
@@ -2741,7 +2741,7 @@
     "text": "hhh … ui … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.muis",
@@ -2757,7 +2757,7 @@
     "text": "mmm … ui … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.duim",
@@ -2773,7 +2773,7 @@
     "text": "d … ui … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.tuin",
@@ -2789,7 +2789,7 @@
     "text": "t … ui … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.buik",
@@ -2805,7 +2805,7 @@
     "text": "b … ui … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.fles",
@@ -2821,7 +2821,7 @@
     "text": "fff … lll … e … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.geit",
@@ -2837,7 +2837,7 @@
     "text": "ggg … ei … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.zout",
@@ -2853,7 +2853,7 @@
     "text": "zzz … ou … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.saus",
@@ -2869,7 +2869,7 @@
     "text": "sss … au … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.lach",
@@ -2885,7 +2885,7 @@
     "text": "lll … a … chch",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.ring",
@@ -2901,7 +2901,7 @@
     "text": "rrr … i … ng",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.slang",
@@ -2917,7 +2917,7 @@
     "text": "sss … lll … a … ng",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.bank",
@@ -2933,7 +2933,7 @@
     "text": "b … a … ngk",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.pink",
@@ -2949,7 +2949,7 @@
     "text": "p … i … ngk",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.en",
@@ -2965,7 +2965,7 @@
     "text": "e … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.in",
@@ -2981,7 +2981,7 @@
     "text": "i … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.is",
@@ -2997,7 +2997,7 @@
     "text": "i … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.ik",
@@ -3013,7 +3013,7 @@
     "text": "i … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.op",
@@ -3029,7 +3029,7 @@
     "text": "o … p",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.al",
@@ -3045,7 +3045,7 @@
     "text": "a … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.bij",
@@ -3061,7 +3061,7 @@
     "text": "b … ij",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.gras",
@@ -3077,7 +3077,7 @@
     "text": "ggg … rrr … a … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.rolt",
@@ -3093,7 +3093,7 @@
     "text": "rrr … o … lll … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.sloot",
@@ -3109,7 +3109,7 @@
     "text": "sss … lll … ooo … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.boot",
@@ -3125,7 +3125,7 @@
     "text": "b … ooo … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.lief",
@@ -3141,7 +3141,7 @@
     "text": "lll … ie … fff",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.ziet",
@@ -3157,7 +3157,7 @@
     "text": "zzz … ie … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.rent",
@@ -3173,7 +3173,7 @@
     "text": "rrr … e … nnn … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.pakt",
@@ -3189,7 +3189,7 @@
     "text": "p … a … k … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.zit",
@@ -3205,7 +3205,7 @@
     "text": "zzz … i … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.lacht",
@@ -3221,7 +3221,7 @@
     "text": "lll … a … chch … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "de.aan",
@@ -4029,7 +4029,7 @@
     "text": "Bijna! Luister naar het begin: mmm…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.a",
@@ -4037,7 +4037,7 @@
     "text": "Bijna! Luister naar het begin: a…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.s",
@@ -4045,7 +4045,7 @@
     "text": "Bijna! Luister naar het begin: sss…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.t",
@@ -4053,7 +4053,7 @@
     "text": "Bijna! Luister naar het begin: t…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.k",
@@ -4061,7 +4061,7 @@
     "text": "Bijna! Luister naar het begin: k…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.r",
@@ -4069,7 +4069,7 @@
     "text": "Bijna! Luister naar het begin: rrr…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.i",
@@ -4077,7 +4077,7 @@
     "text": "Bijna! Luister naar het begin: i…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.v",
@@ -4085,7 +4085,7 @@
     "text": "Bijna! Luister naar het begin: vvv…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.aa",
@@ -4093,7 +4093,7 @@
     "text": "Bijna! Luister naar het begin: aaa…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.l",
@@ -4101,7 +4101,7 @@
     "text": "Bijna! Luister naar het begin: lll…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.n",
@@ -4109,7 +4109,7 @@
     "text": "Bijna! Luister naar het begin: nnn…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.oo",
@@ -4117,7 +4117,7 @@
     "text": "Bijna! Luister naar het begin: ooo…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.e",
@@ -4125,7 +4125,7 @@
     "text": "Bijna! Luister naar het begin: e…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.d",
@@ -4133,7 +4133,7 @@
     "text": "Bijna! Luister naar het begin: d…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.ee",
@@ -4141,7 +4141,7 @@
     "text": "Bijna! Luister naar het begin: eee…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.p",
@@ -4149,7 +4149,7 @@
     "text": "Bijna! Luister naar het begin: p…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.o",
@@ -4157,7 +4157,7 @@
     "text": "Bijna! Luister naar het begin: o…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.z",
@@ -4165,7 +4165,7 @@
     "text": "Bijna! Luister naar het begin: zzz…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.ie",
@@ -4173,7 +4173,7 @@
     "text": "Bijna! Luister naar het begin: ie…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.h",
@@ -4181,7 +4181,7 @@
     "text": "Bijna! Luister naar het begin: hhh…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.oe",
@@ -4189,7 +4189,7 @@
     "text": "Bijna! Luister naar het begin: oe…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.u",
@@ -4197,7 +4197,7 @@
     "text": "Bijna! Luister naar het begin: u…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.b",
@@ -4205,7 +4205,7 @@
     "text": "Bijna! Luister naar het begin: b…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.uu",
@@ -4213,7 +4213,7 @@
     "text": "Bijna! Luister naar het begin: uuu…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.j",
@@ -4221,7 +4221,7 @@
     "text": "Bijna! Luister naar het begin: jjj…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.ij",
@@ -4229,7 +4229,7 @@
     "text": "Bijna! Luister naar het begin: ij…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.w",
@@ -4237,7 +4237,7 @@
     "text": "Bijna! Luister naar het begin: www…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.g",
@@ -4245,7 +4245,7 @@
     "text": "Bijna! Luister naar het begin: ggg…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.eu",
@@ -4253,7 +4253,7 @@
     "text": "Bijna! Luister naar het begin: eu…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.ui",
@@ -4261,7 +4261,7 @@
     "text": "Bijna! Luister naar het begin: ui…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.f",
@@ -4269,7 +4269,7 @@
     "text": "Bijna! Luister naar het begin: fff…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.ei",
@@ -4277,7 +4277,7 @@
     "text": "Bijna! Luister naar het begin: ei…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.ou",
@@ -4285,7 +4285,7 @@
     "text": "Bijna! Luister naar het begin: ou…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.au",
@@ -4293,7 +4293,7 @@
     "text": "Bijna! Luister naar het begin: au…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.ch",
@@ -4301,7 +4301,7 @@
     "text": "Bijna! Luister naar het begin: chch…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.ng",
@@ -4309,7 +4309,7 @@
     "text": "Bijna! Luister naar het begin: ng…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.nk",
@@ -4317,7 +4317,7 @@
     "text": "Bijna! Luister naar het begin: ngk…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.c",
@@ -4325,7 +4325,7 @@
     "text": "Bijna! Luister naar het begin: k…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.x",
@@ -4333,7 +4333,7 @@
     "text": "Bijna! Luister naar het begin: ks…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.y",
@@ -4341,7 +4341,7 @@
     "text": "Bijna! Luister naar het begin: j…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.first_sound.q",
@@ -4349,7 +4349,7 @@
     "text": "Bijna! Luister naar het begin: k…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.m",
@@ -4357,7 +4357,7 @@
     "text": "Bijna! Luister naar het laatste stukje: mmm…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.a",
@@ -4365,7 +4365,7 @@
     "text": "Bijna! Luister naar het laatste stukje: a…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.s",
@@ -4373,7 +4373,7 @@
     "text": "Bijna! Luister naar het laatste stukje: sss…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.t",
@@ -4381,7 +4381,7 @@
     "text": "Bijna! Luister naar het laatste stukje: t…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.k",
@@ -4389,7 +4389,7 @@
     "text": "Bijna! Luister naar het laatste stukje: k…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.r",
@@ -4397,7 +4397,7 @@
     "text": "Bijna! Luister naar het laatste stukje: rrr…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.i",
@@ -4405,7 +4405,7 @@
     "text": "Bijna! Luister naar het laatste stukje: i…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.v",
@@ -4413,7 +4413,7 @@
     "text": "Bijna! Luister naar het laatste stukje: vvv…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.aa",
@@ -4421,7 +4421,7 @@
     "text": "Bijna! Luister naar het laatste stukje: aaa…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.l",
@@ -4429,7 +4429,7 @@
     "text": "Bijna! Luister naar het laatste stukje: lll…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.n",
@@ -4437,7 +4437,7 @@
     "text": "Bijna! Luister naar het laatste stukje: nnn…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.oo",
@@ -4445,7 +4445,7 @@
     "text": "Bijna! Luister naar het laatste stukje: ooo…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.e",
@@ -4453,7 +4453,7 @@
     "text": "Bijna! Luister naar het laatste stukje: e…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.d",
@@ -4461,7 +4461,7 @@
     "text": "Bijna! Luister naar het laatste stukje: d…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.ee",
@@ -4469,7 +4469,7 @@
     "text": "Bijna! Luister naar het laatste stukje: eee…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.p",
@@ -4477,7 +4477,7 @@
     "text": "Bijna! Luister naar het laatste stukje: p…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.o",
@@ -4485,7 +4485,7 @@
     "text": "Bijna! Luister naar het laatste stukje: o…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.z",
@@ -4493,7 +4493,7 @@
     "text": "Bijna! Luister naar het laatste stukje: zzz…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.ie",
@@ -4501,7 +4501,7 @@
     "text": "Bijna! Luister naar het laatste stukje: ie…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.h",
@@ -4509,7 +4509,7 @@
     "text": "Bijna! Luister naar het laatste stukje: hhh…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.oe",
@@ -4517,7 +4517,7 @@
     "text": "Bijna! Luister naar het laatste stukje: oe…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.u",
@@ -4525,7 +4525,7 @@
     "text": "Bijna! Luister naar het laatste stukje: u…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.b",
@@ -4533,7 +4533,7 @@
     "text": "Bijna! Luister naar het laatste stukje: b…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.uu",
@@ -4541,7 +4541,7 @@
     "text": "Bijna! Luister naar het laatste stukje: uuu…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.j",
@@ -4549,7 +4549,7 @@
     "text": "Bijna! Luister naar het laatste stukje: jjj…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.ij",
@@ -4557,7 +4557,7 @@
     "text": "Bijna! Luister naar het laatste stukje: ij…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.w",
@@ -4565,7 +4565,7 @@
     "text": "Bijna! Luister naar het laatste stukje: www…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.g",
@@ -4573,7 +4573,7 @@
     "text": "Bijna! Luister naar het laatste stukje: ggg…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.eu",
@@ -4581,7 +4581,7 @@
     "text": "Bijna! Luister naar het laatste stukje: eu…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.ui",
@@ -4589,7 +4589,7 @@
     "text": "Bijna! Luister naar het laatste stukje: ui…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.f",
@@ -4597,7 +4597,7 @@
     "text": "Bijna! Luister naar het laatste stukje: fff…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.ei",
@@ -4605,7 +4605,7 @@
     "text": "Bijna! Luister naar het laatste stukje: ei…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.ou",
@@ -4613,7 +4613,7 @@
     "text": "Bijna! Luister naar het laatste stukje: ou…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.au",
@@ -4621,7 +4621,7 @@
     "text": "Bijna! Luister naar het laatste stukje: au…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.ch",
@@ -4629,7 +4629,7 @@
     "text": "Bijna! Luister naar het laatste stukje: chch…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.ng",
@@ -4637,7 +4637,7 @@
     "text": "Bijna! Luister naar het laatste stukje: ng…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.nk",
@@ -4645,7 +4645,7 @@
     "text": "Bijna! Luister naar het laatste stukje: ngk…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.c",
@@ -4653,7 +4653,7 @@
     "text": "Bijna! Luister naar het laatste stukje: k…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.x",
@@ -4661,7 +4661,7 @@
     "text": "Bijna! Luister naar het laatste stukje: ks…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.y",
@@ -4669,7 +4669,7 @@
     "text": "Bijna! Luister naar het laatste stukje: j…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.last_sound.q",
@@ -4677,7 +4677,7 @@
     "text": "Bijna! Luister naar het laatste stukje: k…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.a",
@@ -4685,7 +4685,7 @@
     "text": "Luister naar het midden: a… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.i",
@@ -4693,7 +4693,7 @@
     "text": "Luister naar het midden: i… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.aa",
@@ -4701,7 +4701,7 @@
     "text": "Luister naar het midden: aaa… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.oo",
@@ -4709,7 +4709,7 @@
     "text": "Luister naar het midden: ooo… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.e",
@@ -4717,7 +4717,7 @@
     "text": "Luister naar het midden: e… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.ee",
@@ -4725,7 +4725,7 @@
     "text": "Luister naar het midden: eee… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.o",
@@ -4733,7 +4733,7 @@
     "text": "Luister naar het midden: o… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.ie",
@@ -4741,7 +4741,7 @@
     "text": "Luister naar het midden: ie… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.oe",
@@ -4749,7 +4749,7 @@
     "text": "Luister naar het midden: oe… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.u",
@@ -4757,7 +4757,7 @@
     "text": "Luister naar het midden: u… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.uu",
@@ -4765,7 +4765,7 @@
     "text": "Luister naar het midden: uuu… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.ij",
@@ -4773,7 +4773,7 @@
     "text": "Luister naar het midden: ij… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.eu",
@@ -4781,7 +4781,7 @@
     "text": "Luister naar het midden: eu… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.ui",
@@ -4789,7 +4789,7 @@
     "text": "Luister naar het midden: ui… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.ei",
@@ -4797,7 +4797,7 @@
     "text": "Luister naar het midden: ei… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.ou",
@@ -4805,7 +4805,7 @@
     "text": "Luister naar het midden: ou… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_sound.au",
@@ -4813,7 +4813,7 @@
     "text": "Luister naar het midden: au… Welke klinker hoor je?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.m",
@@ -4821,7 +4821,7 @@
     "text": "Luister naar het midden: mmm…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.s",
@@ -4829,7 +4829,7 @@
     "text": "Luister naar het midden: sss…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.t",
@@ -4837,7 +4837,7 @@
     "text": "Luister naar het midden: t…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.k",
@@ -4845,7 +4845,7 @@
     "text": "Luister naar het midden: k…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.r",
@@ -4853,7 +4853,7 @@
     "text": "Luister naar het midden: rrr…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.v",
@@ -4861,7 +4861,7 @@
     "text": "Luister naar het midden: vvv…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.l",
@@ -4869,7 +4869,7 @@
     "text": "Luister naar het midden: lll…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.n",
@@ -4877,7 +4877,7 @@
     "text": "Luister naar het midden: nnn…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.d",
@@ -4885,7 +4885,7 @@
     "text": "Luister naar het midden: d…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.p",
@@ -4893,7 +4893,7 @@
     "text": "Luister naar het midden: p…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.z",
@@ -4901,7 +4901,7 @@
     "text": "Luister naar het midden: zzz…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.h",
@@ -4909,7 +4909,7 @@
     "text": "Luister naar het midden: hhh…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.b",
@@ -4917,7 +4917,7 @@
     "text": "Luister naar het midden: b…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.j",
@@ -4925,7 +4925,7 @@
     "text": "Luister naar het midden: jjj…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.w",
@@ -4933,7 +4933,7 @@
     "text": "Luister naar het midden: www…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.g",
@@ -4941,7 +4941,7 @@
     "text": "Luister naar het midden: ggg…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.f",
@@ -4949,7 +4949,7 @@
     "text": "Luister naar het midden: fff…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.ch",
@@ -4957,7 +4957,7 @@
     "text": "Luister naar het midden: chch…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.ng",
@@ -4965,7 +4965,7 @@
     "text": "Luister naar het midden: ng…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.nk",
@@ -4973,7 +4973,7 @@
     "text": "Luister naar het midden: ngk…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.c",
@@ -4981,7 +4981,7 @@
     "text": "Luister naar het midden: k…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.x",
@@ -4989,7 +4989,7 @@
     "text": "Luister naar het midden: ks…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.y",
@@ -4997,7 +4997,7 @@
     "text": "Luister naar het midden: j…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.middle_consonant.q",
@@ -5005,7 +5005,7 @@
     "text": "Luister naar het midden: k…",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.m",
@@ -5013,7 +5013,7 @@
     "text": "Deze letter zegt mmm. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.a",
@@ -5021,7 +5021,7 @@
     "text": "Deze letter zegt a. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.s",
@@ -5029,7 +5029,7 @@
     "text": "Deze letter zegt sss. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.t",
@@ -5037,7 +5037,7 @@
     "text": "Deze letter zegt t. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.k",
@@ -5045,7 +5045,7 @@
     "text": "Deze letter zegt k. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.r",
@@ -5053,7 +5053,7 @@
     "text": "Deze letter zegt rrr. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.i",
@@ -5061,7 +5061,7 @@
     "text": "Deze letter zegt i. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.v",
@@ -5069,7 +5069,7 @@
     "text": "Deze letter zegt vvv. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.aa",
@@ -5077,7 +5077,7 @@
     "text": "Deze letter zegt aaa. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.l",
@@ -5085,7 +5085,7 @@
     "text": "Deze letter zegt lll. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.n",
@@ -5093,7 +5093,7 @@
     "text": "Deze letter zegt nnn. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.oo",
@@ -5101,7 +5101,7 @@
     "text": "Deze letter zegt ooo. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.e",
@@ -5109,7 +5109,7 @@
     "text": "Deze letter zegt e. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.d",
@@ -5117,7 +5117,7 @@
     "text": "Deze letter zegt d. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.ee",
@@ -5125,7 +5125,7 @@
     "text": "Deze letter zegt eee. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.p",
@@ -5133,7 +5133,7 @@
     "text": "Deze letter zegt p. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.o",
@@ -5141,7 +5141,7 @@
     "text": "Deze letter zegt o. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.z",
@@ -5149,7 +5149,7 @@
     "text": "Deze letter zegt zzz. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.ie",
@@ -5157,7 +5157,7 @@
     "text": "Deze letter zegt ie. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.h",
@@ -5165,7 +5165,7 @@
     "text": "Deze letter zegt hhh. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.oe",
@@ -5173,7 +5173,7 @@
     "text": "Deze letter zegt oe. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.u",
@@ -5181,7 +5181,7 @@
     "text": "Deze letter zegt u. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.b",
@@ -5189,7 +5189,7 @@
     "text": "Deze letter zegt b. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.uu",
@@ -5197,7 +5197,7 @@
     "text": "Deze letter zegt uuu. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.j",
@@ -5205,7 +5205,7 @@
     "text": "Deze letter zegt jjj. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.ij",
@@ -5213,7 +5213,7 @@
     "text": "Deze letter zegt ij. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.w",
@@ -5221,7 +5221,7 @@
     "text": "Deze letter zegt www. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.g",
@@ -5229,7 +5229,7 @@
     "text": "Deze letter zegt ggg. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.eu",
@@ -5237,7 +5237,7 @@
     "text": "Deze letter zegt eu. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.ui",
@@ -5245,7 +5245,7 @@
     "text": "Deze letter zegt ui. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.f",
@@ -5253,7 +5253,7 @@
     "text": "Deze letter zegt fff. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.ei",
@@ -5261,7 +5261,7 @@
     "text": "Deze letter zegt ei. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.ou",
@@ -5269,7 +5269,7 @@
     "text": "Deze letter zegt ou. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.au",
@@ -5277,7 +5277,7 @@
     "text": "Deze letter zegt au. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.ch",
@@ -5285,7 +5285,7 @@
     "text": "Deze letter zegt chch. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.ng",
@@ -5293,7 +5293,7 @@
     "text": "Deze letter zegt ng. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.nk",
@@ -5301,7 +5301,7 @@
     "text": "Deze letter zegt ngk. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.c",
@@ -5309,7 +5309,7 @@
     "text": "Deze letter zegt k. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.x",
@@ -5317,7 +5317,7 @@
     "text": "Deze letter zegt ks. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.y",
@@ -5325,7 +5325,7 @@
     "text": "Deze letter zegt j. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.letter_sound.q",
@@ -5333,7 +5333,7 @@
     "text": "Deze letter zegt k. Probeer het nog eens.",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.order.mam",
@@ -6477,7 +6477,7 @@
     "text": "Luister nog eens: mmm … a … mmm. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.as",
@@ -6485,7 +6485,7 @@
     "text": "Luister nog eens: a … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.mat",
@@ -6493,7 +6493,7 @@
     "text": "Luister nog eens: mmm … a … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.tas",
@@ -6501,7 +6501,7 @@
     "text": "Luister nog eens: t … a … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kam",
@@ -6509,7 +6509,7 @@
     "text": "Luister nog eens: k … a … mmm. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kat",
@@ -6517,7 +6517,7 @@
     "text": "Luister nog eens: k … a … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.tak",
@@ -6525,7 +6525,7 @@
     "text": "Luister nog eens: t … a … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kas",
@@ -6533,7 +6533,7 @@
     "text": "Luister nog eens: k … a … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.ram",
@@ -6541,7 +6541,7 @@
     "text": "Luister nog eens: rrr … a … mmm. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.rat",
@@ -6549,7 +6549,7 @@
     "text": "Luister nog eens: rrr … a … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kar",
@@ -6557,7 +6557,7 @@
     "text": "Luister nog eens: k … a … rrr. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.arm",
@@ -6565,7 +6565,7 @@
     "text": "Luister nog eens: a … rrr … mmm. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.ark",
@@ -6573,7 +6573,7 @@
     "text": "Luister nog eens: a … rrr … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kast",
@@ -6581,7 +6581,7 @@
     "text": "Luister nog eens: k … a … sss … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.mast",
@@ -6589,7 +6589,7 @@
     "text": "Luister nog eens: mmm … a … sss … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.stam",
@@ -6597,7 +6597,7 @@
     "text": "Luister nog eens: sss … t … a … mmm. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kras",
@@ -6605,7 +6605,7 @@
     "text": "Luister nog eens: k … rrr … a … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.start",
@@ -6613,7 +6613,7 @@
     "text": "Luister nog eens: sss … t … a … rrr … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.mis",
@@ -6621,7 +6621,7 @@
     "text": "Luister nog eens: mmm … i … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kist",
@@ -6629,7 +6629,7 @@
     "text": "Luister nog eens: k … i … sss … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.mist",
@@ -6637,7 +6637,7 @@
     "text": "Luister nog eens: mmm … i … sss … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.rit",
@@ -6645,7 +6645,7 @@
     "text": "Luister nog eens: rrr … i … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.tik",
@@ -6653,7 +6653,7 @@
     "text": "Luister nog eens: t … i … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.vis",
@@ -6661,7 +6661,7 @@
     "text": "Luister nog eens: vvv … i … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.vat",
@@ -6669,7 +6669,7 @@
     "text": "Luister nog eens: vvv … a … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.vak",
@@ -6677,7 +6677,7 @@
     "text": "Luister nog eens: vvv … a … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kaas",
@@ -6685,7 +6685,7 @@
     "text": "Luister nog eens: k … aaa … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.raam",
@@ -6693,7 +6693,7 @@
     "text": "Luister nog eens: rrr … aaa … mmm. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.vaas",
@@ -6701,7 +6701,7 @@
     "text": "Luister nog eens: vvv … aaa … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kaart",
@@ -6709,7 +6709,7 @@
     "text": "Luister nog eens: k … aaa … rrr … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.taart",
@@ -6717,7 +6717,7 @@
     "text": "Luister nog eens: t … aaa … rrr … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.staart",
@@ -6725,7 +6725,7 @@
     "text": "Luister nog eens: sss … t … aaa … rrr … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.lam",
@@ -6733,7 +6733,7 @@
     "text": "Luister nog eens: lll … a … mmm. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.slak",
@@ -6741,7 +6741,7 @@
     "text": "Luister nog eens: sss … lll … a … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.stal",
@@ -6749,7 +6749,7 @@
     "text": "Luister nog eens: sss … t … a … lll. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.val",
@@ -6757,7 +6757,7 @@
     "text": "Luister nog eens: vvv … a … lll. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kaal",
@@ -6765,7 +6765,7 @@
     "text": "Luister nog eens: k … aaa … lll. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kan",
@@ -6773,7 +6773,7 @@
     "text": "Luister nog eens: k … a … nnn. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.man",
@@ -6781,7 +6781,7 @@
     "text": "Luister nog eens: mmm … a … nnn. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.nat",
@@ -6789,7 +6789,7 @@
     "text": "Luister nog eens: nnn … a … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kin",
@@ -6797,7 +6797,7 @@
     "text": "Luister nog eens: k … i … nnn. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.vin",
@@ -6805,7 +6805,7 @@
     "text": "Luister nog eens: vvv … i … nnn. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.maan",
@@ -6813,7 +6813,7 @@
     "text": "Luister nog eens: mmm … aaa … nnn. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kraan",
@@ -6821,7 +6821,7 @@
     "text": "Luister nog eens: k … rrr … aaa … nnn. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.lint",
@@ -6829,7 +6829,7 @@
     "text": "Luister nog eens: lll … i … nnn … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kool",
@@ -6837,7 +6837,7 @@
     "text": "Luister nog eens: k … ooo … lll. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.rook",
@@ -6845,7 +6845,7 @@
     "text": "Luister nog eens: rrr … ooo … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.oom",
@@ -6853,7 +6853,7 @@
     "text": "Luister nog eens: ooo … mmm. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.noot",
@@ -6861,7 +6861,7 @@
     "text": "Luister nog eens: nnn … ooo … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.look",
@@ -6869,7 +6869,7 @@
     "text": "Luister nog eens: lll … ooo … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.nek",
@@ -6877,7 +6877,7 @@
     "text": "Luister nog eens: nnn … e … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.mes",
@@ -6885,7 +6885,7 @@
     "text": "Luister nog eens: mmm … e … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.net",
@@ -6893,7 +6893,7 @@
     "text": "Luister nog eens: nnn … e … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.tent",
@@ -6901,7 +6901,7 @@
     "text": "Luister nog eens: t … e … nnn … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.rem",
@@ -6909,7 +6909,7 @@
     "text": "Luister nog eens: rrr … e … mmm. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.melk",
@@ -6917,7 +6917,7 @@
     "text": "Luister nog eens: mmm … e … lll … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.dak",
@@ -6925,7 +6925,7 @@
     "text": "Luister nog eens: d … a … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.das",
@@ -6933,7 +6933,7 @@
     "text": "Luister nog eens: d … a … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.dal",
@@ -6941,7 +6941,7 @@
     "text": "Luister nog eens: d … a … lll. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.teen",
@@ -6949,7 +6949,7 @@
     "text": "Luister nog eens: t … eee … nnn. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.steen",
@@ -6957,7 +6957,7 @@
     "text": "Luister nog eens: sss … t … eee … nnn. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.keel",
@@ -6965,7 +6965,7 @@
     "text": "Luister nog eens: k … eee … lll. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.eet",
@@ -6973,7 +6973,7 @@
     "text": "Luister nog eens: eee … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.pan",
@@ -6981,7 +6981,7 @@
     "text": "Luister nog eens: p … a … nnn. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kip",
@@ -6989,7 +6989,7 @@
     "text": "Luister nog eens: k … i … p. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.pet",
@@ -6997,7 +6997,7 @@
     "text": "Luister nog eens: p … e … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.lip",
@@ -7005,7 +7005,7 @@
     "text": "Luister nog eens: lll … i … p. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.pop",
@@ -7013,7 +7013,7 @@
     "text": "Luister nog eens: p … o … p. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.mol",
@@ -7021,7 +7021,7 @@
     "text": "Luister nog eens: mmm … o … lll. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kop",
@@ -7029,7 +7029,7 @@
     "text": "Luister nog eens: k … o … p. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.rok",
@@ -7037,7 +7037,7 @@
     "text": "Luister nog eens: rrr … o … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.sok",
@@ -7045,7 +7045,7 @@
     "text": "Luister nog eens: sss … o … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.vos",
@@ -7053,7 +7053,7 @@
     "text": "Luister nog eens: vvv … o … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.pot",
@@ -7061,7 +7061,7 @@
     "text": "Luister nog eens: p … o … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.stok",
@@ -7069,7 +7069,7 @@
     "text": "Luister nog eens: sss … t … o … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.slot",
@@ -7077,7 +7077,7 @@
     "text": "Luister nog eens: sss … lll … o … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.zon",
@@ -7085,7 +7085,7 @@
     "text": "Luister nog eens: zzz … o … nnn. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.zak",
@@ -7093,7 +7093,7 @@
     "text": "Luister nog eens: zzz … a … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.zes",
@@ -7101,7 +7101,7 @@
     "text": "Luister nog eens: zzz … e … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.zeep",
@@ -7109,7 +7109,7 @@
     "text": "Luister nog eens: zzz … eee … p. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.riem",
@@ -7117,7 +7117,7 @@
     "text": "Luister nog eens: rrr … ie … mmm. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.diep",
@@ -7125,7 +7125,7 @@
     "text": "Luister nog eens: d … ie … p. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.kies",
@@ -7133,7 +7133,7 @@
     "text": "Luister nog eens: k … ie … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.hek",
@@ -7141,7 +7141,7 @@
     "text": "Luister nog eens: hhh … e … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.hok",
@@ -7149,7 +7149,7 @@
     "text": "Luister nog eens: hhh … o … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.haas",
@@ -7157,7 +7157,7 @@
     "text": "Luister nog eens: hhh … aaa … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.klok",
@@ -7165,7 +7165,7 @@
     "text": "Luister nog eens: k … lll … o … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.voet",
@@ -7173,7 +7173,7 @@
     "text": "Luister nog eens: vvv … oe … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.koek",
@@ -7181,7 +7181,7 @@
     "text": "Luister nog eens: k … oe … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.poes",
@@ -7189,7 +7189,7 @@
     "text": "Luister nog eens: p … oe … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.soep",
@@ -7197,7 +7197,7 @@
     "text": "Luister nog eens: sss … oe … p. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.stoel",
@@ -7205,7 +7205,7 @@
     "text": "Luister nog eens: sss … t … oe … lll. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.hut",
@@ -7213,7 +7213,7 @@
     "text": "Luister nog eens: hhh … u … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.mus",
@@ -7221,7 +7221,7 @@
     "text": "Luister nog eens: mmm … u … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.bus",
@@ -7229,7 +7229,7 @@
     "text": "Luister nog eens: b … u … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.bal",
@@ -7237,7 +7237,7 @@
     "text": "Luister nog eens: b … a … lll. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.bes",
@@ -7245,7 +7245,7 @@
     "text": "Luister nog eens: b … e … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.been",
@@ -7253,7 +7253,7 @@
     "text": "Luister nog eens: b … eee … nnn. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.boom",
@@ -7261,7 +7261,7 @@
     "text": "Luister nog eens: b … ooo … mmm. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.boek",
@@ -7269,7 +7269,7 @@
     "text": "Luister nog eens: b … oe … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.muur",
@@ -7277,7 +7277,7 @@
     "text": "Luister nog eens: mmm … uuu … rrr. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.vuur",
@@ -7285,7 +7285,7 @@
     "text": "Luister nog eens: vvv … uuu … rrr. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.jas",
@@ -7293,7 +7293,7 @@
     "text": "Luister nog eens: jjj … a … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.ijs",
@@ -7301,7 +7301,7 @@
     "text": "Luister nog eens: ij … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.pijl",
@@ -7309,7 +7309,7 @@
     "text": "Luister nog eens: p … ij … lll. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.lijm",
@@ -7317,7 +7317,7 @@
     "text": "Luister nog eens: lll … ij … mmm. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.wol",
@@ -7325,7 +7325,7 @@
     "text": "Luister nog eens: www … o … lll. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.wiel",
@@ -7333,7 +7333,7 @@
     "text": "Luister nog eens: www … ie … lll. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.gat",
@@ -7341,7 +7341,7 @@
     "text": "Luister nog eens: ggg … a … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.geel",
@@ -7349,7 +7349,7 @@
     "text": "Luister nog eens: ggg … eee … lll. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.neus",
@@ -7357,7 +7357,7 @@
     "text": "Luister nog eens: nnn … eu … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.huis",
@@ -7365,7 +7365,7 @@
     "text": "Luister nog eens: hhh … ui … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.muis",
@@ -7373,7 +7373,7 @@
     "text": "Luister nog eens: mmm … ui … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.duim",
@@ -7381,7 +7381,7 @@
     "text": "Luister nog eens: d … ui … mmm. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.tuin",
@@ -7389,7 +7389,7 @@
     "text": "Luister nog eens: t … ui … nnn. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.buik",
@@ -7397,7 +7397,7 @@
     "text": "Luister nog eens: b … ui … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.fles",
@@ -7405,7 +7405,7 @@
     "text": "Luister nog eens: fff … lll … e … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.geit",
@@ -7413,7 +7413,7 @@
     "text": "Luister nog eens: ggg … ei … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.zout",
@@ -7421,7 +7421,7 @@
     "text": "Luister nog eens: zzz … ou … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.saus",
@@ -7429,7 +7429,7 @@
     "text": "Luister nog eens: sss … au … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.lach",
@@ -7437,7 +7437,7 @@
     "text": "Luister nog eens: lll … a … chch. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.ring",
@@ -7445,7 +7445,7 @@
     "text": "Luister nog eens: rrr … i … ng. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.slang",
@@ -7453,7 +7453,7 @@
     "text": "Luister nog eens: sss … lll … a … ng. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.bank",
@@ -7461,7 +7461,7 @@
     "text": "Luister nog eens: b … a … ngk. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.pink",
@@ -7469,7 +7469,7 @@
     "text": "Luister nog eens: p … i … ngk. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.en",
@@ -7477,7 +7477,7 @@
     "text": "Luister nog eens: e … nnn. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.in",
@@ -7485,7 +7485,7 @@
     "text": "Luister nog eens: i … nnn. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.is",
@@ -7493,7 +7493,7 @@
     "text": "Luister nog eens: i … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.ik",
@@ -7501,7 +7501,7 @@
     "text": "Luister nog eens: i … k. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.op",
@@ -7509,7 +7509,7 @@
     "text": "Luister nog eens: o … p. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.al",
@@ -7517,7 +7517,7 @@
     "text": "Luister nog eens: a … lll. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.bij",
@@ -7525,7 +7525,7 @@
     "text": "Luister nog eens: b … ij. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.gras",
@@ -7533,7 +7533,7 @@
     "text": "Luister nog eens: ggg … rrr … a … sss. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.rolt",
@@ -7541,7 +7541,7 @@
     "text": "Luister nog eens: rrr … o … lll … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.sloot",
@@ -7549,7 +7549,7 @@
     "text": "Luister nog eens: sss … lll … ooo … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.boot",
@@ -7557,7 +7557,7 @@
     "text": "Luister nog eens: b … ooo … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.lief",
@@ -7565,7 +7565,7 @@
     "text": "Luister nog eens: lll … ie … fff. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.ziet",
@@ -7573,7 +7573,7 @@
     "text": "Luister nog eens: zzz … ie … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.rent",
@@ -7581,7 +7581,7 @@
     "text": "Luister nog eens: rrr … e … nnn … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.pakt",
@@ -7589,7 +7589,7 @@
     "text": "Luister nog eens: p … a … k … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.zit",
@@ -7597,7 +7597,7 @@
     "text": "Luister nog eens: zzz … i … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.blend_retry.lacht",
@@ -7605,7 +7605,7 @@
     "text": "Luister nog eens: lll … a … chch … t. Kun jij ze samenplakken?",
     "kind": "feedback",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "fb.specific.count.2",
@@ -7645,7 +7645,7 @@
     "text": "Welk woord begint met mmm?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.a",
@@ -7653,7 +7653,7 @@
     "text": "Welk woord begint met a?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.s",
@@ -7661,7 +7661,7 @@
     "text": "Welk woord begint met sss?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.t",
@@ -7669,7 +7669,7 @@
     "text": "Welk woord begint met t?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.k",
@@ -7677,7 +7677,7 @@
     "text": "Welk woord begint met k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.r",
@@ -7685,7 +7685,7 @@
     "text": "Welk woord begint met rrr?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.i",
@@ -7693,7 +7693,7 @@
     "text": "Welk woord begint met i?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.v",
@@ -7701,7 +7701,7 @@
     "text": "Welk woord begint met vvv?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.aa",
@@ -7709,7 +7709,7 @@
     "text": "Welk woord begint met aaa?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.l",
@@ -7717,7 +7717,7 @@
     "text": "Welk woord begint met lll?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.n",
@@ -7725,7 +7725,7 @@
     "text": "Welk woord begint met nnn?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.oo",
@@ -7733,7 +7733,7 @@
     "text": "Welk woord begint met ooo?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.e",
@@ -7741,7 +7741,7 @@
     "text": "Welk woord begint met e?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.d",
@@ -7749,7 +7749,7 @@
     "text": "Welk woord begint met d?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.ee",
@@ -7757,7 +7757,7 @@
     "text": "Welk woord begint met eee?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.p",
@@ -7765,7 +7765,7 @@
     "text": "Welk woord begint met p?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.o",
@@ -7773,7 +7773,7 @@
     "text": "Welk woord begint met o?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.z",
@@ -7781,7 +7781,7 @@
     "text": "Welk woord begint met zzz?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.ie",
@@ -7789,7 +7789,7 @@
     "text": "Welk woord begint met ie?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.h",
@@ -7797,7 +7797,7 @@
     "text": "Welk woord begint met hhh?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.oe",
@@ -7805,7 +7805,7 @@
     "text": "Welk woord begint met oe?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.u",
@@ -7813,7 +7813,7 @@
     "text": "Welk woord begint met u?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.b",
@@ -7821,7 +7821,7 @@
     "text": "Welk woord begint met b?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.uu",
@@ -7829,7 +7829,7 @@
     "text": "Welk woord begint met uuu?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.j",
@@ -7837,7 +7837,7 @@
     "text": "Welk woord begint met jjj?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.ij",
@@ -7845,7 +7845,7 @@
     "text": "Welk woord begint met ij?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.w",
@@ -7853,7 +7853,7 @@
     "text": "Welk woord begint met www?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.g",
@@ -7861,7 +7861,7 @@
     "text": "Welk woord begint met ggg?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.eu",
@@ -7869,7 +7869,7 @@
     "text": "Welk woord begint met eu?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.ui",
@@ -7877,7 +7877,7 @@
     "text": "Welk woord begint met ui?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.f",
@@ -7885,7 +7885,7 @@
     "text": "Welk woord begint met fff?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.ei",
@@ -7893,7 +7893,7 @@
     "text": "Welk woord begint met ei?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.ou",
@@ -7901,7 +7901,7 @@
     "text": "Welk woord begint met ou?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.au",
@@ -7909,7 +7909,7 @@
     "text": "Welk woord begint met au?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.ch",
@@ -7917,7 +7917,7 @@
     "text": "Welk woord begint met chch?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.ng",
@@ -7925,7 +7925,7 @@
     "text": "Welk woord begint met ng?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.nk",
@@ -7933,7 +7933,7 @@
     "text": "Welk woord begint met ngk?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.c",
@@ -7941,7 +7941,7 @@
     "text": "Welk woord begint met k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.x",
@@ -7949,7 +7949,7 @@
     "text": "Welk woord begint met ks?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.y",
@@ -7957,7 +7957,7 @@
     "text": "Welk woord begint met j?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.first_sound.q",
@@ -7965,7 +7965,7 @@
     "text": "Welk woord begint met k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.m",
@@ -7973,7 +7973,7 @@
     "text": "Welk woord eindigt op mmm?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.a",
@@ -7981,7 +7981,7 @@
     "text": "Welk woord eindigt op a?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.s",
@@ -7989,7 +7989,7 @@
     "text": "Welk woord eindigt op sss?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.t",
@@ -7997,7 +7997,7 @@
     "text": "Welk woord eindigt op t?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.k",
@@ -8005,7 +8005,7 @@
     "text": "Welk woord eindigt op k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.r",
@@ -8013,7 +8013,7 @@
     "text": "Welk woord eindigt op rrr?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.i",
@@ -8021,7 +8021,7 @@
     "text": "Welk woord eindigt op i?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.v",
@@ -8029,7 +8029,7 @@
     "text": "Welk woord eindigt op vvv?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.aa",
@@ -8037,7 +8037,7 @@
     "text": "Welk woord eindigt op aaa?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.l",
@@ -8045,7 +8045,7 @@
     "text": "Welk woord eindigt op lll?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.n",
@@ -8053,7 +8053,7 @@
     "text": "Welk woord eindigt op nnn?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.oo",
@@ -8061,7 +8061,7 @@
     "text": "Welk woord eindigt op ooo?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.e",
@@ -8069,7 +8069,7 @@
     "text": "Welk woord eindigt op e?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.d",
@@ -8077,7 +8077,7 @@
     "text": "Welk woord eindigt op d?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.ee",
@@ -8085,7 +8085,7 @@
     "text": "Welk woord eindigt op eee?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.p",
@@ -8093,7 +8093,7 @@
     "text": "Welk woord eindigt op p?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.o",
@@ -8101,7 +8101,7 @@
     "text": "Welk woord eindigt op o?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.z",
@@ -8109,7 +8109,7 @@
     "text": "Welk woord eindigt op zzz?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.ie",
@@ -8117,7 +8117,7 @@
     "text": "Welk woord eindigt op ie?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.h",
@@ -8125,7 +8125,7 @@
     "text": "Welk woord eindigt op hhh?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.oe",
@@ -8133,7 +8133,7 @@
     "text": "Welk woord eindigt op oe?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.u",
@@ -8141,7 +8141,7 @@
     "text": "Welk woord eindigt op u?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.b",
@@ -8149,7 +8149,7 @@
     "text": "Welk woord eindigt op b?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.uu",
@@ -8157,7 +8157,7 @@
     "text": "Welk woord eindigt op uuu?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.j",
@@ -8165,7 +8165,7 @@
     "text": "Welk woord eindigt op jjj?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.ij",
@@ -8173,7 +8173,7 @@
     "text": "Welk woord eindigt op ij?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.w",
@@ -8181,7 +8181,7 @@
     "text": "Welk woord eindigt op www?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.g",
@@ -8189,7 +8189,7 @@
     "text": "Welk woord eindigt op ggg?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.eu",
@@ -8197,7 +8197,7 @@
     "text": "Welk woord eindigt op eu?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.ui",
@@ -8205,7 +8205,7 @@
     "text": "Welk woord eindigt op ui?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.f",
@@ -8213,7 +8213,7 @@
     "text": "Welk woord eindigt op fff?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.ei",
@@ -8221,7 +8221,7 @@
     "text": "Welk woord eindigt op ei?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.ou",
@@ -8229,7 +8229,7 @@
     "text": "Welk woord eindigt op ou?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.au",
@@ -8237,7 +8237,7 @@
     "text": "Welk woord eindigt op au?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.ch",
@@ -8245,7 +8245,7 @@
     "text": "Welk woord eindigt op chch?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.ng",
@@ -8253,7 +8253,7 @@
     "text": "Welk woord eindigt op ng?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.nk",
@@ -8261,7 +8261,7 @@
     "text": "Welk woord eindigt op ngk?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.c",
@@ -8269,7 +8269,7 @@
     "text": "Welk woord eindigt op k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.x",
@@ -8277,7 +8277,7 @@
     "text": "Welk woord eindigt op ks?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.y",
@@ -8285,7 +8285,7 @@
     "text": "Welk woord eindigt op j?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.fn.last_sound.q",
@@ -8293,7 +8293,7 @@
     "text": "Welk woord eindigt op k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.m",
@@ -8301,7 +8301,7 @@
     "text": "Welk woord begint met mmm?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.a",
@@ -8309,7 +8309,7 @@
     "text": "Welk woord begint met a?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.s",
@@ -8317,7 +8317,7 @@
     "text": "Welk woord begint met sss?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.t",
@@ -8325,7 +8325,7 @@
     "text": "Welk woord begint met t?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.k",
@@ -8333,7 +8333,7 @@
     "text": "Welk woord begint met k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.r",
@@ -8341,7 +8341,7 @@
     "text": "Welk woord begint met rrr?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.i",
@@ -8349,7 +8349,7 @@
     "text": "Welk woord begint met i?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.v",
@@ -8357,7 +8357,7 @@
     "text": "Welk woord begint met vvv?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.aa",
@@ -8365,7 +8365,7 @@
     "text": "Welk woord begint met aaa?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.l",
@@ -8373,7 +8373,7 @@
     "text": "Welk woord begint met lll?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.n",
@@ -8381,7 +8381,7 @@
     "text": "Welk woord begint met nnn?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.oo",
@@ -8389,7 +8389,7 @@
     "text": "Welk woord begint met ooo?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.e",
@@ -8397,7 +8397,7 @@
     "text": "Welk woord begint met e?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.d",
@@ -8405,7 +8405,7 @@
     "text": "Welk woord begint met d?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.ee",
@@ -8413,7 +8413,7 @@
     "text": "Welk woord begint met eee?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.p",
@@ -8421,7 +8421,7 @@
     "text": "Welk woord begint met p?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.o",
@@ -8429,7 +8429,7 @@
     "text": "Welk woord begint met o?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.z",
@@ -8437,7 +8437,7 @@
     "text": "Welk woord begint met zzz?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.ie",
@@ -8445,7 +8445,7 @@
     "text": "Welk woord begint met ie?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.h",
@@ -8453,7 +8453,7 @@
     "text": "Welk woord begint met hhh?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.oe",
@@ -8461,7 +8461,7 @@
     "text": "Welk woord begint met oe?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.u",
@@ -8469,7 +8469,7 @@
     "text": "Welk woord begint met u?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.b",
@@ -8477,7 +8477,7 @@
     "text": "Welk woord begint met b?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.uu",
@@ -8485,7 +8485,7 @@
     "text": "Welk woord begint met uuu?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.j",
@@ -8493,7 +8493,7 @@
     "text": "Welk woord begint met jjj?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.ij",
@@ -8501,7 +8501,7 @@
     "text": "Welk woord begint met ij?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.w",
@@ -8509,7 +8509,7 @@
     "text": "Welk woord begint met www?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.g",
@@ -8517,7 +8517,7 @@
     "text": "Welk woord begint met ggg?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.eu",
@@ -8525,7 +8525,7 @@
     "text": "Welk woord begint met eu?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.ui",
@@ -8533,7 +8533,7 @@
     "text": "Welk woord begint met ui?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.f",
@@ -8541,7 +8541,7 @@
     "text": "Welk woord begint met fff?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.ei",
@@ -8549,7 +8549,7 @@
     "text": "Welk woord begint met ei?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.ou",
@@ -8557,7 +8557,7 @@
     "text": "Welk woord begint met ou?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.au",
@@ -8565,7 +8565,7 @@
     "text": "Welk woord begint met au?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.ch",
@@ -8573,7 +8573,7 @@
     "text": "Welk woord begint met chch?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.ng",
@@ -8581,7 +8581,7 @@
     "text": "Welk woord begint met ng?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.nk",
@@ -8589,7 +8589,7 @@
     "text": "Welk woord begint met ngk?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.c",
@@ -8597,7 +8597,7 @@
     "text": "Welk woord begint met k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.x",
@@ -8605,7 +8605,7 @@
     "text": "Welk woord begint met ks?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.y",
@@ -8613,7 +8613,7 @@
     "text": "Welk woord begint met j?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.first.q",
@@ -8621,7 +8621,7 @@
     "text": "Welk woord begint met k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.m",
@@ -8629,7 +8629,7 @@
     "text": "Welk woord eindigt op mmm?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.a",
@@ -8637,7 +8637,7 @@
     "text": "Welk woord eindigt op a?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.s",
@@ -8645,7 +8645,7 @@
     "text": "Welk woord eindigt op sss?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.t",
@@ -8653,7 +8653,7 @@
     "text": "Welk woord eindigt op t?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.k",
@@ -8661,7 +8661,7 @@
     "text": "Welk woord eindigt op k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.r",
@@ -8669,7 +8669,7 @@
     "text": "Welk woord eindigt op rrr?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.i",
@@ -8677,7 +8677,7 @@
     "text": "Welk woord eindigt op i?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.v",
@@ -8685,7 +8685,7 @@
     "text": "Welk woord eindigt op vvv?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.aa",
@@ -8693,7 +8693,7 @@
     "text": "Welk woord eindigt op aaa?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.l",
@@ -8701,7 +8701,7 @@
     "text": "Welk woord eindigt op lll?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.n",
@@ -8709,7 +8709,7 @@
     "text": "Welk woord eindigt op nnn?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.oo",
@@ -8717,7 +8717,7 @@
     "text": "Welk woord eindigt op ooo?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.e",
@@ -8725,7 +8725,7 @@
     "text": "Welk woord eindigt op e?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.d",
@@ -8733,7 +8733,7 @@
     "text": "Welk woord eindigt op d?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.ee",
@@ -8741,7 +8741,7 @@
     "text": "Welk woord eindigt op eee?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.p",
@@ -8749,7 +8749,7 @@
     "text": "Welk woord eindigt op p?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.o",
@@ -8757,7 +8757,7 @@
     "text": "Welk woord eindigt op o?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.z",
@@ -8765,7 +8765,7 @@
     "text": "Welk woord eindigt op zzz?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.ie",
@@ -8773,7 +8773,7 @@
     "text": "Welk woord eindigt op ie?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.h",
@@ -8781,7 +8781,7 @@
     "text": "Welk woord eindigt op hhh?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.oe",
@@ -8789,7 +8789,7 @@
     "text": "Welk woord eindigt op oe?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.u",
@@ -8797,7 +8797,7 @@
     "text": "Welk woord eindigt op u?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.b",
@@ -8805,7 +8805,7 @@
     "text": "Welk woord eindigt op b?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.uu",
@@ -8813,7 +8813,7 @@
     "text": "Welk woord eindigt op uuu?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.j",
@@ -8821,7 +8821,7 @@
     "text": "Welk woord eindigt op jjj?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.ij",
@@ -8829,7 +8829,7 @@
     "text": "Welk woord eindigt op ij?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.w",
@@ -8837,7 +8837,7 @@
     "text": "Welk woord eindigt op www?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.g",
@@ -8845,7 +8845,7 @@
     "text": "Welk woord eindigt op ggg?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.eu",
@@ -8853,7 +8853,7 @@
     "text": "Welk woord eindigt op eu?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.ui",
@@ -8861,7 +8861,7 @@
     "text": "Welk woord eindigt op ui?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.f",
@@ -8869,7 +8869,7 @@
     "text": "Welk woord eindigt op fff?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.ei",
@@ -8877,7 +8877,7 @@
     "text": "Welk woord eindigt op ei?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.ou",
@@ -8885,7 +8885,7 @@
     "text": "Welk woord eindigt op ou?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.au",
@@ -8893,7 +8893,7 @@
     "text": "Welk woord eindigt op au?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.ch",
@@ -8901,7 +8901,7 @@
     "text": "Welk woord eindigt op chch?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.ng",
@@ -8909,7 +8909,7 @@
     "text": "Welk woord eindigt op ng?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.nk",
@@ -8917,7 +8917,7 @@
     "text": "Welk woord eindigt op ngk?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.c",
@@ -8925,7 +8925,7 @@
     "text": "Welk woord eindigt op k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.x",
@@ -8933,7 +8933,7 @@
     "text": "Welk woord eindigt op ks?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.y",
@@ -8941,7 +8941,7 @@
     "text": "Welk woord eindigt op j?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klankjager.last.q",
@@ -8949,7 +8949,7 @@
     "text": "Welk woord eindigt op k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.m",
@@ -8957,7 +8957,7 @@
     "text": "Welke letter hoort bij mmm?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.a",
@@ -8965,7 +8965,7 @@
     "text": "Welke letter hoort bij a?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.s",
@@ -8973,7 +8973,7 @@
     "text": "Welke letter hoort bij sss?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.t",
@@ -8981,7 +8981,7 @@
     "text": "Welke letter hoort bij t?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.k",
@@ -8989,7 +8989,7 @@
     "text": "Welke letter hoort bij k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.r",
@@ -8997,7 +8997,7 @@
     "text": "Welke letter hoort bij rrr?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.i",
@@ -9005,7 +9005,7 @@
     "text": "Welke letter hoort bij i?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.v",
@@ -9013,7 +9013,7 @@
     "text": "Welke letter hoort bij vvv?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.aa",
@@ -9021,7 +9021,7 @@
     "text": "Welke letter hoort bij aaa?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.l",
@@ -9029,7 +9029,7 @@
     "text": "Welke letter hoort bij lll?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.n",
@@ -9037,7 +9037,7 @@
     "text": "Welke letter hoort bij nnn?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.oo",
@@ -9045,7 +9045,7 @@
     "text": "Welke letter hoort bij ooo?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.e",
@@ -9053,7 +9053,7 @@
     "text": "Welke letter hoort bij e?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.d",
@@ -9061,7 +9061,7 @@
     "text": "Welke letter hoort bij d?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.ee",
@@ -9069,7 +9069,7 @@
     "text": "Welke letter hoort bij eee?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.p",
@@ -9077,7 +9077,7 @@
     "text": "Welke letter hoort bij p?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.o",
@@ -9085,7 +9085,7 @@
     "text": "Welke letter hoort bij o?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.z",
@@ -9093,7 +9093,7 @@
     "text": "Welke letter hoort bij zzz?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.ie",
@@ -9101,7 +9101,7 @@
     "text": "Welke letter hoort bij ie?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.h",
@@ -9109,7 +9109,7 @@
     "text": "Welke letter hoort bij hhh?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.oe",
@@ -9117,7 +9117,7 @@
     "text": "Welke letter hoort bij oe?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.u",
@@ -9125,7 +9125,7 @@
     "text": "Welke letter hoort bij u?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.b",
@@ -9133,7 +9133,7 @@
     "text": "Welke letter hoort bij b?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.uu",
@@ -9141,7 +9141,7 @@
     "text": "Welke letter hoort bij uuu?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.j",
@@ -9149,7 +9149,7 @@
     "text": "Welke letter hoort bij jjj?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.ij",
@@ -9157,7 +9157,7 @@
     "text": "Welke letter hoort bij ij?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.w",
@@ -9165,7 +9165,7 @@
     "text": "Welke letter hoort bij www?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.g",
@@ -9173,7 +9173,7 @@
     "text": "Welke letter hoort bij ggg?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.eu",
@@ -9181,7 +9181,7 @@
     "text": "Welke letter hoort bij eu?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.ui",
@@ -9189,7 +9189,7 @@
     "text": "Welke letter hoort bij ui?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.f",
@@ -9197,7 +9197,7 @@
     "text": "Welke letter hoort bij fff?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.ei",
@@ -9205,7 +9205,7 @@
     "text": "Welke letter hoort bij ei?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.ou",
@@ -9213,7 +9213,7 @@
     "text": "Welke letter hoort bij ou?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.au",
@@ -9221,7 +9221,7 @@
     "text": "Welke letter hoort bij au?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.ch",
@@ -9229,7 +9229,7 @@
     "text": "Welke letter hoort bij chch?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.ng",
@@ -9237,7 +9237,7 @@
     "text": "Welke letter hoort bij ng?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.nk",
@@ -9245,7 +9245,7 @@
     "text": "Welke letter hoort bij ngk?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.c",
@@ -9253,7 +9253,7 @@
     "text": "Welke letter hoort bij k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.x",
@@ -9261,7 +9261,7 @@
     "text": "Welke letter hoort bij ks?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.y",
@@ -9269,7 +9269,7 @@
     "text": "Welke letter hoort bij j?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.sound_to_grapheme.q",
@@ -9277,7 +9277,7 @@
     "text": "Welke letter hoort bij k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.m",
@@ -9285,7 +9285,7 @@
     "text": "Welke letter hoort bij mmm?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.a",
@@ -9293,7 +9293,7 @@
     "text": "Welke letter hoort bij a?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.s",
@@ -9301,7 +9301,7 @@
     "text": "Welke letter hoort bij sss?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.t",
@@ -9309,7 +9309,7 @@
     "text": "Welke letter hoort bij t?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.k",
@@ -9317,7 +9317,7 @@
     "text": "Welke letter hoort bij k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.r",
@@ -9325,7 +9325,7 @@
     "text": "Welke letter hoort bij rrr?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.i",
@@ -9333,7 +9333,7 @@
     "text": "Welke letter hoort bij i?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.v",
@@ -9341,7 +9341,7 @@
     "text": "Welke letter hoort bij vvv?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.aa",
@@ -9349,7 +9349,7 @@
     "text": "Welke letter hoort bij aaa?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.l",
@@ -9357,7 +9357,7 @@
     "text": "Welke letter hoort bij lll?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.n",
@@ -9365,7 +9365,7 @@
     "text": "Welke letter hoort bij nnn?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.oo",
@@ -9373,7 +9373,7 @@
     "text": "Welke letter hoort bij ooo?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.e",
@@ -9381,7 +9381,7 @@
     "text": "Welke letter hoort bij e?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.d",
@@ -9389,7 +9389,7 @@
     "text": "Welke letter hoort bij d?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.ee",
@@ -9397,7 +9397,7 @@
     "text": "Welke letter hoort bij eee?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.p",
@@ -9405,7 +9405,7 @@
     "text": "Welke letter hoort bij p?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.o",
@@ -9413,7 +9413,7 @@
     "text": "Welke letter hoort bij o?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.z",
@@ -9421,7 +9421,7 @@
     "text": "Welke letter hoort bij zzz?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.ie",
@@ -9429,7 +9429,7 @@
     "text": "Welke letter hoort bij ie?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.h",
@@ -9437,7 +9437,7 @@
     "text": "Welke letter hoort bij hhh?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.oe",
@@ -9445,7 +9445,7 @@
     "text": "Welke letter hoort bij oe?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.u",
@@ -9453,7 +9453,7 @@
     "text": "Welke letter hoort bij u?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.b",
@@ -9461,7 +9461,7 @@
     "text": "Welke letter hoort bij b?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.uu",
@@ -9469,7 +9469,7 @@
     "text": "Welke letter hoort bij uuu?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.j",
@@ -9477,7 +9477,7 @@
     "text": "Welke letter hoort bij jjj?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.ij",
@@ -9485,7 +9485,7 @@
     "text": "Welke letter hoort bij ij?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.w",
@@ -9493,7 +9493,7 @@
     "text": "Welke letter hoort bij www?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.g",
@@ -9501,7 +9501,7 @@
     "text": "Welke letter hoort bij ggg?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.eu",
@@ -9509,7 +9509,7 @@
     "text": "Welke letter hoort bij eu?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.ui",
@@ -9517,7 +9517,7 @@
     "text": "Welke letter hoort bij ui?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.f",
@@ -9525,7 +9525,7 @@
     "text": "Welke letter hoort bij fff?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.ei",
@@ -9533,7 +9533,7 @@
     "text": "Welke letter hoort bij ei?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.ou",
@@ -9541,7 +9541,7 @@
     "text": "Welke letter hoort bij ou?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.au",
@@ -9549,7 +9549,7 @@
     "text": "Welke letter hoort bij au?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.ch",
@@ -9557,7 +9557,7 @@
     "text": "Welke letter hoort bij chch?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.ng",
@@ -9565,7 +9565,7 @@
     "text": "Welke letter hoort bij ng?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.nk",
@@ -9573,7 +9573,7 @@
     "text": "Welke letter hoort bij ngk?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.c",
@@ -9581,7 +9581,7 @@
     "text": "Welke letter hoort bij k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.x",
@@ -9589,7 +9589,7 @@
     "text": "Welke letter hoort bij ks?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.y",
@@ -9597,7 +9597,7 @@
     "text": "Welke letter hoort bij j?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.letterklank.r2.q",
@@ -9605,7 +9605,7 @@
     "text": "Welke letter hoort bij k?",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.m",
@@ -9613,7 +9613,7 @@
     "text": "Dit is de letter m. Hij zegt mmm.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.a",
@@ -9621,7 +9621,7 @@
     "text": "Dit is de letter a. Hij zegt a.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.s",
@@ -9629,7 +9629,7 @@
     "text": "Dit is de letter s. Hij zegt sss.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.t",
@@ -9637,7 +9637,7 @@
     "text": "Dit is de letter t. Hij zegt t.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.k",
@@ -9645,7 +9645,7 @@
     "text": "Dit is de letter k. Hij zegt k.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.r",
@@ -9653,7 +9653,7 @@
     "text": "Dit is de letter r. Hij zegt rrr.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.i",
@@ -9661,7 +9661,7 @@
     "text": "Dit is de letter i. Hij zegt i.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.v",
@@ -9669,7 +9669,7 @@
     "text": "Dit is de letter v. Hij zegt vvv.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.aa",
@@ -9677,7 +9677,7 @@
     "text": "Dit is de letter aa. Hij zegt aaa.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.l",
@@ -9685,7 +9685,7 @@
     "text": "Dit is de letter l. Hij zegt lll.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.n",
@@ -9693,7 +9693,7 @@
     "text": "Dit is de letter n. Hij zegt nnn.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.oo",
@@ -9701,7 +9701,7 @@
     "text": "Dit is de letter oo. Hij zegt ooo.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.e",
@@ -9709,7 +9709,7 @@
     "text": "Dit is de letter e. Hij zegt e.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.d",
@@ -9717,7 +9717,7 @@
     "text": "Dit is de letter d. Hij zegt d.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.ee",
@@ -9725,7 +9725,7 @@
     "text": "Dit is de letter ee. Hij zegt eee.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.p",
@@ -9733,7 +9733,7 @@
     "text": "Dit is de letter p. Hij zegt p.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.o",
@@ -9741,7 +9741,7 @@
     "text": "Dit is de letter o. Hij zegt o.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.z",
@@ -9749,7 +9749,7 @@
     "text": "Dit is de letter z. Hij zegt zzz.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.ie",
@@ -9757,7 +9757,7 @@
     "text": "Dit is de letter ie. Hij zegt ie.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.h",
@@ -9765,7 +9765,7 @@
     "text": "Dit is de letter h. Hij zegt hhh.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.oe",
@@ -9773,7 +9773,7 @@
     "text": "Dit is de letter oe. Hij zegt oe.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.u",
@@ -9781,7 +9781,7 @@
     "text": "Dit is de letter u. Hij zegt u.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.b",
@@ -9789,7 +9789,7 @@
     "text": "Dit is de letter b. Hij zegt b.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.uu",
@@ -9797,7 +9797,7 @@
     "text": "Dit is de letter uu. Hij zegt uuu.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.j",
@@ -9805,7 +9805,7 @@
     "text": "Dit is de letter j. Hij zegt jjj.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.ij",
@@ -9813,7 +9813,7 @@
     "text": "Dit is de letter ij. Hij zegt ij.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.w",
@@ -9821,7 +9821,7 @@
     "text": "Dit is de letter w. Hij zegt www.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.g",
@@ -9829,7 +9829,7 @@
     "text": "Dit is de letter g. Hij zegt ggg.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.eu",
@@ -9837,7 +9837,7 @@
     "text": "Dit is de letter eu. Hij zegt eu.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.ui",
@@ -9845,7 +9845,7 @@
     "text": "Dit is de letter ui. Hij zegt ui.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.f",
@@ -9853,7 +9853,7 @@
     "text": "Dit is de letter f. Hij zegt fff.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.ei",
@@ -9861,7 +9861,7 @@
     "text": "Dit is de letter ei. Hij zegt ei.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.ou",
@@ -9869,7 +9869,7 @@
     "text": "Dit is de letter ou. Hij zegt ou.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.au",
@@ -9877,7 +9877,7 @@
     "text": "Dit is de letter au. Hij zegt au.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.ch",
@@ -9885,7 +9885,7 @@
     "text": "Dit is de letter ch. Hij zegt chch.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.ng",
@@ -9893,7 +9893,7 @@
     "text": "Dit is de letter ng. Hij zegt ng.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.nk",
@@ -9901,7 +9901,7 @@
     "text": "Dit is de letter nk. Hij zegt ngk.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.c",
@@ -9909,7 +9909,7 @@
     "text": "Dit is de letter c. Hij zegt k.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.x",
@@ -9917,7 +9917,7 @@
     "text": "Dit is de letter x. Hij zegt ks.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.y",
@@ -9925,7 +9925,7 @@
     "text": "Dit is de letter y. Hij zegt j.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.lk.intro.q",
@@ -9933,7 +9933,7 @@
     "text": "Dit is de letter q. Hij zegt k.",
     "kind": "instruction",
     "delivery": "human-required",
-    "status": "missing"
+    "status": "synthetic-draft"
   },
   {
     "key": "instr.klim.mam",

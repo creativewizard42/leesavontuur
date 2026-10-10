@@ -1,5 +1,12 @@
 # Audio — menselijke eindversie en voorlopige ontwikkelbestanden
 
+**Update 0.2.0-beta.2:** op verzoek van de maker zijn alle 1.587 fragmenten nu
+zelf gegenereerd met de Nederlandse Pim-stem, inclusief expliciet aangestuurde
+klanken. Er ontbreken geen audiobestanden meer. Alle bestanden zijn synthetisch
+en nog niet menselijk luistergoedgekeurd. Zie [spraakherontwikkeling](reviews/SPEECH_REWORK.md)
+voor de huidige generator, fonetische aansturing en niet weggefilterde
+uitspraakonzekerheden. De eerdere Ronnie-productie hieronder is historisch.
+
 De definitieve stem is op verzoek van de maker **warm, rustig, menselijk en
 Standaardnederlands**. De huidige MP3s zijn expliciet synthetische concepten,
 geen menselijke opnames of didactisch vrijgegeven fonemen.
@@ -10,10 +17,10 @@ geen menselijke opnames of didactisch vrijgegeven fonemen.
 `docs/audio/recording-script.json`. Op 10 oktober 2026 bevat de inventaris:
 
 - 1.587 unieke fragmenten;
-- 811 aanwezige synthetische MP3s voor woorden, namen, zinnen, feedback en
-  instructies die geen fonemen voordoen;
-- 776 ontbrekende menselijke fragmenten: letterklanken, hak-/plakreeksen en
-  instructies/foutspecifieke feedback met ingebedde klanken.
+- 1.587 aanwezige synthetische MP3s;
+- 776 bestanden voor letterklanken, hak-/plakreeksen en instructies/feedback
+  met ingebedde klanken; deze waren in bèta 1 nog afwezig;
+- 0 ontbrekende manifestbestanden; menselijke luistergoedkeuring ontbreekt nog.
 
 De eerdere 1.847 validatorwaarschuwingen waren verwijzingen, geen telling van
 unieke ontbrekende bestanden. Audio voor auditieve woorden in de rijm-/
@@ -69,7 +76,7 @@ Een vervangen bestand verliest automatisch zijn goedkeuring door de hashcontrole
 `npm run audio:release` faalt bij ontbrekende, synthetische of niet-goedgekeurde
 bestanden. Zonder menselijke review mogen bestanden geen vrijgavestatus krijgen.
 
-## Herkomst van de huidige concepten
+## Historische herkomst van de Ronnie-concepten (bèta 1)
 
 - Offline gegenereerd met Piper `nl_NL-ronnie-medium`, via sherpa-onnx 1.12.36,
   speed 0.92, twee CPU-threads. Geen spraakdienst of microfoon gebruikt tijdens

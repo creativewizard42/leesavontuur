@@ -1,0 +1,105 @@
+{
+  "method": "sherpa-onnx Whisper base int8, language nl; diagnostic only, not phonetic or human approval",
+  "samples": [
+    {
+      "key": "zi.ZI.PHRASE.de-kat",
+      "expected": "de kat",
+      "recognized": "de koud"
+    },
+    {
+      "key": "zi.ZI.PHRASE.een-tas",
+      "expected": "een tas",
+      "recognized": "Entas"
+    },
+    {
+      "key": "zi.ZI.PHRASE.mam-en-de-kat",
+      "expected": "mam en de kat",
+      "recognized": "Mom en de kat"
+    },
+    {
+      "key": "zi.ZI.SIMPLE.de-kat-is-nat",
+      "expected": "de kat is nat",
+      "recognized": "De koud is nat."
+    },
+    {
+      "key": "zi.ZI.SIMPLE.ik-eet-kaas",
+      "expected": "ik eet kaas",
+      "recognized": "Ik eet kass"
+    },
+    {
+      "key": "zi.ZI.SIMPLE.mam-is-in-de-kas",
+      "expected": "mam is in de kas",
+      "recognized": "Mom is in the cas"
+    },
+    {
+      "key": "zi.ZI.SIMPLE.de-rat-zit-in-de-tas",
+      "expected": "de rat zit in de tas",
+      "recognized": "De rads zit in de tas."
+    },
+    {
+      "key": "zi.ZI.SIMPLE.de-kip-is-op-het-dak",
+      "expected": "de kip is op het dak",
+      "recognized": "De kip is op het dak."
+    },
+    {
+      "key": "de.mat",
+      "expected": "mat",
+      "recognized": "mat"
+    },
+    {
+      "key": "de.kam",
+      "expected": "kam",
+      "recognized": "Kom."
+    },
+    {
+      "key": "de.kat",
+      "expected": "kat",
+      "recognized": "Kat"
+    },
+    {
+      "key": "de.mis",
+      "expected": "mis",
+      "recognized": "Meez"
+    },
+    {
+      "key": "de.vis",
+      "expected": "vis",
+      "recognized": "Wees"
+    },
+    {
+      "key": "de.kaas",
+      "expected": "kaas",
+      "recognized": "Kass"
+    },
+    {
+      "key": "de.hut",
+      "expected": "hut",
+      "recognized": "Wut?"
+    },
+    {
+      "key": "de.muur",
+      "expected": "muur",
+      "recognized": "Muur"
+    },
+    {
+      "key": "de.neus",
+      "expected": "neus",
+      "recognized": "Nice"
+    },
+    {
+      "key": "de.huis",
+      "expected": "huis",
+      "recognized": "ho"
+    },
+    {
+      "key": "de.geit",
+      "expected": "geit",
+      "recognized": "great"
+    },
+    {
+      "key": "de.zout",
+      "expected": "zout",
+      "recognized": "Zout"
+    }
+  ]
+}

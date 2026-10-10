@@ -55,6 +55,22 @@ function tick(): Promise<void> {
 }
 
 describe('ActivityView – G1-metadata', () => {
+  it('extraAudio never restarts a prompt on a timer; repeat stays an explicit action', async () => {
+    vi.useFakeTimers();
+    try {
+      const base = wordItem();
+      const audio = mount({ ...base, metadata: { ...base.metadata, extraAudio: true } });
+      await Promise.resolve();
+      await Promise.resolve();
+      const initial = audio.played.length;
+      expect(initial).toBeGreaterThan(0);
+      await vi.advanceTimersByTimeAsync(20000);
+      expect(audio.played).toHaveLength(initial);
+      view!.repeat();
+      await Promise.resolve();
+      expect(audio.played.length).toBeGreaterThan(initial);
+    } finally { vi.useRealTimers(); }
+  });
   it('modelFirst: toont modelletters vóór de keuze en houdt opties even dicht', async () => {
     const base = wordItem();
     const item: ActivityItem = {

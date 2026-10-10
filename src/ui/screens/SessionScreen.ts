@@ -23,8 +23,6 @@ export interface SessionScreenDeps {
   audio: AudioService;
   now: () => number;
   free?: boolean;
-  /** Prompt automatisch herhalen bij lage mastery (GD §7, QA-018). */
-  autoRepeat?: boolean;
   onEvent: (event: AnswerEvent, item: ActivityItem) => void;
   onIntroduce: (graphemeId: string) => void;
   /** Aangeroepen ná `queue.next()` zodat de sessiepositie bewaard kan worden. */
@@ -44,7 +42,6 @@ export function createSessionScreen(deps: SessionScreenDeps): SessionScreenHandl
   let activityDone = false;
   let introShown = false;
   let finished = false;
-  let autoRepeatTimer: ReturnType<typeof setTimeout> | null = null;
 
   const screen = el('div', { class: 'la-screen', 'data-screen': 'session' });
 
@@ -109,24 +106,11 @@ export function createSessionScreen(deps: SessionScreenDeps): SessionScreenHandl
     deps.onFinished();
   }
 
-  function scheduleAutoRepeat(item: ActivityItem): void {
-    if (autoRepeatTimer !== null) clearTimeout(autoRepeatTimer);
-    if (!deps.autoRepeat || !item.prompt.audio) return;
-    autoRepeatTimer = setTimeout(() => {
-      autoRepeatTimer = null;
-      if (!finished && activity && !activity.isDone()) activity.repeat();
-    }, 5000);
-  }
-
   function mountActivity(): void {
     const item = queue.current();
     if (!item) {
       finish();
       return;
-    }
-    if (autoRepeatTimer !== null) {
-      clearTimeout(autoRepeatTimer);
-      autoRepeatTimer = null;
     }
     activity?.destroy();
     activity = null;
@@ -160,18 +144,9 @@ export function createSessionScreen(deps: SessionScreenDeps): SessionScreenHandl
         nextBtn.disabled = false;
         nextBtn.focus();
       },
-      // EDU-R3-002: nu er echte feedback-audio speelt, is een geplande
-      // prompt-herhaling niet meer nodig (voorkomt dubbel praten).
-      onFeedback: () => {
-        if (autoRepeatTimer !== null) {
-          clearTimeout(autoRepeatTimer);
-          autoRepeatTimer = null;
-        }
-      },
     });
     stage.append(activity.element);
     focusFirstInteractive(stage);
-    scheduleAutoRepeat(item);
   }
 
   function maybeIntro(): boolean {
@@ -238,7 +213,6 @@ export function createSessionScreen(deps: SessionScreenDeps): SessionScreenHandl
   function openPause(): void {
     if (overlay || finished) return;
     deps.audio.stop();
-    if (autoRepeatTimer !== null) clearTimeout(autoRepeatTimer);
     overlay = el('div', { class: 'la-overlay', role: 'dialog', 'aria-modal': 'true', 'data-overlay': 'pause' });
     const card = el('div', { class: 'la-overlay__card' });
     card.append(iconPloef('la-ploef--small'));
@@ -325,7 +299,6 @@ export function createSessionScreen(deps: SessionScreenDeps): SessionScreenHandl
     destroy(): void {
       document.removeEventListener('keydown', onKeyDown);
       trapCleanup?.();
-      if (autoRepeatTimer !== null) clearTimeout(autoRepeatTimer);
       activity?.destroy();
       activity = null;
     },

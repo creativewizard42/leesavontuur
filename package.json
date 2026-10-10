@@ -1,7 +1,7 @@
 {
   "name": "leesavontuur",
   "private": true,
-  "version": "0.2.0-beta.1",
+  "version": "0.2.0-beta.2",
   "type": "module",
   "description": "LEESAVONTUUR - educatief leesspel (NL, 5-6 jaar). Offline-first, geen backend.",
   "engines": {
@@ -20,7 +20,8 @@
     "audio:catalog": "vite-node scripts/audio-catalog.ts",
     "audio:release": "vite-node scripts/audio-catalog.ts --release",
     "release:beta": "node scripts/package-release.mjs --beta",
-    "release:stable": "node scripts/package-release.mjs"
+    "release:stable": "node scripts/package-release.mjs",
+    "audio:speech-plan": "vite-node scripts/speech-plan.ts"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",

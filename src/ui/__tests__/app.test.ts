@@ -50,6 +50,7 @@ describe('App – kindflow', () => {
 
     root.querySelector<HTMLButtonElement>('[data-action="start"]')?.click();
     expect(root.querySelector('[data-screen="session"]')).not.toBeNull();
+    expect(storage.read(SESSION_RESUME_KEY)).not.toBeNull();
 
     // Fase 1: de sessie start met een auditieve klankwarming-up met keuzes.
     const option = root.querySelector<HTMLButtonElement>('.la-option');

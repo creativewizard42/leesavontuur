@@ -213,6 +213,9 @@ export function createApp(deps: AppDeps): App {
           rng,
         });
       }
+      // Persist before the first answer too: reload/closing must not discard
+      // the newly planned session while its instruction is playing.
+      if (!free) saveSessionState(queue, storage, now());
       const sessionId = queue.toJSON(now()).sessionNumber;
       const handle = createSessionScreen({
         state,
@@ -220,7 +223,6 @@ export function createApp(deps: AppDeps): App {
         audio: effectiveAudio(),
         now,
         free,
-        autoRepeat: state.profile.settings.autoRepeatPrompt,
         onEvent: (event: AnswerEvent, item: ActivityItem) => {
           if (!event.correct && !event.isGuess) {
             recordConfusion(item.targetId, event.selectedOptionId, item.kind, storage);

@@ -437,8 +437,8 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
       if (!option?.audio) continue;
       markListening(id, true);
       const result = await playClipSafe(option.audio);
-      if (result.reason === 'cancelled') return;
       markListening(id, false);
+      if (result.reason === 'cancelled') break;
     }
     if (!done && !audioBlocked && !disposed) grid.setDisabled(false);
   }
@@ -465,7 +465,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     key: string,
     vars?: Record<string, string>,
     preceding?: Promise<PlayResult>,
-  ): void {
+  ): Promise<PlayResult> {
     const text = fbText(key, vars ?? {});
     feedback.classList.remove('is-hidden', 'la-feedback--correct', 'la-feedback--hint', 'la-feedback--retry');
     if (kind === 'correct') feedback.classList.add('la-feedback--correct');
@@ -482,14 +482,14 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
       feedbackIcon.append(iconPloef('la-ploef--small'));
     }
     feedbackText.textContent = text;
-    const playFeedback = (): void => {
-      if (disposed) return;
+    const playFeedback = (): Promise<PlayResult> => {
+      if (disposed) return Promise.resolve(UNAVAILABLE);
       const clips = feedbackSequence(key, vars ?? {});
-      if (clips.length > 0) void playSequenceSafe(clips);
+      return clips.length > 0 ? playSequenceSafe(clips) : Promise.resolve(UNAVAILABLE);
     };
-    if (preceding) void preceding.then(playFeedback, playFeedback);
-    else playFeedback();
+    const completed = preceding ? preceding.then(result => result.reason === 'cancelled' ? result : playFeedback(), () => UNAVAILABLE) : playFeedback();
     options.onFeedback?.({ key, kind, text });
+    return completed;
   }
 
   function clearMarks(): void {
@@ -562,8 +562,9 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
       done = true;
       grid?.setDisabled(true);
       const optionAudio = markCorrectOption();
-      setFeedback('correct', result.feedbackKey, result.feedbackVars, optionAudio);
-      options.onDone('correct');
+      void setFeedback('correct', result.feedbackKey, result.feedbackVars, optionAudio).then(() => {
+        if (!disposed) options.onDone('correct');
+      });
       return;
     }
 
@@ -575,8 +576,9 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
       const modeling = applyHint();
       // Alleen visueel markeren; de modeling-audio is al gestart door applyHint.
       markCorrectOption(false);
-      setFeedback('model', result.feedbackKey, result.feedbackVars, modeling);
-      options.onDone('modeled');
+      void setFeedback('model', result.feedbackKey, result.feedbackVars, modeling).then(() => {
+        if (!disposed) options.onDone('modeled');
+      });
       return;
     }
 
@@ -640,11 +642,6 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     void audio.playStretched(wordFromItem(item) as string).then((result) => {
       if (!disposed && result.result === 'unavailable' && result.reason !== 'cancelled') showAudioFallback();
     });
-  }
-  if (item.metadata?.['extraAudio'] === true && item.prompt.audio) {
-    later(() => {
-      if (!done) void playSequenceSafe(promptClips());
-    }, 1500);
   }
   if (modelFirst && !isIntroduction && item.kind !== 'beloning') {
     grid?.setDisabled(true);

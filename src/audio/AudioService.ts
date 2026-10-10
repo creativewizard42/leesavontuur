@@ -8,13 +8,17 @@
  * (`ended`); bij `error`,
  * play()-reject of timeout volgt de TTS-fallback (EDU-001/QA-001).
  *
- * Losse klanken en gerekte reeksen vereisen menselijke opnames. Een
- * computerstem mag deze ook niet binnen instructies of feedback benaderen.
+ * Voor deze bèta zijn expliciet gegenereerde Nederlandse klankbestanden
+ * beschikbaar en als synthetisch gemarkeerd. Web Speech mag ontbrekende
+ * klanken of klankreeksen niet als letterteksten uitspreken.
  */
 import type { AudioClip } from '../types';
 import { isLocalAudioSrc } from './localSrc';
 import { needsHumanRecording } from './recordingPolicy';
 import { GRAPHEMES } from '../content/graphemes';
+import syntheticSources from './syntheticSources.json';
+
+const syntheticFiles = new Set(syntheticSources);
 
 function hintsToGraphemeId(hint: string): string {
   return GRAPHEMES.find(g => g.soundHint === hint || g.ttsHint === hint || g.id === hint)?.id ?? hint;
@@ -25,7 +29,7 @@ function hintsToGraphemeId(hint: string): string {
 // oordeel geven. Hier opnieuw geëxporteerd voor bestaande importers/tests.
 export { isLocalAudioSrc } from './localSrc';
 
-/** Uitkomst van een audio-poging: echte opname, (tijdelijke) TTS of niets. */
+/** Uitkomst: bestandsaudio (eventueel synthetisch), lokale TTS of niets. */
 export type PlayOutcome = 'file' | 'tts' | 'unavailable';
 
 /**
@@ -309,7 +313,7 @@ export function createAudioService(options: AudioServiceOptions = {}): AudioServ
       if (token !== operation) return playResult('unavailable', false, 'cancelled');
       if (played) {
         lastResult = 'clip';
-        return playResult('file');
+        return playResult('file', syntheticFiles.has(clip.src));
       }
       // Autoplay failures can be retried after a gesture; do not memoize them.
     }
@@ -328,15 +332,17 @@ export function createAudioService(options: AudioServiceOptions = {}): AudioServ
     const sounds = hints.map(hint => options.source?.getClip(`lk.${hint}.sound`));
     if (sounds.some(sound => !sound)) return playResult('unavailable', false, 'recording-required');
     let outcome: PlayOutcome = 'file';
+    let approximate = false;
     for (let i = 0; i < sounds.length; i++) {
       if (token !== operation) return playResult('unavailable', false, 'cancelled');
       const sound = sounds[i];
       if (!sound) continue;
       const result = await runClip(sound, token);
+      approximate = approximate || result.approximate;
       if (result.result !== 'file') outcome = 'unavailable';
       if (i < sounds.length - 1 && hintPauseMs > 0) await delay(hintPauseMs);
     }
-    return playResult(outcome, false, outcome === 'unavailable' ? `recording-required:${word}` : undefined);
+    return playResult(outcome, approximate, outcome === 'unavailable' ? `recording-required:${word}` : undefined);
   }
 
   function stop(): void {

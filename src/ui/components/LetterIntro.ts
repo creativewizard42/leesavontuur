@@ -26,7 +26,6 @@ export function createLetterIntro(options: LetterIntroOptions): HTMLElement {
   const { grapheme, audio } = options;
   const root = el('div', { class: 'la-activity la-letter-intro', 'data-kind': 'letterintro' });
 
-  const soundClip = grapheme.audio?.sound;
 
   root.append(iconPloef('is-celebrate'));
   root.append(el('p', { class: 'la-letter-groot', text: grapheme.letters }));
@@ -77,7 +76,6 @@ export function createLetterIntro(options: LetterIntroOptions): HTMLElement {
     const clips = [
       ...instructionSequence('instr.lk.intro', { letter: grapheme.letters, sound: grapheme.soundHint }),
     ];
-    if (soundClip) clips.push(soundClip);
     if (clips.length > 0) {
       const promise: Promise<PlayResult> =
         clips.length > 1 ? audio.playSequence(clips) : audio.playClip(clips[0] as (typeof clips)[number]);

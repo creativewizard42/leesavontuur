@@ -30,6 +30,7 @@ const report = { total: entries.length, present: entries.filter(entry => entry.s
   humanMissing: entries.filter(entry => entry.delivery === 'human-required' && entry.status === 'missing').length };
 mkdirSync(dirname('src/audio/coverage.json'), { recursive: true });
 writeFileSync('src/audio/coverage.json', JSON.stringify(report, null, 2) + '\n');
+writeFileSync('src/audio/syntheticSources.json', JSON.stringify(entries.filter(entry => entry.status === 'synthetic-draft').map(entry => entry.src).sort(), null, 2) + '\n');
 console.log(JSON.stringify(report));
 if (process.argv.includes('--release') && entries.some(entry => entry.status !== 'human-reviewed')) {
   console.error('Release blocked: missing or synthetic recordings. Human recordings also require documented listening review.');

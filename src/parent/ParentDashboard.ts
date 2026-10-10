@@ -246,7 +246,6 @@ export function createParentDashboard(options: ParentDashboardOptions): HTMLElem
       { key: 'audioEnabled', label: ui('ui.settings.audio'), checked: settings.audioEnabled },
       { key: 'reducedMotion', label: ui('ui.settings.motion'), checked: settings.reducedMotion },
       { key: 'highContrast', label: ui('ui.settings.contrast'), checked: settings.highContrast },
-      { key: 'autoRepeatPrompt', label: ui('ui.settings.autoRepeat'), checked: settings.autoRepeatPrompt },
     ];
     for (const row of rows) {
       const label = el('label', { class: 'la-hint-text la-setting-row' });
@@ -347,7 +346,9 @@ export function createParentDashboard(options: ParentDashboardOptions): HTMLElem
   const appCard = el('div', { class: 'la-card', 'data-section': 'app-readiness' });
   appCard.append(el('h3', { text: 'App en geluid' }));
   appCard.append(el('p', { text: `Versie ${version} — begeleide bèta. De volledige leesroute is nog in ontwikkeling. Ontbrekende klankopnames kunnen oefeningen blokkeren; gebruik deze versie samen met een volwassene.` }));
-  appCard.append(el('p', { text: `${coverage.present} van ${coverage.total} audiofragmenten aanwezig. ${coverage.synthetic} fragmenten gebruiken een voorlopige computerstem. ${coverage.humanMissing} benodigde menselijke klankopnames ontbreken nog. Definitieve stem: warm, rustig en Nederlands.` }));
+  appCard.append(el('p', { text: `${coverage.present} van ${coverage.total} audiofragmenten aanwezig. ${coverage.synthetic} fragmenten zijn met een Nederlandse computerstem gemaakt. ${coverage.total - coverage.present} audiobestanden ontbreken. De spraak heeft nog geen menselijke luistergoedkeuring; controleer vooral de losse klanken samen met een volwassene.` }));
+  appCard.append(el('p', { text: 'Geluid wordt niet automatisch herhaald. Tik op het oor om zelf opnieuw te luisteren. De vervolgknop komt beschikbaar als antwoordgeluid en feedback klaar zijn.' }));
+  appCard.append(el('a', { class: 'la-btn la-btn--wide', href: `${import.meta.env.BASE_URL}audio-review.html`, text: 'Beluister alle klanken en letternamen' }));
   appCard.append(el('p', { text: 'Luisterkeuzes en begripsvragen geven oefensignalen. Ze bewijzen geen zelfstandig hardop lezen. Lees geregeld samen en bespreek wat je kind leest.' }));
   appCard.append(el('p', { text: 'iPhone: open de app via HTTPS in Safari, kies Deel → Zet op beginscherm. Laat de app eerst volledig laden. Offlinegebruik werkt na het downloaden van de appbestanden. Voortgang blijft op dit apparaat; maak regelmatig een export.' }));
   const offline = document.documentElement.dataset['offlineReady'];

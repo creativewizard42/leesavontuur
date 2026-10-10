@@ -101,7 +101,33 @@ describe('ActivityView – Woord lezen', () => {
     }
   });
 
-  it('laat het kind na een fout opnieuw proberen en daarna verdergaan', () => {
+  it('waits for the answer recording and feedback before enabling continuation', async () => {
+    const item = wordItem();
+    const audio = createMockAudioService();
+    const onDone = vi.fn();
+    let finishAnswer: (() => void) | undefined;
+    let finishFeedback: (() => void) | undefined;
+    const targetAudio = item.options.find(option => option.id === item.targetId)?.audio;
+    expect(targetAudio).toBeDefined();
+    const originalPlay = audio.playClip.bind(audio);
+    vi.spyOn(audio, 'playClip').mockImplementation(clip => clip.key === targetAudio?.key
+      ? new Promise(resolve => { finishAnswer = () => resolve({ result: 'file', approximate: true }); })
+      : clip.kind === 'feedback' ? new Promise(resolve => { finishFeedback = () => resolve({ result: 'file', approximate: true }); }) : originalPlay(clip));
+    vi.spyOn(audio, 'playSequence').mockImplementation(() => new Promise(resolve => {
+      finishFeedback = () => resolve({ result: 'file', approximate: true });
+    }));
+    mount(item, { onDone }, audio);
+    container.querySelector<HTMLButtonElement>(`.la-option[data-option-id="${item.targetId}"]`)!.click();
+    expect(onDone).not.toHaveBeenCalled();
+    finishAnswer!();
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(onDone).not.toHaveBeenCalled();
+    finishFeedback!();
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(onDone).toHaveBeenCalledOnce();
+  });
+
+  it('laat het kind na een fout opnieuw proberen en daarna verdergaan', async () => {
     const item = wordItem();
     const onEvent = vi.fn();
     const onDone = vi.fn();
@@ -115,6 +141,7 @@ describe('ActivityView – Woord lezen', () => {
     const correct = container.querySelector<HTMLButtonElement>(`.la-option[data-option-id="${item.targetId}"]`);
     expect(correct?.disabled).toBe(false);
     correct?.click();
+    await new Promise(resolve => setTimeout(resolve, 0));
     expect(onDone).toHaveBeenCalledWith('correct');
     expect(onEvent).toHaveBeenCalledTimes(2);
   });

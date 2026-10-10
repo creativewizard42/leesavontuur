@@ -1,5 +1,26 @@
 # Verificatie — 10 oktober 2026
 
+## Nieuwste spraakronde: 0.2.0-beta.2
+
+- 1.587/1.587 synthetische audiofragmenten aanwezig; alle checksums, volledige
+  MP3-decoderingen, duren en niet-stille signalen gecontroleerd.
+- Volledige Vitest-suite: 38 bestanden en 285 tests geslaagd.
+- Contentvalidator: 0 fouten en 0 waarschuwingen.
+- Productiebuild en offline browsercontrole onder `/` en `/spel/` geslaagd.
+- Updatecontrole met meerdere vensters en offline heropenen geslaagd.
+- Echte Chromium-beginsessie: 8 stappen tot de beloning, voortgang opgeslagen,
+  geen geblokkeerd geluid; 4× afspeelsnelheid voor de bedieningscontrole.
+- Luistercontrole voor volwassenen: alle 82 klank-/naamfragmenten aanwezig,
+  afspelen getest en geen gelijktijdig geluid bij wisselen van fragment.
+- Spraakherkenningssteekproeven zijn diagnostisch, **geen uitspraakgoedkeuring**.
+  Sommige korte woorden/zinnen worden inconsistent herkend. De resultaten staan
+  in `SPEECH_ASR_SAMPLES.json`; wijzigingen en beperkingen in `SPEECH_REWORK.md`.
+- Menselijke luisterreview, didactische goedkeuring en fysieke iPhone-test
+  zijn nog niet uitgevoerd.
+
+Onderstaande resultaten beschrijven de eerdere bèta 1 en blijven historische
+controle-evidence; de toen ontbrekende bestanden zijn inmiddels synthetisch gevuld.
+
 ## Geslaagd
 
 - **Bètapakket 0.2.0-beta.1:** `npm run release:beta` geslaagd; tar.gz,

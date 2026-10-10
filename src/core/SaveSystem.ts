@@ -69,7 +69,7 @@ function defaultSettings(): ProfileSettings {
     audioEnabled: true,
     reducedMotion: false,
     highContrast: false,
-    autoRepeatPrompt: true,
+    autoRepeatPrompt: false,
   };
 }
 

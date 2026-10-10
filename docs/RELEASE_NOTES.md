@@ -1,16 +1,21 @@
-# Leesavontuur 0.2.0-beta.1
+# Leesavontuur 0.2.0-beta.2
 
 Begeleide bèta voor ontwikkeling en ouderfeedback. Geen volledige leesmethode.
 
 - Rustige bosvormgeving, grote knoppen en een herkenbare avonturenkaart.
 - Gebiedsselectie, eerste decodeerbare zinnen en korte verhalen.
 - Audio speelt sequenties volledig af; ontbrekend oefengeluid wordt niet gescoord.
-- 811 tijdelijke computerstemfragmenten; 776 menselijke klankfragmenten ontbreken.
+- Alle 1.587 audiofragmenten opnieuw gegenereerd met de Nederlandse Pim-stem,
+  inclusief klanken en klankreeksen vanuit expliciete IPA. Geen ontbrekende clips.
+- Dubbele automatische herhaling verwijderd; herhalen alleen via de luisterknop.
+- Verdergaan wacht op antwoordgeluid en feedback; geen oude feedback na annulering.
+- Alle audio blijft synthetisch en zonder menselijke luistergoedkeuring.
+- Ouders kunnen alle 41 klanken en letternamen apart beluisteren voor controle.
 - Lokale voortgang, gecontroleerde import/export en een uitgebreid ouderdashboard.
 - Offline PWA met bereikverzoeken voor audio, ook onder een repositorypad.
 - Ouders kunnen op updates controleren en een gereedstaande versie openen.
 
-Definitieve menselijke audio, didactische review, een pilot met kinderen en fysieke
+Betrouwbare uitspraakreview, definitieve menselijke audio, didactische review, een pilot met kinderen en fysieke
 iPhone-tests zijn nodig voor een volledige release. De bèta vervangt leesonderwijs
 en begeleiding niet. Bij een geblokkeerde oefening ga je via het huisje terug.
 

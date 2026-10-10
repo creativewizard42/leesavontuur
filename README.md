@@ -1,7 +1,7 @@
 # LEESAVONTUUR
 
-**Versie 0.2.0-beta.1 — begeleide bèta.** De leesroute is nog in ontwikkeling:
-menselijke klankopnames ontbreken en didactische beoordeling en praktijktests zijn
+**Versie 0.2.0-beta.2 — begeleide bèta.** Alle 1.587 audiofragmenten zijn nu
+synthetisch gegenereerd; menselijke luisterreview, didactische beoordeling en praktijktests zijn
 nog nodig. Zie [release-informatie](docs/RELEASE_NOTES.md). De workflow publiceert
 naar GitHub Pages na controles; de Pages-bron moet op GitHub Actions staan.
 
@@ -153,11 +153,11 @@ werken en `npm run validate` om te controleren of alle vereiste clips bestaan.
 
 ## Bekende beperkingen
 
-- **Definitieve menselijke opnames ontbreken.** Er zijn 811 lokale MP3-concepten
-  met een Nederlandse computerstem voor woorden, zinnen en veilige instructies.
-  776 fragmenten met fonemen/klankreeksen vereisen menselijke opname. Deze worden
-  niet synthetisch benaderd; oefeningen zonder essentieel geluid worden niet
-  beoordeeld. De gewenste definitieve stem is warm, rustig en Nederlands.
+- **Uitspraakreview ontbreekt.** Alle 1.587 lokale MP3s zijn opnieuw synthetisch
+  gegenereerd, inclusief 776 klankgebonden fragmenten via expliciete IPA.
+  Bestandsaanwezigheid bewijst geen correcte uitspraak. Vooral losse klanken en
+  korte klinkercontrasten vereisen een menselijke luisterbeoordeling. Zie
+  [spraakherontwikkeling](docs/reviews/SPEECH_REWORK.md).
 - **Vakinhoudelijke review nodig.** De woordenlijst en klankvolgorde moeten nog
   door een leerkracht/orthopedagoog worden beoordeeld vóór structureel gebruik.
 - **MVP-scope:** het volledige klankaanbod is gebouwd, maar de speelbare MVP

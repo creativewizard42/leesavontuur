@@ -172,7 +172,8 @@ describe('AudioService – resolutie en fallbacks', () => {
       speech: null,
     });
     const result = await service.play('de.kam');
-    expect(result).toEqual(playResult('file'));
+    // A bundled synthetic file plays successfully but is never labelled human.
+    expect(result).toEqual(playResult('file', true));
   });
 
   it('valt bij een laadfout (error) terug op lokale TTS', async () => {
