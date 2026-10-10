@@ -14,6 +14,14 @@ repository bij Settings → Pages als bron **GitHub Actions** heeft ingesteld.
 Een `v*-beta.*`-tag publiceert het gecontroleerde pakket als GitHub-prerelease.
 De workflow past geen eigen domein of bestaande hosting aan.
 
+Bij een 404 tijdens Pages-deployment: controleer eerst of Pages voor deze
+repository beschikbaar is (een privérepository kan een betaald abonnement
+vereisen) en of Source daadwerkelijk op GitHub Actions staat. De workflow gebruikt
+`actions/configure-pages` vóór deployment om de Pages-configuratie te controleren.
+Die stap schakelt Pages niet automatisch in: het standaard `GITHUB_TOKEN` heeft
+niet de aanvullende rechten die automatische inschakeling vereist. De repository
+openbaar maken of het abonnement veranderen gebeurt niet via deze workflow.
+
 GitHub Pages verwerkt `_headers` niet. De meta-CSP werkt wel; aanvullende
 HTTP-hardeningheaders vereisen andere hosting. Zie `docs/RELEASE_NOTES.md`.
 
