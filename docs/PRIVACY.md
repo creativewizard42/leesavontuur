@@ -1,8 +1,11 @@
 # LEESAVONTUUR — privacy in het kort
 
 **Wat is dit?** LEESAVONTUUR is een leesspel voor kinderen van 5–6 jaar. Het werkt
-volledig **op dit apparaat, zonder internet**. Er is geen account en er is geen
-verbinding nodig om te spelen.
+**op dit apparaat**. Er is geen account. De webapp heeft eerst een verbinding
+nodig om de appbestanden te laden. Na volledige offline-installatie en heropenen
+is geen verbinding nodig om te spelen. Webhosting kan gebruikelijke technische
+verbindingsgegevens ontvangen bij het downloaden van de app; de leergegevens
+worden daarbij niet verstuurd.
 
 **Welke gegevens bewaart het spel?**
 
@@ -26,8 +29,16 @@ gedeeld**. Er zijn **geen advertenties, geen tracking en geen analytics**.
 **Geluid.** Het spel gebruikt alleen gesproken audio die **op dit apparaat**
 beschikbaar is. Er worden **geen teksten naar internet gestuurd** voor spraak.
 Alleen een stem die het apparaat zelf aanbiedt (een zogenoemde lokale stem) wordt
-gebruikt; is er geen geschikte stem, dan blijft het spel gewoon werken — met beeld
-en zonder geluid.
+gebruikt voor geschikte hele woorden en instructies. De huidige ontwikkelversie
+bevat voorlopige, vooraf gegenereerde computerstem-MP3s. Tijdens het spelen
+wordt daarvoor geen externe spraakdienst gebruikt. Losse klanken en hak-/plakreeksen
+vereisen menselijke opnames. Een oefening zonder essentieel geluid kan niet worden
+beoordeeld; vraag een volwassene om hulp.
+
+**Offline appbestanden.** Een service worker bewaart de app, fonts, illustraties
+en aanwezige audio in de browsercache. Updates vervangen geen actieve sessie.
+De cache bevat geen extra kindgegevens. Het apparaat kan cache of lokale opslag
+wissen; maak daarom regelmatig een profiel-export.
 
 **Bewaren.** De gegevens blijven staan zolang u het spel op dit apparaat gebruikt,
 zodat uw kind verder kan waar het gebleven is. Er is geen tijdslimiet aan
@@ -38,6 +49,7 @@ vasthouden + een eenvoudige som) kunt u:
 
 - de gegevens **bewaren als bestand** (een JSON-bestand op dit apparaat) — dit
   bestand bevat geen namen of andere persoonlijke gegevens; en
+- een eerder geëxporteerd profiel **terugzetten** na controle en bevestiging; en
 - **alles wissen** met "Begin helemaal opnieuw". Dit wist het spelprofiel, het log
   met verwisselingen én een eventueel onderbroken sessie.
 
@@ -46,8 +58,4 @@ vasthouden + een eenvoudige som) kunt u:
 versleuteld, en na een privacytoets (DPIA). Nu is dat er niet.
 
 **Vragen?** Neem contact op met de makers van LEESAVONTUUR:
-**[contact invullen]**.
-
-> **Let op — vóór publicatie invullen:** dit contactadres is nog een placeholder.
-> Vervang **[contact invullen]** door een werkend e-mailadres (of postadres) van
-> de makers voordat deze tekst openbaar wordt gemaakt.
+**info@leesavontuur.nl**.

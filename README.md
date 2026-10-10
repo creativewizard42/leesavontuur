@@ -1,10 +1,15 @@
 # LEESAVONTUUR
 
+**Versie 0.2.0-beta.1 — begeleide bèta.** De leesroute is nog in ontwikkeling:
+menselijke klankopnames ontbreken en didactische beoordeling en praktijktests zijn
+nog nodig. Zie [release-informatie](docs/RELEASE_NOTES.md). De workflow publiceert
+naar GitHub Pages na controles; de Pages-bron moet op GitHub Actions staan.
+
 LEESAVONTUUR is een Nederlandstalig, offline leesspel voor kinderen van 5–6 jaar
 (eind groep 2 / begin groep 3). Het spel begeleidt het kind van **klank** naar
 **letter**, van **hakken** naar **plakken** en uiteindelijk naar **begrijpend
 lezen**. Alles werkt op het apparaat zelf: geen account, geen backend, geen
-netwerk, geen tracking.
+tracking. De eerste download en updates gebruiken netwerk; voortgang blijft lokaal.
 
 ## Didactische kern
 
@@ -43,6 +48,16 @@ escalatie (retry → hint → voordoen), en de moeilijkheid past zich per kind a
 - **Toegankelijk:** toetsenbord, focusbeheer, `aria-live`, radiogroep-semantiek,
   tikdoelen ≥ 64 px, hoog contrast en rustige bewegingen.
 
+## Audit en verdere ontwikkeling
+
+De audit en het plan voor een volledige leesapp staan in
+[docs/MVP_AUDIT.md](docs/MVP_AUDIT.md) en
+[docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
+De huidige versie bevat gerichte oefengebieden, eerste zin-/verhaalactiviteiten,
+profielimport en een installeerbare offline-PWA. Dit is nog geen vrijgegeven
+volledige leesmethode. Zie [docs/AUDIO_PRODUCTION.md](docs/AUDIO_PRODUCTION.md)
+voor de definitieve menselijke audio en de voorlopige computerstem.
+
 ## Snelle start
 
 Vereisten: **Node `^22.12.0 || ^24.0.0 || >=26.0.0`** (Windows/macOS/Linux;
@@ -60,6 +75,8 @@ npm run typecheck  # TypeScript zonder output
 npm run validate   # content-validator (grafemen, woorden, audio-referenties)
 npm run recordings # (her)genereert docs/RECORDINGS.md
 npm run check:dist # controleert de build: CSP, geen externe URL's, licenties
+npm run audio:catalog # inventaris en opname-script bijwerken
+npm run audio:release # releasepoort: menselijke audio + luisterreview vereist
 ```
 
 ## Projectstructuur
@@ -136,9 +153,11 @@ werken en `npm run validate` om te controleren of alle vereiste clips bestaan.
 
 ## Bekende beperkingen
 
-- **Nog geen echte opnames.** Het spel gebruikt nu een **lokale TTS-benadering**
-  (gemarkeerd in de ouderzone). Echte opnames zijn nodig vóór gebruik met
-  kinderen; losse klanken en gerekte reeksen horen altijd opnames te zijn.
+- **Definitieve menselijke opnames ontbreken.** Er zijn 811 lokale MP3-concepten
+  met een Nederlandse computerstem voor woorden, zinnen en veilige instructies.
+  776 fragmenten met fonemen/klankreeksen vereisen menselijke opname. Deze worden
+  niet synthetisch benaderd; oefeningen zonder essentieel geluid worden niet
+  beoordeeld. De gewenste definitieve stem is warm, rustig en Nederlands.
 - **Vakinhoudelijke review nodig.** De woordenlijst en klankvolgorde moeten nog
   door een leerkracht/orthopedagoog worden beoordeeld vóór structureel gebruik.
 - **MVP-scope:** het volledige klankaanbod is gebouwd, maar de speelbare MVP
@@ -155,7 +174,7 @@ gebruik met kinderen zijn afgerond:
 |---|---|---|
 | **QA** | Akkoord met voorwaarden | Geen openstaande blockers/majors; de R3-regressies (haalbare fase-2-poort, nooit 1-optie-keuzes, feedbackaudio, resume-hardening) zijn gedekt door tests. Restpunt: echte audio-opnames moeten de TTS-fallback vervangen en de opnamelijst (`docs/RECORDINGS.md`) moet kloppen. |
 | **Educational** | Akkoord met voorwaarden | Echte audio-opnames door een **native spreker** vóór gebruik met kinderen (losse klanken/gerekte reeksen nooit via TTS, ED §13.1). Tweede taalkundige/leerkracht-review van de **woordenlijst**, de **rijm-/lettergreepbank** en de r-in-coda-aandachtspunten (ED §13.7, §6.3). |
-| **Security/Privacy** | Akkoord met voorwaarden | Contactadres in `docs/PRIVACY.md` invullen (nu placeholder `[contact invullen]`). HTTP-hardening-headers bij webhosting toepassen via `deploy/` (`docs/SECURITY_HEADERS.md`, `public/_headers`). |
+| **Security/Privacy** | Akkoord met voorwaarden | Contactadres in `docs/PRIVACY.md` is inmiddels ingevuld; de historische reviewvoorwaarden moeten opnieuw worden gecontroleerd. HTTP-hardening-headers bij webhosting toepassen via `deploy/` (`docs/SECURITY_HEADERS.md`, `public/_headers`). |
 
 Zolang deze voorwaarden openstaan, is het spel geschikt voor begeleide
 kennismaking/test, **niet** voor onbegeleid gebruik met kinderen.

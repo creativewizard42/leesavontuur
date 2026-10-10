@@ -36,6 +36,7 @@ function fakeMedia(mode: MediaMode): HTMLAudioElement {
   };
   const element = {
     currentTime: 0,
+    error: mode === 'error' ? { code: 4 } : null,
     pause(): void {
       /* niets */
     },
@@ -50,7 +51,7 @@ function fakeMedia(mode: MediaMode): HTMLAudioElement {
     play(): Promise<void> {
       if (mode === 'reject') return Promise.reject(new Error('play-rejected'));
       if (mode === 'ok') {
-        queueMicrotask(() => emit('canplaythrough'));
+        queueMicrotask(() => emit('ended'));
         return Promise.resolve();
       }
       if (mode === 'error') {
@@ -72,6 +73,7 @@ function speechWith(voices: { lang: string; localService?: boolean; name?: strin
     spoke,
     speak: (u) => {
       spoke.push(u);
+      queueMicrotask(() => (u as { onend?: () => void }).onend?.());
     },
     cancel: () => undefined,
     getVoices: () => voices,
@@ -89,6 +91,7 @@ function speechThatLoadsLater(
     spoke,
     speak: (u) => {
       spoke.push(u);
+      queueMicrotask(() => (u as { onend?: () => void }).onend?.());
     },
     cancel: () => undefined,
     getVoices: () => current,
@@ -211,7 +214,7 @@ describe('AudioService – resolutie en fallbacks', () => {
     expect(fallbacks).toContain('de.kam');
   });
 
-  it('gebruikt losse klanken via TTS als gemarkeerde benadering (approximate)', async () => {
+  it('weigert synthetische losse klanken, ook wanneer een lokale stem bestaat)', async () => {
     const service = createAudioService({
       source: sourceFor({
         'lk.m.sound': clip({
@@ -225,7 +228,7 @@ describe('AudioService – resolutie en fallbacks', () => {
       speech: speechWith([localVoice]),
     });
     const result = await service.play('lk.m.sound');
-    expect(result).toEqual(playResult('tts', true));
+    expect(result.result).toBe('unavailable');
   });
 
   it('weigert cloud-stemmen (localService !== true)', async () => {
@@ -284,7 +287,7 @@ describe('AudioService – resolutie en fallbacks', () => {
     expect(created).toHaveLength(0);
   });
 
-  it('speelt gerekte woorden als reeks klank-hints met pauzes (approximate)', async () => {
+  it('weigert synthetische hak- en plakreeksen zonder menselijke opnames)', async () => {
     const speech = speechWith([localVoice]);
     const service = createAudioService({
       source: sourceFor({
@@ -296,10 +299,9 @@ describe('AudioService – resolutie en fallbacks', () => {
       hintPauseMs: 0,
     });
     const result = await service.playStretched('kam');
-    expect(result.result).toBe('tts');
-    expect(result.approximate).toBe(true);
-    // k, a en mmm zijn los uitgesproken (drie losse TTS-utterances).
-    expect(speech.spoke).toHaveLength(3);
+    expect(result.result).toBe('unavailable');
+    expect(result.approximate).toBe(false);
+    expect(speech.spoke).toHaveLength(0);
   });
 
   it('prefereert een echte gerekte opname boven TTS', async () => {

@@ -1,3 +1,13 @@
+> Actualisatie 10 oktober 2026: dit document bevat het oorspronkelijke MVP-ontwerp.
+> De actuele uitbreidingen en opvolgende architectuur staan in
+> [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md), de audit in [MVP_AUDIT.md](MVP_AUDIT.md).
+> `src/platform/offline.ts` en `scripts/offline-plugin.ts` verzorgen de PWA;
+> `PracticePlanner` selecteert gebieden; `learning/Reading.ts` levert de eerste
+> sight-word-, zin- en tekstactiviteiten. Audio wacht op volledige weergave en
+> weigert TTS voor fonemen, ook in instructies. Profielimport is beschikbaar.
+> De historische paragrafen over ontbrekende audio en builderwerkverdeling zijn
+> geen beschrijving van de huidige implementatiestatus.
+
 # LEESAVONTUUR – Architecture
 
 | | |

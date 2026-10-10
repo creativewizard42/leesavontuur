@@ -31,7 +31,7 @@ import {
   saveSessionState,
   type SessionQueue,
 } from '../core/SessionPlanner';
-import { graphemes } from '../content';
+import { planPractice } from '../core/PracticePlanner';
 import { createAppAudio } from './audioClips';
 import { clear, focusFirstInteractive } from './dom';
 import { createStartScreen } from './screens/StartScreen';
@@ -56,7 +56,7 @@ export interface App {
   destroy(): void;
   showStart(): void;
   showMap(): void;
-  startSession(free?: boolean): void;
+  startSession(free?: boolean, phase?: number): void;
   showParentGate(): void;
   showParentDashboard(): void;
 }
@@ -107,6 +107,12 @@ export function createApp(deps: AppDeps): App {
     save();
   }
 
+  function prepareScreen(): void {
+    baseAudio.stop();
+    currentDestroy?.();
+    currentDestroy = null;
+  }
+
   function mount(screen: HTMLElement, destroy?: () => void): void {
     if (disposed) return;
     currentDestroy?.();
@@ -137,11 +143,13 @@ export function createApp(deps: AppDeps): App {
     },
     destroy() {
       disposed = true;
+      baseAudio.stop();
       currentDestroy?.();
       currentDestroy = null;
       clear(root);
     },
     showStart() {
+      prepareScreen();
       applySettings();
       mount(
         createStartScreen({
@@ -158,20 +166,26 @@ export function createApp(deps: AppDeps): App {
       );
     },
     showMap() {
+      prepareScreen();
       applySettings();
       mount(
         createMapScreen({
           profile: state.profile,
           audio: effectiveAudio(),
-          onSelectArea: () => app.startSession(false),
+          onSelectArea: (phase) => app.startSession(false, phase),
+          onStart: () => app.startSession(),
+          onHome: () => app.showStart(),
           onStartFree: () => app.startSession(true),
           onParent: () => app.showParentGate(),
         }),
       );
     },
-    startSession(free = false) {
+    startSession(free = false, phase?: number) {
+      prepareScreen();
       applySettings();
-      const planProfile = free ? freeProfile(state.profile) : state.profile;
+      const planProfile = state.profile;
+      const selectedPlan = phase === undefined ? undefined : planPractice(planProfile, phase, rng);
+      if (phase !== undefined && !selectedPlan) return;
       // QA-R3-003: hervat met dezelfde context (profiel/rng/geleerde set) als
       // een verse queue, zodat adaptief gedrag en succes-items niet afwijken.
       const resumed = free
@@ -183,10 +197,15 @@ export function createApp(deps: AppDeps): App {
             rng,
           });
       let queue: SessionQueue;
-      if (resumed) {
+      const resumedPhase = resumed?.toJSON(now()).sections[0]?.items[0]?.metadata?.['practicePhase'];
+      if (resumed && resumedPhase === phase) {
         queue = resumed;
       } else {
-        const plan = planSession(planProfile, rng);
+        const plan = selectedPlan ?? planSession(planProfile, rng);
+        if (free) plan.sections = plan.sections.filter(section => section.step !== 3);
+        if (phase !== undefined) for (const section of plan.sections) for (const item of section.items) {
+          item.metadata = { ...item.metadata, practicePhase: phase };
+        }
         queue = createSessionQueue(plan, {
           sessionNumber: state.sessionNumber,
           profile: planProfile,
@@ -251,6 +270,7 @@ export function createApp(deps: AppDeps): App {
       mount(handle.element, handle.destroy);
     },
     showParentGate() {
+      prepareScreen();
       applySettings();
       mount(
         createParentGate({
@@ -260,6 +280,7 @@ export function createApp(deps: AppDeps): App {
       );
     },
     showParentDashboard() {
+      prepareScreen();
       applySettings();
       mount(
         createParentDashboard({
@@ -270,6 +291,15 @@ export function createApp(deps: AppDeps): App {
           audioApproximate: audioApproximate(),
           onSettingsChange: (patch) => updateSettings(patch),
           onBack: () => app.showMap(),
+          onImport: (profile) => {
+            if (!saveProfile(profile, storage).ok) return false;
+            state = createInitialState(profile);
+            clearSessionState(storage);
+            clearConfusions(storage);
+            saveFailed = false;
+            app.showMap();
+            return true;
+          },
           onReset: () => {
             state = createInitialState(resetProfile(storage));
             clearConfusions(storage);
@@ -308,11 +338,6 @@ export function createApp(deps: AppDeps): App {
     app.showMap();
   }
   return app;
-}
-
-/** Profiel met alle grafemen vrijgegeven (voor De Speelwei, vrij oefenen). */
-function freeProfile(profile: Profile): Profile {
-  return { ...profile, unlockedGraphemes: graphemes.map((g) => g.id) };
 }
 
 /**

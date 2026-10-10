@@ -541,7 +541,7 @@ export function validateContent(
     } else if (existingAssets && !existingAssets.has(clip.src)) {
       add(
         'AUDIO_ASSET_MISSING',
-        `Geen opname gevonden voor "${clip.src}" (TTS/tekst-fallback actief)`,
+        `Geen opname gevonden voor "${clip.src}" (opname ontbreekt; klankoefeningen vereisen menselijke audio)`,
         location,
         'warning',
       );

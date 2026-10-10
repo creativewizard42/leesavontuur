@@ -33,9 +33,10 @@ export function createStartScreen(options: StartScreenOptions): HTMLElement {
   });
   topbar.append(parentButton);
 
-  const stage = el('div', { class: 'la-stage' });
+  const stage = el('div', { class: 'la-stage la-start-stage' });
+  stage.append(el('img', { class: 'la-forest', src: 'assets/images/klankwoud.svg', alt: '', 'aria-hidden': 'true' }));
   stage.append(iconPloef('is-celebrate'));
-  stage.append(el('h1', { class: 'la-title', text: ui('ui.app.title') }));
+  stage.append(el('h1', { class: 'la-title', text: 'Leesavontuur' }));
 
   const avatarGroup = el('div', { class: 'la-avatars', role: 'group', 'aria-label': ui('ui.avatar.group') });
   for (const id of AVATAR_IDS) {
@@ -58,6 +59,7 @@ export function createStartScreen(options: StartScreenOptions): HTMLElement {
     });
     avatarGroup.append(button);
   }
+  stage.append(el('p', { class: 'la-hint-text la-start-hint', text: 'Kies je bosvriendje' }));
   stage.append(avatarGroup);
 
   const playButton = createButton({

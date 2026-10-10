@@ -11,6 +11,8 @@
  * afgeleid van een generieke template.
  */
 export const INSTRUCTIONS: Readonly<Record<string, string>> = {
+  'instr.reading.start': 'Lees rustig. Ben je klaar? Tik op het vinkje.',
+  'instr.reading.listen': 'Luister naar het verhaal. Lees daarna zelf nog een keer.',
   // Fonemisch bewustzijn / Klankjager (GD §4a)
   'instr.fn.first_sound': 'Welk woord begint met {sound}?',
   'instr.fn.last_sound': 'Welk woord eindigt op {sound}?',
@@ -33,8 +35,8 @@ export const INSTRUCTIONS: Readonly<Record<string, string>> = {
   // EDU-R3-004: sleepvariant `r2` is nog niet in gebruik; niet verplicht.
   'instr.plakken.r2': 'Sleep de klanken in de goede volgorde.',
   // Woord lezen (GD §4e)
-  'instr.de.read': 'Lees dit woord. Tik eerst de letters, plak ze daarna aan elkaar.',
-  'instr.woordlezen.start': 'Lees dit woord. Tik eerst de letters, plak ze daarna aan elkaar.',
+  'instr.de.read': 'Lees dit woord. Luister naar de knoppen en kies wat er staat.',
+  'instr.woordlezen.start': 'Lees dit woord. Luister naar de knoppen en kies wat er staat.',
   'instr.woordlezen.reveal': '{woord}. Dit is {beeld}.',
   'instr.woordlezen.comprehension': 'Wat hoort bij dit woord?',
   // De Klimboom (GD §4f) – generieke template voor `instr.klim.<woord>`.

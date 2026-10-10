@@ -4,16 +4,21 @@
  * -> stil (visuele fallback). Zonder audio crasht het spel nooit en er gaat
  * nooit een netwerkverzoek naar een externe host.
  *
- * Een clip geldt alleen als "gespeeld" wanneer het bestand echt laadt en
- * afspeelt (`canplaythrough`/`playing`/play()-resolve); bij `error`,
+ * Een clip geldt alleen als "gespeeld" wanneer het fragment is voltooid
+ * (`ended`); bij `error`,
  * play()-reject of timeout volgt de TTS-fallback (EDU-001/QA-001).
  *
- * Losse klanken/gerekte reeksen zijn in de praktijk opnames; TTS is de
- * tijdelijke, gemarkeerde benadering (`approximate: true`) zolang er geen
- * opnames zijn (ED §13.1, EDU-010).
+ * Losse klanken en gerekte reeksen vereisen menselijke opnames. Een
+ * computerstem mag deze ook niet binnen instructies of feedback benaderen.
  */
 import type { AudioClip } from '../types';
 import { isLocalAudioSrc } from './localSrc';
+import { needsHumanRecording } from './recordingPolicy';
+import { GRAPHEMES } from '../content/graphemes';
+
+function hintsToGraphemeId(hint: string): string {
+  return GRAPHEMES.find(g => g.soundHint === hint || g.ttsHint === hint || g.id === hint)?.id ?? hint;
+}
 
 // SEC-R3-005: de src-validatie is gedeeld met `SessionPlanner.readAudio`
 // (`src/audio/localSrc.ts`), zodat runtime-audio en hervatte audio hetzelfde
@@ -103,9 +108,8 @@ export interface AudioServiceOptions {
 }
 
 /**
- * Kinds die via TTS mogen. Losse klanken (`grapheme-sound`) horen hier alleen
- * als **tijdelijke, gemarkeerde** benadering (EDU-001/ED §13.1) bij; de
- * `approximate`-vlag waarschuwt de UI.
+ * Kinds die via lokale TTS mogen. De opnamepolicy weigert daarnaast
+ * instructies of feedback met ingebedde fonemen.
  */
 const DEFAULT_TTS_KINDS: readonly AudioClip['kind'][] = [
   'word',
@@ -113,7 +117,6 @@ const DEFAULT_TTS_KINDS: readonly AudioClip['kind'][] = [
   'feedback',
   'instruction',
   'sentence',
-  'grapheme-sound',
   'grapheme-name',
   'grapheme-example',
 ];
@@ -147,10 +150,6 @@ function defaultUtterance(text: string, lang: string): unknown {
 
 const OUTCOME_RANK: Readonly<Record<PlayOutcome, number>> = { unavailable: 0, tts: 1, file: 2 };
 
-function betterOutcome(a: PlayOutcome, b: PlayOutcome): PlayOutcome {
-  return OUTCOME_RANK[b] > OUTCOME_RANK[a] ? b : a;
-}
-
 /** Splitst een hint-reeks ("k-a-mmm", "k … a … m") in losse klank-hints. */
 export function splitSoundHints(text: string | undefined): string[] {
   if (!text) return [];
@@ -163,7 +162,7 @@ export function splitSoundHints(text: string | undefined): string[] {
 export function createAudioService(options: AudioServiceOptions = {}): AudioService {
   const ttsKinds = options.ttsKinds ?? DEFAULT_TTS_KINDS;
   const voiceWaitMs = options.voiceWaitMs ?? 1200;
-  const elementTimeoutMs = options.elementTimeoutMs ?? 15000;
+  const elementTimeoutMs = options.elementTimeoutMs ?? 60000;
   const hintPauseMs = options.hintPauseMs ?? 220;
   const delay = options.delay ?? ((ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms)));
   const speech =
@@ -180,12 +179,13 @@ export function createAudioService(options: AudioServiceOptions = {}): AudioServ
     options.clipCapable ?? (options.createElement !== undefined ? true : typeof Audio !== 'undefined');
 
   let current: HTMLAudioElement | null = null;
-  let lastResult: AudioMode | null = null;
-  /** Onthoud per sessie welke src's ontbraken, om herhaalde 404-pogingen te vermijden. */
+  let operation = 0;
+  let cancelPlayback: (() => void) | null = null;
   const missingSrcs = new Set<string>();
+  let lastResult: AudioMode | null = null;
 
   function canTts(clip: AudioClip): boolean {
-    return ttsKinds.includes(clip.kind) && typeof clip.text === 'string' && clip.text.length > 0;
+    return !needsHumanRecording(clip.key, clip.kind) && ttsKinds.includes(clip.kind) && typeof clip.text === 'string' && clip.text.length > 0;
   }
 
   function localVoiceNow(): SpeechVoiceLike | undefined {
@@ -242,125 +242,107 @@ export function createAudioService(options: AudioServiceOptions = {}): AudioServ
     });
   }
 
-  async function speak(clip: AudioClip): Promise<boolean> {
+  async function speak(clip: AudioClip, token: number): Promise<boolean> {
     if (!canTts(clip)) return false;
     const voice = await resolveLocalVoice();
-    if (!speech || !voice) return false;
+    if (!speech || !voice || token !== operation) return false;
     const factory = options.createUtterance ?? defaultUtterance;
-    try {
-      const utterance = factory(clip.text ?? '', voice.lang);
-      if (utterance && typeof utterance === 'object') {
-        (utterance as { voice?: unknown }).voice = voice;
-      }
-      speech.speak(utterance);
-      return true;
-    } catch {
-      return false;
-    }
-  }
-
-  /**
-   * Speelt één opname af. Succesvol alleen wanneer het bestand echt laadt en
-   * afspeelt; bij `error`/reject/timeout volgt `false` (EDU-001).
-   */
-  async function playElement(src: string): Promise<boolean> {
-    let element: HTMLAudioElement | null = null;
-    try {
-      element = elementFactory(src);
-    } catch {
-      element = null;
-    }
-    if (!element) return false;
-    current = element;
-    return await new Promise<boolean>((resolve) => {
+    return new Promise<boolean>(resolve => {
       let settled = false;
-      let timer: ReturnType<typeof setTimeout> | undefined;
-      const detach = (): void => {
-        if (typeof element?.removeEventListener !== 'function') return;
-        element.removeEventListener('canplaythrough', succeed);
-        element.removeEventListener('playing', succeed);
-        element.removeEventListener('loadeddata', succeed);
-        element.removeEventListener('ended', succeed);
-        element.removeEventListener('error', fail);
-      };
-      const succeed = (): void => {
+      const timer = setTimeout(() => finish(false), elementTimeoutMs);
+      function finish(ok: boolean): void {
         if (settled) return;
         settled = true;
-        if (timer !== undefined) clearTimeout(timer);
-        detach();
-        resolve(true);
-      };
-      const fail = (): void => {
-        if (settled) return;
-        settled = true;
-        if (timer !== undefined) clearTimeout(timer);
-        detach();
-        resolve(false);
-      };
-      if (typeof element?.addEventListener === 'function') {
-        element.addEventListener('canplaythrough', succeed);
-        element.addEventListener('playing', succeed);
-        element.addEventListener('loadeddata', succeed);
-        element.addEventListener('ended', succeed);
-        element.addEventListener('error', fail);
+        clearTimeout(timer);
+        if (cancelPlayback === cancel) cancelPlayback = null;
+        resolve(ok);
       }
-      timer = setTimeout(fail, elementTimeoutMs);
+      const cancel = (): void => finish(false);
+      cancelPlayback = cancel;
       try {
-        const maybe = element?.play();
-        if (maybe && typeof (maybe as Promise<void>).then === 'function') {
-          (maybe as Promise<void>).then(succeed).catch(fail);
-        }
-      } catch {
-        fail();
-      }
+        const utterance = factory(clip.text ?? '', voice.lang) as {
+          voice?: unknown; onend?: () => void; onerror?: () => void;
+        };
+        utterance.voice = voice;
+        utterance.onend = () => finish(true);
+        utterance.onerror = () => finish(false);
+        speech.speak(utterance);
+      } catch { finish(false); }
     });
   }
 
-  async function runClip(clip: AudioClip): Promise<PlayResult> {
-    stop();
+  /** Resolve only on ended, never on loadeddata/playing/play() resolution. */
+  async function playElement(src: string): Promise<boolean> {
+    let element: HTMLAudioElement | null;
+    try { element = elementFactory(src); } catch { return false; }
+    if (!element) return false;
+    current = element;
+    return new Promise<boolean>(resolve => {
+      let settled = false;
+      const timer = setTimeout(() => finish(false), elementTimeoutMs);
+      function finish(ok: boolean): void {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        element?.removeEventListener('ended', ended);
+        element?.removeEventListener('error', failed);
+        if (cancelPlayback === cancel) cancelPlayback = null;
+        if (current === element) current = null;
+        if (!ok) { try { element?.pause(); } catch { /* unsupported media */ } }
+        resolve(ok);
+      }
+      const ended = (): void => finish(true);
+      const failed = (): void => { if (element?.error?.code === 4) missingSrcs.add(src); finish(false); };
+      const cancel = (): void => finish(false);
+      cancelPlayback = cancel;
+      element?.addEventListener('ended', ended);
+      element?.addEventListener('error', failed);
+      try { void element?.play()?.catch(failed); } catch { failed(); }
+    });
+  }
+
+  async function runClip(clip: AudioClip, token: number): Promise<PlayResult> {
+    if (token !== operation) return playResult('unavailable', false, 'cancelled');
     const hasSrc = clip.src.length > 0 && isLocalAudioSrc(clip.src);
     if (clipCapable && hasSrc && !missingSrcs.has(clip.src)) {
       const played = await playElement(clip.src);
+      if (token !== operation) return playResult('unavailable', false, 'cancelled');
       if (played) {
         lastResult = 'clip';
         return playResult('file');
       }
-      missingSrcs.add(clip.src);
+      // Autoplay failures can be retried after a gesture; do not memoize them.
     }
-    if (await speak(clip)) {
+    if (await speak(clip, token)) {
       lastResult = 'tts';
       return playResult('tts', APPROXIMATE_TTS_KINDS.has(clip.kind));
     }
-    let reason: string;
-    if (!hasSrc) reason = 'no-audio-available';
-    else if (missingSrcs.has(clip.src)) reason = 'clip-missing';
-    else reason = 'no-voice-available';
+    if (token !== operation) return playResult('unavailable', false, 'cancelled');
+    const reason = hasSrc ? 'clip-missing' : 'no-audio-available';
     options.onFallback?.(clip.key, reason);
     lastResult = 'silent';
     return playResult('unavailable', false, reason);
   }
 
-  async function playHintSequence(word: string, hints: readonly string[]): Promise<PlayResult> {
-    let best: PlayOutcome = 'unavailable';
-    let reason: string | undefined;
-    for (let i = 0; i < hints.length; i++) {
-      const clip: AudioClip = {
-        key: `blend.${word}.${i}`,
-        src: '',
-        text: hints[i] ?? '',
-        kind: 'grapheme-sound',
-      };
-      const result = await runClip(clip);
-      best = betterOutcome(best, result.result);
-      if (result.reason !== undefined) reason = result.reason;
-      if (i < hints.length - 1 && hintPauseMs > 0) await delay(hintPauseMs);
+  async function playRecordedSounds(word: string, hints: readonly string[], token: number): Promise<PlayResult> {
+    const sounds = hints.map(hint => options.source?.getClip(`lk.${hint}.sound`));
+    if (sounds.some(sound => !sound)) return playResult('unavailable', false, 'recording-required');
+    let outcome: PlayOutcome = 'file';
+    for (let i = 0; i < sounds.length; i++) {
+      if (token !== operation) return playResult('unavailable', false, 'cancelled');
+      const sound = sounds[i];
+      if (!sound) continue;
+      const result = await runClip(sound, token);
+      if (result.result !== 'file') outcome = 'unavailable';
+      if (i < sounds.length - 1 && hintPauseMs > 0) await delay(hintPauseMs);
     }
-    // Alleen een echte TTS-weergave is een "benadering"; bij volledige stilte
-    // (geen stem) is approximate onwaar (EDU-R2-007).
-    return playResult(best, best === 'tts', reason);
+    return playResult(outcome, false, outcome === 'unavailable' ? `recording-required:${word}` : undefined);
   }
 
   function stop(): void {
+    operation += 1;
+    cancelPlayback?.();
+    cancelPlayback = null;
     if (current) {
       try {
         current.pause();
@@ -406,28 +388,37 @@ export function createAudioService(options: AudioServiceOptions = {}): AudioServ
       }
     },
     async play(key: string): Promise<PlayResult> {
+      stop();
       const clip = options.source?.getClip(key);
       if (!clip) {
         options.onFallback?.(key, 'clip-not-found');
         lastResult = 'silent';
         return playResult('unavailable', false, 'clip-not-found');
       }
-      return runClip(clip);
+      return runClip(clip, operation);
     },
-    playClip: runClip,
+    playClip(clip) {
+      stop();
+      return runClip(clip, operation);
+    },
     async playSequence(clips: readonly AudioClip[]): Promise<PlayResult> {
-      let best: PlayOutcome = 'unavailable';
+      stop();
+      const token = operation;
+      let best: PlayOutcome = 'file';
       let approximate = false;
       let reason: string | undefined;
       for (const clip of clips) {
-        const result = await runClip(clip);
-        best = betterOutcome(best, result.result);
+        if (token !== operation) return playResult('unavailable', false, 'cancelled');
+        const result = await runClip(clip, token);
+        if (OUTCOME_RANK[result.result] < OUTCOME_RANK[best]) best = result.result;
         approximate = approximate || result.approximate;
         if (result.reason !== undefined) reason = result.reason;
       }
       return playResult(best, approximate, reason);
     },
     async playStretched(word: string): Promise<PlayResult> {
+      stop();
+      const token = operation;
       const key = `blend.${word}`;
       const blend: AudioClip =
         options.source?.getClip(key) ?? {
@@ -440,26 +431,21 @@ export function createAudioService(options: AudioServiceOptions = {}): AudioServ
       // 1. Echte gerekte opname heeft altijd de voorkeur.
       if (clipCapable && isLocalAudioSrc(blend.src) && !missingSrcs.has(blend.src)) {
         const played = await playElement(blend.src);
+        if (token !== operation) return playResult('unavailable', false, 'cancelled');
         if (played) {
           lastResult = 'clip';
           return playResult('file');
         }
-        missingSrcs.add(blend.src);
+
       }
 
-      // 2. Anders: losse klank-hints na elkaar met korte pauzes (benadering).
-      const hints = splitSoundHints(blend.text);
-      if (hints.length > 1) {
-        return playHintSequence(word, hints);
-      }
-
-      // 3. Laatste redmiddel: het hele woord als benadering.
-      return runClip({
-        key,
-        src: '',
-        text: blend.text ?? word,
-        kind: 'grapheme-sound',
+      // A sequence of genuine recorded phonemes is a supported fallback.
+      // Synthetic phonemes/letter names can teach the wrong sounds.
+      const graphemeIds = splitSoundHints(blend.text).map(hint => {
+        const entries = hintsToGraphemeId(hint);
+        return entries;
       });
+      return playRecordedSounds(word, graphemeIds, token);
     },
     stop,
     isAvailable(): boolean {

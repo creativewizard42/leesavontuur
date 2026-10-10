@@ -1,4 +1,5 @@
 import { defineConfig, type Plugin } from 'vitest/config';
+import { offlinePlugin } from './scripts/offline-plugin.ts';
 
 /**
  * Productie-CSP (SEC-002/SEC-003/SEC-004, SEC-R2-005).
@@ -52,7 +53,8 @@ function productionCspPlugin(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [productionCspPlugin()],
+  base: './',
+  plugins: [productionCspPlugin(), offlinePlugin()],
   // SEC-R2-003: laat `vite preview` dezelfde hardening-headers sturen, zodat
   // lokaal testen van de productiebuild het echte hostgedrag benadert.
   preview: {

@@ -17,15 +17,15 @@ export const FEEDBACK: Readonly<Record<string, string>> = {
   'fb.try1.3': 'Het begin klopt! Kijk nog eens naar het eind.',
   'fb.try1.4': 'We lezen van links naar rechts. Begin hier.',
   // 5.3 Tweede poging fout (hint)
-  'fb.hint.1': 'Luister: k… a… m. Plak maar aan elkaar.',
-  'fb.hint.2': 'Deze letter zegt sss.',
-  'fb.hint.4': 'De klank is mmm. Welk woord begint daarmee?',
-  'fb.hint.5': 'Luister: k… a… m. Tik ze in deze volgorde.',
+  'fb.hint.1': 'Luister goed. Plak de klanken aan elkaar.',
+  'fb.hint.2': 'Luister nog eens naar deze klank.',
+  'fb.hint.4': 'Luister naar de klank. Welk woord begint daarmee?',
+  'fb.hint.5': 'Luister nog eens. Tel de klanken rustig mee.',
   // 5.4 Derde poging fout (modeling)
-  'fb.model.1': 'We doen het samen. k-a-m … kam! Dit woord is kam. Straks komt hij nog een keer.',
-  'fb.model.2': 'Samen: dit is tak. t-a-k. Jij mag hem straks nog eens.',
-  'fb.model.3': 'Samen: mmm-mat. Mat begint met mmm. Straks mag je het nog een keer.',
-  'fb.model.4': 'Samen: de s zegt sss. Jij mag het straks nog eens.',
+  'fb.model.1': 'We doen het samen. Luister maar. Straks mag je het nog een keer.',
+  'fb.model.2': 'We doen het samen. Luister naar de klanken. Jij mag het straks nog eens.',
+  'fb.model.3': 'Luister naar het begin van het woord. Straks mag je het nog een keer.',
+  'fb.model.4': 'Samen luisteren we naar de klank. Jij mag het straks nog eens.',
   // 5.5 Overig
   'fb.guess.1': 'Rustig maar. Eerst goed kijken.',
   'fb.nav.stop.1': 'We stoppen. Knap gedaan vandaag!',

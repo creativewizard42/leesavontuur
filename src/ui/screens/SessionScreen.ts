@@ -73,6 +73,7 @@ export function createSessionScreen(deps: SessionScreenDeps): SessionScreenHandl
   const stage = el('div', { class: 'la-stage' });
   const progress = el('p', { class: 'la-sr-only', 'aria-live': 'off' });
 
+  const stones = el('div', { class: 'la-step-stones', 'aria-hidden': 'true' });
   const footer = el('div', { class: 'la-footer' });
   const nextBtn = el('button', {
     type: 'button',
@@ -84,12 +85,16 @@ export function createSessionScreen(deps: SessionScreenDeps): SessionScreenHandl
   nextBtn.append(iconNext());
   footer.append(nextBtn);
 
-  screen.append(topbar, stage, progress, footer);
+  screen.append(topbar, stones, stage, progress, footer);
 
   const totalItems = queue.toJSON(deps.now()).sections.reduce((n, section) => n + section.items.length, 0);
 
   function updateProgress(): void {
     const current = Math.min(totalItems, totalItems - queue.remaining() + 1);
+    clear(stones);
+    const count = Math.min(8, totalItems);
+    const currentStone = Math.min(count - 1, Math.floor((current - 1) / Math.max(1, totalItems) * count));
+    for (let i = 0; i < count; i++) stones.append(el('span', { class: `la-step-stone${i < currentStone ? ' is-complete' : i === currentStone ? ' is-current' : ''}` }));
     progress.textContent = ui('ui.nav.progress').replace('{index}', String(current)).replace('{total}', String(totalItems));
   }
 
@@ -232,6 +237,8 @@ export function createSessionScreen(deps: SessionScreenDeps): SessionScreenHandl
 
   function openPause(): void {
     if (overlay || finished) return;
+    deps.audio.stop();
+    if (autoRepeatTimer !== null) clearTimeout(autoRepeatTimer);
     overlay = el('div', { class: 'la-overlay', role: 'dialog', 'aria-modal': 'true', 'data-overlay': 'pause' });
     const card = el('div', { class: 'la-overlay__card' });
     card.append(iconPloef('la-ploef--small'));

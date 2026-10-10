@@ -11,6 +11,7 @@ import {
   instructionVariantClips,
 } from './dynamicClips';
 import { formatSoundSequence } from './soundSequence';
+import { allPhonologyWords } from './phonology';
 
 /**
  * Volledige opnamelijst voor audio (ARCHITECTURE §6.2, GD §11.2, EDU-009/EDU-022).
@@ -44,6 +45,10 @@ export function buildAudioManifest(): AudioClip[] {
       text: formatSoundSequence(w.graphemes, 'speech'),
       kind: 'blend',
     });
+  }
+
+  for (const word of allPhonologyWords()) {
+    put({ key: `de.${word}`, src: `audio/words/${word}.mp3`, text: word, kind: 'word' });
   }
 
   for (const pn of PROPER_NAMES) put(pn.audio);

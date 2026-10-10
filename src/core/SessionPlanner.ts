@@ -60,6 +60,7 @@ import * as Blending from '../learning/Blending';
 import * as WordReading from '../learning/WordReading';
 import * as Klimboom from '../learning/Klimboom';
 import * as Phonology from '../learning/Phonology';
+import { readingPractice } from '../learning/Reading';
 
 export interface SessionSection {
   step: number;
@@ -416,6 +417,11 @@ export function planSession(profile: Profile, rng: Rng = defaultRng): SessionPla
     if (items.length > 0) sections.push({ step: 6, name: 'Mini-game De Klimboom', items });
   }
 
+  const readingItems = readingPractice(profile, 7, rng);
+  if (readingItems.length) sections.push({ step: 17, name: 'Zinnen lezen', items: readingItems });
+  const storyItems = readingPractice(profile, 8, rng);
+  if (storyItems.length) sections.push({ step: 18, name: 'Verhalen lezen', items: storyItems });
+
   // 7. Herhaling – Leitner due items (ED §10.4) + oefening op vrijgegeven
   //    grafemen (voorkomt de progressiedeadlock, QA-003).
   {
@@ -687,7 +693,10 @@ function sanitizeMetadata(value: unknown): Record<string, unknown> | undefined {
   let count = 0;
   for (const [key, entry] of Object.entries(value)) {
     if (DANGEROUS_KEYS.has(key)) continue;
-    out[key] = entry;
+    if (key === 'questionAudio' || key === 'readingAudio') {
+      const clip = readAudio(entry);
+      if (clip) out[key] = clip;
+    } else { out[key] = entry; }
     count += 1;
     if (count >= MAX_METADATA_KEYS) break;
   }

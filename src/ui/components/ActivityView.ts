@@ -108,6 +108,9 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
   const auditoryDistractors = item.metadata?.['auditoryDistractors'] === true;
   let attempt = 1;
   let done = false;
+  let disposed = false;
+  let audioBlocked = false;
+  let readingConfirmed = item.kind !== 'verhaallezen';
   let usedHint = false;
   const itemStart = options.now();
   const timers = new Set<ReturnType<typeof setTimeout>>();
@@ -143,7 +146,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
   function playClipSafe(clip: AudioClip | undefined): Promise<PlayResult> {
     if (!clip) return Promise.resolve(UNAVAILABLE);
     return audio.playClip(clip).then((result) => {
-      if (result.result === 'unavailable') showAudioFallback();
+      if (!disposed && result.result === 'unavailable' && result.reason !== 'cancelled') showAudioFallback();
       return result;
     });
   }
@@ -152,7 +155,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     if (clips.length === 0) return Promise.resolve(UNAVAILABLE);
     if (clips.length === 1) return playClipSafe(clips[0]);
     return audio.playSequence(clips).then((result) => {
-      if (result.result === 'unavailable') showAudioFallback();
+      if (!disposed && result.result === 'unavailable' && result.reason !== 'cancelled') showAudioFallback();
       return result;
     });
   }
@@ -197,13 +200,15 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
   function showAudioFallback(): void {
     if (audioFallbackShown) return;
     audioFallbackShown = true;
+    const needsAudio = item.kind !== 'verhaallezen';
+    if (needsAudio) { audioBlocked = true; grid?.setDisabled(true); }
     const wrap = el('div', { class: 'la-audio-fallback', 'data-audio-fallback': 'true' });
     const icon = iconNoSound();
     icon.classList.add('la-audio-fallback__icon');
     wrap.append(icon);
     // Alleen voor ouders/AT; niet leesbaar voor de doelgroep in beeld.
     wrap.append(el('p', { class: 'la-sr-only', text: ui('ui.audio.unavailable') }));
-    wrap.append(el('p', { class: 'la-sr-only', text: ui('ui.audio.unavailable.hint') }));
+    wrap.append(el('p', { class: 'la-hint-text', text: 'Geen oefengeluid. Vraag een volwassene om hulp.' }));
 
     const targetGrapheme = metaString(item, 'targetGrapheme');
     const word = wordFromItem(item);
@@ -302,6 +307,34 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
         }
         break;
       }
+      case 'verhaallezen': {
+        const passage = el('div', { class: 'la-reading', 'data-reading': 'passage' });
+        passage.append(el('p', { class: 'la-reading__text', text: item.prompt.text ?? '' }));
+        const listen = el('button', { type: 'button', class: 'la-btn',
+          'data-action': 'reading-listen', 'aria-label': 'Lees samen met Ploef' });
+        listen.append(iconEar(), document.createTextNode(' Lees samen'));
+        listen.addEventListener('click', () => {
+          usedHint = true;
+          const clip = item.metadata?.['readingAudio'] as AudioClip | undefined;
+          void playClipSafe(clip);
+        });
+        const ready = el('button', { type: 'button', class: 'la-btn la-btn--primary',
+          'data-action': 'reading-ready', 'aria-label': 'Ik heb gelezen. Toon de vraag.' });
+        ready.append(iconCheck(), document.createTextNode(' Klaar'));
+        ready.addEventListener('click', () => {
+          if (readingConfirmed) return;
+          readingConfirmed = true;
+          ready.hidden = true;
+          const question = el('p', { class: 'la-reading__question', text: metaString(item, 'question') ?? '' });
+          passage.append(question);
+          if (grid) { grid.element.hidden = false; grid.focusIndex(0); }
+          const clip = item.metadata?.['questionAudio'] as AudioClip | undefined;
+          void playClipSafe(clip);
+        });
+        passage.append(listen, ready);
+        playfield.append(passage);
+        break;
+      }
       case 'woordlezen': {
         playfield.append(el('p', { class: 'la-prompt', text: item.prompt.text ?? '' }));
         break;
@@ -339,20 +372,15 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
   const listenFirst = item.kind === 'klankjager' && item.metadata?.['interaction'] === 'listen-then-choose';
   let grid: OptionGridHandle | null = null;
 
-  const onPreview = (option: ActivityOption): void => {
-    if (done || !option.audio) return;
-    void playClipSafe(option.audio);
-  };
-
   if (!isIntroduction && item.kind !== 'beloning' && item.options.length > 0) {
     grid = createOptionGrid({
       options: item.options,
       mode: gridMode,
       ...(auditoryDistractors ? { auditory: true } : {}),
       onSelect: (optionId) => handleSelect(optionId),
-      ...(isAudioOptions ? { onPreview } : {}),
-      ...(listenFirst ? { onListen: (option: ActivityOption) => void playClipSafe(option.audio) } : {}),
+      ...(isAudioOptions || listenFirst ? { onListen: (option: ActivityOption) => void playClipSafe(option.audio) } : {}),
     });
+    if (!readingConfirmed) grid.element.hidden = true;
   }
 
   /** Letters van het doel (woord of grafeem) voor rustige modeling. */
@@ -386,7 +414,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     const clip = word ? wordClip(word) : graphemeId ? graphemeSoundClip(graphemeId) : undefined;
     const finished = clip ? playClipSafe(clip) : Promise.resolve(UNAVAILABLE);
     void finished.then(() => {
-      if (done) return;
+      if (done || disposed || audioBlocked) return;
       grid?.setDisabled(false);
       litBlocks = [];
     });
@@ -404,13 +432,15 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     const ids = metaStringArray(item, 'candidateIds') ?? item.options.map((o) => o.id);
     grid.setDisabled(true);
     for (const id of ids) {
+      if (disposed || done) return;
       const option = item.options.find((o) => o.id === id);
       if (!option?.audio) continue;
       markListening(id, true);
-      await playClipSafe(option.audio);
+      const result = await playClipSafe(option.audio);
+      if (result.reason === 'cancelled') return;
       markListening(id, false);
     }
-    if (!done) grid.setDisabled(false);
+    if (!done && !audioBlocked && !disposed) grid.setDisabled(false);
   }
 
   // ----- reveal (pas NA correct; element wordt pas dan toegevoegd) -----
@@ -453,6 +483,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     }
     feedbackText.textContent = text;
     const playFeedback = (): void => {
+      if (disposed) return;
       const clips = feedbackSequence(key, vars ?? {});
       if (clips.length > 0) void playSequenceSafe(clips);
     };
@@ -475,7 +506,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     const word = wordFromItem(item);
     if (word) {
       const playing = audio.playStretched(word).then((result) => {
-        if (result.result === 'unavailable') showAudioFallback();
+        if (!disposed && result.result === 'unavailable' && result.reason !== 'cancelled') showAudioFallback();
         return result;
       });
       litBlocks.forEach((block, index) => {
@@ -506,7 +537,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
   }
 
   function handleSelect(optionId: string): void {
-    if (done) return;
+    if (done || disposed || audioBlocked || !readingConfirmed || grid?.buttons.some(button => button.disabled)) return;
     clearMarks();
     const elapsed = options.now() - itemStart;
     const preliminary = checkAnswer(item, { optionId, attempt });
@@ -560,6 +591,11 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
   }
 
   function repeat(): void {
+    if (disposed) return;
+    if (item.kind === 'verhaallezen' && readingConfirmed) {
+      void playClipSafe(item.metadata?.['questionAudio'] as AudioClip | undefined);
+      return;
+    }
     const clips = promptClips();
     if (clips.length > 0) {
       void playSequenceSafe(clips);
@@ -567,7 +603,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     }
     if (wordFromItem(item)) {
       void audio.playStretched(wordFromItem(item) as string).then((result) => {
-        if (result.result === 'unavailable') showAudioFallback();
+        if (!disposed && result.result === 'unavailable' && result.reason !== 'cancelled') showAudioFallback();
       });
     }
   }
@@ -578,7 +614,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
 
   // Cijfertoetsen 1-4 als directe keuze; H = herhalen (UX §6.1).
   const onKeyDown = (event: KeyboardEvent): void => {
-    if (done) return;
+    if (done || root.closest('[inert]')) return;
     if (event.key === 'h' || event.key === 'H') {
       repeat();
       return;
@@ -596,12 +632,13 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
 
   // Prompt afspelen (instructie + stimulus) + optionele herhaling/adaptieve extra audio.
   const initialClips = promptClips();
+  let initialPlayback = Promise.resolve(UNAVAILABLE);
   if (initialClips.length > 0) {
-    void playSequenceSafe(initialClips);
+    initialPlayback = playSequenceSafe(initialClips);
   } else if (wordFromItem(item) && item.kind === 'hakken') {
     // Auditieve hakopdracht zonder opname: laat de gerekte reeks horen.
     void audio.playStretched(wordFromItem(item) as string).then((result) => {
-      if (result.result === 'unavailable') showAudioFallback();
+      if (!disposed && result.result === 'unavailable' && result.reason !== 'cancelled') showAudioFallback();
     });
   }
   if (item.metadata?.['extraAudio'] === true && item.prompt.audio) {
@@ -609,8 +646,14 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
       if (!done) void playSequenceSafe(promptClips());
     }, 1500);
   }
-  if (modelFirst && !isIntroduction && item.kind !== 'beloning') runModelFirst();
-  if (listenFirst) void playListenFirst();
+  if (modelFirst && !isIntroduction && item.kind !== 'beloning') {
+    grid?.setDisabled(true);
+    void initialPlayback.then(() => { if (!disposed && !done && !audioBlocked) runModelFirst(); });
+  }
+  if (listenFirst) {
+    grid?.setDisabled(true);
+    void initialPlayback.then(() => { if (!disposed && !done && !audioBlocked) void playListenFirst(); });
+  }
 
   return {
     element: root,
@@ -618,6 +661,8 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     isDone: () => done,
     attempts: () => attempt,
     destroy: () => {
+      disposed = true;
+      audio.stop();
       document.removeEventListener('keydown', onKeyDown);
       for (const id of timers) clearTimeout(id);
       timers.clear();

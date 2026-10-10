@@ -65,6 +65,10 @@ export const SENTENCES: readonly Sentence[] = [
     requiresBlocks: [1, 2, 7],
     requiresSightWords: ['SW.de'],
     audio: sentenceAudio('ZI.SIMPLE.de-kat-is-nat', 'de kat is nat'),
+    comprehension: {
+      questionAudio: questionAudio('ZI.SIMPLE.de-kat-is-nat', 'Wie is nat?'),
+      options: ['de kat', 'de rat'], correctIndex: 0, showAfterReading: true,
+    },
   },
   {
     id: 'ZI.SIMPLE.ik-eet-kaas',
@@ -74,6 +78,10 @@ export const SENTENCES: readonly Sentence[] = [
     requiresBlocks: [3],
     requiresSightWords: [],
     audio: sentenceAudio('ZI.SIMPLE.ik-eet-kaas', 'ik eet kaas'),
+    comprehension: {
+      questionAudio: questionAudio('ZI.SIMPLE.ik-eet-kaas', 'Wat eet ik?'),
+      options: ['kaas', 'soep', 'vis'], correctIndex: 0, showAfterReading: true,
+    },
   },
   {
     id: 'ZI.SIMPLE.mam-is-in-de-kas',
@@ -148,6 +156,10 @@ export const SENTENCES: readonly Sentence[] = [
     requiresBlocks: [5],
     requiresSightWords: [],
     audio: sentenceAudio('ZI.CAPITAL.joep-eet-soep', 'Joep eet soep'),
+    comprehension: {
+      questionAudio: questionAudio('ZI.CAPITAL.joep-eet-soep', 'Wat eet Joep?'),
+      options: ['soep', 'kaas'], correctIndex: 0, showAfterReading: true,
+    },
   },
 
   // --- Korte teksten (TX.SHORT) – ED §8.3 ---

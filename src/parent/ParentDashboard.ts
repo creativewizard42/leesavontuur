@@ -10,7 +10,10 @@ import type { Profile, ProfileSettings } from '../types';
 import { graphemes, ui } from '../content';
 import { skillStatus, soundSkillFor, type SkillStatus } from '../core/Progression';
 import { median } from '../core/Mastery';
-import { exportProfile, defaultStorage, type SaveStorage } from '../core/SaveSystem';
+import { exportProfile, parseProfileImport, defaultStorage, type SaveStorage } from '../core/SaveSystem';
+import coverage from '../audio/coverage.json';
+import { version } from '../../package.json';
+import { applyUpdate, checkForUpdate } from '../platform/offline';
 import { loadConfusions, type ConfusionEntry } from './confusions';
 import { el } from '../ui/dom';
 import { uiText } from '../ui/text';
@@ -21,6 +24,7 @@ export interface ParentDashboardOptions {
   storage?: SaveStorage;
   onBack: () => void;
   onReset: () => void;
+  onImport?: (profile: Profile) => boolean;
   /** Wijzig een instelling direct (QA-018). */
   onSettingsChange?: (patch: Partial<ProfileSettings>) => void;
   /** Toon een rustige melding als opslaan niet lukte (QA-004). */
@@ -115,7 +119,7 @@ export function createParentDashboard(options: ParentDashboardOptions): HTMLElem
   }
 
   // Geleerde klanken (MVP-grafemen, blok 1).
-  const mvp = graphemes.filter((g) => g.introducedInPhase <= 1);
+  const mvp = graphemes;
   const learned = mvp.filter((g) => statusFor(profile, soundSkillFor(g.id)) === 'zeker');
   const card = el('div', { class: 'la-card' });
   card.append(el('h3', { text: ui('ui.parent.learned.title') }));
@@ -309,7 +313,63 @@ export function createParentDashboard(options: ParentDashboardOptions): HTMLElem
     confirmRow.hidden = false;
   });
   manage.append(exportBtn, resetBtn, confirmRow);
+  if (options.onImport) {
+    const label = el('label', { class: 'la-setting-row', text: 'Voortgang terugzetten uit een exportbestand' });
+    const input = el('input', { type: 'file', accept: '.json,application/json', 'data-action': 'import-file' });
+    const status = el('p', { role: 'status', 'aria-live': 'polite', 'data-notice': 'import-status' });
+    const confirm = el('button', { type: 'button', class: 'la-btn', text: 'Dit profiel terugzetten', hidden: true, 'data-action': 'import-confirm' });
+    let candidate: Profile | undefined;
+    input.addEventListener('change', () => {
+      candidate = undefined;
+      confirm.hidden = true;
+      const file = input.files?.[0];
+      if (!file) return;
+      if (file.size > 1024 * 1024) { status.textContent = 'Het bestand is te groot (maximaal 1 MB).'; return; }
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          candidate = parseProfileImport(String(reader.result));
+          status.textContent = `Profiel met ${candidate.sessionCount} sessies. Terugzetten vervangt de huidige voortgang. Exporteer die eerst als je haar wilt bewaren.`;
+          confirm.hidden = false;
+        } catch (error) { status.textContent = error instanceof Error ? error.message : 'Importeren is niet gelukt.'; }
+      };
+      reader.onerror = () => { status.textContent = 'Het bestand kon niet worden gelezen.'; };
+      reader.readAsText(file);
+    });
+    confirm.addEventListener('click', () => {
+      if (candidate && !options.onImport?.(candidate)) status.textContent = 'Opslaan is niet gelukt. De huidige voortgang is behouden.';
+    });
+    label.append(input);
+    manage.append(label, status, confirm);
+  }
   container.append(manage);
+
+  const appCard = el('div', { class: 'la-card', 'data-section': 'app-readiness' });
+  appCard.append(el('h3', { text: 'App en geluid' }));
+  appCard.append(el('p', { text: `Versie ${version} — begeleide bèta. De volledige leesroute is nog in ontwikkeling. Ontbrekende klankopnames kunnen oefeningen blokkeren; gebruik deze versie samen met een volwassene.` }));
+  appCard.append(el('p', { text: `${coverage.present} van ${coverage.total} audiofragmenten aanwezig. ${coverage.synthetic} fragmenten gebruiken een voorlopige computerstem. ${coverage.humanMissing} benodigde menselijke klankopnames ontbreken nog. Definitieve stem: warm, rustig en Nederlands.` }));
+  appCard.append(el('p', { text: 'Luisterkeuzes en begripsvragen geven oefensignalen. Ze bewijzen geen zelfstandig hardop lezen. Lees geregeld samen en bespreek wat je kind leest.' }));
+  appCard.append(el('p', { text: 'iPhone: open de app via HTTPS in Safari, kies Deel → Zet op beginscherm. Laat de app eerst volledig laden. Offlinegebruik werkt na het downloaden van de appbestanden. Voortgang blijft op dit apparaat; maak regelmatig een export.' }));
+  const offline = document.documentElement.dataset['offlineReady'];
+  appCard.append(el('p', { text: offline === 'true' ? 'De offline-appbestanden zijn opgeslagen. Heropen de app om offline te spelen.' : 'Offlineopslag is nog niet bevestigd. Gebruik een beveiligde webverbinding of een lokale server.' }));
+  const updateStatus = el('p', { role: 'status' });
+  const updateButton = el('button', { type: 'button', class: 'la-btn la-btn--wide', text: 'Controleer op een update' });
+  let updateReady = false;
+  updateButton.addEventListener('click', async () => {
+    updateButton.disabled = true;
+    try {
+      if (updateReady) {
+        if (!await applyUpdate()) updateStatus.textContent = 'Sluit andere vensters van Leesavontuur en probeer opnieuw. Sluit eventueel de hele app en open haar opnieuw.';
+      } else {
+        updateReady = await checkForUpdate();
+        updateStatus.textContent = updateReady ? 'De nieuwe versie is opgeslagen. Maak eventueel eerst een voortgangsexport. Klik om opnieuw te openen.' : 'Nog geen update klaar. Bij een download kun je later opnieuw controleren.';
+        if (updateReady) updateButton.textContent = 'Open de nieuwe versie';
+      }
+    } catch { updateStatus.textContent = 'Controleren lukt nu niet. Probeer het later met internet.'; }
+    finally { updateButton.disabled = false; }
+  });
+  appCard.append(updateButton, updateStatus);
+  container.append(appCard);
 
   root.append(container);
   return root;

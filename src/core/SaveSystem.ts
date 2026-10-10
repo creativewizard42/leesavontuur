@@ -26,7 +26,7 @@ export const SAVE_KEY = 'leesavontuur.save.v1';
 /** Resultaat van een schrijfpoging; gooit nooit (QA-004 / SEC-006). */
 export interface SaveResult {
   ok: boolean;
-  reason?: 'quota' | 'unavailable' | 'serialize' | 'unknown';
+  reason?: 'quota' | 'unavailable' | 'serialize' | 'unknown' | 'unsupported-version';
 }
 
 /** Sleutels die nooit als record-key mogen worden overgenomen (SEC-007). */
@@ -261,6 +261,16 @@ function classifyWriteError(error: unknown): SaveResult['reason'] {
  * een serializeerfout volgt `{ ok: false, reason }` (QA-004 / SEC-006).
  */
 export function saveProfile(profile: Profile, storage: SaveStorage = defaultStorage()): SaveResult {
+  try {
+    const existing = storage.read(SAVE_KEY);
+    if (existing) {
+      let value: unknown;
+      try { value = JSON.parse(existing); } catch { value = null; }
+      if (isRecord(value) && typeof value.schemaVersion === 'number' && value.schemaVersion > SAVE_SCHEMA_VERSION) {
+        return { ok: false, reason: 'unsupported-version' };
+      }
+    }
+  } catch { /* write attempt below reports inaccessible storage */ }
   let json: string;
   try {
     json = JSON.stringify(normalizeProfile(profile));
@@ -278,6 +288,27 @@ export function saveProfile(profile: Profile, storage: SaveStorage = defaultStor
 /** JSON-export (ouderzone). Nooit PII: alleen het lokale profiel. */
 export function exportProfile(profile: Profile): string {
   return JSON.stringify(normalizeProfile(profile), null, 2);
+}
+
+/** Validate imports before any state change; never turn an invalid backup into a fresh profile. */
+export function parseProfileImport(json: string): Profile {
+  if (json.length > 1024 * 1024) throw new Error('Het bestand is te groot (maximaal 1 MB).');
+  let raw: unknown;
+  try {
+    raw = JSON.parse(json, (key, value: unknown) => {
+      if (DANGEROUS_KEYS.has(key)) throw new Error('Onveilige sleutel');
+      return value;
+    });
+  } catch { throw new Error('Dit is geen geldig Leesavontuur-bestand.'); }
+  if (!isRecord(raw) || raw.schemaVersion !== SAVE_SCHEMA_VERSION ||
+      typeof raw.profileId !== 'string' || !raw.profileId ||
+      typeof raw.sessionCount !== 'number' || !Number.isInteger(raw.sessionCount) || raw.sessionCount < 0 ||
+      !Array.isArray(raw.unlockedGraphemes) || raw.unlockedGraphemes.length > MAX_UNLOCKED ||
+      raw.unlockedGraphemes.some(id => typeof id !== 'string' || !graphemes.some(g => g.id === id)) ||
+      !isRecord(raw.skills) || !isRecord(raw.items) || !isRecord(raw.settings) || !isRecord(raw.rewards)) {
+    throw new Error('Dit profiel is onvolledig of gebruikt een andere appversie.');
+  }
+  return normalizeProfile(raw);
 }
 
 /** Wist de save en geeft een vers profiel terug (dubbele bevestiging in UI). */

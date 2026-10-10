@@ -3,7 +3,7 @@
  * (ARCHITECTURE §6). Alles same-origin; geen netwerk, geen cloud-TTS.
  */
 import type { AudioClip } from '../types';
-import { content, formatSoundSequence, graphemes, instructions, properNames, sentences, sightWords } from '../content';
+import { audioManifest } from '../content';
 import {
   createAudioService,
   type AudioService,
@@ -12,38 +12,9 @@ import {
 
 /** Index van alle clips op key, inclusief beide blend-key-conventies. */
 export function buildClipIndex(): Map<string, AudioClip> {
-  const map = new Map<string, AudioClip>();
-  const put = (clip: AudioClip | undefined): void => {
-    if (clip && !map.has(clip.key)) map.set(clip.key, clip);
-  };
-
-  for (const g of graphemes) {
-    put(g.audio?.sound);
-    put(g.audio?.name);
-    put(g.audio?.example);
-  }
-  for (const w of content.words) {
-    put(w.audio);
-    const blend: AudioClip = {
-      key: `blend.${w.word}`,
-      src: `audio/blends/${w.word}.mp3`,
-      text: formatSoundSequence(w.graphemes, 'speech'),
-      kind: 'blend',
-    };
-    put(blend);
-    if (!map.has(`bl.${w.word}`)) map.set(`bl.${w.word}`, blend);
-  }
-  for (const sw of sightWords) put(sw.audio);
-  for (const s of sentences) {
-    put(s.audio);
-    put(s.comprehension?.questionAudio);
-  }
-  for (const pn of properNames) put(pn.audio);
-  for (const [key, text] of Object.entries(content.feedback)) {
-    put({ key, src: `audio/feedback/${key}.mp3`, text, kind: 'feedback' });
-  }
-  for (const [key, text] of Object.entries(instructions)) {
-    put({ key, src: `audio/feedback/${key}.mp3`, text, kind: 'instruction' });
+  const map = new Map<string, AudioClip>(audioManifest.map(clip => [clip.key, clip]));
+  for (const clip of audioManifest) {
+    if (clip.kind === 'blend') map.set(clip.key.replace(/^blend\./, 'bl.'), clip);
   }
   return map;
 }

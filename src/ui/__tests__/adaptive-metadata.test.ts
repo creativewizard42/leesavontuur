@@ -63,13 +63,15 @@ describe('ActivityView – G1-metadata', () => {
     };
     mount(item);
     expect(document.querySelector('[data-model-first="true"]')).not.toBeNull();
-    expect(document.querySelector('[data-model-row="true"]')).not.toBeNull();
+    // Modeling waits for the complete instruction rather than interrupting it.
+    expect(document.querySelector('[data-model-row="true"]')).toBeNull();
     expect(document.querySelector('.la-activity--simplified')).not.toBeNull();
     const firstOption = document.querySelector<HTMLButtonElement>('.la-option');
     expect(firstOption?.disabled).toBe(true);
 
     await tick();
     await tick();
+    expect(document.querySelector('[data-model-row="true"]')).not.toBeNull();
     expect(document.querySelector<HTMLButtonElement>('.la-option')?.disabled).toBe(false);
   });
 
