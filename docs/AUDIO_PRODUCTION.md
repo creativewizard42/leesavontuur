@@ -1,80 +1,54 @@
-# Audio — menselijke eindversie en voorlopige ontwikkelbestanden
+# Audio — synthetische spraak en uitspraakcontrole
 
-**Update 0.2.0-beta.2:** op verzoek van de maker zijn alle 1.587 fragmenten nu
-zelf gegenereerd met de Nederlandse Pim-stem, inclusief expliciet aangestuurde
-klanken. Er ontbreken geen audiobestanden meer. Alle bestanden zijn synthetisch
-en nog niet menselijk luistergoedgekeurd. Zie [spraakherontwikkeling](reviews/SPEECH_REWORK.md)
-voor de huidige generator, fonetische aansturing en niet weggefilterde
-uitspraakonzekerheden. De eerdere Ronnie-productie hieronder is historisch.
+## Huidige productie: 0.2.0-beta.4
 
-De definitieve stem is op verzoek van de maker **warm, rustig, menselijk en
-Standaardnederlands**. De huidige MP3s zijn expliciet synthetische concepten,
-geen menselijke opnames of didactisch vrijgegeven fonemen.
+De maker koos inmiddels expliciet voor synthetische spraak zonder menselijke
+stemopnames. Jessica van ElevenLabs verzorgt 1.458 fragmenten: woorden,
+instructies, verhalen en levendige complimenten. 183 losse leesklanken en
+hak-/plakreeksen blijven met Piper Pim gegenereerd. Klankgebonden opdrachten
+combineren Jessica-spraak met deze bestaande klanken.
 
-## Huidige inventaris
+De inventaris telt 1.641 aanwezige MP3s en nul ontbrekende manifestbestanden.
+Alle audio blijft synthetisch en nog niet volledig luistergoedgekeurd.
+Zie [ElevenLabs-productie](audio/ELEVENLABS_SETUP.md) voor de generator,
+instellingen, het budget en de cache. De eerdere Pim-productie is beschreven in
+[spraakherontwikkeling](reviews/SPEECH_REWORK.md).
 
-`npm run audio:catalog` schrijft de actuele aantallen en
-`docs/audio/recording-script.json`. Op 10 oktober 2026 bevat de inventaris:
+`npm run audio:catalog` vernieuwt de inventaris en
+`docs/audio/recording-script.json`. Bestandsnamen en logische sleutels blijven
+gelijk, zodat de app onafhankelijk blijft van de gebruikte spraakdienst.
 
-- 1.587 unieke fragmenten;
-- 1.587 aanwezige synthetische MP3s;
-- 776 bestanden voor letterklanken, hak-/plakreeksen en instructies/feedback
-  met ingebedde klanken; deze waren in bèta 1 nog afwezig;
-- 0 ontbrekende manifestbestanden; menselijke luistergoedkeuring ontbreekt nog.
+## Uitspraakcontrole
 
-De eerdere 1.847 validatorwaarschuwingen waren verwijzingen, geen telling van
-unieke ontbrekende bestanden. Audio voor auditieve woorden in de rijm-/
-lettergreepbank is nu ook opgenomen in de centrale inventaris.
+- Controleer Standaardnederlands, verstaanbaarheid, warmte en rustig tempo.
+- Controleer losse fonemen, geen letternamen: m is /m/, niet “em”. Plofklanken
+  mogen geen aangeplakte klinker krijgen. Controleer korte/lange klinkers apart.
+- Bij legacy-classificatie `human-required` is de tekst een fonetische aanwijzing;
+  deze mag niet blind als natuurlijke taal naar een spraakdienst worden gestuurd.
+- Controleer segmentatie, tweetekenklanken en de pauzes in hak-/plakreeksen.
+- Beluister ook samengestelde instructies met een andere stem voor de doelklank.
+- Controleer codec, clipping, stilte, volume, bestandsnamen en uitspraakbetekenis.
+  Automatische decodering of normalisatie bewijst geen goede uitspraak.
 
-Alle huidige concepten moeten uiteindelijk door de gekozen menselijke stem worden
-vervangen. Bestandsnamen en logische sleutels blijven gelijk zodat runtime en
-leercontent niet aan één productieproces vastzitten. Noem synthetische bestanden
-nooit menselijke opnames. Een luisterreview van de concepten is nog niet uitgevoerd.
+Gebruik `speech-review.html` voor de nieuwe spreekstem en `audio-review.html`
+voor de klanken. Een deskundige luisteraar legt goedkeuring pas na controle vast
+in `docs/audio/review.json` met src, SHA-256, approved en reviewer. Een gewijzigde
+hash maakt eerdere goedkeuring ongeldig. De reviewlijst is momenteel leeg.
 
-## Opnamebrief
+`npm run audio:release` hanteert nog de oorspronkelijke, strengere poort voor
+menselijke opnames en luisterreview. Deze update gebruikt `release:beta` en
+verzwakt die poort niet. Voor een stabiele synthetische release is een expliciete
+herziening van het vrijgavebeleid en een inhoudelijke uitspraakreview nodig.
 
-- Native Standaardnederlands; uitnodigend, rustig en duidelijk, zonder overmatige
-  kinderlijke stem of belonend schreeuwen. Goed en opnieuw proberen even vriendelijk.
-- Neem losse fonemen op, geen letternamen: `m` is /m/, niet “em”; plofklanken kort,
-  zonder een aangeplakte sjwa. Korte/lange klinkers expliciet door een leesexpert
-  laten controleren; spelling alleen is geen voldoende uitspraakaanwijzing.
-- De scriptregel bevat `key`, `src`, `text`, `kind` en `delivery`. Bij
-  `human-required` is `text` een opnameaanwijzing; nooit blind door een TTS halen.
-- Blends volgen grafeemsegmentatie; tweetekenklanken zijn één klank. Gebruik
-  natuurlijke, pedagogisch afgesproken verbinding/pauzes. Een r-in-coda en
-  contextafhankelijke uitspraak moeten passend worden ingesproken.
-- Masteropnames: WAV, mono, minimaal 44,1kHz/16bit. Bewaar masters buiten `public`.
-  Lever MP3 op het scriptpad. Geen leading knip, harde eindknip, ruis of muziek.
-- Gebruik één afgesproken volume: richtwaarde −20 LUFS, true peak ≤ −2 dBTP,
-  constante feedbackluidheid. Meet én luister; normalisatie vervangt geen review.
+## Technische productie
 
-## Productie en goedkeuring
-
-1. Spreker neemt de actuele scriptregels op; begin met het feitelijk benodigde
-   MVP-pakket en lever uiteindelijk alle geselecteerde content af.
-2. Audio-editor controleert clipping, stilte, codec, volume en bestandsnamen.
-3. Een tweede luisteraar met leesdidactische expertise controleert uitspraak,
-   fonemen, doelwoord, segmentatie, leeftijdspassendheid en instructiebetekenis.
-4. Vervang de MP3 op exact dezelfde `src`. Verwijder zijn oude synthetische entry
-   uit `public/audio/provenance.json` pas wanneer daadwerkelijk menselijke audio is
-   geplaatst. Bewaar de vervangingsgeschiedenis buiten de runtime-bundel.
-5. Leg na goedkeuring een entry in `docs/audio/review.json` vast:
-
-```json
-[
-  {
-    "src": "audio/graphemes/m_sound.mp3",
-    "sha256": "de werkelijk berekende SHA-256 van het goedgekeurde bestand",
-    "approved": true,
-    "reviewer": "identificatie van de verantwoordelijke luisterreviewer"
-  }
-]
-```
-
-Het voorbeeld is geen goedkeuring. De repository start met een lege reviewlijst.
-Een vervangen bestand verliest automatisch zijn goedkeuring door de hashcontrole.
-`npm run audio:release` faalt bij ontbrekende, synthetische of niet-goedgekeurde
-bestanden. Zonder menselijke review mogen bestanden geen vrijgavestatus krijgen.
+De optionele Python-productiestappen zijn alleen nodig om audio te vernieuwen.
+De app gebruikt meegeleverde MP3s en vereist geen Python, model of API-sleutel.
+Jessica-uitvoer wordt naar mono MP3, 44,1 kHz, 128 kbps geconverteerd; samengesteld
+materiaal krijgt 160 ms tussenruimte. Het RMS-doel is 0,0794 met pieklimiet 0,79.
+Herkomst, segmenten, duur, SHA-256 en `reviewed: false` staan per bestand in
+`public/audio/provenance.json`. `scripts/tts/verify_audio.py` controleert volledige
+decodering, hashes, duur en niet-lege signalen.
 
 ## Historische herkomst van de Ronnie-concepten (bèta 1)
 

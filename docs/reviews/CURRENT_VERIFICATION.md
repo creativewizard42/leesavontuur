@@ -1,6 +1,26 @@
 # Verificatie — 12 oktober 2026
 
-## Nieuwste functionele ronde: 0.2.0-beta.3
+## Nieuwste ronde: 0.2.0-beta.4
+
+- ElevenLabs Jessica: 311 unieke aanvragen, 4.008 teksttekens; 1.458 MP3s
+  vervangen. 183 losse Piper-klanken en hakreeksen behouden. 634 samengestelde
+  bestanden combineren Jessica met bestaande doelklanken.
+- Maker koos levendige complimenten na de stemproeven; dit is geen volledige
+  uitspraakgoedkeuring. Alle bestanden blijven synthetisch en niet gereviewd.
+- 40 testbestanden en 290 tests geslaagd; contentvalidatie zonder fouten of
+  waarschuwingen, productiebuild, distributiecontrole en bètapakket geslaagd.
+- Alle 1.641 hashes, volledige MP3-decoderingen, duren en signalen gecontroleerd.
+- 6.666 gegenereerde opdrachten, 871 gebruikte audiopaden: geen ontbrekende
+  bestanden. Alle 68 browserroutes voor luisteren, antwoorden, hints en voordoen
+  geslaagd met de nieuwe audio (8× snelheid voor bediening, niet uitspraak).
+- Productiebrowsercontroles onder / en /spel/ geslaagd, inclusief offline audio.
+- Volledige beginsessie van 8 stappen met echte audio geslaagd; voortgang bewaard.
+  Alle 18 nieuwe spreekstemvoorbeelden afgespeeld; klankreview met 82 clips en
+  bescherming tegen gelijktijdig afspelen gecontroleerd.
+- Offline update met meerdere vensters geslaagd.
+- Fysieke iPhone/Safari en volledige deskundige uitspraakreview blijven open.
+
+## Eerdere functionele ronde: 0.2.0-beta.3
 
 - 40 testbestanden, 290 tests geslaagd; inclusief het hergebruiken van de
   audiospeler en opnieuw proberen na een geblokkeerde afspeelpoging.

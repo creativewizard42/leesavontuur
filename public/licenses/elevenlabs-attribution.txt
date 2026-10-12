@@ -1,0 +1,9 @@
+Jessica speech generated with ElevenLabs — elevenlabs.io
+Voice ID: cgSgspJ2msm6clMCkdW9
+Model: eleven_multilingual_v2, Dutch (nl).
+
+This attribution identifies the generation service. It does not assign a
+separate license to its service, models, or voices. Generated audio remains
+subject to the account's applicable ElevenLabs terms and plan permissions.
+Per-file voice provenance is recorded in audio/provenance.json.
+Teaching phonemes and blends identified as Piper retain their prior provenance.

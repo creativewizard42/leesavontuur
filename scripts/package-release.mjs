@@ -22,6 +22,6 @@ writeFileSync(`releases/${filename}.json`, JSON.stringify({
   sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
   dirty: Boolean(execFileSync('git', ['status', '--porcelain'], { encoding: 'utf8' }).trim()),
   sha256, audio: JSON.parse(readFileSync('src/audio/coverage.json', 'utf8')),
-  limitations: beta ? ['Begeleide bèta; menselijke klankopnames ontbreken.', 'Geen bewijs van zelfstandig lezen of volledige leesmethode.', 'Fysieke iPhone en didactische pilot nog niet gevalideerd.'] : [],
+  limitations: beta ? ['Begeleide bèta; synthetische uitspraak nog niet luistergoedgekeurd.', 'Geen bewijs van zelfstandig lezen of volledige leesmethode.', 'Fysieke iPhone en didactische pilot nog niet gevalideerd.'] : [],
 }, null, 2) + '\n');
 console.log(`Releasepakket: releases/${filename}`);

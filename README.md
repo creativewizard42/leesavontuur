@@ -1,6 +1,6 @@
 # LEESAVONTUUR
 
-**Versie 0.2.0-beta.3 — begeleide bèta.** Alle 1.641 audiofragmenten zijn nu
+**Versie 0.2.0-beta.4 — begeleide bèta.** Alle 1.641 audiofragmenten zijn nu
 synthetisch gegenereerd; menselijke luisterreview, didactische beoordeling en praktijktests zijn
 nog nodig. Zie [release-informatie](docs/RELEASE_NOTES.md). De workflow publiceert
 naar GitHub Pages na controles; de Pages-bron moet op GitHub Actions staan.
@@ -56,7 +56,7 @@ De audit en het plan voor een volledige leesapp staan in
 De huidige versie bevat gerichte oefengebieden, eerste zin-/verhaalactiviteiten,
 profielimport en een installeerbare offline-PWA. Dit is nog geen vrijgegeven
 volledige leesmethode. Zie [docs/AUDIO_PRODUCTION.md](docs/AUDIO_PRODUCTION.md)
-voor de definitieve menselijke audio en de voorlopige computerstem.
+voor de synthetische spraakproductie en vereiste uitspraakcontrole.
 
 ## Snelle start
 
@@ -153,8 +153,8 @@ werken en `npm run validate` om te controleren of alle vereiste clips bestaan.
 
 ## Bekende beperkingen
 
-- **Uitspraakreview ontbreekt.** Alle 1.641 lokale MP3s zijn opnieuw synthetisch
-  gegenereerd, inclusief 776 klankgebonden fragmenten via expliciete IPA.
+- **Uitspraakreview ontbreekt.** Alle 1.641 lokale MP3s zijn synthetisch: 1.458 met Jessica-spraak en
+  183 behouden Piper-klanken/hakreeksen.
   Bestandsaanwezigheid bewijst geen correcte uitspraak. Vooral losse klanken en
   korte klinkercontrasten vereisen een menselijke luisterbeoordeling. Zie
   [spraakherontwikkeling](docs/reviews/SPEECH_REWORK.md).
@@ -162,7 +162,7 @@ werken en `npm run validate` om te controleren of alle vereiste clips bestaan.
   door een leerkracht/orthopedagoog worden beoordeeld vóór structureel gebruik.
 - **MVP-scope:** het volledige klankaanbod is gebouwd, maar de speelbare MVP
   richt zich op **m, a, s, t, k, r**.
-- Geen Cloud-TTS, geen synchronisatie, geen analytics (bewust).
+- Geen Cloud-TTS tijdens gebruik, geen synchronisatie, geen analytics (bewust).
 
 ## Status & sign-offs
 

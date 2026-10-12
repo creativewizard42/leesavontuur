@@ -21,7 +21,7 @@ SAMPLES = [
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--voice', default='JoZAnrliG62q9Iogun7f')
+    parser.add_argument('--voice', default='cgSgspJ2msm6clMCkdW9')
     parser.add_argument('--output', type=Path, default=Path('/tmp/leesavontuur-elevenlabs-stemproeven'))
     parser.add_argument('--plan', action='store_true')
     args = parser.parse_args()

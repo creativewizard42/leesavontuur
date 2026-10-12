@@ -24,3 +24,23 @@ Luister vooral of korte en lange klinkers duidelijk verschillen en of medeklinke
 De klank is iets anders dan de letternaam. Geef bij een probleem de letter en wat je hoort door.</p>
 <p><a href="./">Terug naar Leesavontuur</a></p><table><caption>Alle 41 letters en lettercombinaties</caption>
 <thead><tr><th>Letter</th><th>Klank</th><th>Letternaam</th></tr></thead><tbody>${rows}</tbody></table></body></html>\n`);
+
+const sampleKeys = [
+  'fb.correct.1', 'fb.correct.2', 'fb.correct.8', 'fb.correct.9', 'fb.correct.10', 'fb.correct.11',
+  'fb.hint.rhyme', 'fb.hint.syllable', 'instr.lk.grapheme_to_sound', 'instr.reading.start',
+  'de.kat', 'de.tas', 'de.hut', 'de.huis', 'de.geit', 'de.neus', 'de.vis', 'de.kaas',
+];
+const speechRows = sampleKeys.map(key => {
+  const clip = AUDIO_MANIFEST.find(entry => entry.key === key);
+  if (!clip) throw new Error(`Missing voice sample: ${key}`);
+  return `<li><p>${escape(clip.text ?? key)}</p><audio controls preload="none" src="${escape(clip.src)}"></audio></li>`;
+}).join('\n');
+writeFileSync('public/speech-review.html', `<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; media-src 'self'; object-src 'none'; base-uri 'none'">
+<title>Leesavontuur — spreekstem beluisteren</title><script src="./audio-review.js" defer></script></head>
+<body><h1>De nieuwe spreekstem beluisteren</h1>
+<p>Jessica spreekt de complimenten levendig uit en de opdrachten rustiger. Deze AI-audio is gemaakt met ElevenLabs (elevenlabs.io).</p>
+<p>Controleer de Nederlandse uitspraak samen met een volwassene. De keuze van de stem is nog geen uitspraakgoedkeuring voor alle fragmenten.
+De <a href="./audio-review.html">losse leesklanken en hakreeksen</a> gebruiken voorlopig de eerdere klankstem.</p>
+<p><a href="./">Terug naar Leesavontuur</a></p><ul>${speechRows}</ul></body></html>\n`);

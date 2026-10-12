@@ -347,6 +347,8 @@ export function createParentDashboard(options: ParentDashboardOptions): HTMLElem
   appCard.append(el('h3', { text: 'App en geluid' }));
   appCard.append(el('p', { text: `Versie ${version} — begeleide bèta. De volledige leesroute is nog in ontwikkeling. Ontbrekende klankopnames kunnen oefeningen blokkeren; gebruik deze versie samen met een volwassene.` }));
   appCard.append(el('p', { text: `${coverage.present} van ${coverage.total} audiofragmenten aanwezig. ${coverage.synthetic} fragmenten zijn met een Nederlandse computerstem gemaakt. ${coverage.total - coverage.present} audiobestanden ontbreken. De spraak heeft nog geen menselijke luistergoedkeuring; controleer vooral de losse klanken samen met een volwassene.` }));
+  appCard.append(el('p', { text: 'De spreekstem is Jessica: AI-audio gemaakt met ElevenLabs (elevenlabs.io). Complimenten klinken levendig; opdrachten worden rustiger uitgesproken. Losse leesklanken en hakreeksen gebruiken voorlopig de eerdere klankstem.' }));
+  appCard.append(el('a', { class: 'la-btn la-btn--wide', href: `${import.meta.env.BASE_URL}speech-review.html`, text: 'Beluister de nieuwe spreekstem' }));
   appCard.append(el('p', { text: 'Geluid wordt niet automatisch herhaald. Tik op het oor om zelf opnieuw te luisteren. De vervolgknop komt beschikbaar als antwoordgeluid en feedback klaar zijn.' }));
   appCard.append(el('a', { class: 'la-btn la-btn--wide', href: `${import.meta.env.BASE_URL}audio-review.html`, text: 'Beluister alle klanken en letternamen' }));
   appCard.append(el('p', { text: 'Luisterkeuzes en begripsvragen geven oefensignalen. Ze bewijzen geen zelfstandig hardop lezen. Lees geregeld samen en bespreek wat je kind leest.' }));

@@ -69,8 +69,20 @@ try:
         page.locator('audio').nth(2).evaluate('(media) => media.play()')
         assert page.locator('audio').nth(0).evaluate('(media) => media.paused'), 'Review clips overlap'
         page.locator('audio').nth(2).evaluate('media => media.ended ? Promise.resolve() : new Promise(resolve => media.addEventListener("ended", resolve, { once: true }))')
+        page.goto(f'http://127.0.0.1:{server.server_port}/speech-review.html')
+        assert page.locator('audio').count() == 18
+        page.locator('h1').click()
+        for media in page.locator('audio').all():
+            media.evaluate('''async media => {
+                await media.play();
+                await new Promise((resolve, reject) => {
+                    const timer = setTimeout(() => reject(new Error('Speech review playback timed out')), 15000);
+                    media.addEventListener('ended', () => { clearTimeout(timer); resolve(); }, {once: true});
+                    media.addEventListener('error', () => { clearTimeout(timer); reject(new Error('Speech review media error')); }, {once: true});
+                });
+            }''')
         assert not errors, errors
-        print(f'PASS: fresh session completed ({count} steps), real audio ended events, no blocked clips, saved progress; 82 adult-review clips and single playback. Playback accelerated 4x for control testing.', flush=True)
+        print(f'PASS: fresh session completed ({count} steps), real audio ended events, no blocked clips, saved progress; 82 phoneme-review clips and single playback; all 18 speech-review samples played. Playback accelerated 4x for control testing.', flush=True)
         browser.close()
 finally:
     server.shutdown()
