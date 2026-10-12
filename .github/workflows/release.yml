@@ -33,6 +33,7 @@ jobs:
       - run: python scripts/browser-smoke.py --chromium "$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
       - run: python scripts/browser-update-smoke.py --chromium "$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
       - run: python scripts/browser-speech-smoke.py --chromium "$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+      - run: python scripts/browser-activities-smoke.py --chromium "$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
       - uses: actions/upload-artifact@v4
         with:
           name: release-package

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import type { AudioClip } from '../../types';
 import {
   createAudioService,
@@ -211,7 +211,7 @@ describe('AudioService – resolutie en fallbacks', () => {
     });
     const result = await service.play('de.kam');
     expect(result.result).toBe('unavailable');
-    expect(result.reason).toBe('clip-missing');
+    expect(result.reason).toBe('media-error');
     expect(fallbacks).toContain('de.kam');
   });
 
@@ -258,7 +258,7 @@ describe('AudioService – resolutie en fallbacks', () => {
     expect(speech.spoke).toHaveLength(1);
   });
 
-  it('probeert een ontbrekende src niet telkens opnieuw (404-geheugen)', async () => {
+  it('probeert een tijdelijk onbeschikbare bron opnieuw na een nieuwe afspeelactie', async () => {
     const created: string[] = [];
     const service = createAudioService({
       source: sourceFor({ 'de.kam': clip() }),
@@ -271,7 +271,7 @@ describe('AudioService – resolutie en fallbacks', () => {
     });
     expect((await service.play('de.kam')).result).toBe('tts');
     expect((await service.play('de.kam')).result).toBe('tts');
-    expect(created).toHaveLength(1);
+    expect(created).toHaveLength(2);
   });
 
   it('speelt nooit een externe host af, ook niet als bron dat vraagt', async () => {
@@ -342,5 +342,35 @@ describe('AudioService – mock', () => {
     expect(mock.mode).toBe('silent');
     mock.setAvailable(false);
     expect(mock.isAvailable()).toBe(false);
+  });
+});
+
+// Safari unlocks individual players, not every future Audio instance.
+describe('Safari media permission', () => {
+  it('reuses the same native player across clips and does not interrupt it during preload', async () => {
+    const media = fakeMedia('ok');
+    const AudioConstructor = vi.fn(function () { return media; });
+    vi.stubGlobal('Audio', AudioConstructor);
+    try {
+      const first = clip();
+      const second = clip({ key: 'de.tas', src: 'audio/words/tas.mp3' });
+      const service = createAudioService({ source: sourceFor({ [first.key]: first, [second.key]: second }), speech: null });
+      expect((await service.playSequence([first, second])).result).toBe('file');
+      expect(AudioConstructor).toHaveBeenCalledTimes(1);
+      expect(media.src).toBe(second.src);
+      await service.preload([first.key]);
+      expect(media.src).toBe(second.src);
+    } finally { vi.unstubAllGlobals(); }
+  });
+  it('reports an autoplay block and permits a subsequent user-initiated retry', async () => {
+    let blocked = true;
+    const service = createAudioService({ speech: null, createElement: () => {
+      const media = fakeMedia('ok');
+      if (blocked) media.play = () => Promise.reject(new DOMException('Tap required', 'NotAllowedError'));
+      return media;
+    }});
+    expect((await service.playClip(clip())).reason).toBe('gesture-required');
+    blocked = false;
+    expect((await service.playClip(clip())).result).toBe('file');
   });
 });

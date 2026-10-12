@@ -1,4 +1,28 @@
-# Verificatie — 10 oktober 2026
+# Verificatie — 12 oktober 2026
+
+## Nieuwste functionele ronde: 0.2.0-beta.3
+
+- 40 testbestanden, 290 tests geslaagd; inclusief het hergebruiken van de
+  audiospeler en opnieuw proberen na een geblokkeerde afspeelpoging.
+- 6.666 gegenereerde opdrachten gecontroleerd, 871 unieke gebruikte
+  audioverwijzingen zonder ontbrekende bestanden in deze steekproef.
+- 68 Chromium-bedieningsroutes geslaagd: aparte luisterknoppen, goed antwoord,
+  herhaald verkeerd antwoord, hint, voordoen en afronden. Alle geplande
+  opdrachttypen opgenomen, plus expliciet rijmen en zichtwoordherkenning.
+  Echte MP3-ended-events op 8× snelheid testen bediening, niet uitspraak.
+- Alle 1.641 MP3-checksums, decoderingen, duren en niet-stille signalen geslaagd.
+- Productiebuild, inhoudsvalidatie, distributiecontrole en bètapakket geslaagd.
+- Productiebrowsercontroles onder / en /spel/, volledige beginsessie en
+  offline updatecontrole met meerdere vensters geslaagd.
+- Nieuwe ontbrekende feedback gevuld; letterverwisseling, rijm-, klap-,
+  eindklank- en leeshulp gecorrigeerd. Vijf extra complimenten toegevoegd.
+- iPhone/Safari: één gedeelde speler en herstelknop geïmplementeerd; gedrag bij
+  autoplay-blokkade getest met gecontroleerde foutinjectie. **Geen fysieke
+  iPhone-test uitgevoerd**, dus de gemelde iPhone-situatie nog daar bevestigen.
+- ElevenLabs-stemgegevens bereikbaar; proefgeneratie levert HTTP 402
+  payment_required. Geen ElevenLabs-audio aanwezig. Zie audio/ELEVENLABS_SETUP.md.
+
+Onderstaande verificatie beschrijft eerdere versies.
 
 ## Nieuwste spraakronde: 0.2.0-beta.2
 

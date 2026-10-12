@@ -30,7 +30,9 @@ export function sentenceReady(profile: Profile, sentence: Sentence): boolean {
     (sentence.comprehension?.options.every(option => option.split(/\s+/).every(wordReady)) ?? true);
 }
 
-const readingFeedback = () => feedbackMeta({ correct: 'fb.correct.1', try1: 'fb.try1.2', hint: 'fb.hint.2', model: 'fb.model.4' });
+const readingFeedback = (comprehension = false) => feedbackMeta({ correct: 'fb.correct.1', try1: 'fb.try1.2',
+  hint: comprehension ? 'fb.hint.reading' : 'fb.hint.2',
+  model: comprehension ? 'fb.model.reading' : 'fb.model.4' });
 
 /** Recognition is recorded separately from independent oral reading. */
 export function generateSightWord(profile: Profile, id: string, rng: Rng): ActivityItem {
@@ -65,7 +67,7 @@ export function generateReading(profile: Profile, sentence: Sentence, rng: Rng):
     id: itemId('lezen', sentence.id, rng), skillId, kind: 'verhaallezen',
     prompt: { audio: instructionClip('instr.reading.start', 'Lees rustig. Ben je klaar? Tik op het vinkje.'), text: sentence.text, showText: true },
     ...placed, difficulty: 'A', isRetry: false, itemKey: sentence.id,
-    metadata: { ...readingFeedback(), scored: true, question: question.questionAudio?.text ?? '',
+    metadata: { ...readingFeedback(true), scored: true, question: question.questionAudio?.text ?? '',
       questionAudio: question.questionAudio, readingAudio: sentence.audio, assessment: 'comprehension' },
   };
 }

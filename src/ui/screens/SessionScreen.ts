@@ -1,3 +1,4 @@
+import { createComplimentPicker } from '../compliments';
 /**
  * Sessiescherm: rendert de vaste sessie-loop (GD §3.1) met vaste hoeken
  * (huis linksboven, oor rechtsboven, verder rechtsonder) en pauze (UX §3.10).
@@ -37,6 +38,7 @@ export interface SessionScreenHandle {
 }
 
 export function createSessionScreen(deps: SessionScreenDeps): SessionScreenHandle {
+  const chooseCompliment = createComplimentPicker();
   const queue = deps.queue;
   let activity: ActivityViewHandle | null = null;
   let activityDone = false;
@@ -135,6 +137,7 @@ export function createSessionScreen(deps: SessionScreenDeps): SessionScreenHandl
 
     activity = createActivityView({
       item,
+      chooseCompliment,
       audio: deps.audio,
       sessionNumber: deps.state.sessionNumber,
       now: deps.now,

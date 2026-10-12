@@ -176,16 +176,22 @@ export function createAudioService(options: AudioServiceOptions = {}): AudioServ
         ? (speechSynthesis as unknown as SpeechSynthesisLike)
         : null;
 
-  const elementFactory =
-    options.createElement ??
-    (typeof Audio !== 'undefined' ? (src: string) => new Audio(src) : () => null);
+  // Safari grants playback permission per media element. Reuse the player
+  // unlocked by a tap for subsequent instructions, choices and feedback.
+  let sharedElement: HTMLAudioElement | null = null;
+  const elementFactory = options.createElement ?? ((src: string) => {
+    if (typeof Audio === 'undefined') return null;
+    sharedElement ??= new Audio();
+    sharedElement.src = src;
+    return sharedElement;
+  });
   const clipCapable =
     options.clipCapable ?? (options.createElement !== undefined ? true : typeof Audio !== 'undefined');
 
   let current: HTMLAudioElement | null = null;
   let operation = 0;
   let cancelPlayback: (() => void) | null = null;
-  const missingSrcs = new Set<string>();
+  let playbackFailure = 'media-error';
   let lastResult: AudioMode | null = null;
 
   function canTts(clip: AudioClip): boolean {
@@ -253,7 +259,7 @@ export function createAudioService(options: AudioServiceOptions = {}): AudioServ
     const factory = options.createUtterance ?? defaultUtterance;
     return new Promise<boolean>(resolve => {
       let settled = false;
-      const timer = setTimeout(() => finish(false), elementTimeoutMs);
+      const timer = setTimeout(() => { playbackFailure = 'timeout'; finish(false); }, elementTimeoutMs);
       function finish(ok: boolean): void {
         if (settled) return;
         settled = true;
@@ -277,13 +283,14 @@ export function createAudioService(options: AudioServiceOptions = {}): AudioServ
 
   /** Resolve only on ended, never on loadeddata/playing/play() resolution. */
   async function playElement(src: string): Promise<boolean> {
+    playbackFailure = 'media-error';
     let element: HTMLAudioElement | null;
     try { element = elementFactory(src); } catch { return false; }
     if (!element) return false;
     current = element;
     return new Promise<boolean>(resolve => {
       let settled = false;
-      const timer = setTimeout(() => finish(false), elementTimeoutMs);
+      const timer = setTimeout(() => { playbackFailure = 'timeout'; finish(false); }, elementTimeoutMs);
       function finish(ok: boolean): void {
         if (settled) return;
         settled = true;
@@ -296,19 +303,23 @@ export function createAudioService(options: AudioServiceOptions = {}): AudioServ
         resolve(ok);
       }
       const ended = (): void => finish(true);
-      const failed = (): void => { if (element?.error?.code === 4) missingSrcs.add(src); finish(false); };
+      const failed = (error?: unknown): void => {
+        playbackFailure = error && typeof error === 'object' && 'name' in error && error.name === 'NotAllowedError'
+          ? 'gesture-required' : 'media-error';
+        finish(false);
+      };
       const cancel = (): void => finish(false);
       cancelPlayback = cancel;
       element?.addEventListener('ended', ended);
       element?.addEventListener('error', failed);
-      try { void element?.play()?.catch(failed); } catch { failed(); }
+      try { void element?.play()?.catch(failed); } catch (error) { failed(error); }
     });
   }
 
   async function runClip(clip: AudioClip, token: number): Promise<PlayResult> {
     if (token !== operation) return playResult('unavailable', false, 'cancelled');
     const hasSrc = clip.src.length > 0 && isLocalAudioSrc(clip.src);
-    if (clipCapable && hasSrc && !missingSrcs.has(clip.src)) {
+    if (clipCapable && hasSrc) {
       const played = await playElement(clip.src);
       if (token !== operation) return playResult('unavailable', false, 'cancelled');
       if (played) {
@@ -322,7 +333,7 @@ export function createAudioService(options: AudioServiceOptions = {}): AudioServ
       return playResult('tts', APPROXIMATE_TTS_KINDS.has(clip.kind));
     }
     if (token !== operation) return playResult('unavailable', false, 'cancelled');
-    const reason = hasSrc ? 'clip-missing' : 'no-audio-available';
+    const reason = hasSrc ? playbackFailure : 'no-audio-available';
     options.onFallback?.(clip.key, reason);
     lastResult = 'silent';
     return playResult('unavailable', false, reason);
@@ -381,17 +392,9 @@ export function createAudioService(options: AudioServiceOptions = {}): AudioServ
       } catch {
         /* negeren */
       }
-      if (!clipCapable) return;
-      for (const key of keys) {
-        const clip = options.source?.getClip(key);
-        if (clip && isLocalAudioSrc(clip.src)) {
-          try {
-            elementFactory(clip.src);
-          } catch {
-            /* negeren */
-          }
-        }
-      }
+      // The service worker preloads files. Changing the shared player's src
+      // here would interrupt a running clip and invalidate Safari permission.
+      void keys;
     },
     async play(key: string): Promise<PlayResult> {
       stop();
@@ -435,12 +438,12 @@ export function createAudioService(options: AudioServiceOptions = {}): AudioServ
         };
 
       // 1. Echte gerekte opname heeft altijd de voorkeur.
-      if (clipCapable && isLocalAudioSrc(blend.src) && !missingSrcs.has(blend.src)) {
+      if (clipCapable && isLocalAudioSrc(blend.src)) {
         const played = await playElement(blend.src);
         if (token !== operation) return playResult('unavailable', false, 'cancelled');
         if (played) {
           lastResult = 'clip';
-          return playResult('file');
+          return playResult('file', syntheticFiles.has(blend.src));
         }
 
       }

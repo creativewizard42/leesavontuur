@@ -56,7 +56,7 @@ function generateSyllables(options: PhonologyOptions): ActivityItem[] {
       isRetry: false,
       itemKey: entry.word,
       metadata: {
-        ...feedbackMeta({ correct: 'fb.correct.6', try1: 'fb.try1.1', hint: 'fb.hint.1', model: 'fb.model.3' }),
+        ...feedbackMeta({ correct: 'fb.correct.6', try1: 'fb.try1.1', hint: 'fb.hint.syllable', model: 'fb.model.syllable' }),
         word: entry.word,
         syllables: entry.syllables,
       },
@@ -106,7 +106,7 @@ function generateRhymes(options: PhonologyOptions): ActivityItem[] {
       isRetry: false,
       itemKey: target,
       metadata: {
-        ...feedbackMeta({ correct: 'fb.correct.6', try1: 'fb.try1.1', hint: 'fb.hint.1', model: 'fb.model.3' }),
+        ...feedbackMeta({ correct: 'fb.correct.6', try1: 'fb.try1.1', hint: 'fb.hint.rhyme', model: 'fb.model.rhyme' }),
         word: target,
         rhyme: correctWord,
       },

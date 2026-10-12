@@ -1,6 +1,6 @@
 # LEESAVONTUUR
 
-**Versie 0.2.0-beta.2 — begeleide bèta.** Alle 1.587 audiofragmenten zijn nu
+**Versie 0.2.0-beta.3 — begeleide bèta.** Alle 1.641 audiofragmenten zijn nu
 synthetisch gegenereerd; menselijke luisterreview, didactische beoordeling en praktijktests zijn
 nog nodig. Zie [release-informatie](docs/RELEASE_NOTES.md). De workflow publiceert
 naar GitHub Pages na controles; de Pages-bron moet op GitHub Actions staan.
@@ -153,7 +153,7 @@ werken en `npm run validate` om te controleren of alle vereiste clips bestaan.
 
 ## Bekende beperkingen
 
-- **Uitspraakreview ontbreekt.** Alle 1.587 lokale MP3s zijn opnieuw synthetisch
+- **Uitspraakreview ontbreekt.** Alle 1.641 lokale MP3s zijn opnieuw synthetisch
   gegenereerd, inclusief 776 klankgebonden fragmenten via expliciete IPA.
   Bestandsaanwezigheid bewijst geen correcte uitspraak. Vooral losse klanken en
   korte klinkercontrasten vereisen een menselijke luisterbeoordeling. Zie

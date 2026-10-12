@@ -50,7 +50,7 @@ describe('opnamelijst (EDU-009)', () => {
   });
 
   it('laat ongebruikte feedbackvarianten weg uit content en opnamelijst (reviewfix set B)', () => {
-    const removed = ['fb.correct.8', 'fb.try1.5', 'fb.try1.6', 'fb.try1.7', 'fb.hint.3'];
+    const removed = ['fb.try1.5', 'fb.try1.6', 'fb.try1.7', 'fb.hint.3'];
     const manifestKeys = new Set(audioManifest.map((c) => c.key));
     for (const key of removed) {
       expect(feedback[key], key).toBeUndefined();

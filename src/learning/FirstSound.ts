@@ -136,8 +136,8 @@ export function generate(options: FirstSoundOptions): ActivityItem[] {
         ...feedbackMeta({
           correct: 'fb.correct.6',
           try1: 'fb.try1.2',
-          hint: 'fb.hint.4',
-          model: 'fb.model.3',
+          hint: last ? 'fb.hint.last' : 'fb.hint.4',
+          model: last ? 'fb.model.last' : 'fb.model.3',
         }),
         ...wordMetadata(target.word, { targetGrapheme, task: last ? 'last-sound' : 'first-sound' }),
         // EDU-005: expliciete luisterstap vóór de keuzestap; elke optie heeft audio.

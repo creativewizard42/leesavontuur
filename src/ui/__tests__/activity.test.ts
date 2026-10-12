@@ -307,6 +307,22 @@ describe('ActivityView – ontbrekend geluid (QA-002)', () => {
     container.remove();
   });
 
+  it('herstart geblokkeerde audio na een tik en maakt antwoorden weer beschikbaar', async () => {
+    const audio = createMockAudioService({ result: { result: 'unavailable', approximate: false, reason: 'gesture-required' } });
+    const item = wordItem();
+    const onDone = vi.fn();
+    view = createActivityView({ item, audio, sessionNumber: 1, now: () => 1000, onEvent: vi.fn(), onDone });
+    container.append(view.element);
+    await vi.waitFor(() => expect(container.querySelector('[data-action="audio-retry"]')).not.toBeNull());
+    expect(container.querySelector<HTMLButtonElement>('[data-option-id]')?.disabled).toBe(true);
+    audio.setResult({ result: 'file', approximate: true });
+    container.querySelector<HTMLButtonElement>('[data-action="audio-retry"]')?.click();
+    await vi.waitFor(() => expect(container.querySelector('[data-audio-fallback]')).toBeNull());
+    expect(container.querySelector<HTMLButtonElement>('[data-option-id]')?.disabled).toBe(false);
+    container.querySelector<HTMLButtonElement>(`[data-option-id="${item.targetId}"]`)?.click();
+    await vi.waitFor(() => expect(onDone).toHaveBeenCalledWith('correct'));
+  });
+
   it('toont een rustige visuele fallback zonder crash', async () => {
     const audio = createMockAudioService({
       result: { result: 'unavailable', approximate: false, reason: 'clip-missing' },

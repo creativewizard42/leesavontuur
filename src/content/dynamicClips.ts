@@ -103,6 +103,11 @@ const INSTRUCTION_VARIANTS: readonly VariantSpec[] = [
 /** Concrete foutspecifieke feedbackvarianten (EDU-006). */
 const FEEDBACK_VARIANTS: readonly VariantSpec[] = [
   {
+    base: 'fb.specific.letter_confusion',
+    values: GRAPHEME_IDS,
+    text: (id) => `Luister nog eens naar deze klank: ${soundOf(id)}.`,
+  },
+  {
     base: 'fb.specific.first_sound',
     values: GRAPHEME_IDS,
     text: (id) => `Bijna! Luister naar het begin: ${soundOf(id)}…`,
@@ -277,7 +282,7 @@ const FEEDBACK_PRIMARY_VAR: Readonly<Record<string, string>> = {
   'fb.specific.middle_consonant': 'sound',
   'fb.specific.letter_sound': 'sound',
   'fb.specific.order': 'word',
-  'fb.specific.letter_confusion': 'letter',
+  'fb.specific.letter_confusion': 'sound',
   'fb.specific.blend_retry': 'word',
   'fb.specific.count': 'count',
 };

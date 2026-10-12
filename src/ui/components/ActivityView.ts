@@ -9,13 +9,13 @@
  *    laat het kind klanken tikken (elke tegel speelt zijn klank en springt los).
  *  - klankjager: eerst alle kandidaten afspelen, daarna kiezen; aparte
  *    luisterknop per tegel (EDU-005).
- *  - `extraAudio`: prompt automatisch nogmaals afspelen.
+ *  - herhalen gebeurt alleen na een tik op een luisterknop.
  *  - audio 'unavailable' → rustige visuele fallback (QA-002), nooit crash.
  */
 import type { ActivityItem, ActivityOption, AnswerEvent, AudioClip } from '../../types';
 import type { AudioService, PlayResult } from '../../audio/AudioService';
 import { buildAnswerEvent, checkAnswer, type AnswerCheckResult } from '../../learning/answer';
-import { graphemeSoundClip, wordClip } from '../../learning/util';
+import { blendClip, graphemeSoundClip, wordClip } from '../../learning/util';
 import { fbText, getGrapheme, getWord, ui } from '../../content';
 import { el, clear } from '../dom';
 import { iconCheck, iconEar, iconNoSound, iconPloef, iconSpark, iconStar, iconTap } from '../icons';
@@ -38,6 +38,7 @@ export interface ActivityViewOptions {
   now: () => number;
   onEvent: (event: AnswerEvent, result: AnswerCheckResult) => void;
   onDone: (outcome: 'correct' | 'modeled') => void;
+  chooseCompliment?: (specific: string) => string;
   onFeedback?: (info: FeedbackInfo) => void;
 }
 
@@ -115,6 +116,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
   const itemStart = options.now();
   const timers = new Set<ReturnType<typeof setTimeout>>();
   let audioFallbackShown = false;
+  let retryPlayback: (() => Promise<PlayResult>) | undefined;
 
   const root = el('div', { class: 'la-activity', 'data-kind': item.kind, 'data-item-id': item.id });
   if (simplified) root.classList.add('la-activity--simplified');
@@ -146,7 +148,10 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
   function playClipSafe(clip: AudioClip | undefined): Promise<PlayResult> {
     if (!clip) return Promise.resolve(UNAVAILABLE);
     return audio.playClip(clip).then((result) => {
-      if (!disposed && result.result === 'unavailable' && result.reason !== 'cancelled') showAudioFallback();
+      if (!disposed && result.result === 'unavailable' && result.reason !== 'cancelled') {
+        retryPlayback = () => audio.playClip(clip);
+        showAudioFallback();
+      }
       return result;
     });
   }
@@ -155,7 +160,10 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     if (clips.length === 0) return Promise.resolve(UNAVAILABLE);
     if (clips.length === 1) return playClipSafe(clips[0]);
     return audio.playSequence(clips).then((result) => {
-      if (!disposed && result.result === 'unavailable' && result.reason !== 'cancelled') showAudioFallback();
+      if (!disposed && result.result === 'unavailable' && result.reason !== 'cancelled') {
+        retryPlayback = () => audio.playSequence(clips);
+        showAudioFallback();
+      }
       return result;
     });
   }
@@ -208,7 +216,28 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     wrap.append(icon);
     // Alleen voor ouders/AT; niet leesbaar voor de doelgroep in beeld.
     wrap.append(el('p', { class: 'la-sr-only', text: ui('ui.audio.unavailable') }));
-    wrap.append(el('p', { class: 'la-hint-text', text: 'Geen oefengeluid. Vraag een volwassene om hulp.' }));
+    wrap.append(el('p', { class: 'la-hint-text', text: 'Tik op het oor om het geluid opnieuw te starten.' }));
+    const retry = el('button', { type: 'button', class: 'la-btn la-btn--icon la-btn--primary',
+      'data-action': 'audio-retry', 'aria-label': 'Start het oefengeluid opnieuw' });
+    retry.append(iconEar());
+    retry.addEventListener('click', () => {
+      if (retry.disabled || disposed) return;
+      // Start within the tap itself: Safari needs this user gesture.
+      const playback = retryPlayback?.();
+      if (!playback) { repeat(); return; }
+      retry.disabled = true;
+      void playback.then(result => {
+        if (disposed) return;
+        retry.disabled = false;
+        if (result.result === 'unavailable') return;
+        audioBlocked = false;
+        audioFallbackShown = false;
+        wrap.remove();
+        if (!done && listenFirst) void playListenFirst();
+        else if (!done) grid?.setDisabled(false);
+      });
+    });
+    wrap.append(retry);
 
     const targetGrapheme = metaString(item, 'targetGrapheme');
     const word = wordFromItem(item);
@@ -498,6 +527,15 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
   }
 
   function applyHint(): Promise<PlayResult> | undefined {
+    // Rhymes and syllables are whole-word listening tasks, not phoneme blends.
+    if (item.kind === 'klapbrug') return playClipSafe(wordClip(wordFromItem(item)!));
+    if (item.kind === 'rijmpoort') return playSequenceSafe([
+      wordClip(wordFromItem(item)!), wordClip(metaString(item, 'rhyme')!),
+    ]);
+    if (item.kind === 'verhaallezen') {
+      usedHint = true;
+      return playClipSafe(item.metadata?.['readingAudio'] as AudioClip | undefined);
+    }
     const graphemeId = metaString(item, 'targetGrapheme');
     // Auditieve/letter-taken: laat de doelklank horen (geen woord verklappen).
     if (graphemeId && getGrapheme(graphemeId) && litBlocks.length === 0) {
@@ -505,10 +543,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     }
     const word = wordFromItem(item);
     if (word) {
-      const playing = audio.playStretched(word).then((result) => {
-        if (!disposed && result.result === 'unavailable' && result.reason !== 'cancelled') showAudioFallback();
-        return result;
-      });
+      const playing = playClipSafe(blendClip(word));
       litBlocks.forEach((block, index) => {
         later(() => block.classList.add('is-lit'), index * 180);
       });
@@ -517,8 +552,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
     if (graphemeId && getGrapheme(graphemeId)) {
       return playClipSafe(graphemeSoundClip(graphemeId));
     }
-    repeat();
-    return undefined;
+    return playSequenceSafe(promptClips());
   }
 
   function markCorrectOption(includeAudio = true): Promise<PlayResult> | undefined {
@@ -562,7 +596,7 @@ export function createActivityView(options: ActivityViewOptions): ActivityViewHa
       done = true;
       grid?.setDisabled(true);
       const optionAudio = markCorrectOption();
-      void setFeedback('correct', result.feedbackKey, result.feedbackVars, optionAudio).then(() => {
+      void setFeedback('correct', options.chooseCompliment?.(result.feedbackKey) ?? result.feedbackKey, result.feedbackVars, optionAudio).then(() => {
         if (!disposed) options.onDone('correct');
       });
       return;

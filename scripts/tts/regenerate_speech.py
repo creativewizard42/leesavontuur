@@ -18,6 +18,7 @@ from piper.config import SynthesisConfig
 parser = argparse.ArgumentParser()
 parser.add_argument('--model-dir', type=Path, required=True)
 parser.add_argument('--repair-phonetics', action='store_true', help='Regenerate clips affected by the Dutch model phonetic equivalents')
+parser.add_argument('--missing-only', action='store_true', help='Generate only absent files; preserve existing voice assets')
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[2]
 plan = json.loads((root / 'docs/audio/speech-plan.json').read_text())
@@ -131,6 +132,8 @@ def render(entry):
 with tempfile.TemporaryDirectory() as temporary:
     for index, entry in enumerate(plan['clips']):
         target = root / 'public' / entry['src']
+        if args.missing_only and target.exists():
+            continue
         if args.repair_phonetics:
             gid = entry['key'].rsplit('.', 1)[-1]
             word = entry['key'].removeprefix('blend.') if entry['kind'] == 'blend' else entry['text'] if entry['kind'] in ('word', 'grapheme-example') else gid

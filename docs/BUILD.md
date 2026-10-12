@@ -2,7 +2,7 @@
 
 ## Begeleide bèta en GitHub Pages
 
-De huidige versie is `0.2.0-beta.2`. `npm run release:beta` voert tests,
+De huidige versie is `0.2.0-beta.3`. `npm run release:beta` voert tests,
 contentvalidatie, audiocatalogus, build en distributiecontrole uit en maakt een
 tar.gz-pakket met SHA-256 en bronmetadata in `releases/`. De volledige audiopoort
 blijft apart vereist voor `npm run release:stable`.

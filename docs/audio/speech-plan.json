@@ -2804,6 +2804,36 @@
       "kind": "feedback"
     },
     {
+      "key": "fb.correct.8",
+      "src": "audio/feedback/fb.correct.8.mp3",
+      "text": "Hoera, dat is hem!",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.correct.9",
+      "src": "audio/feedback/fb.correct.9.mp3",
+      "text": "Ja! Dat heb je goed ontdekt!",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.correct.10",
+      "src": "audio/feedback/fb.correct.10.mp3",
+      "text": "Kijk eens, het is gelukt!",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.correct.11",
+      "src": "audio/feedback/fb.correct.11.mp3",
+      "text": "Goed zo! Op naar de volgende!",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.correct.12",
+      "src": "audio/feedback/fb.correct.12.mp3",
+      "text": "Wat heb je goed geoefend!",
+      "kind": "feedback"
+    },
+    {
       "key": "fb.try1.1",
       "src": "audio/feedback/fb.try1.1.mp3",
       "text": "Bijna. Probeer nog een keer.",
@@ -2849,6 +2879,54 @@
       "key": "fb.hint.5",
       "src": "audio/feedback/fb.hint.5.mp3",
       "text": "Luister nog eens. Tel de klanken rustig mee.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.hint.syllable",
+      "src": "audio/feedback/fb.hint.syllable.mp3",
+      "text": "Zeg het woord rustig. Klap met elk stukje mee.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.model.syllable",
+      "src": "audio/feedback/fb.model.syllable.mp3",
+      "text": "We doen het samen. Zeg het woord en klap mee. Kijk, dit is het aantal klappen.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.hint.rhyme",
+      "src": "audio/feedback/fb.hint.rhyme.mp3",
+      "text": "Luister naar het einde van de woorden. Welke klinken daar hetzelfde?",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.model.rhyme",
+      "src": "audio/feedback/fb.model.rhyme.mp3",
+      "text": "Hoor je het? Deze woorden klinken aan het einde hetzelfde. Ze rijmen!",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.hint.last",
+      "src": "audio/feedback/fb.hint.last.mp3",
+      "text": "Luister naar de laatste klank. Welk woord eindigt daarmee?",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.model.last",
+      "src": "audio/feedback/fb.model.last.mp3",
+      "text": "Luister naar het einde van het woord. Straks mag je het nog een keer.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.hint.reading",
+      "src": "audio/feedback/fb.hint.reading.mp3",
+      "text": "Lees het stukje nog eens. Wat staat er in het verhaal?",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.model.reading",
+      "src": "audio/feedback/fb.model.reading.mp3",
+      "text": "We lezen samen. Kijk, dit antwoord past bij het verhaal.",
       "kind": "feedback"
     },
     {
@@ -3018,6 +3096,252 @@
       "src": "audio/feedback/instr.new_letter.mp3",
       "text": "Ooo, luister! Er is een nieuwe klank.",
       "kind": "instruction"
+    },
+    {
+      "key": "fb.specific.letter_confusion.m",
+      "src": "audio/feedback/fb.specific.letter_confusion.m.mp3",
+      "text": "Luister nog eens naar deze klank: mmm.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.a",
+      "src": "audio/feedback/fb.specific.letter_confusion.a.mp3",
+      "text": "Luister nog eens naar deze klank: a.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.s",
+      "src": "audio/feedback/fb.specific.letter_confusion.s.mp3",
+      "text": "Luister nog eens naar deze klank: sss.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.t",
+      "src": "audio/feedback/fb.specific.letter_confusion.t.mp3",
+      "text": "Luister nog eens naar deze klank: t.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.k",
+      "src": "audio/feedback/fb.specific.letter_confusion.k.mp3",
+      "text": "Luister nog eens naar deze klank: k.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.r",
+      "src": "audio/feedback/fb.specific.letter_confusion.r.mp3",
+      "text": "Luister nog eens naar deze klank: rrr.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.i",
+      "src": "audio/feedback/fb.specific.letter_confusion.i.mp3",
+      "text": "Luister nog eens naar deze klank: i.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.v",
+      "src": "audio/feedback/fb.specific.letter_confusion.v.mp3",
+      "text": "Luister nog eens naar deze klank: vvv.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.aa",
+      "src": "audio/feedback/fb.specific.letter_confusion.aa.mp3",
+      "text": "Luister nog eens naar deze klank: aaa.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.l",
+      "src": "audio/feedback/fb.specific.letter_confusion.l.mp3",
+      "text": "Luister nog eens naar deze klank: lll.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.n",
+      "src": "audio/feedback/fb.specific.letter_confusion.n.mp3",
+      "text": "Luister nog eens naar deze klank: nnn.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.oo",
+      "src": "audio/feedback/fb.specific.letter_confusion.oo.mp3",
+      "text": "Luister nog eens naar deze klank: ooo.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.e",
+      "src": "audio/feedback/fb.specific.letter_confusion.e.mp3",
+      "text": "Luister nog eens naar deze klank: e.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.d",
+      "src": "audio/feedback/fb.specific.letter_confusion.d.mp3",
+      "text": "Luister nog eens naar deze klank: d.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.ee",
+      "src": "audio/feedback/fb.specific.letter_confusion.ee.mp3",
+      "text": "Luister nog eens naar deze klank: eee.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.p",
+      "src": "audio/feedback/fb.specific.letter_confusion.p.mp3",
+      "text": "Luister nog eens naar deze klank: p.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.o",
+      "src": "audio/feedback/fb.specific.letter_confusion.o.mp3",
+      "text": "Luister nog eens naar deze klank: o.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.z",
+      "src": "audio/feedback/fb.specific.letter_confusion.z.mp3",
+      "text": "Luister nog eens naar deze klank: zzz.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.ie",
+      "src": "audio/feedback/fb.specific.letter_confusion.ie.mp3",
+      "text": "Luister nog eens naar deze klank: ie.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.h",
+      "src": "audio/feedback/fb.specific.letter_confusion.h.mp3",
+      "text": "Luister nog eens naar deze klank: hhh.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.oe",
+      "src": "audio/feedback/fb.specific.letter_confusion.oe.mp3",
+      "text": "Luister nog eens naar deze klank: oe.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.u",
+      "src": "audio/feedback/fb.specific.letter_confusion.u.mp3",
+      "text": "Luister nog eens naar deze klank: u.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.b",
+      "src": "audio/feedback/fb.specific.letter_confusion.b.mp3",
+      "text": "Luister nog eens naar deze klank: b.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.uu",
+      "src": "audio/feedback/fb.specific.letter_confusion.uu.mp3",
+      "text": "Luister nog eens naar deze klank: uuu.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.j",
+      "src": "audio/feedback/fb.specific.letter_confusion.j.mp3",
+      "text": "Luister nog eens naar deze klank: jjj.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.ij",
+      "src": "audio/feedback/fb.specific.letter_confusion.ij.mp3",
+      "text": "Luister nog eens naar deze klank: ij.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.w",
+      "src": "audio/feedback/fb.specific.letter_confusion.w.mp3",
+      "text": "Luister nog eens naar deze klank: www.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.g",
+      "src": "audio/feedback/fb.specific.letter_confusion.g.mp3",
+      "text": "Luister nog eens naar deze klank: ggg.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.eu",
+      "src": "audio/feedback/fb.specific.letter_confusion.eu.mp3",
+      "text": "Luister nog eens naar deze klank: eu.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.ui",
+      "src": "audio/feedback/fb.specific.letter_confusion.ui.mp3",
+      "text": "Luister nog eens naar deze klank: ui.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.f",
+      "src": "audio/feedback/fb.specific.letter_confusion.f.mp3",
+      "text": "Luister nog eens naar deze klank: fff.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.ei",
+      "src": "audio/feedback/fb.specific.letter_confusion.ei.mp3",
+      "text": "Luister nog eens naar deze klank: ei.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.ou",
+      "src": "audio/feedback/fb.specific.letter_confusion.ou.mp3",
+      "text": "Luister nog eens naar deze klank: ou.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.au",
+      "src": "audio/feedback/fb.specific.letter_confusion.au.mp3",
+      "text": "Luister nog eens naar deze klank: au.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.ch",
+      "src": "audio/feedback/fb.specific.letter_confusion.ch.mp3",
+      "text": "Luister nog eens naar deze klank: chch.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.ng",
+      "src": "audio/feedback/fb.specific.letter_confusion.ng.mp3",
+      "text": "Luister nog eens naar deze klank: ng.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.nk",
+      "src": "audio/feedback/fb.specific.letter_confusion.nk.mp3",
+      "text": "Luister nog eens naar deze klank: ngk.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.c",
+      "src": "audio/feedback/fb.specific.letter_confusion.c.mp3",
+      "text": "Luister nog eens naar deze klank: k.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.x",
+      "src": "audio/feedback/fb.specific.letter_confusion.x.mp3",
+      "text": "Luister nog eens naar deze klank: ks.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.y",
+      "src": "audio/feedback/fb.specific.letter_confusion.y.mp3",
+      "text": "Luister nog eens naar deze klank: j.",
+      "kind": "feedback"
+    },
+    {
+      "key": "fb.specific.letter_confusion.q",
+      "src": "audio/feedback/fb.specific.letter_confusion.q.mp3",
+      "text": "Luister nog eens naar deze klank: k.",
+      "kind": "feedback"
     },
     {
       "key": "fb.specific.first_sound.m",
