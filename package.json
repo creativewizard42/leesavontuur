@@ -1,7 +1,7 @@
 {
   "name": "leesavontuur",
   "private": true,
-  "version": "0.2.0-beta.4",
+  "version": "0.2.0-beta.5",
   "type": "module",
   "description": "LEESAVONTUUR - educatief leesspel (NL, 5-6 jaar). Offline-first, geen backend.",
   "engines": {

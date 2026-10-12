@@ -5,7 +5,7 @@
     "text": "em",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.m.sound",
@@ -13,7 +13,7 @@
     "text": "mmm",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.m.example",
@@ -29,7 +29,7 @@
     "text": "aa",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.a.sound",
@@ -37,7 +37,7 @@
     "text": "a-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.a.example",
@@ -53,7 +53,7 @@
     "text": "es",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.s.sound",
@@ -61,7 +61,7 @@
     "text": "sss",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.s.example",
@@ -77,7 +77,7 @@
     "text": "tee",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.t.sound",
@@ -85,7 +85,7 @@
     "text": "t-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.t.example",
@@ -101,7 +101,7 @@
     "text": "kaa",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.k.sound",
@@ -109,7 +109,7 @@
     "text": "k-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.k.example",
@@ -125,7 +125,7 @@
     "text": "er",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.r.sound",
@@ -133,7 +133,7 @@
     "text": "rrr",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.r.example",
@@ -149,7 +149,7 @@
     "text": "ie",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.i.sound",
@@ -157,7 +157,7 @@
     "text": "i-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.i.example",
@@ -173,7 +173,7 @@
     "text": "vee",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.v.sound",
@@ -181,7 +181,7 @@
     "text": "vvv",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.v.example",
@@ -221,7 +221,7 @@
     "text": "el",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.l.sound",
@@ -229,7 +229,7 @@
     "text": "lll",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.l.example",
@@ -245,7 +245,7 @@
     "text": "en",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.n.sound",
@@ -253,7 +253,7 @@
     "text": "nnn",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.n.example",
@@ -293,7 +293,7 @@
     "text": "ee",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.e.sound",
@@ -301,7 +301,7 @@
     "text": "e-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.e.example",
@@ -317,7 +317,7 @@
     "text": "dee",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.d.sound",
@@ -325,7 +325,7 @@
     "text": "d-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.d.example",
@@ -365,7 +365,7 @@
     "text": "pee",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.p.sound",
@@ -373,7 +373,7 @@
     "text": "p-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.p.example",
@@ -389,7 +389,7 @@
     "text": "oo",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.o.sound",
@@ -397,7 +397,7 @@
     "text": "o-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.o.example",
@@ -413,7 +413,7 @@
     "text": "zet",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.z.sound",
@@ -421,7 +421,7 @@
     "text": "zzz",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.z.example",
@@ -461,7 +461,7 @@
     "text": "haa",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.h.sound",
@@ -469,7 +469,7 @@
     "text": "hhh",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.h.example",
@@ -509,7 +509,7 @@
     "text": "uu",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.u.sound",
@@ -517,7 +517,7 @@
     "text": "u-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.u.example",
@@ -533,7 +533,7 @@
     "text": "bee",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.b.sound",
@@ -541,7 +541,7 @@
     "text": "b-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.b.example",
@@ -581,7 +581,7 @@
     "text": "jee",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.j.sound",
@@ -589,7 +589,7 @@
     "text": "jjj",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.j.example",
@@ -629,7 +629,7 @@
     "text": "wee",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.w.sound",
@@ -637,7 +637,7 @@
     "text": "www",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.w.example",
@@ -653,7 +653,7 @@
     "text": "gee",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.g.sound",
@@ -661,7 +661,7 @@
     "text": "ggg",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.g.example",
@@ -725,7 +725,7 @@
     "text": "ef",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.f.sound",
@@ -733,7 +733,7 @@
     "text": "fff",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.f.example",
@@ -893,7 +893,7 @@
     "text": "see",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.c.sound",
@@ -901,7 +901,7 @@
     "text": "k-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.x.name",
@@ -909,7 +909,7 @@
     "text": "iks",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.x.sound",
@@ -917,7 +917,7 @@
     "text": "ks",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.y.name",
@@ -925,7 +925,7 @@
     "text": "i-grec",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.y.sound",
@@ -933,7 +933,7 @@
     "text": "jjj",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.q.name",
@@ -941,7 +941,7 @@
     "text": "kuu",
     "kind": "grapheme-name",
     "delivery": "speech",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "lk.q.sound",
@@ -949,7 +949,7 @@
     "text": "k-",
     "kind": "grapheme-sound",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.mam",
@@ -965,7 +965,7 @@
     "text": "mmm … a … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.as",
@@ -981,7 +981,7 @@
     "text": "a … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.mat",
@@ -997,7 +997,7 @@
     "text": "mmm … a … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.tas",
@@ -1013,7 +1013,7 @@
     "text": "t … a … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.kam",
@@ -1029,7 +1029,7 @@
     "text": "k … a … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.kat",
@@ -1045,7 +1045,7 @@
     "text": "k … a … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.tak",
@@ -1061,7 +1061,7 @@
     "text": "t … a … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.kas",
@@ -1077,7 +1077,7 @@
     "text": "k … a … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.ram",
@@ -1093,7 +1093,7 @@
     "text": "rrr … a … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.rat",
@@ -1109,7 +1109,7 @@
     "text": "rrr … a … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.kar",
@@ -1125,7 +1125,7 @@
     "text": "k … a … rrr",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.arm",
@@ -1141,7 +1141,7 @@
     "text": "a … rrr … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.ark",
@@ -1157,7 +1157,7 @@
     "text": "a … rrr … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.kast",
@@ -1173,7 +1173,7 @@
     "text": "k … a … sss … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.mast",
@@ -1189,7 +1189,7 @@
     "text": "mmm … a … sss … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.stam",
@@ -1205,7 +1205,7 @@
     "text": "sss … t … a … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.kras",
@@ -1221,7 +1221,7 @@
     "text": "k … rrr … a … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.start",
@@ -1237,7 +1237,7 @@
     "text": "sss … t … a … rrr … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.mis",
@@ -1253,7 +1253,7 @@
     "text": "mmm … i … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.kist",
@@ -1269,7 +1269,7 @@
     "text": "k … i … sss … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.mist",
@@ -1285,7 +1285,7 @@
     "text": "mmm … i … sss … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.rit",
@@ -1301,7 +1301,7 @@
     "text": "rrr … i … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.tik",
@@ -1317,7 +1317,7 @@
     "text": "t … i … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.vis",
@@ -1333,7 +1333,7 @@
     "text": "vvv … i … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.vat",
@@ -1349,7 +1349,7 @@
     "text": "vvv … a … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.vak",
@@ -1365,7 +1365,7 @@
     "text": "vvv … a … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.kaas",
@@ -1477,7 +1477,7 @@
     "text": "lll … a … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.slak",
@@ -1493,7 +1493,7 @@
     "text": "sss … lll … a … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.stal",
@@ -1509,7 +1509,7 @@
     "text": "sss … t … a … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.val",
@@ -1525,7 +1525,7 @@
     "text": "vvv … a … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.kaal",
@@ -1557,7 +1557,7 @@
     "text": "k … a … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.man",
@@ -1573,7 +1573,7 @@
     "text": "mmm … a … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.nat",
@@ -1589,7 +1589,7 @@
     "text": "nnn … a … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.kin",
@@ -1605,7 +1605,7 @@
     "text": "k … i … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.vin",
@@ -1621,7 +1621,7 @@
     "text": "vvv … i … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.maan",
@@ -1669,7 +1669,7 @@
     "text": "lll … i … nnn … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.kool",
@@ -1765,7 +1765,7 @@
     "text": "nnn … e … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.mes",
@@ -1781,7 +1781,7 @@
     "text": "mmm … e … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.net",
@@ -1797,7 +1797,7 @@
     "text": "nnn … e … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.tent",
@@ -1813,7 +1813,7 @@
     "text": "t … e … nnn … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.rem",
@@ -1829,7 +1829,7 @@
     "text": "rrr … e … mmm",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.melk",
@@ -1845,7 +1845,7 @@
     "text": "mmm … e … lll … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.dak",
@@ -1861,7 +1861,7 @@
     "text": "d … a … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.das",
@@ -1877,7 +1877,7 @@
     "text": "d … a … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.dal",
@@ -1893,7 +1893,7 @@
     "text": "d … a … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.teen",
@@ -1973,7 +1973,7 @@
     "text": "p … a … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.kip",
@@ -1989,7 +1989,7 @@
     "text": "k … i … p",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.pet",
@@ -2005,7 +2005,7 @@
     "text": "p … e … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.lip",
@@ -2021,7 +2021,7 @@
     "text": "lll … i … p",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.pop",
@@ -2037,7 +2037,7 @@
     "text": "p … o … p",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.mol",
@@ -2053,7 +2053,7 @@
     "text": "mmm … o … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.kop",
@@ -2069,7 +2069,7 @@
     "text": "k … o … p",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.rok",
@@ -2085,7 +2085,7 @@
     "text": "rrr … o … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.sok",
@@ -2101,7 +2101,7 @@
     "text": "sss … o … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.vos",
@@ -2117,7 +2117,7 @@
     "text": "vvv … o … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.pot",
@@ -2133,7 +2133,7 @@
     "text": "p … o … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.stok",
@@ -2149,7 +2149,7 @@
     "text": "sss … t … o … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.slot",
@@ -2165,7 +2165,7 @@
     "text": "sss … lll … o … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.zon",
@@ -2181,7 +2181,7 @@
     "text": "zzz … o … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.zak",
@@ -2197,7 +2197,7 @@
     "text": "zzz … a … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.zes",
@@ -2213,7 +2213,7 @@
     "text": "zzz … e … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.zeep",
@@ -2293,7 +2293,7 @@
     "text": "hhh … e … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.hok",
@@ -2309,7 +2309,7 @@
     "text": "hhh … o … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.haas",
@@ -2341,7 +2341,7 @@
     "text": "k … lll … o … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.voet",
@@ -2437,7 +2437,7 @@
     "text": "hhh … u … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.mus",
@@ -2453,7 +2453,7 @@
     "text": "mmm … u … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.bus",
@@ -2469,7 +2469,7 @@
     "text": "b … u … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.bal",
@@ -2485,7 +2485,7 @@
     "text": "b … a … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.bes",
@@ -2501,7 +2501,7 @@
     "text": "b … e … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.been",
@@ -2597,7 +2597,7 @@
     "text": "jjj … a … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.ijs",
@@ -2661,7 +2661,7 @@
     "text": "www … o … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.wiel",
@@ -2693,7 +2693,7 @@
     "text": "ggg … a … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.geel",
@@ -2821,7 +2821,7 @@
     "text": "fff … lll … e … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.geit",
@@ -2965,7 +2965,7 @@
     "text": "e … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.in",
@@ -2981,7 +2981,7 @@
     "text": "i … nnn",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.is",
@@ -2997,7 +2997,7 @@
     "text": "i … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.ik",
@@ -3013,7 +3013,7 @@
     "text": "i … k",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.op",
@@ -3029,7 +3029,7 @@
     "text": "o … p",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.al",
@@ -3045,7 +3045,7 @@
     "text": "a … lll",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.bij",
@@ -3077,7 +3077,7 @@
     "text": "ggg … rrr … a … sss",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.rolt",
@@ -3093,7 +3093,7 @@
     "text": "rrr … o … lll … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.sloot",
@@ -3173,7 +3173,7 @@
     "text": "rrr … e … nnn … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.pakt",
@@ -3189,7 +3189,7 @@
     "text": "p … a … k … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.zit",
@@ -3205,7 +3205,7 @@
     "text": "zzz … i … t",
     "kind": "blend",
     "delivery": "human-required",
-    "status": "synthetic-draft"
+    "status": "present-unreviewed"
   },
   {
     "key": "de.lacht",

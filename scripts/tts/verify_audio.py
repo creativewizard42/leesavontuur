@@ -1,4 +1,4 @@
-"""Check every synthetic asset's identity, decodability and non-silent signal.
+"""Check every recorded asset's identity, decodability and non-silent signal.
 This verifies technical integrity, never pronunciation or human approval.
 """
 from concurrent.futures import ThreadPoolExecutor
@@ -10,6 +10,7 @@ import subprocess
 
 root = Path(__file__).resolve().parents[2]
 entries = json.loads((root / 'public/audio/provenance.json').read_text())['clips']
+by_src = {entry['src']: entry for entry in entries}
 def check(entry):
     path = root / 'public' / entry['src']
     assert hashlib.sha256(path.read_bytes()).hexdigest() == entry['sha256'], entry['src']
@@ -21,7 +22,15 @@ def check(entry):
     assert .005 < peak < 1.0, (entry['src'], peak)
     duration = len(samples) / 16000
     assert abs(duration - entry['durationSeconds']) < .2, (entry['src'], duration)
-    assert entry['origin'] == 'synthetic-draft' and entry['reviewed'] is False
+    assert entry['origin'] in ('synthetic-draft', 'human-recording') and entry['reviewed'] is False
+    if entry['origin'] == 'human-recording':
+        if 'sourceRecording' in entry:
+            source = entry['sourceRecording']
+            assert len(source['sourceSha256']) == 64
+            assert 0 <= source['startSeconds'] < source['endSeconds']
+        else:
+            assert entry.get('parts'), entry['src']
+            assert all('existing' in part and by_src[part['existing']]['origin'] == 'human-recording' for part in entry['parts']), entry['src']
 with ThreadPoolExecutor(max_workers=4) as pool:
     list(pool.map(check, entries))
 print(f'PASS: {len(entries)} checksums, full MP3 decodes, durations and non-silent signals. No pronunciation approval implied.')

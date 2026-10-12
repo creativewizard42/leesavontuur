@@ -1,6 +1,27 @@
 # Verificatie — 12 oktober 2026
 
-## Nieuwste ronde: 0.2.0-beta.4
+## Nieuwste ronde: 0.2.0-beta.5 — eigen a–z-opnames
+
+- 26 letternamen en 26 leesklanken ingevoerd vanuit opnames van de maker,
+  in bevestigde alfabetvolgorde. 596 afhankelijke fragmenten opnieuw opgebouwd;
+  in totaal 648 audiobestanden gewijzigd.
+- 136 bestanden bestaan volledig uit menselijke opnames (52 directe clips en
+  84 hakreeksen). 1.505 bestanden bevatten synthetische audio. De catalogus maakt
+  onderscheid tussen menselijke herkomst en daadwerkelijke luistergoedkeuring.
+- 40 testbestanden, 290 tests geslaagd; inhoudsvalidatie zonder waarschuwingen,
+  productiebuild, distributiecontrole en bètapakket geslaagd.
+- Definitieve controle: alle 1.641 hashes, volledige decoderingen, duren en
+  niet-stille signalen geslaagd. Een te hoge piek in de eerste k-export is
+  hersteld door opnieuw vanuit het origineel te exporteren met meer headroom.
+- 6.666 gegenereerde opdrachten, 871 gebruikte audiopaden zonder ontbrekende
+  bestanden. Alle 68 browserroutes voor luisterknoppen, antwoorden, hints en
+  voordoen geslaagd op de definitieve bestanden (8× voor bedieningscontrole).
+- Productie onder / en /spel/, offline heropenen, echte beginsessie van 8 stappen,
+  reviewpagina's en updates met meerdere vensters geslaagd.
+- 15 lettercombinaties buiten a–z blijven synthetisch. Geen deskundige
+  uitspraakgoedkeuring of fysieke iPhone-test afgeleid uit technische controles.
+
+## Eerdere ronde: 0.2.0-beta.4
 
 - ElevenLabs Jessica: 311 unieke aanvragen, 4.008 teksttekens; 1.458 MP3s
   vervangen. 183 losse Piper-klanken en hakreeksen behouden. 634 samengestelde

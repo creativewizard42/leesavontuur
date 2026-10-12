@@ -1,6 +1,27 @@
 # Audio — synthetische spraak en uitspraakcontrole
 
-## Huidige productie: 0.2.0-beta.4
+## Huidige productie: 0.2.0-beta.5
+
+De maker heeft eigen opnames aangeleverd en de a–z-volgorde bevestigd.
+26 letternamen uit ABC en 26 klanken uit de tweede Spraaktaal-opname vervangen
+hun eerdere synthetische bestanden. Tempo en toonhoogte zijn behouden;
+knippen bevatten 150 ms vóór en 180 ms na de gedetecteerde klank. Volume is
+bij export genormaliseerd. Kniptijden en bronhashes staan per bestand in de
+herkomstregistratie; de originele volledige opnames worden niet gepubliceerd.
+
+`scripts/tts/import_letter_recordings.py --recordings <manifest> --apply`
+controleert 52 bronbestanden en bouwt afhankelijke hakreeksen en opdrachten
+opnieuw op. Zonder `--apply` wordt uitsluitend het plan gecontroleerd.
+De ElevenLabs-cache wordt alleen lokaal gelezen, zonder API-verzoeken.
+Gecombineerde bestanden met enig synthetisch onderdeel blijven synthetisch
+geclassificeerd. Uitsluitend menselijke opnames krijgen `human-recording`,
+maar blijven zonder luisterreview **present-unreviewed**. De releasepoort blijft
+volledige, hashgebonden luistergoedkeuring vereisen.
+
+De 15 lettercombinaties buiten a–z blijven voorlopig synthetisch.
+De afgekeurde Piper-proef is niet gepubliceerd.
+
+## Eerdere productie: 0.2.0-beta.4
 
 De maker koos inmiddels expliciet voor synthetische spraak zonder menselijke
 stemopnames. Jessica van ElevenLabs verzorgt 1.458 fragmenten: woorden,

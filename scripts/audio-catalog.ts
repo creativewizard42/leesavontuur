@@ -6,8 +6,8 @@ import { AUDIO_MANIFEST } from '../src/content/audioManifest';
 import { needsHumanRecording } from '../src/audio/recordingPolicy';
 
 const provenancePath = 'public/audio/provenance.json';
-const provenance = existsSync(provenancePath) ? JSON.parse(readFileSync(provenancePath, 'utf8')) as { clips: { src: string }[] } : { clips: [] };
-const generated = new Set(provenance.clips.map(clip => clip.src));
+const provenance = existsSync(provenancePath) ? JSON.parse(readFileSync(provenancePath, 'utf8')) as { clips: { src: string; origin?: string }[] } : { clips: [] };
+const generated = new Set(provenance.clips.filter(clip => clip.origin !== 'human-recording').map(clip => clip.src));
 const reviewPath = 'docs/audio/review.json';
 const reviews = existsSync(reviewPath) ? JSON.parse(readFileSync(reviewPath, 'utf8')) as
   { src: string; sha256: string; approved: boolean; reviewer: string }[] : [];

@@ -19,7 +19,7 @@ writeFileSync('public/audio-review.html', `<!doctype html>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; media-src 'self'; object-src 'none'; base-uri 'none'">
 <title>Leesavontuur — luistercontrole</title><script src="./audio-review.js" defer></script></head>
 <body><h1>Luistercontrole voor volwassenen</h1>
-<p>Deze Nederlandse computerstem heeft nog geen menselijke luistergoedkeuring.
+<p>De letters a–z zijn door de maker ingesproken; overige lettercombinaties zijn nog synthetisch. De fragmenten hebben nog geen volledige uitspraakgoedkeuring.
 Luister vooral of korte en lange klinkers duidelijk verschillen en of medeklinkers geen extra klinker krijgen.
 De klank is iets anders dan de letternaam. Geef bij een probleem de letter en wat je hoort door.</p>
 <p><a href="./">Terug naar Leesavontuur</a></p><table><caption>Alle 41 letters en lettercombinaties</caption>
@@ -42,5 +42,5 @@ writeFileSync('public/speech-review.html', `<!doctype html>
 <body><h1>De nieuwe spreekstem beluisteren</h1>
 <p>Jessica spreekt de complimenten levendig uit en de opdrachten rustiger. Deze AI-audio is gemaakt met ElevenLabs (elevenlabs.io).</p>
 <p>Controleer de Nederlandse uitspraak samen met een volwassene. De keuze van de stem is nog geen uitspraakgoedkeuring voor alle fragmenten.
-De <a href="./audio-review.html">losse leesklanken en hakreeksen</a> gebruiken voorlopig de eerdere klankstem.</p>
+De <a href="./audio-review.html">letternamen en leesklanken a–z</a> zijn door de maker ingesproken. Andere lettercombinaties gebruiken voorlopig synthetische audio.</p>
 <p><a href="./">Terug naar Leesavontuur</a></p><ul>${speechRows}</ul></body></html>\n`);

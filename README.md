@@ -1,7 +1,7 @@
 # LEESAVONTUUR
 
-**Versie 0.2.0-beta.4 — begeleide bèta.** Alle 1.641 audiofragmenten zijn nu
-synthetisch gegenereerd; menselijke luisterreview, didactische beoordeling en praktijktests zijn
+**Versie 0.2.0-beta.5 — begeleide bèta.** Alle 1.641 audiofragmenten zijn aanwezig, met eigen opnames voor a–z.
+Volledige luisterreview, didactische beoordeling en praktijktests zijn
 nog nodig. Zie [release-informatie](docs/RELEASE_NOTES.md). De workflow publiceert
 naar GitHub Pages na controles; de Pages-bron moet op GitHub Actions staan.
 
@@ -153,8 +153,9 @@ werken en `npm run validate` om te controleren of alle vereiste clips bestaan.
 
 ## Bekende beperkingen
 
-- **Uitspraakreview ontbreekt.** Alle 1.641 lokale MP3s zijn synthetisch: 1.458 met Jessica-spraak en
-  183 behouden Piper-klanken/hakreeksen.
+- **Uitspraakreview ontbreekt.** Van de 1.641 lokale MP3s bestaan 136 volledig uit eigen opnames
+  (52 letters en 84 samengestelde hakreeksen). 1.505 bestanden bevatten nog
+  synthetische spraak, waaronder samengestelde opdrachten met eigen klanken.
   Bestandsaanwezigheid bewijst geen correcte uitspraak. Vooral losse klanken en
   korte klinkercontrasten vereisen een menselijke luisterbeoordeling. Zie
   [spraakherontwikkeling](docs/reviews/SPEECH_REWORK.md).
